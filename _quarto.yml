@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 book:
-  title: "STAT 1810: R is Your Friend"
+  title: "R is Your Friend"
   author: "Cal Poly - SLO, Statistics Department"
   date: last-modified
   chapters:

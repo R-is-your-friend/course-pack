@@ -1,8 +1,8 @@
 # Preface {.unnumbered}
 
-This text was created for xxx by xxx.
+This text was created for STAT 1810: Introduction to Statistical Computing in R at Cal Poly - San Luis Obispo by Dr. Kelly Bodwin, Dr. Allison Theobold, Dr. Charlotte Mann, Dr. Zoe Rehnberg, Dr. Emily Robinson, and Dr. Julia Schedler.
 
-This text is not meant to be a complete course or textbook by itself; rather, think of it as “long-form” class slides. We will summarize the main concepts in each chapter, show you examples, point you to more in-depth readings from outside sources, and ask you to try out short tasks in python as you go.
+This text is not meant to be a complete course or textbook by itself; rather, think of it as “long-form” class slides. We will summarize the main concepts in each chapter, show you examples, point you to more in-depth readings from outside sources, and ask you to try out short tasks in R as you go.
 
 ## How to Use This Text
 
@@ -53,7 +53,7 @@ Consider these to be optional readings/viewings. The world of python programming
 We will usually make these "click to expand" so that they don't distract from your reading.
 :::
 
-:::{.callout-opinion .icon collapse="true"}
+:::{.callout-opinion .icon}
 
 These are personal opinion comments from the authors.  Take them with a grain of salt; we aren't the only python programmers worth listening to, we are just sharing what has worked for us.
 

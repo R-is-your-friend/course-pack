@@ -174,6 +174,19 @@ div.callout-learn-more.icon.callout-captioned .callout-icon::before {
 
 //opinion
 
+div.callout-example {
+  border-left-color: $border-color-left-ex !important;
+}
+
+div.callout-example .callout-header {
+  background-color: $background-color-ex !important;
+}
+
+div.callout-example .callout-icon::before {
+    background-image: $icon-ex;
+}
+
+
 div.callout-opinion {
   border-left-color: $border-color-left-op !important;
 }
