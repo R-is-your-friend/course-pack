@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Cal Poly - SLO, Statistics Department">
-<meta name="dcterms.date" content="2025-09-15">
 
-<title>STAT 1810: R is Your Friend</title>
+<title>8&nbsp; More Wrangling – STAT 1810: R is Your Friend</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,7 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./00-setup.html" rel="next">
+<link href="./08-strings.html" rel="next">
+<link href="./06-data-wrangling.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -245,7 +244,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Preface</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-data-visualizations.html">Data Wrangling and Visualization</a></li><li class="breadcrumb-item"><a href="./07-more-wrangling.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">More Wrangling</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -299,7 +298,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
@@ -367,7 +366,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./07-more-wrangling.html" class="sidebar-item-text sidebar-link">
+  <a href="./07-more-wrangling.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">More Wrangling</span></span></a>
   </div>
 </li>
@@ -431,45 +430,23 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a>
-  <ul class="collapse">
-  <li><a href="#how-to-use-this-text" id="toc-how-to-use-this-text" class="nav-link" data-scroll-target="#how-to-use-this-text">How to Use This Text</a></li>
-  <li><a href="#additional-resources" id="toc-additional-resources" class="nav-link" data-scroll-target="#additional-resources">Additional Resources</a></li>
-  </ul></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-data-visualizations.html">Data Wrangling and Visualization</a></li><li class="breadcrumb-item"><a href="./07-more-wrangling.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">More Wrangling</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">STAT 1810: R is Your Friend</h1>
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">More Wrangling</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Cal Poly - SLO, Statistics Department </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">September 15, 2025</p>
-    </div>
-  </div>
   
     
   </div>
@@ -479,142 +456,25 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="preface" class="level1 unnumbered">
-<h1 class="unnumbered">Preface</h1>
-<p>This text was created for xxx by xxx.</p>
-<p>This text is not meant to be a complete course or textbook by itself; rather, think of it as “long-form” class slides. We will summarize the main concepts in each chapter, show you examples, point you to more in-depth readings from outside sources, and ask you to try out short tasks in python as you go.</p>
-<section id="how-to-use-this-text" class="level2">
-<h2 class="anchored" data-anchor-id="how-to-use-this-text">How to Use This Text</h2>
-<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class="callout-icon"></i>
+<i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Warning
+Learning Objectives
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Watch out sections contain things you may want to look out for - common errors, etc.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-example callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Example
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Example sections contain code and other information. Don’t skip them!</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Note sections contain clarification points (anywhere I would normally say “note that ….). Make sure to read them to avoid any common pitfalls or misconceptions.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-required-reading callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Required Reading
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Consider these sections to be required readings. This is where we will direct you to existing materials to explain or introduce a concept.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-required-video callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Required Video
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Similarly, consider these sections to be required viewing for the course material.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-check-in callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Check In
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Check-in sections contain small tasks that you need to do throughout the reading, to practice or prepare. Although they are not graded, please treat them as required!</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-practice-exercise callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Practice Activity
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Each chapter will have a longer practice exercise to complete and turn in. These are intended to be done with help from instructors and peers.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-learn-more callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Learn More
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Consider these to be optional readings/viewings. The world of python programming has so many interesting tidbits, we can’t possibly teach them all - but we want to share them with you nonetheless!</p>
-<p>We will usually make these “click to expand” so that they don’t distract from your reading.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-opinion callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Just our opinion...
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>These are personal opinion comments from the authors. Take them with a grain of salt; we aren’t the only python programmers worth listening to, we are just sharing what has worked for us.</p>
-<p>We will usually make these “click to expand” so that they don’t distract from your reading.</p>
-</div>
-</div>
-</section>
-<section id="additional-resources" class="level2">
-<h2 class="anchored" data-anchor-id="additional-resources">Additional Resources</h2>
-<p>References or additional readings may come from the following texts:</p>
 <ul>
-<li>R for Data Science (<a href="https://r4ds.hadley.nz/" class="uri">https://r4ds.hadley.nz/</a>)</li>
+<li></li>
+<li></li>
+<li></li>
 </ul>
+</div>
+</div>
 
 
-</section>
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1031,10 +891,13 @@ Just our opinion...
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./06-data-wrangling.html" class="pagination-link" aria-label="Data Wrangling">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Wrangling</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./00-setup.html" class="pagination-link" aria-label="Set up">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Set up</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./08-strings.html" class="pagination-link" aria-label="Strings">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Strings</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

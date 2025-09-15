@@ -2,41 +2,185 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "course-pack",
+    "title": "STAT 1810: R is Your Friend",
     "section": "",
-    "text": "Preface\nThis is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books.\n\n1 + 1\n\n[1] 2\n\n\nhttps://github.com/R-is-your-friend/course-pack.git",
+    "text": "Preface\nThis text was created for xxx by xxx.\nThis text is not meant to be a complete course or textbook by itself; rather, think of it as “long-form” class slides. We will summarize the main concepts in each chapter, show you examples, point you to more in-depth readings from outside sources, and ask you to try out short tasks in python as you go.",
     "crumbs": [
       "Preface"
     ]
   },
   {
-    "objectID": "intro.html",
-    "href": "intro.html",
-    "title": "1  Introduction",
-    "section": "",
-    "text": "This is a book created from markdown and executable code.\nSee Knuth (1984) for additional discussion of literate programming.\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97.",
+    "objectID": "index.html#how-to-use-this-text",
+    "href": "index.html#how-to-use-this-text",
+    "title": "STAT 1810: R is Your Friend",
+    "section": "How to Use This Text",
+    "text": "How to Use This Text\n\n\n\n\n\n\nWarning\n\n\n\nWatch out sections contain things you may want to look out for - common errors, etc.\n\n\n\n\n\n\n\n\nExample\n\n\n\nExample sections contain code and other information. Don’t skip them!\n\n\n\n\n\n\n\n\nNote\n\n\n\nNote sections contain clarification points (anywhere I would normally say “note that ….). Make sure to read them to avoid any common pitfalls or misconceptions.\n\n\n\n\n\n\n\n\nRequired Reading\n\n\n\nConsider these sections to be required readings. This is where we will direct you to existing materials to explain or introduce a concept.\n\n\n\n\n\n\n\n\nRequired Video\n\n\n\nSimilarly, consider these sections to be required viewing for the course material.\n\n\n\n\n\n\n\n\nCheck In\n\n\n\nCheck-in sections contain small tasks that you need to do throughout the reading, to practice or prepare. Although they are not graded, please treat them as required!\n\n\n\n\n\n\n\n\nPractice Activity\n\n\n\nEach chapter will have a longer practice exercise to complete and turn in. These are intended to be done with help from instructors and peers.\n\n\n\n\n\n\n\n\nLearn More\n\n\n\nConsider these to be optional readings/viewings. The world of python programming has so many interesting tidbits, we can’t possibly teach them all - but we want to share them with you nonetheless!\nWe will usually make these “click to expand” so that they don’t distract from your reading.\n\n\n\n\n\n\n\n\nJust our opinion...\n\n\n\nThese are personal opinion comments from the authors. Take them with a grain of salt; we aren’t the only python programmers worth listening to, we are just sharing what has worked for us.\nWe will usually make these “click to expand” so that they don’t distract from your reading.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+      "Preface"
     ]
   },
   {
-    "objectID": "summary.html",
-    "href": "summary.html",
-    "title": "2  Summary",
-    "section": "",
-    "text": "In summary, this book has no content whatsoever.\n\n1 + 1\n\n[1] 2",
+    "objectID": "index.html#additional-resources",
+    "href": "index.html#additional-resources",
+    "title": "STAT 1810: R is Your Friend",
+    "section": "Additional Resources",
+    "text": "Additional Resources\nReferences or additional readings may come from the following texts:\n\nR for Data Science (https://r4ds.hadley.nz/)",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Summary</span>"
+      "Preface"
     ]
   },
   {
-    "objectID": "references.html",
-    "href": "references.html",
-    "title": "References",
+    "objectID": "01-what-is-code.html",
+    "href": "01-what-is-code.html",
+    "title": "2  What is Code",
     "section": "",
-    "text": "Knuth, Donald E. 1984. “Literate Programming.” Comput.\nJ. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97.",
+    "text": "Learning Objectives",
     "crumbs": [
-      "References"
+      "Fundamentals of Coding",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>What is Code</span>"
+    ]
+  },
+  {
+    "objectID": "02-r-is-friend.html",
+    "href": "02-r-is-friend.html",
+    "title": "3  R is Friend",
+    "section": "",
+    "text": "Learning Objectives",
+    "crumbs": [
+      "Fundamentals of Coding",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>R is Friend</span>"
+    ]
+  },
+  {
+    "objectID": "03-control-flow.html",
+    "href": "03-control-flow.html",
+    "title": "4  Control Flow",
+    "section": "",
+    "text": "Learning Objectives",
+    "crumbs": [
+      "Fundamentals of Coding",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Control Flow</span>"
+    ]
+  },
+  {
+    "objectID": "04-data-is-friend.html",
+    "href": "04-data-is-friend.html",
+    "title": "5  Data is Friend",
+    "section": "",
+    "text": "Learning Objectives",
+    "crumbs": [
+      "Fundamentals of Coding",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Data is Friend</span>"
+    ]
+  },
+  {
+    "objectID": "05-data-visualizations.html",
+    "href": "05-data-visualizations.html",
+    "title": "6  Data Visualizations",
+    "section": "",
+    "text": "Learning Objectives",
+    "crumbs": [
+      "Data Wrangling and Visualization",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Data Visualizations</span>"
+    ]
+  },
+  {
+    "objectID": "06-data-wrangling.html",
+    "href": "06-data-wrangling.html",
+    "title": "7  Data Wrangling",
+    "section": "",
+    "text": "Learning Objectives",
+    "crumbs": [
+      "Data Wrangling and Visualization",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Data Wrangling</span>"
+    ]
+  },
+  {
+    "objectID": "07-more-wrangling.html",
+    "href": "07-more-wrangling.html",
+    "title": "8  More Wrangling",
+    "section": "",
+    "text": "Learning Objectives",
+    "crumbs": [
+      "Data Wrangling and Visualization",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>More Wrangling</span>"
+    ]
+  },
+  {
+    "objectID": "08-strings.html",
+    "href": "08-strings.html",
+    "title": "9  Strings",
+    "section": "",
+    "text": "Learning Objectives",
+    "crumbs": [
+      "Data Wrangling and Visualization",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Strings</span>"
+    ]
+  },
+  {
+    "objectID": "09-dates.html",
+    "href": "09-dates.html",
+    "title": "10  Dates",
+    "section": "",
+    "text": "Learning Objectives",
+    "crumbs": [
+      "Data Wrangling and Visualization",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Dates</span>"
+    ]
+  },
+  {
+    "objectID": "10-factors.html",
+    "href": "10-factors.html",
+    "title": "11  Factors",
+    "section": "",
+    "text": "Learning Objectives",
+    "crumbs": [
+      "Data Wrangling and Visualization",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Factors</span>"
+    ]
+  },
+  {
+    "objectID": "11-communication.html",
+    "href": "11-communication.html",
+    "title": "12  Communication",
+    "section": "",
+    "text": "Learning Objectives",
+    "crumbs": [
+      "Data Wrangling and Visualization",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Communication</span>"
+    ]
+  },
+  {
+    "objectID": "12-writing-functions.html",
+    "href": "12-writing-functions.html",
+    "title": "13  Writing Functions",
+    "section": "",
+    "text": "Learning Objectives",
+    "crumbs": [
+      "Modeling and Functions",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Writing Functions</span>"
+    ]
+  },
+  {
+    "objectID": "13-regression.html",
+    "href": "13-regression.html",
+    "title": "14  Regression",
+    "section": "",
+    "text": "Learning Objectives",
+    "crumbs": [
+      "Modeling and Functions",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Regression</span>"
+    ]
+  },
+  {
+    "objectID": "14-simulation.html",
+    "href": "14-simulation.html",
+    "title": "15  Simulation",
+    "section": "",
+    "text": "Learning Objectives",
+    "crumbs": [
+      "Modeling and Functions",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Simulation</span>"
     ]
   }
 ]

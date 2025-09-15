@@ -3,24 +3,61 @@ project:
   output-dir: docs
 
 book:
-  title: "course-pack"
-  author: "Norah Jones"
-  date: "9/15/2025"
+  title: "STAT 1810: R is Your Friend"
+  author: "Cal Poly - SLO, Statistics Department"
+  date: last-modified
   chapters:
-    - index.qmd
-    - intro.qmd
-    - summary.qmd
-    - references.qmd
+  - index.qmd
+  - part: "Fundamentals of Coding"
+    chapters: 
+    - 00-setup.qmd
+    - 01-what-is-code.qmd
+    - 02-r-is-friend.qmd
+    - 03-control-flow.qmd
+    - 04-data-is-friend.qmd
+  - part: "Data Wrangling and Visualization"
+    chapters:
+    - 05-data-visualizations.qmd
+    - 06-data-wrangling.qmd
+    - 07-more-wrangling.qmd
+    - 08-strings.qmd
+    - 09-dates.qmd
+    - 10-factors.qmd
+    - 11-communication.qmd
+  - part: "Modeling and Functions"
+    chapters:
+    - 12-writing-functions.qmd
+    - 13-regression.qmd
+    - 14-simulation.qmd
+  site-url: https://r-is-your-friend.github.io/course-pack/
+  repo-url: https://github.com/R-is-your-friend
+  repo-branch: main
+  sharing: [twitter, facebook, linkedin]
 
-bibliography: references.bib
+# bibliography: references.bib
+
+from: markdown+emoji
 
 format:
   html:
+    # theme: cosmo
+    code-link: true
     theme:
-      - cosmo
-      - brand
-  pdf:
-    documentclass: scrreprt
+      light: [flatly, customcallouts.scss]
+      dark: [darkly, customcallouts.scss]
+    code-copy: true
+    code-annotations: below
+  # pdf:
+  #   documentclass: scrreprt
+
+filters:
+  - custom_callout.lua
+    
+execute: 
+  echo: true
+  warning: false
+  error: true
+  freeze: auto
 
 
 
