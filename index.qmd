@@ -55,7 +55,7 @@ We will usually make these "click to expand" so that they don't distract from yo
 
 :::{.callout-opinion .icon}
 
-These are personal opinion comments from the authors.  Take them with a grain of salt; we aren't the only python programmers worth listening to, we are just sharing what has worked for us.
+These are personal opinion comments from the authors.  Take them with a grain of salt; we aren't the only R programmers worth listening to, we are just sharing what has worked for us.
 
 We will usually make these "click to expand" so that they don't distract from your reading.
 
