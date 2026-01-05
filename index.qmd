@@ -66,4 +66,15 @@ We will usually make these "click to expand" so that they don't distract from yo
 
 References or additional readings may come from the following texts:
 
++ Statistical Computing Using R and Python (<https://srvanderplas.github.io/stat-computing-r-python/>)
 + R for Data Science (<https://r4ds.hadley.nz/>)
+
+You can find additional help for Coding in R from the following resources: 
+- [RStudio Education Page](https://education.rstudio.com/learn/beginner/) 
+- [Posit Primers](https://posit.cloud/learn/primers) 
+- ["R Bootcamp" Practice](https://r-bootcamp.netlify.app/) 
+
+Part of this course will be dedicated to conducting familiar statistical analyses using R code. You can find a refresher on statistical concepts from the following resources: 
+
+- [Introduction to Modern Statistics](https://openintro-ims.netlify.app/) 
+- [Modern Dive](https://moderndive.com/1-getting-started.html)
