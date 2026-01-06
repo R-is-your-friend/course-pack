@@ -8,3 +8,10 @@
 :::
 
 
+<!-- ### RStudio Projects -->
+
+<!-- When you work on a project that may need to exist on some other machine, it's important to use **local** file paths -- the global path will likely not be the same, but you can usually set the local project-specific structure up to be the same across machines.  -->
+
+<!-- In fact, there's a very common shortcut that programmers take -- they set up a project-specific folder that is self contained.  -->
+<!-- That is, all of the data and code necessary for that project is provided within the folder.  -->
+<!-- Then, the code within the folder can use local paths and will work when the project folder is copied to a new machine.  -->
