@@ -454,6 +454,18 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#making-good-file-names" id="toc-making-good-file-names" class="nav-link" data-scroll-target="#making-good-file-names"><span class="header-section-number">2.3.1</span> Making Good File Names</a></li>
   </ul></li>
   </ul></li>
+  <li><a href="#software" id="toc-software" class="nav-link" data-scroll-target="#software"><span class="header-section-number">3</span> Software</a>
+  <ul class="collapse">
+  <li><a href="#what-do-i-need-to-install" id="toc-what-do-i-need-to-install" class="nav-link" data-scroll-target="#what-do-i-need-to-install"><span class="header-section-number">3.1</span> What do I need to install?</a></li>
+  <li><a href="#installing-r" id="toc-installing-r" class="nav-link" data-scroll-target="#installing-r"><span class="header-section-number">3.2</span> Installing <code>R</code></a>
+  <ul class="collapse">
+  <li><a href="#if-you-are-a-windows-user" id="toc-if-you-are-a-windows-user" class="nav-link" data-scroll-target="#if-you-are-a-windows-user"><span class="header-section-number">3.2.1</span> If you are a <em>Windows</em> user:</a></li>
+  <li><a href="#if-you-are-macos-user" id="toc-if-you-are-macos-user" class="nav-link" data-scroll-target="#if-you-are-macos-user"><span class="header-section-number">3.2.2</span> If you are <em>macOS</em> user:</a></li>
+  <li><a href="#if-you-are-a-linux-user" id="toc-if-you-are-a-linux-user" class="nav-link" data-scroll-target="#if-you-are-a-linux-user"><span class="header-section-number">3.2.3</span> If you are a <em>Linux</em> user:</a></li>
+  </ul></li>
+  <li><a href="#step-2-install-rstudio" id="toc-step-2-install-rstudio" class="nav-link" data-scroll-target="#step-2-install-rstudio"><span class="header-section-number">3.3</span> Step 2: Install RStudio</a></li>
+  </ul></li>
+  <li><a href="#lets-start-working-in-r" id="toc-lets-start-working-in-r" class="nav-link" data-scroll-target="#lets-start-working-in-r"><span class="header-section-number">4</span> Let’s start working in <code>R</code>! 🥳</a></li>
   </ul>
 </nav>
     </div>
@@ -621,7 +633,7 @@ ul.task-list li input[type="checkbox"] {
 <p>You might have noticed a few things about how we chose to name the folders in the previous example. First, the main folder was named <code>stat-1810</code> not <code>Stat-1810</code> or <code>Stat 1810</code>. We made this choice for two reasons:</p>
 <ol type="1">
 <li><p>Some computers are case sensitive, so it is safer to use the same capitalization for all folders. <code>stat</code> is easier to type than <code>Stat</code> or <code>STAT</code>.</p></li>
-<li><p>Using spaces in file names (e.g., <code>stat 1810</code>) can sometimes cause issues. So, we advocate for replacing spaces with a hyphon or an underscore.</p></li>
+<li><p>Using spaces in file names (e.g., <code>stat 1810</code>) can sometimes cause issues. So, we advocate for replacing spaces with a hyphen or an underscore.</p></li>
 </ol>
 
 <div class="no-row-height column-margin column-container"><div class="">
@@ -677,12 +689,153 @@ ul.task-list li input[type="checkbox"] {
 </ol>
 </div>
 </div>
-<!-- ## Software -->
-<!-- Installing R and RStudio -->
-
-
 </section>
 </section>
+</section>
+<section id="software" class="level1 page-columns page-full" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Software</h1>
+<p>This course is all about you learning skills for working with data in R, so you will need to have <strong>local</strong> installations of both R and RStudio on your computer. Moreover, we will make use of Quarto documents, so you will need to have Quarto installed on your computer.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Cannot Install R or RStudio
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If for any reason you cannot download R or RStudio onto your laptop, please let me know as soon as possible so we can figure something out.</p>
+</div>
+</div>
+<section id="what-do-i-need-to-install" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="what-do-i-need-to-install"><span class="header-section-number">3.1</span> What do I need to install?</h2>
+<p>It’s a good idea to be skeptical when someone is telling you to install things. 🤨 Here’s a very broad overview of what each of these programs or services does and why I’m asking you to install or sign up for them.</p>
+<table class="caption-top table">
+<caption>Logos for and descriptions of what each of the programs you will use in STAT 1810.</caption>
+<colgroup>
+<col style="width: 19%">
+<col style="width: 19%">
+<col style="width: 61%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Program</th>
+<th>Logo</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>R</td>
+<td><img src="https://www.r-project.org/Rlogo.png" alt="R logo which is a blue letter R with a gray oval in the background." width="80" height="63"></td>
+<td>A statistical programming language built around working with data</td>
+</tr>
+<tr class="even">
+<td>RStudio IDE</td>
+<td><img src="images/00-rstudio-ball.png" class="img-fluid" alt="The RStudio logo which is a blue ball with a white R logo in the center." width="80"></td>
+<td>An integrated desktop environment (IDE) created to make it easy to work with R, Python, and other data-science programming tools.</td>
+</tr>
+<tr class="odd">
+<td>Quarto</td>
+<td><img src="https://quarto.org/quarto.png" alt="Quarto logo which is the word quarto in blue with a logo of a blue circle cut into quarters on the left hand side." width="80" height="20"></td>
+<td>A document creation system that allows you to include code, results, and pictures generated from data within a document so that they automatically update when the document is recompiled.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="installing-r" class="level2 page-columns page-full" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="installing-r"><span class="header-section-number">3.2</span> Installing <code>R</code></h2>
+<!-- I don't think we need to have instructions for updating R? -->
+<p>As mentioned above, you will need to have local installations of both R (the software) and RStudio (the interface for working in R). <strong><em>Do not skip this step if you already have both R and RStudio installed on your computer</em></strong>, as you need to ensure you are using the most up to date version of R and RStudio.</p>
+<p>Download and install R by going to <a href="https://cloud.r-project.org/" class="uri">https://cloud.r-project.org/</a>. Here, you will find three options for installing R—click on the option for your computer’s operating system.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/YrEe2TLr3MI" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div></div><section id="if-you-are-a-windows-user" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="if-you-are-a-windows-user"><span class="header-section-number">3.2.1</span> If you are a <em>Windows</em> user:</h3>
+<ul>
+<li><p>Click on “Download R for Windows”</p></li>
+<li><p>Click on “base”</p></li>
+<li><p>Click on the Download link.</p></li>
+<li><p>When you open the execution file (<code>.exe</code>) you will be prompted with a variety of questions about installing R. Feel free to use the default features / settings that come with R (continue to click “Ok” until the download starts).</p></li>
+</ul>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Multiple Versions of R
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Beware that if you had a previous version of R downloaded on your PC, that old version will not be deleted when you download the most recent version of R. We do not want to have two versions of R installed, as your computer can get confused what version of R to use. So, you need to remove the old version of R.</p>
+<p>To do this you need to:</p>
+<ul>
+<li>Navigate to your computer’s settings</li>
+<li>Click on the “Apps” option on the left-hand panel</li>
+<li>Search for or scroll down to R</li>
+<li>Find the older version of R</li>
+</ul>
+<p><img src="images/00-multiple-versions-of-r.png" class="img-fluid" alt="A screenshot of a PC with two different versions of R installed---version 4.3.1 and version 4.4.1."></p>
+<ul>
+<li>Click on the <code>...</code> on the right side</li>
+<li>Select “Uninstall”</li>
+</ul>
+<p><img src="images/00-uninstall-old-r-version.png" class="img-fluid" alt="A screenshot of selecting the (...) option to uninstall the older version of R."></p>
+</div>
+</div>
+</section>
+<section id="if-you-are-macos-user" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="if-you-are-macos-user"><span class="header-section-number">3.2.2</span> If you are <em>macOS</em> user:</h3>
+<ul>
+<li><p>Click on “Download R for (Mac) OS X”</p></li>
+<li><p>Under “Latest release:” click on R-X.X.X.pkg, where R-X.X.X is the version number. For example, the latest version of R as of January 1, 2025 was R-4.5.2 (Not Part in a Rumble).</p></li>
+<li><p>When installing, use the default features / settings that come with R (click Ok until the download starts).</p></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Troubleshooting for Macs
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>First, identify which version of OSx you are running. <a href="https://support.apple.com/en-us/HT201260">How-to</a></p>
+<p>Next, find out which version of <code>R</code> your computer can run. <a href="https://cran.r-project.org/bin/macosx/">Link</a></p>
+<p>If this version is 3.6 or later, download the latest version that your computer can handle.</p>
+<p>If this version is 3.4 or earlier, you’re going to run in to some trouble. I recommend updating your version of OSx, if you are willing. If you can’t, then you can use <a href="https://posit.cloud/">Posit Cloud</a> to run <code>R</code> and RStudio on a free server. However, I recommend strongly against this option; your files will not be saved indefinitely, you will have limited hours to complete your work, your computing power will be limited, and you will need an internet connection at all times to do your work.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="if-you-are-a-linux-user" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="if-you-are-a-linux-user"><span class="header-section-number">3.2.3</span> If you are a <em>Linux</em> user:</h3>
+<p>Click on “Download R for Linux” and choose your distribution for more information on installing <code>R</code> for your setup.</p>
+</section>
+</section>
+<section id="step-2-install-rstudio" class="level2 page-columns page-full" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="step-2-install-rstudio"><span class="header-section-number">3.3</span> Step 2: Install RStudio</h2>
+<p>RStudio is an Integrated Development Environment (IDE) for <code>R</code>. What does that mean? Well, if you think of <code>R</code> as a language, which it is, you can think of RStudio as a program that helps you write and work in the language. Back in the dark ages, people wrote programs in text editors and then used the command line to compile those programs and run them. RStudio makes programming in <code>R</code> much easier and this course requires you to use it!</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/YrEe2TLr3MI" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/n8kP7c_QbLA" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div></div><p>Downloading the most recent version of RStudio works the same way regardless of whether you’ve never downloaded RStudio before or if you just need to update your version of RStudio.</p>
+<p>When you navigate to the RStudio download page (<a href="https://rstudio.com/products/rstudio/download/" class="uri">https://rstudio.com/products/rstudio/download/</a>), the website should automatically detect your computer’s operating system. So, you should be able to simply click the blue “Download RStudio Desktop for [insert operating system here]” button.</p>
+<p>Clicking the button will begin installing RStudio. Once the download has completed, you will need to open the application file (on a Mac this is a <code>.dmg</code> file, on Windows this is an <code>exe</code> file).</p>
+</section>
+</section>
+<section id="lets-start-working-in-r" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Let’s start working in <code>R</code>! 🥳</h1>
+<p><img src="images/00-typing-R.gif" class="img-fluid" alt="A video of Hadley Wickham (author of many R packages) pretending to type and saying 'just typing R code'."></p>
+
+
 </section>
 
 </main> <!-- /main -->

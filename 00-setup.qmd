@@ -189,7 +189,7 @@ the previous example. First, the main folder was named `stat-1810` not
 capitalization for all folders. `stat` is easier to type than `Stat` or `STAT`. 
 
 2. Using spaces in file names (e.g., `stat 1810`) can sometimes cause issues. 
-So, we advocate for replacing spaces with a hyphon or an underscore. 
+So, we advocate for replacing spaces with a hyphen or an underscore. 
 
 ::: {.column-margin}
 
@@ -221,6 +221,151 @@ Take a screenshot of your class directory, showing:
 2.  a Week 1 sub-folder 
 :::
 
-<!-- ## Software -->
+# Software
 
-<!-- Installing R and RStudio -->
+This course is all about you learning skills for working with data in R, so you
+will need to have **local** installations of both R and RStudio on your
+computer. Moreover, we will make use of Quarto documents, so you will need to 
+have Quarto installed on your computer. 
+
+::: callout-warning
+# Cannot Install R or RStudio
+
+If for any reason you cannot download R or RStudio onto your laptop, please let
+me know as soon as possible so we can figure something out.
+:::
+
+## What do I need to install?
+
+It's a good idea to be skeptical when someone is telling you to install things.
+🤨 Here's a very broad overview of what each of these programs or services
+does and why I'm asking you to install or sign up for them.
+
+
+| Program      | Logo          |    Purpose                                 |
+|--------------|--------------|---------------------------------------------|
+| R            | ![](https://www.r-project.org/Rlogo.png){width="80" height="63" fig-alt="R logo which is a blue letter R with a gray oval in the background."}                                                                           | A statistical programming language built around working with data                                                                                                                                             |
+| RStudio IDE | ![](images/00-rstudio-ball.png){width="80" fig-alt="The RStudio logo which is a blue ball with a white R logo in the center."}                                                       | An integrated desktop environment (IDE) created to make it easy to work with R, Python, and other data-science programming tools.                                                                                   |
+| Quarto      | ![](https://quarto.org/quarto.png){width="80" height="20" fig-alt="Quarto logo which is the word quarto in blue with a logo of a blue circle cut into quarters on the left hand side."}                                                                                 | A document creation system that allows you to include code, results, and pictures generated from data within a document so that they automatically update when the document is recompiled. |
+
+: Logos for and descriptions of what each of the programs you will use in STAT 1810.
+
+## Installing `R`
+
+<!-- I don't think we need to have instructions for updating R? -->
+
+As mentioned above, you will need to have local installations of both R (the
+software) and RStudio (the interface for working in R). ***Do not skip this step
+if you already have both R and RStudio installed on your computer***, as you
+need to ensure you are using the most up to date version of R and RStudio.
+
+Download and install R by going to <https://cloud.r-project.org/>. Here, you
+will find three options for installing R---click on the option for your
+computer's operating system.
+
+::: {.column-margin}
+{{< video https://www.youtube.com/watch?v=YrEe2TLr3MI >}}
+:::
+
+### If you are a *Windows* user:
+
+-   Click on “Download R for Windows”
+
+-   Click on “base”
+
+-   Click on the Download link.
+
+-   When you open the execution file (`.exe`) you will be prompted with a
+variety of questions about installing R. Feel free to use the default features /
+settings that come with R (continue to click "Ok" until the download starts).
+
+::: callout-warning
+# Multiple Versions of R
+
+Beware that if you had a previous version of R downloaded on your PC, that old
+version will not be deleted when you download the most recent version of R. We
+do not want to have two versions of R installed, as your computer can get
+confused what version of R to use. So, you need to remove the old version of R.
+
+To do this you need to:
+
+-   Navigate to your computer's settings
+-   Click on the "Apps" option on the left-hand panel
+-   Search for or scroll down to R
+-   Find the older version of R
+
+![](images/00-multiple-versions-of-r.png){fig-alt="A screenshot of a PC with two different versions of R installed---version 4.3.1 and version 4.4.1."}
+
+-   Click on the `...` on the right side
+-   Select "Uninstall"
+
+![](images/00-uninstall-old-r-version.png){fig-alt="A screenshot of selecting the (...) option to uninstall the older version of R."}
+:::
+
+### If you are *macOS* user:
+
+-   Click on “Download R for (Mac) OS X”
+
+-   Under “Latest release:” click on R-X.X.X.pkg, where R-X.X.X is the version
+number. For example, the latest version of R as of January 1, 2025 was R-4.5.2
+(Not Part in a Rumble).
+
+-   When installing, use the default features / settings that come with R (click
+Ok until the download starts).
+
+::: {.callout-tip collapse=TRUE}
+# Troubleshooting for Macs
+
+First, identify which version of OSx you are running. [How-to](https://support.apple.com/en-us/HT201260)
+
+Next, find out which version of `R` your computer can run. [Link](https://cran.r-project.org/bin/macosx/)
+
+If this version is 3.6 or later, download the latest version that your computer
+can handle.
+
+If this version is 3.4 or earlier, you're going to run in to some trouble. I
+recommend updating your version of OSx, if you are willing. If you can't, then
+you can use [Posit Cloud](https://posit.cloud/) to run `R` and RStudio on a free
+server. However, I recommend strongly against this option; your files will not
+be saved indefinitely, you will have limited hours to complete your work, your
+computing power will be limited, and you will need an internet connection at all
+times to do your work.
+:::
+
+### If you are a *Linux* user:
+
+Click on “Download R for Linux” and choose your distribution for more
+information on installing `R` for your setup.
+
+## Step 2: Install RStudio
+
+RStudio is an Integrated Development Environment (IDE) for `R`. What does that
+mean? Well, if you think of `R` as a language, which it is, you can think of
+RStudio as a program that helps you write and work in the language. Back in the
+dark ages, people wrote programs in text editors and then used the command line
+to compile those programs and run them. RStudio makes programming in `R` much
+easier and this course requires you to use it!
+
+::: {.column-margin}
+{{< video https://www.youtube.com/watch?v=YrEe2TLr3MI >}}
+
+{{< video https://www.youtube.com/watch?v=n8kP7c_QbLA >}}
+:::
+
+Downloading the most recent version of RStudio works the same way regardless of
+whether you've never downloaded RStudio before or if you just need to update
+your version of RStudio. 
+
+When you navigate to the RStudio download page
+(<https://rstudio.com/products/rstudio/download/>), the website should
+automatically detect your computer's operating system. So, you should be able to 
+simply click the blue "Download RStudio Desktop for [insert operating system
+here]" button. 
+
+Clicking the button will begin installing RStudio. Once the download has
+completed, you will need to open the application file (on a Mac this is a `.dmg`
+file, on Windows this is an `exe` file). 
+
+# Let's start working in `R`! 🥳
+
+![](images/00-typing-R.gif){fig-alt="A video of Hadley Wickham (author of many R packages) pretending to type and saying 'just typing R code'."}
