@@ -24,163 +24,9 @@
     "href": "index.html#additional-resources",
     "title": "R is Your Friend",
     "section": "Additional Resources",
-    "text": "Additional Resources\nReferences or additional readings may come from the following texts:\n\nStatistical Computing Using R and Python (https://srvanderplas.github.io/stat-computing-r-python/)\nR for Data Science (https://r4ds.hadley.nz/)\n\nYou can find additional help for Coding in R from the following resources: - RStudio Education Page - Posit Primers - “R Bootcamp” Practice\nPart of this course will be dedicated to conducting familiar statistical analyses using R code. You can find a refresher on statistical concepts from the following resources:\n\nIntroduction to Modern Statistics\nModern Dive",
+    "text": "Additional Resources\nReferences or additional readings may come from the following texts:\n\nStatistical Computing Using R and Python (https://srvanderplas.github.io/stat-computing-r-python/)\nR for Data Science (https://r4ds.hadley.nz/)\n\nYou can find additional help for Coding in R from the following resources:\n\nRStudio Education Page\nPosit Primers\n“R Bootcamp” Practice\n\nPart of this course will be dedicated to conducting familiar statistical analyses using R code. You can find a refresher on statistical concepts from the following resources:\n\nIntroduction to Modern Statistics\nModern Dive",
     "crumbs": [
       "Preface"
-    ]
-  },
-  {
-    "objectID": "01-what-is-code.html",
-    "href": "01-what-is-code.html",
-    "title": "2  What is Code",
-    "section": "",
-    "text": "Learning Objectives",
-    "crumbs": [
-      "Fundamentals of Coding",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>What is Code</span>"
-    ]
-  },
-  {
-    "objectID": "02-r-is-friend.html",
-    "href": "02-r-is-friend.html",
-    "title": "3  R is Friend",
-    "section": "",
-    "text": "Learning Objectives",
-    "crumbs": [
-      "Fundamentals of Coding",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>R is Friend</span>"
-    ]
-  },
-  {
-    "objectID": "03-control-flow.html",
-    "href": "03-control-flow.html",
-    "title": "4  Control Flow",
-    "section": "",
-    "text": "Learning Objectives",
-    "crumbs": [
-      "Fundamentals of Coding",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Control Flow</span>"
-    ]
-  },
-  {
-    "objectID": "04-data-is-friend.html",
-    "href": "04-data-is-friend.html",
-    "title": "5  Data is Friend",
-    "section": "",
-    "text": "NoneLearning Objectives",
-    "crumbs": [
-      "Fundamentals of Coding",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Data is Friend</span>"
-    ]
-  },
-  {
-    "objectID": "05-data-visualizations.html",
-    "href": "05-data-visualizations.html",
-    "title": "6  Data Visualizations",
-    "section": "",
-    "text": "Learning Objectives",
-    "crumbs": [
-      "Data Wrangling and Visualization",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Data Visualizations</span>"
-    ]
-  },
-  {
-    "objectID": "06-data-wrangling.html",
-    "href": "06-data-wrangling.html",
-    "title": "7  Data Wrangling",
-    "section": "",
-    "text": "Learning Objectives",
-    "crumbs": [
-      "Data Wrangling and Visualization",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Data Wrangling</span>"
-    ]
-  },
-  {
-    "objectID": "07-more-wrangling.html",
-    "href": "07-more-wrangling.html",
-    "title": "8  More Wrangling",
-    "section": "",
-    "text": "Learning Objectives",
-    "crumbs": [
-      "Data Wrangling and Visualization",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>More Wrangling</span>"
-    ]
-  },
-  {
-    "objectID": "08-strings.html",
-    "href": "08-strings.html",
-    "title": "9  Strings",
-    "section": "",
-    "text": "Learning Objectives",
-    "crumbs": [
-      "Data Wrangling and Visualization",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Strings</span>"
-    ]
-  },
-  {
-    "objectID": "09-dates.html",
-    "href": "09-dates.html",
-    "title": "10  Dates",
-    "section": "",
-    "text": "Learning Objectives",
-    "crumbs": [
-      "Data Wrangling and Visualization",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Dates</span>"
-    ]
-  },
-  {
-    "objectID": "10-factors.html",
-    "href": "10-factors.html",
-    "title": "11  Factors",
-    "section": "",
-    "text": "Learning Objectives",
-    "crumbs": [
-      "Data Wrangling and Visualization",
-      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Factors</span>"
-    ]
-  },
-  {
-    "objectID": "11-communication.html",
-    "href": "11-communication.html",
-    "title": "12  Communication",
-    "section": "",
-    "text": "Learning Objectives",
-    "crumbs": [
-      "Data Wrangling and Visualization",
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Communication</span>"
-    ]
-  },
-  {
-    "objectID": "12-writing-functions.html",
-    "href": "12-writing-functions.html",
-    "title": "13  Writing Functions",
-    "section": "",
-    "text": "Learning Objectives",
-    "crumbs": [
-      "Modeling and Functions",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Writing Functions</span>"
-    ]
-  },
-  {
-    "objectID": "13-regression.html",
-    "href": "13-regression.html",
-    "title": "14  Regression",
-    "section": "",
-    "text": "Learning Objectives",
-    "crumbs": [
-      "Modeling and Functions",
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Regression</span>"
-    ]
-  },
-  {
-    "objectID": "14-simulation.html",
-    "href": "14-simulation.html",
-    "title": "15  Simulation",
-    "section": "",
-    "text": "Learning Objectives",
-    "crumbs": [
-      "Modeling and Functions",
-      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Simulation</span>"
     ]
   },
   {
@@ -192,39 +38,6 @@
     "crumbs": [
       "Fundamentals of Coding",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Computer is Friend</span>"
-    ]
-  },
-  {
-    "objectID": "00-setup.html#hardware",
-    "href": "00-setup.html#hardware",
-    "title": "1  Computer is Friend",
-    "section": "",
-    "text": "TipLearn About Your Computer\n\n\n\nExamine the hardware on your computer using one of the following methods:\nWindows: Ctrl+Shift+Escape &gt; Task Manager &gt; More Options &gt; Performance tab\nMac: Apple menu &gt; System Settings &gt; General (sidebar) &gt; About &gt; System Report\n\nFind out:\n\nWhat processor do you have? This most likely will start with ARM, Intel, AMD, or Apple M*\nHow much RAM do you have? (most likely between 8 and 64 GB)\nHow much hard drive space do you have?\n\n\n\n\n1.1.1 Operating Systems\nOperating systems (OS), such as Windows and MacOS, are sophisticated programs that allow CPUs to keep track of multiple programs and tasks and execute them at the same time. This 2-minute video describes different operating systems.\n\n\n\nBroadly, you should know (1) what operating system your computer uses (Windows / Mac / Linux), and (2) what version of the system your computer uses (e.g. Windows 11, Mac OSX Tahoe, Debian 12, RedHat 7).\n\n\n\n\n\n\nTipLearn About Your Computer\n\n\n\nLocate your operating system and version information. When was your system last updated?\nIf your system hasn’t been updated in a while, consider updating it now. System updates may break software you’ll install to work with R in the next few weeks.\n\n\n\n\n1.1.2 File Systems\nFile systems are places you save files (shocking!). These systems are modeled after physical file cabinets, where documents are kept in a hierarchical sequence of folders. This collection of folders is what is stored on your hard drive.\nThere has been a generational shift in how computers are used. Older users (like me!) were taught to organize files deliberately, while many newer users rely almost entirely on search, treating their computers less like filing cabinets and more like laundry hampers.\nRegardless of how you tend to organize your personal files, it is helpful to understand the basics of what is meant by a computer file system–a way to organize data stored on a hard drive.\n\n\n\n\n\n\n\n\n\nNoteYou can stop watching at 4:16.\n\n\n\n\n\n\nThat’s not enough, though - we also need to know how computers remember the location of what is stored where. Specifically, we need to understand file paths.\n\n\n\nWhen you write a program, you may have to reference external files - data stored in a .csv file, for instance, or a picture. Best practice is to create a file structure that contains everything you need to run your entire project in a single file folder (you can, and sometimes should, have sub-folders).\nFor now, it is enough to know how to find files using file paths, and how to refer to a file using a relative file path from your base folder. In this situation, your “base folder” is known as your working directory - the place your program thinks of as home.\nIn Chapter 1, we will discuss Directories, Paths, and Projects as they relate to R and getting setup to be successful in this course.",
-    "crumbs": [
-      "Fundamentals of Coding",
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Computer is Friend</span>"
-    ]
-  },
-  {
-    "objectID": "00-setup.html#software",
-    "href": "00-setup.html#software",
-    "title": "1  Computer is Friend",
-    "section": "2.4 Software",
-    "text": "2.4 Software\nThis course is all about you learning skills for working with data in R, so you will need to have local installations of both R and RStudio on your computer. Moreover, we will make use of Quarto documents, so you will need to have Quarto installed on your computer.\n\n\n\n\n\n\nWarningCannot Install R or RStudio\n\n\n\nIf for any reason you cannot download R or RStudio onto your laptop, please let me know as soon as possible so we can figure something out.\n\n\n\n2.4.1 What do I need to install?\nIt’s a good idea to be skeptical when someone is telling you to install things. 🤨 Here’s a very broad overview of what each of these programs or services does and why I’m asking you to install or sign up for them.\n\nLogos for and descriptions of what each of the programs you will use in STAT 1810.\n\n\n\n\n\n\n\nProgram\nLogo\nPurpose\n\n\n\n\nR\n\nA statistical programming language built around working with data\n\n\nRStudio IDE\n\nAn integrated desktop environment (IDE) created to make it easy to work with R, Python, and other data-science programming tools.\n\n\nQuarto\n\nA document creation system that allows you to include code, results, and pictures generated from data within a document so that they automatically update when the document is recompiled.\n\n\n\n\n\n2.4.2 Installing R\n\nAs mentioned above, you will need to have local installations of both R (the software) and RStudio (the interface for working in R). Do not skip this step if you already have both R and RStudio installed on your computer, as you need to ensure you are using the most up to date version of R and RStudio.\nDownload and install R by going to https://cloud.r-project.org/. Here, you will find three options for installing R—click on the option for your computer’s operating system.\n\n\n\n\n2.4.2.1 If you are a Windows user:\n\nClick on “Download R for Windows”\nClick on “base”\nClick on the Download link.\nWhen you open the execution file (.exe) you will be prompted with a variety of questions about installing R. Feel free to use the default features / settings that come with R (continue to click “Ok” until the download starts).\n\n\n\n\n\n\n\nWarningMultiple Versions of R\n\n\n\nBeware that if you had a previous version of R downloaded on your PC, that old version will not be deleted when you download the most recent version of R. We do not want to have two versions of R installed, as your computer can get confused what version of R to use. So, you need to remove the old version of R.\nTo do this you need to:\n\nNavigate to your computer’s settings\nClick on the “Apps” option on the left-hand panel\nSearch for or scroll down to R\nFind the older version of R\n\n\n\nClick on the ... on the right side\nSelect “Uninstall”\n\n\n\n\nIf you are macOS user:\n\nClick on “Download R for (Mac) OS X”\nUnder “Latest release:” click on R-X.X.X.pkg, where R-X.X.X is the version number. For example, the latest version of R as of January 1, 2025 was R-4.5.2 (Not Part in a Rumble).\nWhen installing, use the default features / settings that come with R (click Ok until the download starts).\n\n\n\n\n\n\n\nTipTroubleshooting for Macs\n\n\n\n\n\nFirst, identify which version of OSx you are running. How-to\nNext, find out which version of R your computer can run. Link\nIf this version is 3.6 or later, download the latest version that your computer can handle.\nIf this version is 3.4 or earlier, you’re going to run in to some trouble. I recommend updating your version of OSx, if you are willing. If you can’t, then you can use Posit Cloud to run R and RStudio on a free server. However, I recommend strongly against this option; your files will not be saved indefinitely, you will have limited hours to complete your work, your computing power will be limited, and you will need an internet connection at all times to do your work.\n\n\n\n\n\n2.4.2.2 If you are a Linux user:\nClick on “Download R for Linux” and choose your distribution for more information on installing R for your setup.",
-    "crumbs": [
-      "Fundamentals of Coding",
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Computer is Friend</span>"
-    ]
-  },
-  {
-    "objectID": "00-setup.html#file-storage",
-    "href": "00-setup.html#file-storage",
-    "title": "1  Set up",
-    "section": "1.3 File Storage",
-    "text": "1.3 File Storage",
-    "crumbs": [
-      "Fundamentals of Coding",
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Set up</span>"
     ]
   },
   {
@@ -294,14 +107,157 @@
     ]
   },
   {
-    "objectID": "00-setup.html#installing-rstudio",
-    "href": "00-setup.html#installing-rstudio",
-    "title": "1  Computer is Friend",
-    "section": "3.4 Installing RStudio",
-    "text": "3.4 Installing RStudio\n\n\n\n\nDownloading the most recent version of RStudio works the same way regardless of whether you’ve never downloaded RStudio before or if you just need to update your version of RStudio.\nWhen you navigate to the RStudio download page (https://rstudio.com/products/rstudio/download/), the website should automatically detect your computer’s operating system. So, you should be able to simply click the blue “Download RStudio Desktop for [insert operating system here]” button.\nClicking the button will begin installing RStudio. Once the download has completed, you will need to open the application file (on a Mac this is a .dmg file, on Windows this is an exe file).",
+    "objectID": "01-what-is-code.html",
+    "href": "01-what-is-code.html",
+    "title": "2  What is Code",
+    "section": "",
+    "text": "NoneLearning Objectives",
     "crumbs": [
       "Fundamentals of Coding",
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Computer is Friend</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>What is Code</span>"
+    ]
+  },
+  {
+    "objectID": "02-r-is-friend.html",
+    "href": "02-r-is-friend.html",
+    "title": "3  R is Friend",
+    "section": "",
+    "text": "NoneLearning Objectives",
+    "crumbs": [
+      "Fundamentals of Coding",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>R is Friend</span>"
+    ]
+  },
+  {
+    "objectID": "03-control-flow.html",
+    "href": "03-control-flow.html",
+    "title": "4  Control Flow",
+    "section": "",
+    "text": "NoneLearning Objectives",
+    "crumbs": [
+      "Fundamentals of Coding",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Control Flow</span>"
+    ]
+  },
+  {
+    "objectID": "04-data-is-friend.html",
+    "href": "04-data-is-friend.html",
+    "title": "5  Data is Friend",
+    "section": "",
+    "text": "NoneLearning Objectives",
+    "crumbs": [
+      "Fundamentals of Coding",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Data is Friend</span>"
+    ]
+  },
+  {
+    "objectID": "05-data-visualizations.html",
+    "href": "05-data-visualizations.html",
+    "title": "6  Data Visualizations",
+    "section": "",
+    "text": "NoneLearning Objectives",
+    "crumbs": [
+      "Data Wrangling and Visualization",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Data Visualizations</span>"
+    ]
+  },
+  {
+    "objectID": "06-data-wrangling.html",
+    "href": "06-data-wrangling.html",
+    "title": "7  Data Wrangling",
+    "section": "",
+    "text": "NoneLearning Objectives",
+    "crumbs": [
+      "Data Wrangling and Visualization",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Data Wrangling</span>"
+    ]
+  },
+  {
+    "objectID": "07-more-wrangling.html",
+    "href": "07-more-wrangling.html",
+    "title": "8  More Wrangling",
+    "section": "",
+    "text": "NoneLearning Objectives",
+    "crumbs": [
+      "Data Wrangling and Visualization",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>More Wrangling</span>"
+    ]
+  },
+  {
+    "objectID": "08-strings.html",
+    "href": "08-strings.html",
+    "title": "9  Strings",
+    "section": "",
+    "text": "NoneLearning Objectives",
+    "crumbs": [
+      "Data Wrangling and Visualization",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Strings</span>"
+    ]
+  },
+  {
+    "objectID": "09-dates.html",
+    "href": "09-dates.html",
+    "title": "10  Dates",
+    "section": "",
+    "text": "NoneLearning Objectives",
+    "crumbs": [
+      "Data Wrangling and Visualization",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Dates</span>"
+    ]
+  },
+  {
+    "objectID": "10-factors.html",
+    "href": "10-factors.html",
+    "title": "11  Factors",
+    "section": "",
+    "text": "NoneLearning Objectives",
+    "crumbs": [
+      "Data Wrangling and Visualization",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Factors</span>"
+    ]
+  },
+  {
+    "objectID": "11-communication.html",
+    "href": "11-communication.html",
+    "title": "12  Communication",
+    "section": "",
+    "text": "NoneLearning Objectives",
+    "crumbs": [
+      "Data Wrangling and Visualization",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Communication</span>"
+    ]
+  },
+  {
+    "objectID": "12-writing-functions.html",
+    "href": "12-writing-functions.html",
+    "title": "13  Writing Functions",
+    "section": "",
+    "text": "NoneLearning Objectives",
+    "crumbs": [
+      "Modeling and Functions",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Writing Functions</span>"
+    ]
+  },
+  {
+    "objectID": "13-regression.html",
+    "href": "13-regression.html",
+    "title": "14  Regression",
+    "section": "",
+    "text": "NoneLearning Objectives",
+    "crumbs": [
+      "Modeling and Functions",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Regression</span>"
+    ]
+  },
+  {
+    "objectID": "14-simulation.html",
+    "href": "14-simulation.html",
+    "title": "15  Simulation",
+    "section": "",
+    "text": "NoneLearning Objectives",
+    "crumbs": [
+      "Modeling and Functions",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Simulation</span>"
     ]
   }
 ]

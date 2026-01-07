@@ -70,6 +70,7 @@ References or additional readings may come from the following texts:
 + R for Data Science (<https://r4ds.hadley.nz/>)
 
 You can find additional help for Coding in R from the following resources: 
+
 - [RStudio Education Page](https://education.rstudio.com/learn/beginner/) 
 - [Posit Primers](https://posit.cloud/learn/primers) 
 - ["R Bootcamp" Practice](https://r-bootcamp.netlify.app/) 
