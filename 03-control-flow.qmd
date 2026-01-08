@@ -8,3 +8,15 @@
 :::
 
 
+<!-- (Allison) I'm not quite sure where this should go, so I'm putting it here. This -->
+<!-- should live wherever we first teach students about looking up the documentation  -->
+<!-- for a function.  -->
+
+<!-- ### Help tab -->
+
+<!-- The help tab is a wonderful way to get help with how to use an R or python function. -->
+
+<!-- ![The help tab makes it easy to get access to function documentation within Rstudio, so you don't have to switch windows.](../images/tools/Rstudio-help-tab.png){fig-alt="Screenshot of RStudio help tab. Search bar is highlighted and annotated with 'search for function name here', and then the main window is annotated with 'Documentation appears here'."} -->
+
+<!-- By default, you can search for an R function name in the search window, and documentation for matching functions will appear in the main part of the pane.  -->
+<!-- To get help with python functions, you need to (in the python console) use `?<function name`, so I would type in at the `>>>` prompt `?print` to get the equivalent python help file.  -->

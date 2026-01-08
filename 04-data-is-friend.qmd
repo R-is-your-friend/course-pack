@@ -15,3 +15,13 @@
 <!-- In fact, there's a very common shortcut that programmers take -- they set up a project-specific folder that is self contained.  -->
 <!-- That is, all of the data and code necessary for that project is provided within the folder.  -->
 <!-- Then, the code within the folder can use local paths and will work when the project folder is copied to a new machine.  -->
+
+<!-- (Allison) I'm not quite sure where this should go, but we will need to 
+introduce packages in this lesson. -->
+
+<!-- ### Packages tab -->
+
+<!-- R and python both work off of packages - extensions to the default language that make it easier to accomplish certain tasks, like reading data from Excel files or drawing pretty charts.  -->
+<!-- This tab shows all of the R packages you have installed on your machine, and which ones are currently loaded. -->
+
+<!-- ![You can get important information from the packages tab, like what packages are loaded, easy access to documentation for each package, and what version of the package is installed.](../images/tools/Rstudio-packages-tab.png){fig-alt="Packages tab of RStudio. Checkboxes in the far left column show whether packages are loaded. Links to the package name can be clicked to access package documentation. The 3rd column is the package version, which should be verified and updated if you're having issues with the package's functions."} -->
