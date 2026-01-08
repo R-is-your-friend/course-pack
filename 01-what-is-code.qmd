@@ -2,9 +2,110 @@
 
 ::: callout
 ## Learning Objectives
-+ 
++ Locate different panes of RStudio
++ Use the Console to run code
++ Use Environment tab to identify what objects have been created
 + 
 +
 :::
 
+# Welcome to RStudio!
 
+RStudio is the integrated development environment (IDE) we will be using to 
+interact with R. RStudio is a very powerful environment that has lots of 
+capabilities. We will learn many of these as we go, so right now we are going 
+to focus on the most important aspects!
+
+## RStudio Layout
+
+When you open RStudio on your computer, you should get something that looks like 
+the image below. You should see **three** panes, two on the right hand side and
+one on the left. Let's learn what these do!
+
+<!-- Need to update to not have the editor pane (since they won't have that open yet) -->
+
+![Important locations and buttons in RStudio.](images/01-Rstudio-important-buttons.png){#fig-rstudio-important fig-alt="A screenshot of an RStudio window highlighting buttons for creating new files (top left), opening an RStudio project (top right). The main portion of the window shows the four panes in a default RStudio interface. The editor pane (top left), contains text files that may contain R or python code. The terminal/console pane (bottom left), contains the R console, system terminal, and a tab for background jobs. The top right pane contains the environment, history, connections, and tutorial tabs by default, and may also contain tabs labeled build and git, depending on your project setup. The environment tab shows you what objects are currently in your programming environment - that is, what things are defined. The bottom right pane contains the files, plots, packages, help, viewer, and presentation tabs. By default, the files tab will show you your current working directory; if you are not working in a project, then it will show your home directory, which is the default working directory."} 
+
+On the left, you will find the Console pane. The Console is where you will see
+your code execute! In the top right, you can find the Environment and History
+tabs. These tabs show any objects you've created and a history of the code you
+ran. In the bottom right, you will find the Files, Help, and Packages tabs. 
+These tabs allow you to access files on your computer, install and load 
+packages, and access documentation (help) pages for functions you might be 
+trying to use.
+
+<!-- You do not need to know what all of these tabs do right now. For the moment, it's enough to get a sense of the basics - where to write code (top left), where to look for results (bottom left), where to get help (bottom right), and where to monitor what R/python are doing (top right). -->
+
+# Running Code (in the Console)
+
+## The Console Pane (Bottom Left)
+
+## History Tab (Top Right)
+
+Another useful tab in this pane is the History tab, which shows you a running list of every command you've ever run. 
+While I strongly encourage you to write your code in a text file in the editor pane, sometimes you deleted a line of code accidentally and want to get it back... and the history tab has you covered (unless you've cleared the history out).
+
+![The history tab shows you a list of all commands you've run and allows you to send them to the console or to source (the text editor).](../images/tools/Rstudio-history-pane.png){fig-alt="RStudio history pane. This pane preserves all commands that have been run from the console or from evaluating code cells or scripts."}
+
+
+## Creating Objects
+
+### Environment tab
+
+The Environment tab shows you any objects which are defined in memory in whatever language you're currently using (as long as it's R or python). 
+You'll see headers like "Data", "Values", and "Functions" within this table, and two columns - the name of the thing, and the value of the thing (if it's a complicated object, you'll see what type of object it is and possibly how long it is). 
+
+![The environment tab shows you all of the objects in memory that the language you're working in knows about.](../images/tools/Rstudio-env-pane.png){fig-alt="Screenshot of the environment pane. Notice that there is an indicator of which language's environment is shown, a way to clear the environment, and pairs of variable names and values."}
+
+If you're working in both R and python, you can toggle which language's environment you're looking at using the language drop down button on the far left side.
+
+<!-- ## Updating Objects -->
+
+<!-- # Saving Your Code -->
+
+<!-- ## Scripts -->
+
+<!-- At one point, I wanted to keep a record of the temperature around my house so that I could examine how my heating bill changed with the temperature and determine if an upgrade to a heat pump was cost effective. I decided to record the outside temperature every 6 hours, writing that information to a file along with the date and time. This only required a few commands, but I wasn’t willing to commit to being at the computer every 6 hours for the rest of my life, and I wanted the data to be complete. -->
+
+<!-- Enter scripts. -->
+
+<!-- If you need to repeat the same analysis, or even just remember what commands you used, typing each command in each time is not ideal. A script is a text file which records a series of commands so that they can be run together. -->
+
+<!-- Interactive mode is useful for quick, one-off analyses, but if you need to repeat an analysis (or remember what you did), interactive mode is just awful. Once you close the program, the commands (and results) are gone. This is particularly inconvenient when you need to run the same task multiple times. -->
+
+<!-- To somewhat address this issue, most computing languages allow you to provide a sequence of commands in a text file, or a script. In many languages, scripts are intended to run on their own, from start to finish. We often call this executing a script, and this is typically done from a terminal prompt. -->
+
+<!-- Scripts, and compiled programs generated from scripts, are responsible for much of what you interact with on a computer or cell phone day-to-day. When the goal is to process a file or complete a task in exactly the same way each time, a script is the right choice for the job. -->
+
+<!-- Using scripts interactively allows us to see what is happening in the code step-by-step, and to examine the results during the program’s evaluation. This can be beneficial when applying a script to a new dataset, because it allows us to change things on the fly while still keeping the same basic order of operations. -->
+
+<!-- You can run single lines of code within a script file by clicking on the line and using the “Run” button in RStudio, or by typing Ctrl/Cmd + Enter, which will run the selected line(s) of code in the Console. -->
+
+<!-- ## The Editor/File Pane (Top Left) -->
+
+<!-- The buttons and layout within this pane change based on the type of file you have open. -->
+
+<!-- ::: panel-tabset -->
+<!-- ### R script -->
+
+<!-- ![The logo on the script file indicates the file type. When an R file is open, there are Run and Source buttons on the top which allow you to run selected lines of code (Run) or source (run) the entire file. Code line numbers are provided on the left (this is a handy way to see where in the code the errors occur), and you can see line:character numbers at the bottom left. At the bottom right, there is another indicator of what type of file Rstudio thinks this is.](../images/tools/Rstudio-editor-pane-buttons.png){fig-alt="Screenshot of the RStudio editor window in R script mode. Lines are numbered along the left side. Editor style can be toggled between source and visual mode. There is a run button at the top to run the current or selected line(s), and an additional shortcut to source the script. An indicator in the bottom right tells you what kind of file you are looking at. In the bottom left, you can see the line:character that is being edited."} -->
+
+<!-- ### Files tab -->
+
+<!-- ![The files tab shows you the files in your current working directory (by default), though you can navigate through it and find other files as necessary. If you want to return to your working directory, there's a button for that in the "More" menu. One of the most important pieces of information in this pane is your path - you can construct the file path by using ~/ for home, and then for each folder, adding a slash between. The path to the folder we're looking at here is thus `~/Projects/Class/stat-computing-r-python/`.](../images/tools/Rstudio-file-tab.png){fig-alt="Screenshot of RStudio file tab, showing files, size, and last modified date. The folder path is shown just below the icon row and can be useful if you don't know where your files are located."} -->
+
+
+<!-- ## Writing Code for People -->
+
+<!-- One problem with scripts and interactive modes of using programming languages is that we’re spending most of our time writing code for computers to read – which doesn’t necessarily imply that our code is easy for humans to read. As you become more proficient at programming, you will realize quickly that writing readable code is more challenging than writing working code. It is hard to remember what a specific block of code did when you come back to it months after you wrote it! -->
+
+<!-- There are two solutions to this problem, and I encourage you to make liberal use of both of them (together). -->
+
+<!-- Code Comments -->
+
+<!-- A comment is a part of computer code which is intended only for people to read. It is not evaluated or run by the computing language. -->
+
+<!-- To “comment out” a single line of code in R or python, put a # (pound sign/hashtag) just before the part of the code you do not want to be evaluated. This works in both R and Python. Other languages also have so-called inline comments, but may use a different character to indicate that something is a comment. // Comment text and <!-- Comment text --> are in-line comments for JavaScript and HTML, respectively. -->
+
+
+<!-- Examples of helpful code comments -->
