@@ -2,10 +2,17 @@
 
 ::: callout
 ## Learning Objectives
-+ 
-+ 
-+
++ Define the observational unit (rows) and variables (columns) of rectangular data
++ Identify variable types given rectangular data
++ Explore rectangular data quickly in R (with code and with RStudio visually)
++ Read rectangular data with various delimiters into R using an appropriate `readr` or `readxl` function
++ Define relative versus absolute file paths
 :::
+
+<!-- https://r4ds.hadley.nz/data-import.html
+https://r4ds.hadley.nz/spreadsheets.html#excel
+https://r4ds.had.co.nz/workflow-projects.html
+https://r4ds.hadley.nz/quarto.html  -->
 
 
 <!-- ### RStudio Projects -->

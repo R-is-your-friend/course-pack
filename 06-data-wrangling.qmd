@@ -2,9 +2,11 @@
 
 ::: callout
 ## Learning Objectives
-+ 
-+ 
-+
++ Identify the rectangular dataset required for a given task
++ Identify required sequence of steps to get from one rectangular dataset to another
++ Apply data manipulation verbs (`filter()`, `select()`, `group_by()`, `summarize()`, `mutate()`) to get from one rectangular dataset to another
++ Describe step-by-step data cleaning process in lay terms appropriately and understand the consequences of data cleaning steps
 :::
 
 
+<!-- https://r4ds.hadley.nz/data-transform.html -->
