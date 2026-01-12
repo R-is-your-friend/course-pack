@@ -154,8 +154,8 @@
     "objectID": "01-what-is-code.html#creating-objects",
     "href": "01-what-is-code.html#creating-objects",
     "title": "2  What is Code",
-    "section": "4.3 Creating Objects",
-    "text": "4.3 Creating Objects\n\n4.3.1 Environment tab\nThe Environment tab shows you any objects which are defined in memory in whatever language you’re currently using (as long as it’s R or python). You’ll see headers like “Data”, “Values”, and “Functions” within this table, and two columns - the name of the thing, and the value of the thing (if it’s a complicated object, you’ll see what type of object it is and possibly how long it is).\n\n\n\nThe environment tab shows you all of the objects in memory that the language you’re working in knows about.\n\n\nIf you’re working in both R and python, you can toggle which language’s environment you’re looking at using the language drop down button on the far left side.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nare in-line comments for JavaScript and HTML, respectively. –&gt;",
+    "section": "5.2 Creating Objects",
+    "text": "5.2 Creating Objects\nIt seems a bit silly to use R as a calculator when it can do so much more for us! A key aspect of working in R is the idea of storing values into objects. When storing a value into an object, your code will look something like this: x &lt;- 5\nBelieve it or not, there is a lot going on in this simple line of code. So, let’s break it down.\n\n\nx is the name of the object we are creating\n5 is the value we want to store inside x\n&lt;- is an operator that binds the name x to the value 5\n\nThe &lt;- works similar to an = sign, but we are specifically using an &lt;- because we believe it makes the action of assignment more explicit.\n\n\n\n\n\n\nPractice-exercisePractice Activity\n\n\n\nCreate two objects in your console, one named x which has the value 3 stored in it and one named y which has the value 4 stored in it.\n\n\n\n5.2.1 Environment tab\nNow that you’ve created two objects, there are some interesting things to notice in the upper right corner. The Environment tab displays any objects which are defined in memory. Currently, both objects you’ve created should be labeled “Values”, but later on we will start to see objects labeled “Data” and “Functions”.",
     "crumbs": [
       "Fundamentals of Coding",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>What is Code</span>"
@@ -302,6 +302,28 @@
     "crumbs": [
       "Modeling and Functions",
       "<span class='chapter-number'>15</span>  <span class='chapter-title'>Simulation</span>"
+    ]
+  },
+  {
+    "objectID": "01-what-is-code.html#the-console-tab",
+    "href": "01-what-is-code.html#the-console-tab",
+    "title": "2  What is Code",
+    "section": "5.1 The Console Tab",
+    "text": "5.1 The Console Tab\nIt is possible to run code directly in the console! This code can be simple arithmetic like 2 + 2 or 3 * 6 or 6 - 4. The output of each line is showed below (e.g, [1] 4). Next week we will learn what the [1] means with the output, so for now we will focus on the number that is output.\n\n\n\n\n\n\n\nPractice-exercisePractice Activity\n\n\n\nRun these same three lines of code in your console.",
+    "crumbs": [
+      "Fundamentals of Coding",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>What is Code</span>"
+    ]
+  },
+  {
+    "objectID": "01-what-is-code.html#the-history-tab-top-right",
+    "href": "01-what-is-code.html#the-history-tab-top-right",
+    "title": "2  What is Code",
+    "section": "5.3 The History Tab (Top Right)",
+    "text": "5.3 The History Tab (Top Right)\nAnother useful tab in this pane is the History tab, which shows you a running list of every command you’ve ever run. At this point you should have run (at least) five lines of code, all of which should be displayed in the history.",
+    "crumbs": [
+      "Fundamentals of Coding",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>What is Code</span>"
     ]
   }
 ]

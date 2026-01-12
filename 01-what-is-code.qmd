@@ -24,7 +24,7 @@ one on the left. Let's learn what these do!
 
 <!-- Need to update to not have the editor pane (since they won't have that open yet) -->
 
-![Important locations and buttons in RStudio.](images/01-Rstudio-important-buttons.png){#fig-rstudio-important fig-alt="A screenshot of an RStudio window highlighting buttons for creating new files (top left), opening an RStudio project (top right). The main portion of the window shows the four panes in a default RStudio interface. The editor pane (top left), contains text files that may contain R or python code. The terminal/console pane (bottom left), contains the R console, system terminal, and a tab for background jobs. The top right pane contains the environment, history, connections, and tutorial tabs by default, and may also contain tabs labeled build and git, depending on your project setup. The environment tab shows you what objects are currently in your programming environment - that is, what things are defined. The bottom right pane contains the files, plots, packages, help, viewer, and presentation tabs. By default, the files tab will show you your current working directory; if you are not working in a project, then it will show your home directory, which is the default working directory."} 
+![Important locations and buttons in RStudio.](images/01-rstudio-three-pane-annotated.png){#fig-rstudio-three-pane fig-alt="A screenshot of an RStudio window highlighting the three different panes that open by default. The first pane (on the left hand side) is called the 'Console Pane.' This is the pane where the code you run shows up! In the upper right hand corner, there is the 'Environment and History Pane,' which is comprised of four tabs---Environment, History, Connections, and Tutorial. The Environment tab displays the objects that have been created in your code and the History tab displays a history of the code you've run. In the lower right corner there is the 'Files, Packages, and Help Pane,' which has six different tabs---Files, Plots, Packages, Help, Viewer, and Presentations. The file tab is displayed in the image, showing that (by default), the files will show you your current working directory. For this computer, that current working directory is the Macbook Hard Drive (similar to a PC's C drive)."} 
 
 On the left, you will find the Console pane. The Console is where you will see
 your code execute! In the top right, you can find the Environment and History
@@ -34,30 +34,103 @@ These tabs allow you to access files on your computer, install and load
 packages, and access documentation (help) pages for functions you might be 
 trying to use.
 
-<!-- You do not need to know what all of these tabs do right now. For the moment, it's enough to get a sense of the basics - where to write code (top left), where to look for results (bottom left), where to get help (bottom right), and where to monitor what R/python are doing (top right). -->
+<!-- You do not need to know what all of these tabs do right now. For the moment,  -->
+<!-- it's enough to get a sense of the basics. You can see what code was run and the -->
+<!-- output of the code in the bottom left), you can navigate to files in the  -->
+<!-- bottom right, and you can monitor what objects were created by your code in the -->
+<!-- top right. -->
+
+# What is code?
 
 # Running Code (in the Console)
 
-## The Console Pane (Bottom Left)
+When you open RStudio, the console pane should display information related to 
+your R session. You should see something like the message displayed below. This
+message tells you two things (1) R was successfully detected on your computer, 
+and (2) the version of R with which you are working. 
 
-## History Tab (Top Right)
+<!-- We will need to update this to the current version of R in August! -->
 
-Another useful tab in this pane is the History tab, which shows you a running list of every command you've ever run. 
-While I strongly encourage you to write your code in a text file in the editor pane, sometimes you deleted a line of code accidentally and want to get it back... and the history tab has you covered (unless you've cleared the history out).
+```
+R version 4.5.2 (2025-10-31) -- "[Not] Part in a Rumble"
+Copyright (C) 2025 The R Foundation for Statistical Computing
+Platform: aarch64-apple-darwin20
 
-![The history tab shows you a list of all commands you've run and allows you to send them to the console or to source (the text editor).](../images/tools/Rstudio-history-pane.png){fig-alt="RStudio history pane. This pane preserves all commands that have been run from the console or from evaluating code cells or scripts."}
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
 
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+```
+
+::: {.callout-important}
+If you don't see information related to your R session when you open RStudio
+or RStudio tells you it doesn't detect R on your laptop you either forgot to
+install R or installed it in an unexpected location. 
+:::
+
+## The Console Tab
+
+It is possible to run code directly in the console! This code can be simple 
+arithmetic like `2 + 2` or `3 * 6` or `6 - 4`. The output of each line is 
+showed below (e.g, `[1] 4`). Next week we will learn what the `[1]` means with 
+the output, so for now we will focus on the number that is output. 
+
+![](images/01-rstudio-console-annotated.png){fig-alt=""}
+
+::: {.callout-practice-exercise}
+Run these same three lines of code in your console. 
+:::
 
 ## Creating Objects
 
+It seems a bit silly to use R as a calculator when it can do so much more for 
+us! A key aspect of working in R is the idea of storing values into objects. 
+When storing a value into an object, your code will look something like this:
+`x <- 5`
+
+Believe it or not, there is a lot going on in this simple line of code. So, 
+let's break it down. 
+
+<!-- From Advanced R: the object, or value, doesn’t have a name; it’s actually the name that has a value. -->
+
+- `x` is the name of the object we are creating
+- `5` is the value we want to store inside `x`
+- `<-` is an operator that binds the name `x` to the value `5`
+
+The `<-` works similar to an `=` sign, but we are specifically using an `<-` 
+because we believe it makes the action of assignment more explicit. 
+
+::: {.callout-practice-exercise}
+Create two objects in your console, one named `x` which has the value `3` stored
+in it and one named `y` which has the value `4` stored in it.
+:::
+
 ### Environment tab
 
-The Environment tab shows you any objects which are defined in memory in whatever language you're currently using (as long as it's R or python). 
-You'll see headers like "Data", "Values", and "Functions" within this table, and two columns - the name of the thing, and the value of the thing (if it's a complicated object, you'll see what type of object it is and possibly how long it is). 
+Now that you've created two objects, there are some interesting things to 
+notice in the upper right corner. The Environment tab displays any objects which
+are defined in memory. Currently, both objects you've created should be labeled 
+"Values", but later on we will start to see objects labeled "Data" and 
+"Functions".
 
-![The environment tab shows you all of the objects in memory that the language you're working in knows about.](../images/tools/Rstudio-env-pane.png){fig-alt="Screenshot of the environment pane. Notice that there is an indicator of which language's environment is shown, a way to clear the environment, and pairs of variable names and values."}
+![](images/01-rstudio-environment-annotated.png){fig-alt="Screenshot of the environment pane after creating the objects x and y. A Orange box is drawn around the names x and y with the annotation 'object name' and a second box is drawn around the values 3 and 4 with an annotation 'object value'. The screenshot also highlights the broom icon with a red box drawn around it, and an annotation indicating that this icon will remove all the objects from the environment."}
 
-If you're working in both R and python, you can toggle which language's environment you're looking at using the language drop down button on the far left side.
+## The History Tab (Top Right)
+
+Another useful tab in this pane is the History tab, which shows you a running
+list of every command you've ever run. At this point you should have run 
+(at least) five lines of code, all of which should be displayed in the history.
+
+![](images/01-rstudio-history-annotated.png){fig-alt="Screenshot of the history pane. This pane preserves all commands that have been run from the console or from evaluating code cells or scripts. The image highlights the broom icon in a red box and an accompanying annotation stating that this icon will clear the history (of the code that has been run)."}
 
 <!-- ## Updating Objects -->
 
@@ -105,7 +178,6 @@ If you're working in both R and python, you can toggle which language's environm
 
 <!-- A comment is a part of computer code which is intended only for people to read. It is not evaluated or run by the computing language. -->
 
-<!-- To “comment out” a single line of code in R or python, put a # (pound sign/hashtag) just before the part of the code you do not want to be evaluated. This works in both R and Python. Other languages also have so-called inline comments, but may use a different character to indicate that something is a comment. // Comment text and <!-- Comment text --> are in-line comments for JavaScript and HTML, respectively. -->
-
+<!-- To “comment out” a single line of code in R or python, put a # (pound sign/hashtag) just before the part of the code you do not want to be evaluated. 
 
 <!-- Examples of helpful code comments -->
