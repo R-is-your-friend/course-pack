@@ -2,9 +2,10 @@
 
 ::: callout
 ## Learning Objectives
-+ 
-+ 
-+
++ Work with date and time variables using `lubridate`
++ Convert a string variable into a date / time variable 
++ Extract date / time information from a date / time variable (e.g. month, year, day of the week, etc) 
++ Convert between UTC and other time zones (?)
 :::
 
-
+<!-- https://r4ds.hadley.nz/datetimes.html -->

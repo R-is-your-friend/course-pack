@@ -2,9 +2,13 @@
 
 ::: callout
 ## Learning Objectives
-+ 
-+ 
-+
++ Determine what data format is necessary to generate a desired plot or statistical model.
++ Describe the differences between “wide” and “long” format data and how to transition between the two structures.
++ Use data joins to assemble data from multiple relational tables into a single table.
++ Design and implement more advanced plots
 :::
+
+<!-- https://r4ds.hadley.nz/data-tidy.html
+https://r4ds.hadley.nz/joins.html -->
 
 

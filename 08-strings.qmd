@@ -2,9 +2,11 @@
 
 ::: callout
 ## Learning Objectives
-+ 
-+ 
-+
++ Clean and extract information from character variables using `stringr` 
++ Recognize what basic regular expressions will match
++ Construct basic regular expressions to match a pattern
 :::
 
 
+<!-- https://r4ds.hadley.nz/strings.html
+https://r4ds.hadley.nz/regexps.html  -->

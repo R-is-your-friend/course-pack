@@ -2,9 +2,14 @@
 
 ::: callout
 ## Learning Objectives
-+ 
-+ 
-+
++ Map rows and columns of rectangular data to elements of a graphic
++ Describe and/or draw a desired plot based to answer a research question
++ Describe charts using the grammar of graphics
++ Create layered graphics that highlight multiple aspects of the data
++ Evaluate existing charts and develop new versions that improve accessibility and readability
++ Identify the appropriate kind of plot (geometries and aesthetics) given types of variables.
 :::
+
+<!-- https://r4ds.hadley.nz/data-visualize.html -->
 
 
