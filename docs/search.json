@@ -325,5 +325,27 @@
       "Fundamentals of Coding",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>What is Code</span>"
     ]
+  },
+  {
+    "objectID": "01-what-is-code.html#updating-objects",
+    "href": "01-what-is-code.html#updating-objects",
+    "title": "2  What is Code",
+    "section": "5.4 Updating Objects",
+    "text": "5.4 Updating Objects\nCurrently, the values of x and y are 3 and 4 respectively, but we might need to update their values. If we want to change the values of x or y, we simply need to assign them new values.\n\nx &lt;- 8\nz &lt;- x + y\ny &lt;- 5\n\n\n\n\n\n\n\nPractice-exercisePractice Activity\n\n\n\nCode tracing is a great technique for understanding what happens to an object at each line of code. Use the table below to trace the values of x, y, and z for each of the three lines of code above.\n\n\n\n\n\nLine\nx\ny\nz\n\n\n\n\nLine 1\n\n4\nDoes not exist\n\n\nLine 2\n\n\n\n\n\nLine 3",
+    "crumbs": [
+      "Fundamentals of Coding",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>What is Code</span>"
+    ]
+  },
+  {
+    "objectID": "01-what-is-code.html#scripts",
+    "href": "01-what-is-code.html#scripts",
+    "title": "2  What is Code",
+    "section": "6.1 Scripts",
+    "text": "6.1 Scripts\nAn R script is a document that can store your code! Specifically, an R script is a plain text file whose entire purpose is to store R commands. Instead of typing code line-by-line into the console, we can write our code in a script, save it, and run it whenever we need.\nWorking in an R script has several advantages. First, it allows us to easily edit and fix mistakes without rewriting code from scratch. Second, scripts provide a complete record of the steps we took to perform an analysis, making our work easier to understand, reproduce, and share with others (or with our future selves!). Finally, scripts help us organize our code, encouraging clearer structure, comments, and good programming habits as our projects grow.\nLet’s create our first R script!\n\n6.1.1 Creating an R Script\nIn the upper left hand corner, you should see an image of a white sheet with a green plus sign. If you click this button you should see something like the image below:\n \n\n\n\n6.1.2 The Editor/File Pane (Top Left)\n\n\n\n\n\n\n6.1.3 Saving Your R Script",
+    "crumbs": [
+      "Fundamentals of Coding",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>What is Code</span>"
+    ]
   }
 ]

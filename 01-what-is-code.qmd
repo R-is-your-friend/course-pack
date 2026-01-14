@@ -1,57 +1,101 @@
+---
+editor: 
+  markdown: 
+    wrap: 72
+---
+
 # What is Code
 
 ::: callout
 ## Learning Objectives
-+ Locate different panes of RStudio
-+ Use the Console to run code
-+ Use Environment tab to identify what objects have been created
-+ 
-+
+
+-   Locate different panes of RStudio
+-   Use the Console to run code
+-   Use Environment tab to identify what objects have been created
+-   
+-   
 :::
 
 # Welcome to RStudio!
 
-RStudio is the integrated development environment (IDE) we will be using to 
-interact with R. RStudio is a very powerful environment that has lots of 
-capabilities. We will learn many of these as we go, so right now we are going 
-to focus on the most important aspects!
+RStudio is the integrated development environment (IDE) we will be using
+to interact with R. RStudio is a very powerful environment that has lots
+of capabilities. We will learn many of these as we go, so right now we
+are going to focus on the most important aspects!
 
 ## RStudio Layout
 
-When you open RStudio on your computer, you should get something that looks like 
-the image below. You should see **three** panes, two on the right hand side and
-one on the left. Let's learn what these do!
+When you open RStudio on your computer, you should get something that
+looks like the image below. You should see **three** panes, two on the
+right hand side and one on the left. Let's learn what these do!
 
 <!-- Need to update to not have the editor pane (since they won't have that open yet) -->
 
-![Important locations and buttons in RStudio.](images/01-rstudio-three-pane-annotated.png){#fig-rstudio-three-pane fig-alt="A screenshot of an RStudio window highlighting the three different panes that open by default. The first pane (on the left hand side) is called the 'Console Pane.' This is the pane where the code you run shows up! In the upper right hand corner, there is the 'Environment and History Pane,' which is comprised of four tabs---Environment, History, Connections, and Tutorial. The Environment tab displays the objects that have been created in your code and the History tab displays a history of the code you've run. In the lower right corner there is the 'Files, Packages, and Help Pane,' which has six different tabs---Files, Plots, Packages, Help, Viewer, and Presentations. The file tab is displayed in the image, showing that (by default), the files will show you your current working directory. For this computer, that current working directory is the Macbook Hard Drive (similar to a PC's C drive)."} 
+![Important locations and buttons in
+RStudio.](images/01-rstudio-three-pane-annotated.png){#fig-rstudio-three-pane
+fig-alt="A screenshot of an RStudio window highlighting the three different panes that open by default. The first pane (on the left hand side) is called the 'Console Pane.' This is the pane where the code you run shows up! In the upper right hand corner, there is the 'Environment and History Pane,' which is comprised of four tabs---Environment, History, Connections, and Tutorial. The Environment tab displays the objects that have been created in your code and the History tab displays a history of the code you've run. In the lower right corner there is the 'Files, Packages, and Help Pane,' which has six different tabs---Files, Plots, Packages, Help, Viewer, and Presentations. The file tab is displayed in the image, showing that (by default), the files will show you your current working directory. For this computer, that current working directory is the Macbook Hard Drive (similar to a PC's C drive)."}
 
-On the left, you will find the Console pane. The Console is where you will see
-your code execute! In the top right, you can find the Environment and History
-tabs. These tabs show any objects you've created and a history of the code you
-ran. In the bottom right, you will find the Files, Help, and Packages tabs. 
-These tabs allow you to access files on your computer, install and load 
-packages, and access documentation (help) pages for functions you might be 
-trying to use.
+On the left, you will find the Console pane. The Console is where you
+will see your code execute! In the top right, you can find the
+Environment and History tabs. These tabs show any objects you've created
+and a history of the code you ran. In the bottom right, you will find
+the Files, Help, and Packages tabs. These tabs allow you to access files
+on your computer, install and load packages, and access documentation
+(help) pages for functions you might be trying to use.
 
 <!-- You do not need to know what all of these tabs do right now. For the moment,  -->
+
 <!-- it's enough to get a sense of the basics. You can see what code was run and the -->
+
 <!-- output of the code in the bottom left), you can navigate to files in the  -->
+
 <!-- bottom right, and you can monitor what objects were created by your code in the -->
+
 <!-- top right. -->
 
 # What is code?
 
+## What makes R different?
+
+R is a statistical programming language. Unlike more general-purpose languages,
+R is optimized for working with data and doing statistics. R was created by Ross
+Ihaka and Robert Gentleman in 1993 (hence "R") and was formally released by the
+**R Core Group** in 1997 (a group of 20-ish volunteers who are the *only* people
+who can change the base, built-in functionality of `R`). If you want to build
+an independent, standalone graphical interface, or run a web server, R is
+probably not the ideal language to use (you might want C / Python or PHP /
+Python, respectively). If you want to vacuum up a bunch of data, fit several
+regression models, and then compare the models, R is a great option and will be
+faster than working in a more general-purpose language like C or base Python.
+
+One thing to know about `R` is that it is **open-source**. This means that no
+company owns `R` (like there is for *SAS* or *Matlab*) and that developers
+cannot charge for the use of their R software. This does not mean that all of
+your code needs to be public (you can keep your code private), but it is
+important to be a good open-source citizen by sharing your code publicly when
+possible (in STAT 3820 you will learn about *GitHub*), contributing to public
+projects and packages, creating your own packages, and using `R` for ethical and
+respectful projects.
+
+### 📖 [Required Reading: Basics of R](https://r4ds.hadley.nz/workflow-basics)
+
+::: callout-note
+# The History of `R`
+
+If you would like to learn more about the history of R, here is an [excellent article written by Roger Peng](https://bookdown.org/rdpeng/rprogdatascience/history-and-overview-of-r.html).
+:::
+
 # Running Code (in the Console)
 
-When you open RStudio, the console pane should display information related to 
-your R session. You should see something like the message displayed below. This
-message tells you two things (1) R was successfully detected on your computer, 
-and (2) the version of R with which you are working. 
+When you open RStudio, the console pane should display information
+related to your R session. You should see something like the message
+displayed below. This message tells you two things (1) R was
+successfully detected on your computer, and (2) the version of R with
+which you are working.
 
 <!-- We will need to update this to the current version of R in August! -->
 
-```
+```         
 R version 4.5.2 (2025-10-31) -- "[Not] Part in a Rumble"
 Copyright (C) 2025 The R Foundation for Statistical Computing
 Platform: aarch64-apple-darwin20
@@ -71,102 +115,201 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 ```
 
-::: {.callout-important}
-If you don't see information related to your R session when you open RStudio
-or RStudio tells you it doesn't detect R on your laptop you either forgot to
-install R or installed it in an unexpected location. 
+::: callout-important
+If you don't see information related to your R session when you open
+RStudio or RStudio tells you it doesn't detect R on your laptop you
+either forgot to install R or installed it in an unexpected location.
 :::
 
 ## The Console Tab
 
-It is possible to run code directly in the console! This code can be simple 
-arithmetic like `2 + 2` or `3 * 6` or `6 - 4`. The output of each line is 
-showed below (e.g, `[1] 4`). Next week we will learn what the `[1]` means with 
-the output, so for now we will focus on the number that is output. 
+It is possible to run code directly in the console! This code can be
+simple arithmetic like `2 + 2` or `3 * 6` or `6 - 4`. The output of each
+line is showed below (e.g, `[1] 4`). Next week we will learn what the
+`[1]` means with the output, so for now we will focus on the number that
+is output.
 
 ![](images/01-rstudio-console-annotated.png){fig-alt=""}
 
-::: {.callout-practice-exercise}
-Run these same three lines of code in your console. 
+::: callout-practice-exercise
+Run these same three lines of code in your console.
 :::
 
 ## Creating Objects
 
-It seems a bit silly to use R as a calculator when it can do so much more for 
-us! A key aspect of working in R is the idea of storing values into objects. 
-When storing a value into an object, your code will look something like this:
-`x <- 5`
+It seems a bit silly to use R as a calculator when it can do so much
+more for us! A key aspect of working in R is the idea of storing values
+into objects. When storing a value into an object, your code will look
+something like this: `x <- 5`
 
-Believe it or not, there is a lot going on in this simple line of code. So, 
-let's break it down. 
+Believe it or not, there is a lot going on in this simple line of code.
+So, let's break it down.
 
 <!-- From Advanced R: the object, or value, doesn’t have a name; it’s actually the name that has a value. -->
 
-- `x` is the name of the object we are creating
-- `5` is the value we want to store inside `x`
-- `<-` is an operator that binds the name `x` to the value `5`
+-   `x` is the name of the object we are creating
+-   `5` is the value we want to store inside `x`
+-   `<-` is an operator that binds the name `x` to the value `5`
 
-The `<-` works similar to an `=` sign, but we are specifically using an `<-` 
-because we believe it makes the action of assignment more explicit. 
+The `<-` works similar to an `=` sign, but we are specifically using an
+`<-` because we believe it makes the action of assignment more explicit.
 
-::: {.callout-practice-exercise}
-Create two objects in your console, one named `x` which has the value `3` stored
-in it and one named `y` which has the value `4` stored in it.
+::: callout-practice-exercise
+Create two objects in your console, one named `x` which has the value
+`3` stored in it and one named `y` which has the value `4` stored in it.
 :::
+
+You should have noticed when you created `x` and `y` that the values are not
+printed, they are just stored. If you want to view the value, you would need 
+to type `x` to see its contents.
 
 ### Environment tab
 
-Now that you've created two objects, there are some interesting things to 
-notice in the upper right corner. The Environment tab displays any objects which
-are defined in memory. Currently, both objects you've created should be labeled 
-"Values", but later on we will start to see objects labeled "Data" and 
-"Functions".
+Now that you've created two objects, there are some interesting things
+to notice in the upper right corner. The Environment tab displays any
+objects which are defined in memory. Currently, both objects you've
+created should be labeled "Values", but later on we will start to see
+objects labeled "Data" and "Functions".
 
 ![](images/01-rstudio-environment-annotated.png){fig-alt="Screenshot of the environment pane after creating the objects x and y. A Orange box is drawn around the names x and y with the annotation 'object name' and a second box is drawn around the values 3 and 4 with an annotation 'object value'. The screenshot also highlights the broom icon with a red box drawn around it, and an annotation indicating that this icon will remove all the objects from the environment."}
 
 ## The History Tab (Top Right)
 
-Another useful tab in this pane is the History tab, which shows you a running
-list of every command you've ever run. At this point you should have run 
-(at least) five lines of code, all of which should be displayed in the history.
+Another useful tab in this pane is the History tab, which shows you a
+running list of every command you've ever run. At this point you should
+have run (at least) five lines of code, all of which should be displayed
+in the history.
 
 ![](images/01-rstudio-history-annotated.png){fig-alt="Screenshot of the history pane. This pane preserves all commands that have been run from the console or from evaluating code cells or scripts. The image highlights the broom icon in a red box and an accompanying annotation stating that this icon will clear the history (of the code that has been run)."}
 
-<!-- ## Updating Objects -->
+## Updating Objects
 
-<!-- # Saving Your Code -->
+Currently, the values of `x` and `y` are `3` and `4` respectively, but
+we might need to update their values. If we want to change the values of
+`x` or `y`, we simply need to assign them new values.
 
-<!-- ## Scripts -->
+```{r}
+#| eval: false
+#| label: change-values
 
-<!-- At one point, I wanted to keep a record of the temperature around my house so that I could examine how my heating bill changed with the temperature and determine if an upgrade to a heat pump was cost effective. I decided to record the outside temperature every 6 hours, writing that information to a file along with the date and time. This only required a few commands, but I wasn’t willing to commit to being at the computer every 6 hours for the rest of my life, and I wanted the data to be complete. -->
+x <- 8
+z <- x + y
+y <- 5
+```
 
-<!-- Enter scripts. -->
+::: callout-practice-exercise
 
-<!-- If you need to repeat the same analysis, or even just remember what commands you used, typing each command in each time is not ideal. A script is a text file which records a series of commands so that they can be run together. -->
+Code tracing is a great technique for understanding what happens to an
+object at each line of code. Use the table below to trace the values 
+of `x`, `y`, and `z` for each of the three lines of code above.
 
-<!-- Interactive mode is useful for quick, one-off analyses, but if you need to repeat an analysis (or remember what you did), interactive mode is just awful. Once you close the program, the commands (and results) are gone. This is particularly inconvenient when you need to run the same task multiple times. -->
+<!-- Is there a way to make this interactive? -->
+<!-- Maybe do multiple choice questions with webR? -->
 
-<!-- To somewhat address this issue, most computing languages allow you to provide a sequence of commands in a text file, or a script. In many languages, scripts are intended to run on their own, from start to finish. We often call this executing a script, and this is typically done from a terminal prompt. -->
+| Line   | `x`    | `y`     | `z`                   |
+|--------|:------:|:-------:|:---------------------:|
+| Line 1 |        |  4      |   Does not exist      |
+| Line 2 |        |         |                       |
+| Line 3 |        |         |                       |
+:::
 
-<!-- Scripts, and compiled programs generated from scripts, are responsible for much of what you interact with on a computer or cell phone day-to-day. When the goal is to process a file or complete a task in exactly the same way each time, a script is the right choice for the job. -->
+# Saving Your Code
 
-<!-- Using scripts interactively allows us to see what is happening in the code step-by-step, and to examine the results during the program’s evaluation. This can be beneficial when applying a script to a new dataset, because it allows us to change things on the fly while still keeping the same basic order of operations. -->
+This process of updating objects in the console seems a bit tedious and error 
+prone. If we made a mistake we can't modify our previous code, so we will need
+to write another line of code. Moreover, it would be a bit tedious to get a
+history of all the code we ran. Enter R scripts! 
 
-<!-- You can run single lines of code within a script file by clicking on the line and using the “Run” button in RStudio, or by typing Ctrl/Cmd + Enter, which will run the selected line(s) of code in the Console. -->
+## Scripts
 
-<!-- ## The Editor/File Pane (Top Left) -->
+An R script is a document that can store your code! Specifically, an R script is
+a plain text file whose entire purpose is to store R commands. Instead of typing
+code line-by-line into the console, we can write our code in a script, save it,
+and run it whenever we need.
 
-<!-- The buttons and layout within this pane change based on the type of file you have open. -->
+Working in an R script has several advantages. First, it allows us to easily
+edit and fix mistakes without rewriting code from scratch. Second, scripts
+provide a complete record of the steps we took to perform an analysis, making
+our work easier to understand, reproduce, and share with others (or with our
+future selves!). Finally, scripts help us organize our code, encouraging clearer
+structure, comments, and good programming habits as our projects grow.
 
-<!-- ::: panel-tabset -->
-<!-- ### R script -->
+Let's create our first R script!
 
-<!-- ![The logo on the script file indicates the file type. When an R file is open, there are Run and Source buttons on the top which allow you to run selected lines of code (Run) or source (run) the entire file. Code line numbers are provided on the left (this is a handy way to see where in the code the errors occur), and you can see line:character numbers at the bottom left. At the bottom right, there is another indicator of what type of file Rstudio thinks this is.](../images/tools/Rstudio-editor-pane-buttons.png){fig-alt="Screenshot of the RStudio editor window in R script mode. Lines are numbered along the left side. Editor style can be toggled between source and visual mode. There is a run button at the top to run the current or selected line(s), and an additional shortcut to source the script. An indicator in the bottom right tells you what kind of file you are looking at. In the bottom left, you can see the line:character that is being edited."} -->
+### Creating an R Script
+
+In the upper left hand corner, you should see an image of a white sheet with a 
+green plus sign. If you click this button you should see something like the 
+image below:
+
+![](images/01-rstudio-create-script-annotated.png){fig-alt="Screenshot of RStudio showing how to create a new R script. The green “New File” button in the top-left toolbar is highlighted. Its dropdown menu is open, and the “R Script” option is highlighted, indicating that students should click “New File” and then select “R Script” to create a new script."}
+
+If you click on the R Script option, a new file should appear and your RStudio 
+should look something like this:
+
+![](images/01-rstudio-r-script.png){fig-alt=""}
+
+::: callout-practice-exercise
+Create an R Script in your RStudio!
+:::
+
+### The Editor Pane
+
+Now that we have a document to edit, we can see the fourth pane in RStudio---the
+editor pane. There are many different files we can create in RStudio. The 
+logo in the top left of the document indicates the type of file we have open. 
+An R script file has a blue circle with the letter R. 
+
+Let's start typing in the script, so we can explore some of the other buttons 
+available to us. 
+
+### Running Code
+
+Copy the code below into your R script, so we can explore the various ways to 
+run code. 
+
+```
+a <- 1
+b <- 4
+c <- a + b
+
+fname <- "Jane"
+lname <- "Hollander"
+```
+
+Now that we have code in the script we can see that code numbers are provided on
+the left. This is a handy way to see where in the code the errors occur. There
+are a few ways to run code:
+
+1. place your cursor on the line you want to run and click the [run button](images/01-rstudio-run-code.png){fig-alt=""}
+
+2. place your cursor on the line you want to run and hit Command + Enter (or Control + Enter)
+
+Either of these options will run the line of code that your cursor is on and
+then hop to the next line (if there is one). 
+
+::: callout-practice-exercise
+Run each of the five lines of code in your R script. Try both methods of running
+code and see which one you prefer!
+:::
+
+### Saving Your R Script 
+
+You'll notice that currently your script is labeled "Untitled1" that is because
+we haven't saved the file anywhere. If we were to try and close our file before
+saving RStudio would tell us that our document had unsaved changes. Let's save 
+our document so we have access to it later on!
+
+![](images/01-rstudio-unsaved-changes.png){fig-alt=""}
+You can save your file a few different ways. First, you can always use Command + S (or Control + S) to save a file. Second, you can click on the [blue floppy disk](images/01-rstudio-save.png){fig-alt=""} immediately below your file name. 
+
+Either of these options should open a popup menu for you to select where you
+want the script to be saved. Navigate to your `stat-1810` folder that lives in
+your `Documents` folder. Change the file name to `week-1.R`.
 
 <!-- ### Files tab -->
 
 <!-- ![The files tab shows you the files in your current working directory (by default), though you can navigate through it and find other files as necessary. If you want to return to your working directory, there's a button for that in the "More" menu. One of the most important pieces of information in this pane is your path - you can construct the file path by using ~/ for home, and then for each folder, adding a slash between. The path to the folder we're looking at here is thus `~/Projects/Class/stat-computing-r-python/`.](../images/tools/Rstudio-file-tab.png){fig-alt="Screenshot of RStudio file tab, showing files, size, and last modified date. The folder path is shown just below the icon row and can be useful if you don't know where your files are located."} -->
-
 
 <!-- ## Writing Code for People -->
 
@@ -178,6 +321,5 @@ list of every command you've ever run. At this point you should have run
 
 <!-- A comment is a part of computer code which is intended only for people to read. It is not evaluated or run by the computing language. -->
 
-<!-- To “comment out” a single line of code in R or python, put a # (pound sign/hashtag) just before the part of the code you do not want to be evaluated. 
-
-<!-- Examples of helpful code comments -->
+<!-- ## Exiting RStudio -->
+<!-- Need to update global options to not save Rdata! -->

@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -453,6 +488,16 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#environment-tab" id="toc-environment-tab" class="nav-link" data-scroll-target="#environment-tab"><span class="header-section-number">5.2.1</span> Environment tab</a></li>
   </ul></li>
   <li><a href="#the-history-tab-top-right" id="toc-the-history-tab-top-right" class="nav-link" data-scroll-target="#the-history-tab-top-right"><span class="header-section-number">5.3</span> The History Tab (Top Right)</a></li>
+  <li><a href="#updating-objects" id="toc-updating-objects" class="nav-link" data-scroll-target="#updating-objects"><span class="header-section-number">5.4</span> Updating Objects</a></li>
+  </ul></li>
+  <li><a href="#saving-your-code" id="toc-saving-your-code" class="nav-link" data-scroll-target="#saving-your-code"><span class="header-section-number">6</span> Saving Your Code</a>
+  <ul class="collapse">
+  <li><a href="#scripts" id="toc-scripts" class="nav-link" data-scroll-target="#scripts"><span class="header-section-number">6.1</span> Scripts</a>
+  <ul class="collapse">
+  <li><a href="#creating-an-r-script" id="toc-creating-an-r-script" class="nav-link" data-scroll-target="#creating-an-r-script"><span class="header-section-number">6.1.1</span> Creating an R Script</a></li>
+  <li><a href="#the-editorfile-pane-top-left" id="toc-the-editorfile-pane-top-left" class="nav-link" data-scroll-target="#the-editorfile-pane-top-left"><span class="header-section-number">6.1.2</span> The Editor/File Pane (Top Left)</a></li>
+  <li><a href="#saving-your-r-script" id="toc-saving-your-r-script" class="nav-link" data-scroll-target="#saving-your-r-script"><span class="header-section-number">6.1.3</span> Saving Your R Script</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -613,22 +658,85 @@ Important
 <h2 data-number="5.3" class="anchored" data-anchor-id="the-history-tab-top-right"><span class="header-section-number">5.3</span> The History Tab (Top Right)</h2>
 <p>Another useful tab in this pane is the History tab, which shows you a running list of every command you’ve ever run. At this point you should have run (at least) five lines of code, all of which should be displayed in the history.</p>
 <p><img src="images/01-rstudio-history-annotated.png" class="img-fluid" alt="Screenshot of the history pane. This pane preserves all commands that have been run from the console or from evaluating code cells or scripts. The image highlights the broom icon in a red box and an accompanying annotation stating that this icon will clear the history (of the code that has been run)."></p>
-<!-- ## Updating Objects -->
-<!-- # Saving Your Code -->
-<!-- ## Scripts -->
-<!-- At one point, I wanted to keep a record of the temperature around my house so that I could examine how my heating bill changed with the temperature and determine if an upgrade to a heat pump was cost effective. I decided to record the outside temperature every 6 hours, writing that information to a file along with the date and time. This only required a few commands, but I wasn’t willing to commit to being at the computer every 6 hours for the rest of my life, and I wanted the data to be complete. -->
-<!-- Enter scripts. -->
-<!-- If you need to repeat the same analysis, or even just remember what commands you used, typing each command in each time is not ideal. A script is a text file which records a series of commands so that they can be run together. -->
-<!-- Interactive mode is useful for quick, one-off analyses, but if you need to repeat an analysis (or remember what you did), interactive mode is just awful. Once you close the program, the commands (and results) are gone. This is particularly inconvenient when you need to run the same task multiple times. -->
-<!-- To somewhat address this issue, most computing languages allow you to provide a sequence of commands in a text file, or a script. In many languages, scripts are intended to run on their own, from start to finish. We often call this executing a script, and this is typically done from a terminal prompt. -->
-<!-- Scripts, and compiled programs generated from scripts, are responsible for much of what you interact with on a computer or cell phone day-to-day. When the goal is to process a file or complete a task in exactly the same way each time, a script is the right choice for the job. -->
-<!-- Using scripts interactively allows us to see what is happening in the code step-by-step, and to examine the results during the program’s evaluation. This can be beneficial when applying a script to a new dataset, because it allows us to change things on the fly while still keeping the same basic order of operations. -->
+</section>
+<section id="updating-objects" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="updating-objects"><span class="header-section-number">5.4</span> Updating Objects</h2>
+<p>Currently, the values of <code>x</code> and <code>y</code> are <code>3</code> and <code>4</code> respectively, but we might need to update their values. If we want to change the values of <code>x</code> or <code>y</code>, we simply need to assign them new values.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">8</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> x <span class="sc">+</span> y</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-style-default callout-practice-exercise callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Practice-exercise</span>Practice Activity
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Code tracing is a great technique for understanding what happens to an object at each line of code. Use the table below to trace the values of <code>x</code>, <code>y</code>, and <code>z</code> for each of the three lines of code above.</p>
+<!-- Is there a way to make this interactive? -->
+<!-- Maybe do multiple choice questions with webR? -->
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Line</th>
+<th style="text-align: center;"><code>x</code></th>
+<th style="text-align: center;"><code>y</code></th>
+<th style="text-align: center;"><code>z</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Line 1</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">Does not exist</td>
+</tr>
+<tr class="even">
+<td>Line 2</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td>Line 3</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</section>
+<section id="saving-your-code" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Saving Your Code</h1>
+<p>This process of updating objects in the console seems a bit tedious and error prone. If we made a mistake we can’t modify our previous code, so we will need to write another line of code. Moreover, it would be a bit tedious to get a history of all the code we ran. Enter R scripts!</p>
+<section id="scripts" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="scripts"><span class="header-section-number">6.1</span> Scripts</h2>
+<p>An R script is a document that can store your code! Specifically, an R script is a plain text file whose entire purpose is to store R commands. Instead of typing code line-by-line into the console, we can write our code in a script, save it, and run it whenever we need.</p>
+<p>Working in an R script has several advantages. First, it allows us to easily edit and fix mistakes without rewriting code from scratch. Second, scripts provide a complete record of the steps we took to perform an analysis, making our work easier to understand, reproduce, and share with others (or with our future selves!). Finally, scripts help us organize our code, encouraging clearer structure, comments, and good programming habits as our projects grow.</p>
+<p>Let’s create our first R script!</p>
+<section id="creating-an-r-script" class="level3" data-number="6.1.1">
+<h3 data-number="6.1.1" class="anchored" data-anchor-id="creating-an-r-script"><span class="header-section-number">6.1.1</span> Creating an R Script</h3>
+<p>In the upper left hand corner, you should see an image of a white sheet with a green plus sign. If you click this button you should see something like the image below:</p>
+<p><img src="images/01-rstudio-create-script-annotated.png" class="img-fluid" alt="Screenshot of RStudio showing how to create a new R script. The green “New File” button in the top-left toolbar is highlighted. Its dropdown menu is open, and the “R Script” option is highlighted, indicating that students should click “New File” and then select “R Script” to create a new script."> <!-- Using scripts interactively allows us to see what is happening in the code step-by-step, and to examine the results during the program’s evaluation. This can be beneficial when applying a script to a new dataset, because it allows us to change things on the fly while still keeping the same basic order of operations. --></p>
 <!-- You can run single lines of code within a script file by clicking on the line and using the “Run” button in RStudio, or by typing Ctrl/Cmd + Enter, which will run the selected line(s) of code in the Console. -->
-<!-- ## The Editor/File Pane (Top Left) -->
+</section>
+<section id="the-editorfile-pane-top-left" class="level3" data-number="6.1.2">
+<h3 data-number="6.1.2" class="anchored" data-anchor-id="the-editorfile-pane-top-left"><span class="header-section-number">6.1.2</span> The Editor/File Pane (Top Left)</h3>
 <!-- The buttons and layout within this pane change based on the type of file you have open. -->
 <!-- ::: panel-tabset -->
 <!-- ### R script -->
 <!-- ![The logo on the script file indicates the file type. When an R file is open, there are Run and Source buttons on the top which allow you to run selected lines of code (Run) or source (run) the entire file. Code line numbers are provided on the left (this is a handy way to see where in the code the errors occur), and you can see line:character numbers at the bottom left. At the bottom right, there is another indicator of what type of file Rstudio thinks this is.](../images/tools/Rstudio-editor-pane-buttons.png){fig-alt="Screenshot of the RStudio editor window in R script mode. Lines are numbered along the left side. Editor style can be toggled between source and visual mode. There is a run button at the top to run the current or selected line(s), and an additional shortcut to source the script. An indicator in the bottom right tells you what kind of file you are looking at. In the bottom left, you can see the line:character that is being edited."} -->
+</section>
+<section id="saving-your-r-script" class="level3" data-number="6.1.3">
+<h3 data-number="6.1.3" class="anchored" data-anchor-id="saving-your-r-script"><span class="header-section-number">6.1.3</span> Saving Your R Script</h3>
 <!-- ### Files tab -->
 <!-- ![The files tab shows you the files in your current working directory (by default), though you can navigate through it and find other files as necessary. If you want to return to your working directory, there's a button for that in the "More" menu. One of the most important pieces of information in this pane is your path - you can construct the file path by using ~/ for home, and then for each folder, adding a slash between. The path to the folder we're looking at here is thus `~/Projects/Class/stat-computing-r-python/`.](../images/tools/Rstudio-file-tab.png){fig-alt="Screenshot of RStudio file tab, showing files, size, and last modified date. The folder path is shown just below the icon row and can be useful if you don't know where your files are located."} -->
 <!-- ## Writing Code for People -->
@@ -641,6 +749,7 @@ Important
 <!-- Examples of helpful code comments -->
 
 
+</section>
 </section>
 </section>
 
