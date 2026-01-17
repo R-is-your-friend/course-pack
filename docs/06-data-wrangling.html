@@ -269,8 +269,15 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#welcome-to-the-tidyverse" id="toc-welcome-to-the-tidyverse" class="nav-link active" data-scroll-target="#welcome-to-the-tidyverse"><span class="header-section-number">7.1</span> Welcome to the tidyverse!</a></li>
+  <li><a href="#data-manipulation-and-cleaning" id="toc-data-manipulation-and-cleaning" class="nav-link" data-scroll-target="#data-manipulation-and-cleaning"><span class="header-section-number">7.2</span> Data Manipulation and Cleaning</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -305,16 +312,89 @@ Learning Objectives
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li>Identify the rectangular dataset required for a given task</li>
-<li>Identify required sequence of steps to get from one rectangular dataset to another</li>
+<li>Identify the rectangular dataset required for a given task.</li>
+<li>Identify required sequence of steps to get from one rectangular dataset to another.</li>
 <li>Apply data manipulation verbs (<code>filter()</code>, <code>select()</code>, <code>group_by()</code>, <code>summarize()</code>, <code>mutate()</code>) to get from one rectangular dataset to another</li>
-<li>Describe step-by-step data cleaning process in lay terms appropriately and understand the consequences of data cleaning steps</li>
+<li>Describe step-by-step data cleaning process in lay terms appropriately and understand the consequences of data cleaning steps.</li>
 </ul>
 </div>
 </div>
-<!-- https://r4ds.hadley.nz/data-transform.html -->
+<section id="welcome-to-the-tidyverse" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="welcome-to-the-tidyverse"><span class="header-section-number">7.1</span> Welcome to the tidyverse!</h2>
+<p>Since R is open source, there are many different options for functions that can accomplish the same task. Over time, full sets of functions and packages have been developed with the purpose of working well together for data analysis and visualization.</p>
+<p>In this class, we will use the <code>tidyverse</code> set of packages to visualize and wrangle data. This <strong>decision</strong> impacts the way that we will think about working with data (in a good way - in our opinion!).</p>
+<p>In their own words, the <code>tidyverse</code> developers desscribe it as:</p>
+<blockquote class="blockquote">
+<p>an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+</blockquote>
+<p>Most of the functionality you will need for an entire data analysis workflow will have the <strong>cohesive grammar</strong> of the tidyverse. Already, you have learned how to read in data with <code>readr</code> and visualize data with <code>ggplot2</code>.</p>
+<p><img src="images/06-data-science-workflow.png" class="img-fluid"></p>
+</section>
+<section id="data-manipulation-and-cleaning" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="data-manipulation-and-cleaning"><span class="header-section-number">7.2</span> Data Manipulation and Cleaning</h2>
+<div class="callout callout-style-default callout-check-in callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Check In
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>In groups</strong>, describe in words steps you would take from <code>cereal</code> data to get the output for each of the following:</p>
+<ol type="1">
+<li><p>What is the ratio of fiber to sugars in each cereal?</p></li>
+<li><p>Create a new dataset that only has Nabisco cereals and displays the protein, fat, and sodium in each.</p></li>
+<li><p>Create a table that shows, for each manufacturer the average and standard deviation of the grams of sugar in their cereals, along with how many cereals are in the data for each manufacturer. Order the table from most sugar (on average) to least.</p></li>
+</ol>
+</div>
+</div>
+<p><code>dplyr</code> is part of the <strong>tidyverse</strong> that provides us with the <em>Grammar of Data Manipulation</em>.</p>
+<ul>
+<li>This package gives us the tools to <strong>wrangle, manipulate, and tidy</strong> our data with ease.</li>
+<li>Check out the <code>dplyr</code> <a href="https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf">cheatsheet</a>.</li>
+</ul>
+<div class="callout callout-style-default callout-check-in callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Check In
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>In groups</strong> match the <code>dplyr</code> verbs to your suggested steps:</p>
+<ol type="1">
+<li><p>What is the ratio of fiber to sugars in each cereal?</p></li>
+<li><p>Create a new dataset that only has Nabisco cereals and displays the protein, fat, and sodium in each.</p></li>
+<li><p>Create a table that shows, for each manufacturer the average and standard deviation of the grams of sugar in their cereals, along with how many cereals are in the data for each manufacturer. Order the table from most sugar (on average) to least.</p></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-required-reading callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Required Reading
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>To review what we covered this week, refer to <strong>Chapter 3: Data Transformation</strong> in R4DS <a href="https://r4ds.hadley.nz/data-transform.html">https://r4ds.hadley.nz/data-transform.html</a></p>
+</div>
+</div>
 
 
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>https://www.tidyverse.org/<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

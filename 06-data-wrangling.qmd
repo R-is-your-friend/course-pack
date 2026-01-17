@@ -2,11 +2,61 @@
 
 ::: callout
 ## Learning Objectives
-+ Identify the rectangular dataset required for a given task
-+ Identify required sequence of steps to get from one rectangular dataset to another
++ Identify the rectangular dataset required for a given task.
++ Identify required sequence of steps to get from one rectangular dataset to another.
 + Apply data manipulation verbs (`filter()`, `select()`, `group_by()`, `summarize()`, `mutate()`) to get from one rectangular dataset to another
-+ Describe step-by-step data cleaning process in lay terms appropriately and understand the consequences of data cleaning steps
++ Describe step-by-step data cleaning process in lay terms appropriately and understand the consequences of data cleaning steps.
 :::
 
 
-<!-- https://r4ds.hadley.nz/data-transform.html -->
+## Welcome to the tidyverse!
+
+Since R is open source, there are many different options for functions that can accomplish the same task. Over time, full sets of functions and packages have been developed with the purpose of working well together for data analysis and visualization. 
+
+In this class, we will use the `tidyverse` set of packages to visualize and wrangle data. This **decision** impacts the way that we will think about working with data (in a good way - in our opinion!). 
+
+In their own words, the `tidyverse` developers desscribe it as:
+
+>an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures.[^1]
+
+Most of the functionality you will need for an entire data analysis workflow will have the **cohesive grammar** of the tidyverse. Already, you have learned how to read in data with `readr` and visualize data with `ggplot2`.
+
+![](images/06-data-science-workflow.png)
+
+
+[^1]: https://www.tidyverse.org/
+
+## Data Manipulation and Cleaning
+
+
+
+:::{.callout-check-in .icon}
+**In groups**, describe in words steps you would take from `cereal` data to get the output for each of the following:
+
+1. What is the ratio of fiber to sugars in each cereal?
+
+2. Create a new dataset that only has Nabisco cereals and displays the protein, fat, and sodium in each.
+
+3. Create a table that shows, for each manufacturer the average and standard deviation of the grams of sugar in their cereals, along with how many cereals are in the data for each manufacturer. Order the table from most sugar (on average) to least.
+:::
+
+`dplyr` is part of the **tidyverse** that provides us with the *Grammar of Data Manipulation*.
+
++ This package gives us the tools to **wrangle, manipulate, and tidy** our data with ease.
++ Check out the `dplyr` [cheatsheet](https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf).
+
+:::{.callout-check-in .icon}
+**In groups** match the `dplyr` verbs to your suggested steps:
+
+1. What is the ratio of fiber to sugars in each cereal?
+
+2. Create a new dataset that only has Nabisco cereals and displays the protein, fat, and sodium in each.
+
+3. Create a table that shows, for each manufacturer the average and standard deviation of the grams of sugar in their cereals, along with how many cereals are in the data for each manufacturer. Order the table from most sugar (on average) to least.
+:::
+
+
+
+:::{.callout-required-reading .icon}
+To review what we covered this week, refer to **Chapter 3: Data Transformation** in R4DS  [https://r4ds.hadley.nz/data-transform.html](https://r4ds.hadley.nz/data-transform.html)
+:::
