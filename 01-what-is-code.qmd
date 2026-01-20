@@ -302,19 +302,123 @@ Either of these options should open a popup menu for you to select where you
 want the script to be saved. Navigate to your `stat-1810` folder that lives in
 your `Documents` folder. Change the file name to `week-1.R`.
 
-<!-- ### Files tab -->
+### Files tab
 
-<!-- ![The files tab shows you the files in your current working directory (by default), though you can navigate through it and find other files as necessary. If you want to return to your working directory, there's a button for that in the "More" menu. One of the most important pieces of information in this pane is your path - you can construct the file path by using ~/ for home, and then for each folder, adding a slash between. The path to the folder we're looking at here is thus `~/Projects/Class/stat-computing-r-python/`.](../images/tools/Rstudio-file-tab.png){fig-alt="Screenshot of RStudio file tab, showing files, size, and last modified date. The folder path is shown just below the icon row and can be useful if you don't know where your files are located."} -->
+Now that you've saved your script, it should appear in the Files tab in the
+lower right corner. By default, the Files tab starts at your computer's working
+directory (the hard drive). If we wanted to get to a specific file, we could 
+click through the path to get to that file. 
 
-<!-- ## Writing Code for People -->
+To get to the `week-1.R` file I needed to click through two folders:
 
-<!-- One problem with scripts and interactive modes of using programming languages is that we’re spending most of our time writing code for computers to read – which doesn’t necessarily imply that our code is easy for humans to read. As you become more proficient at programming, you will realize quickly that writing readable code is more challenging than writing working code. It is hard to remember what a specific block of code did when you come back to it months after you wrote it! -->
+1. `Documents`
+2. `stat-1810`
 
-<!-- There are two solutions to this problem, and I encourage you to make liberal use of both of them (together). -->
+![](images/01-rstudio-file-path-annotated.png){fig-alt="A series of three screenshots demonstrating how to get to the week-1.R file saved in the stat-1810 folder. The first screenshot shows the 'Home' directory, which is similar to the C Drive on a PC. The Documents folder is outlined in red, as that is the folder that needs to be clicked on. The second screenshot shows the files stored in the Documents folder. There are six folders and the stat-1810 folder is highlighted in red. The third screenshot shows the week-1.R file which lives in the stat-1810 folder. At the top of the screenshot there is a red box highlighting the path to get to the week-1.R file (Home > Documents > stat-1810)."}
 
-<!-- Code Comments -->
+## Writing Code for People
 
-<!-- A comment is a part of computer code which is intended only for people to read. It is not evaluated or run by the computing language. -->
+While scripts are a great way to store our code, scripts often don't make it 
+easy for people to understand the processes enacted in the code. Yet, in almost 
+every data science setting someone else will be reading your code. So, it is 
+important to learn how to write readable code. As you become more proficient at
+programming, you will realize quickly that writing readable code is more
+challenging than writing working code but it is possibly just as important as 
+getting a working solution. 
 
-<!-- ## Exiting RStudio -->
-<!-- Need to update global options to not save Rdata! -->
+### Code Comments
+
+One way to make code easier to understand is the use of code comments. Since 
+an R script can only contain R code, a code comment is your way of interweaving
+a written description into a script. Fundamentally, a code comment starts after
+a `#`. The `#` symbol indicates to R that this line of text **should not** be 
+executed as code. 
+
+::: {.panel-tabset}
+
+# Descriptive Comments
+
+You can use code comments to describe the actions taken by the code. Notice 
+how each code comment below *describes* what is happening in the subsequent 
+lines. Stylistically, it is important to have a space between the `#` and the
+text so the comment is easier to read. 
+
+```{r}
+# Creating variables x and y
+x <- 8
+y <- 5
+
+# Creating z to depend on current values of x and y
+z <- x + y
+
+```
+
+# Actionable Comments
+
+You can also use code comments to comment out a line of code, so it is not
+executed. Note that we are still using a space after the `#` to make the line
+of code (being commented out) easier to read.
+
+```{r}
+# Creating variables x and y
+x <- 8
+y <- 5
+
+# Creating z to depend on current values of x and y
+# z <- x + y
+
+```
+:::
+
+::: {.callout-note}
+# How many `#` to use?
+
+Technically, you could use as many `#` as you want when making a code comment
+(e.g., `#### Creating variables x and y`). However, it is not recommended to 
+use more than one `#` for consistency and readability.
+:::
+
+
+# Exiting RStudio
+
+Now that we've accomplished what we set out to do, we can close RStudio. When 
+you try and close RStudio, you should get a message like the one below. You 
+might wonder what this message means. Let us tell you!
+
+![](images/01-rstudio-exit-message.png){fig-alt="A screenshot of the message that appears when you attempt to close RStudio after running code. The message asks if you want to 'Save workspace image to ~/.Rdata?' with options Save, Don't Save, and Cancel."}
+
+When you exit an R session, you’re faced with the question of whether or not to
+save your workspace. The workspace is an image of all the objects you created
+while you were working in R into a file called `.RData`. If you save your
+workspace, when you reopen RStudio that workspace will be loaded and all the 
+objects you created previously will be available to you. This might sound like
+something you might want, but actually can cause some major headaches. 
+
+Loading a saved workspace turns your R script from a program, where everything
+happens based on a series of known steps, to something more akin to a 
+cardboard box full of assorted pages and pictures that you don't remember where
+they came from and why you made them. This has two major issues. First, this
+action can clutter your workspace with lots of objects you don't need. Second,
+the versions of the variables stored in your workspaces might be different from
+what you want them to be (or think they are) and will cause issues in your code.
+
+Fundamentally, you should never need to save your workspace because your
+scripts should contain **all** the code you need to create the objects that you 
+want to store. So, let's walk you through how to **never** save your workspace.
+
+Click "Cancel" in the pop-up window above (with the message about saving the
+workspace image). Now, at the top file menu for RStudio, click on Tools. In the
+dropdown menu that appears, click on "Global Options". 
+
+![](images/01-rstudio-global-options-annotated.png){fig-alt="A screenshot of the menu that appears when you click on 'Tools' from the top menu of RStudio. At the bottom of the menu that appears, 'Global Options' is highlighted in red and blue indicating this is the option you want to select."}
+
+In the menu that appears, you want to uncheck the box next to "Restore .RData
+into workspace at startup." Next, you should select "Never" from the dropdown
+menu next to "Save workspace to .RData on exit" (there are three options). Once
+you've changed these options, click "OK" and the popup window should close. 
+
+![](images/01-rstudio-save-rdata-annotated.png){fig-alt="A screenshot of the popup window that appears after you select 'Global Options' from the previous menu. The popup window has A LOT of options, but there is a red box outlining the section we need to focus on. Under 'Workspace' there is a checkbox next to a line that says 'Restore .RData'. This box should be unchecked. The next line says 'Save workspace to .RData on exit.'. Next to this line there is a dropdown menu with three options: Always, Never, Ask. We need to change this option to 'Never'. Once these options have been modified, click on 'OK' to exit."}
+
+
+
+Now, it is safe to exit RStudio!
