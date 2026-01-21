@@ -37,17 +37,9 @@ the Files, Help, and Packages tabs. These tabs allow you to access files
 on your computer, install and load packages, and access documentation
 (help) pages for functions you might be trying to use.
 
-<!-- You do not need to know what all of these tabs do right now. For the moment,  -->
-
-<!-- it's enough to get a sense of the basics. You can see what code was run and the -->
-
-<!-- output of the code in the bottom left), you can navigate to files in the  -->
-
-<!-- bottom right, and you can monitor what objects were created by your code in the -->
-
-<!-- top right. -->
-
 # What is code?
+
+<!-- Need to fill this in! -->
 
 ## What makes R different?
 
@@ -70,8 +62,6 @@ important to be a good open-source citizen by sharing your code publicly when
 possible (in STAT 3820 you will learn about *GitHub*), contributing to public
 projects and packages, creating your own packages, and using `R` for ethical and
 respectful projects.
-
-### 📖 [Required Reading: Basics of R](https://r4ds.hadley.nz/workflow-basics)
 
 ::: callout-note
 # The History of `R`
