@@ -186,9 +186,9 @@
   {
     "objectID": "04-data-is-friend.html",
     "href": "04-data-is-friend.html",
-    "title": "5  Data is Friend",
+    "title": "\n5  Data is Friend\n",
     "section": "",
-    "text": "Learning Objectives\n\n\n\n\nDefine the observational unit (rows) and variables (columns) of rectangular data\nIdentify variable types given rectangular data\nExplore rectangular data quickly in R (with code and with RStudio visually)\nRead rectangular data with various delimiters into R using an appropriate readr or readxl function\nDefine relative versus absolute file paths",
+    "text": "5.1 Rectangular Data\nThere are a lot of different ways that we can look at data in the world and store it on our computer. In this class, we will primarily focus on working with what we call rectangular data meaning that the data is two-dimentional with rows and columns. With rectangular data, each row represents one observation (or observational unit) and each column represents a variable.\nThere are also multiple ways that rectangular data can be stored in R! We will primarily work with data.frame() and tibble() ojects. It is important to know the type and format of the data you’re working with! It is much easier to create data visualizations or conduct statistical analyses if the data you use is in the right shape.\nIn a perfect world, all data would come in the right format for our needs, but this is often not the case. We will spend the next few weeks learning about how to use R to read in data and reformat our data so that it can be used in a specific analysis.",
     "crumbs": [
       "Fundamentals of Coding",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Data is Friend</span>"
@@ -210,7 +210,7 @@
     "href": "06-data-wrangling.html",
     "title": "7  Data Wrangling",
     "section": "",
-    "text": "7.1 Welcome to the tidyverse!\nSince R is open source, there are many different options for functions that can accomplish the same task. Over time, full sets of functions and packages have been developed with the purpose of working well together for data analysis and visualization.\nIn this class, we will use the tidyverse set of packages to visualize and wrangle data. This decision impacts the way that we will think about working with data (in a good way - in our opinion!).\nIn their own words, the tidyverse developers desscribe it as:\nMost of the functionality you will need for an entire data analysis workflow will have the cohesive grammar of the tidyverse. Already, you have learned how to read in data with readr and visualize data with ggplot2.",
+    "text": "7.1 Welcome to the tidyverse!",
     "crumbs": [
       "Data Wrangling and Visualization",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Data Wrangling</span>"
@@ -390,6 +390,28 @@
     "crumbs": [
       "Data Wrangling and Visualization",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Data Wrangling</span>"
+    ]
+  },
+  {
+    "objectID": "04-data-is-friend.html#rectangular-data",
+    "href": "04-data-is-friend.html#rectangular-data",
+    "title": "\n5  Data is Friend\n",
+    "section": "",
+    "text": "5.1.1 Data Frames in R\nData frames are a specific object type in R, data.frame(), and can be indexed the same as matrices. It may be useful to actually look at your data before beginning to work with it to see the format of the data. The following functions in R help us learn information about our data sets:\n\n\nclass(): outputs the object type\n\nnames(): outputs the variable (column) names\n\nhead(): outputs the first 6 rows of a dataframe\n\nglimpse() or str(): output a transpose of dataframe or matrix; shows the data types\n\nsummary() outputs 6-number summaries or frequencies for all variables in the data set depending on the variables data type\n\ndata$variable: extracts a specific variable (column) from the data set\n\nYou may also choose to click on the data set name in your Environment window pane in R and the data set will pop up in a new tab in the script pane.",
+    "crumbs": [
+      "Fundamentals of Coding",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Data is Friend</span>"
+    ]
+  },
+  {
+    "objectID": "04-data-is-friend.html#reading-in-data",
+    "href": "04-data-is-friend.html#reading-in-data",
+    "title": "\n5  Data is Friend\n",
+    "section": "\n5.2 Reading in Data",
+    "text": "5.2 Reading in Data\nIn order to use statistical software to do anything interesting, we need to be able to get data into the program so that we can work with it effectively.\n\n5.2.1 Types of Data Files\nFor the moment, we’ll focus on rectangular data, with rows indicating observations and columns that show variables. This type of data can be stored on the computer in multiple ways:\n\n\nas raw text, usually in a file that ends with .txt, .tsv, .csv, .dat, or sometimes, there will be no file extension at all.\n\n\n.csv “Comma-separated”\n\n.txt plain text - could be just text, comma-separated, tab-separated, etc.\n\n\n\nin a spreadsheet. Spreadsheets, such as those created by MS Excel, Google Sheets use a special type of markup that is specific to the filetype and the program it’s designed to work with. Therefore, special functionality is required for working with them in R.\n\n.xls\n.xlsx\n\n\n\nTo work with data in R, it’s important to know how to read in text files (CSV, tab-delimited, etc.). It can be helpful to also know how to read in XLSX files.\nNote: there are a lot of other ways to store data that we just won’t talk about in this class!\n\n5.2.2 File Paths\nBefore we can read in data, we need to tell R where to look for the data file!\nA file path describes where a certain file or directory lives on your computer. Any time that you are working in R, there is a working directory, which is the baseline directory that R is then looking for other files from. You can find your current working directory with:\n\ngetwd()\n\n[1] \"/Users/czmann/Documents/r-revamp/course-pack\"\n\n\nThere are two different kinds of file paths that you can define to indicate the location of a file or directory:\n\nabsolute file path: full path from the root directory on your computer. Note this will only work on your computer!\nrelative file path: path based on the relationship with a current working directory in terms of a hierarchichy of directories\n\nLet’s look at an example of relative versus absolute file paths. In the example below the “labs” directory is the working directory. The directories that “labs” are in are called it’s parent directories, which are referenced with \"../\" in the relative file paths.\n\n\n\n\n\n\n\nImportant\n\n\n\nSince absolute file paths only work on your computer, we will always use relative file paths in this course.\n\n\n\n5.2.3 Reading in Data with readr and readxl\n\n\n\nread_csv() is for reading in .csv files\n\nread_txv() is for tab-separated data\n\nread_table() is for any data with “columns” (white space separating)\n\nread_delim() is for special “delimiters” separating data\n\nread_xlsx() is specifically for dealing with Excel files\n\n\n# load the readr package (or alternatively the tidyverse package)\nlibrary(readr)\n\n# here we are using a URL\nsurveys &lt;- read_csv(file = \"https://raw.githubusercontent.com/earobinson95/stat331-calpoly/master/lab-assignments/Lab2-graphics/surveys.csv\")\n\n# here is an example of a relative file path to an actual data file!\nsurveys &lt;- read_csv(file = \"../data/surveys.csv\")",
+    "crumbs": [
+      "Fundamentals of Coding",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Data is Friend</span>"
     ]
   }
 ]

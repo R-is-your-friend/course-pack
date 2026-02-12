@@ -15,6 +15,95 @@ https://r4ds.had.co.nz/workflow-projects.html
 https://r4ds.hadley.nz/quarto.html  -->
 
 
+
+## Rectangular Data
+
+There are a lot of different ways that we can look at data in the world and store it on our computer. In this class, we will primarily focus on working with what we call *rectangular data* meaning that the data is two-dimentional with rows and columns. With rectangular data, each *row* represents one observation (or observational unit) and each *column* represents a *variable*.
+
+There are also multiple ways that rectangular data can be stored in R! We will primarily work with `data.frame()` and `tibble()` ojects. It is important to know the type and format of the data you're working with! It is much easier to create data visualizations or conduct statistical analyses if the data you use is in the right shape. 
+
+In a perfect world, all data would come in the right format for our needs, but this is often not the case. We will spend the next few weeks learning about how to use R to read in data and reformat our data so that it can be used in a specific analysis. 
+
+### Data Frames in R
+
+Data frames are a specific object type in R, `data.frame()`, and can be indexed the same as matrices. It may be useful to actually look at your data before beginning to work with it to see the format of the data. The following functions in R help us learn information about our data sets:
+
++ `class()`: outputs the object type
++ `names()`: outputs the variable (column) names
++ `head()`: outputs the first 6 rows of a dataframe
++ `glimpse()` or `str()`: output a transpose of dataframe or matrix; shows the data types
++ `summary()` outputs 6-number summaries or frequencies for all variables in the data set depending on the variables data type
++ `data$variable`: extracts a specific variable (column) from the data set
+
+You may also choose to click on the data set name in your Environment window pane in R and the data set will pop up in a new tab in the script pane.
+
+## Reading in Data
+
+In order to use statistical software to do anything interesting, we need to be able to get data into the program so that we can work with it effectively. 
+
+### Types of Data Files
+
+For the moment, we'll focus on rectangular data, with rows indicating observations and columns that show variables. This type of data can be stored on the computer in multiple ways:
+
+- **as raw text**, usually in a file that ends with `.txt`, `.tsv`, `.csv`, `.dat`, or sometimes, there will be no file extension at all. 
+  + `.csv` "Comma-separated"
+  + `.txt` plain text - could be just text, comma-separated, tab-separated, etc.
+
+- **in a spreadsheet**. Spreadsheets, such as those created by MS Excel, Google Sheets use a special type of markup that is specific to the filetype and the program it's designed to work with. Therefore, special functionality is required for working with them in R.
+  + `.xls`
+  + `.xlsx`
+
+To work with data in R, it's important to know how to read in text files (CSV, tab-delimited, etc.). It can be helpful to also know how to read in XLSX files. 
+
+Note: there are a lot of other ways to store data that we just won't talk about in this class!
+
+
+### File Paths
+
+Before we can read in data, we need to tell R where to look for the data file!
+
+A **file path** describes where a certain file or directory lives on your computer. Any time that you are working in R, there is a *working directory*, which is the baseline directory that R is then looking for other files from. You can find your current working directory with:
+
+```{r}
+getwd()
+```
+
+There are two different kinds of file paths that you can define to indicate the location of a file or directory:
+
+- **absolute file path**: full path from the root directory on *your* computer. Note this will only work on your computer!
+
+- **relative file path**: path based on the relationship with a current *working directory* in terms of a hierarchichy of directories 
+ 
+Let's look at an example of relative versus absolute file paths. In the example below the "labs" directory is the working directory. The directories that "labs" are in are called it's *parent* directories, which are referenced with `"../"` in the relative file paths.
+
+![](images/04-relative-absolute.png)
+
+
+:::callout-important
+Since absolute file paths **only** work on **your computer**, we will **always use relative file paths** in this course.
+:::
+
+### Reading in Data with `readr` and `readxl`
+
++ `read_csv()` is for reading in .csv files
++ `read_txv()` is for tab-separated data
++ `read_table()` is for any data with "columns" (white space separating)
++ `read_delim()` is for special "delimiters" separating data
++ `read_xlsx()` is specifically for dealing with Excel files
+
+```{r}
+#| eval: false
+
+# load the readr package (or alternatively the tidyverse package)
+library(readr)
+
+# here we are using a URL
+surveys <- read_csv(file = "https://raw.githubusercontent.com/earobinson95/stat331-calpoly/master/lab-assignments/Lab2-graphics/surveys.csv")
+
+# here is an example of a relative file path to an actual data file!
+surveys <- read_csv(file = "../data/surveys.csv")
+```
+
 <!-- ### RStudio Projects -->
 
 <!-- When you work on a project that may need to exist on some other machine, it's important to use **local** file paths -- the global path will likely not be the same, but you can usually set the local project-specific structure up to be the same across machines.  -->
