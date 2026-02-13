@@ -14,7 +14,7 @@
     "href": "index.html#how-to-use-this-text",
     "title": "R is Your Friend",
     "section": "How to Use This Text",
-    "text": "How to Use This Text\n\n\n\n\n\n\nWarning\n\n\n\nWatch out sections contain things you may want to look out for - common errors, etc.\n\n\n\n\n\n\n\n\nExampleExample\n\n\n\nExample sections contain code and other information. Don’t skip them!\n\n\n\n\n\n\n\n\nNote\n\n\n\nNote sections contain clarification points (anywhere I would normally say “note that ….). Make sure to read them to avoid any common pitfalls or misconceptions.\n\n\n\n\n\n\n\n\nRequired-readingRequired Reading\n\n\n\nConsider these sections to be required readings. This is where we will direct you to existing materials to explain or introduce a concept.\n\n\n\n\n\n\n\n\nRequired-videoRequired Video\n\n\n\nSimilarly, consider these sections to be required viewing for the course material.\n\n\n\n\n\n\n\n\nCheck-inCheck In\n\n\n\nCheck-in sections contain small tasks that you need to do throughout the reading, to practice or prepare. Although they are not graded, please treat them as required!\n\n\n\n\n\n\n\n\nPractice-exercisePractice Activity\n\n\n\nEach chapter will have a longer practice exercise to complete and turn in. These are intended to be done with help from instructors and peers.\n\n\n\n\n\n\n\n\nLearn-moreLearn More\n\n\n\nConsider these to be optional readings/viewings. The world of python programming has so many interesting tidbits, we can’t possibly teach them all - but we want to share them with you nonetheless!\nWe will usually make these “click to expand” so that they don’t distract from your reading.\n\n\n\n\n\n\n\n\nOpinionJust our opinion...\n\n\n\nThese are personal opinion comments from the authors. Take them with a grain of salt; we aren’t the only R programmers worth listening to, we are just sharing what has worked for us.\nWe will usually make these “click to expand” so that they don’t distract from your reading.",
+    "text": "How to Use This Text\n\n\n\n\n\n\nWarning\n\n\n\nWatch out sections contain things you may want to look out for - common errors, etc.\n\n\n\n\n\n\n\n\nExample\n\n\n\nExample sections contain code and other information. Don’t skip them!\n\n\n\n\n\n\n\n\nNote\n\n\n\nNote sections contain clarification points (anywhere I would normally say “note that ….). Make sure to read them to avoid any common pitfalls or misconceptions.\n\n\n\n\n\n\n\n\nRequired Reading\n\n\n\nConsider these sections to be required readings. This is where we will direct you to existing materials to explain or introduce a concept.\n\n\n\n\n\n\n\n\nRequired Video\n\n\n\nSimilarly, consider these sections to be required viewing for the course material.\n\n\n\n\n\n\n\n\nCheck In\n\n\n\nCheck-in sections contain small tasks that you need to do throughout the reading, to practice or prepare. Although they are not graded, please treat them as required!\n\n\n\n\n\n\n\n\nPractice Activity\n\n\n\nEach chapter will have a longer practice exercise to complete and turn in. These are intended to be done with help from instructors and peers.\n\n\n\n\n\n\n\n\nLearn More\n\n\n\nConsider these to be optional readings/viewings. The world of python programming has so many interesting tidbits, we can’t possibly teach them all - but we want to share them with you nonetheless!\nWe will usually make these “click to expand” so that they don’t distract from your reading.\n\n\n\n\n\n\n\n\nJust our opinion...\n\n\n\nThese are personal opinion comments from the authors. Take them with a grain of salt; we aren’t the only R programmers worth listening to, we are just sharing what has worked for us.\nWe will usually make these “click to expand” so that they don’t distract from your reading.",
     "crumbs": [
       "Preface"
     ]
@@ -109,7 +109,7 @@
   {
     "objectID": "01-what-is-code.html",
     "href": "01-what-is-code.html",
-    "title": "2  What is Code",
+    "title": "\n2  What is Code\n",
     "section": "",
     "text": "3 Welcome to RStudio!\nRStudio is the integrated development environment (IDE) we will be using to interact with R. RStudio is a very powerful environment that has lots of capabilities. We will learn many of these as we go, so right now we are going to focus on the most important aspects!",
     "crumbs": [
@@ -120,31 +120,31 @@
   {
     "objectID": "01-what-is-code.html#rstudio-layout",
     "href": "01-what-is-code.html#rstudio-layout",
-    "title": "2  What is Code",
-    "section": "3.1 RStudio Layout",
-    "text": "3.1 RStudio Layout\nWhen you open RStudio on your computer, you should get something that looks like the image below. You should see three panes, two on the right hand side and one on the left. Let’s learn what these do!\n\n\n\n\n\n\n\nFigure 3.1: Important locations and buttons in RStudio.\n\n\n\nOn the left, you will find the Console pane. The Console is where you will see your code execute! In the top right, you can find the Environment and History tabs. These tabs show any objects you’ve created and a history of the code you ran. In the bottom right, you will find the Files, Help, and Packages tabs. These tabs allow you to access files on your computer, install and load packages, and access documentation (help) pages for functions you might be trying to use.",
+    "title": "\n2  What is Code\n",
+    "section": "\n3.1 RStudio Layout",
+    "text": "3.1 RStudio Layout\nWhen you open RStudio on your computer, you should get something that looks like the image below. You should see three panes, two on the right hand side and one on the left. Let’s learn what these do!\n\n\n\n\n\n\nFigure 3.1: Important locations and buttons in RStudio.\n\n\nOn the left, you will find the Console pane. The Console is where you will see your code execute! In the top right, you can find the Environment and History tabs. These tabs show any objects you’ve created and a history of the code you ran. In the bottom right, you will find the Files, Help, and Packages tabs. These tabs allow you to access files on your computer, install and load packages, and access documentation (help) pages for functions you might be trying to use.",
     "crumbs": [
       "Fundamentals of Coding",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>What is Code</span>"
     ]
   },
   {
-    "objectID": "01-what-is-code.html#the-console-pane-bottom-left",
-    "href": "01-what-is-code.html#the-console-pane-bottom-left",
-    "title": "2  What is Code",
-    "section": "4.1 The Console Pane (Bottom Left)",
-    "text": "4.1 The Console Pane (Bottom Left)",
+    "objectID": "01-what-is-code.html#what-makes-r-different",
+    "href": "01-what-is-code.html#what-makes-r-different",
+    "title": "\n2  What is Code\n",
+    "section": "\n4.1 What makes R different?",
+    "text": "4.1 What makes R different?\nR is a statistical programming language. Unlike more general-purpose languages, R is optimized for working with data and doing statistics. R was created by Ross Ihaka and Robert Gentleman in 1993 (hence “R”) and was formally released by the R Core Group in 1997 (a group of 20-ish volunteers who are the only people who can change the base, built-in functionality of R). If you want to build an independent, standalone graphical interface, or run a web server, R is probably not the ideal language to use (you might want C / Python or PHP / Python, respectively). If you want to vacuum up a bunch of data, fit several regression models, and then compare the models, R is a great option and will be faster than working in a more general-purpose language like C or base Python.\nOne thing to know about R is that it is open-source. This means that no company owns R (like there is for SAS or Matlab) and that developers cannot charge for the use of their R software. This does not mean that all of your code needs to be public (you can keep your code private), but it is important to be a good open-source citizen by sharing your code publicly when possible (in STAT 3820 you will learn about GitHub), contributing to public projects and packages, creating your own packages, and using R for ethical and respectful projects.\n\n\n\n\n\n\nThe History of R\n\n\n\nIf you would like to learn more about the history of R, here is an excellent article written by Roger Peng.",
     "crumbs": [
       "Fundamentals of Coding",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>What is Code</span>"
     ]
   },
   {
-    "objectID": "01-what-is-code.html#history-tab-top-right",
-    "href": "01-what-is-code.html#history-tab-top-right",
-    "title": "2  What is Code",
-    "section": "4.2 History Tab (Top Right)",
-    "text": "4.2 History Tab (Top Right)\nAnother useful tab in this pane is the History tab, which shows you a running list of every command you’ve ever run. While I strongly encourage you to write your code in a text file in the editor pane, sometimes you deleted a line of code accidentally and want to get it back… and the history tab has you covered (unless you’ve cleared the history out).\n\n\n\nThe history tab shows you a list of all commands you’ve run and allows you to send them to the console or to source (the text editor).",
+    "objectID": "01-what-is-code.html#the-console-tab",
+    "href": "01-what-is-code.html#the-console-tab",
+    "title": "\n2  What is Code\n",
+    "section": "\n5.1 The Console Tab",
+    "text": "5.1 The Console Tab\nIt is possible to run code directly in the console! This code can be simple arithmetic like 2 + 2 or 3 * 6 or 6 - 4. The output of each line is showed below (e.g, [1] 4). Next week we will learn what the [1] means with the output, so for now we will focus on the number that is output.\n\n\n\n\n\n\n\nPractice Activity\n\n\n\nRun these same three lines of code in your console.",
     "crumbs": [
       "Fundamentals of Coding",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>What is Code</span>"
@@ -153,9 +153,53 @@
   {
     "objectID": "01-what-is-code.html#creating-objects",
     "href": "01-what-is-code.html#creating-objects",
-    "title": "2  What is Code",
-    "section": "5.2 Creating Objects",
-    "text": "5.2 Creating Objects\nIt seems a bit silly to use R as a calculator when it can do so much more for us! A key aspect of working in R is the idea of storing values into objects. When storing a value into an object, your code will look something like this: x &lt;- 5\nBelieve it or not, there is a lot going on in this simple line of code. So, let’s break it down.\n\n\nx is the name of the object we are creating\n5 is the value we want to store inside x\n&lt;- is an operator that binds the name x to the value 5\n\nThe &lt;- works similar to an = sign, but we are specifically using an &lt;- because we believe it makes the action of assignment more explicit.\n\n\n\n\n\n\nPractice-exercisePractice Activity\n\n\n\nCreate two objects in your console, one named x which has the value 3 stored in it and one named y which has the value 4 stored in it.\n\n\nYou should have noticed when you created x and y that the values are not printed, they are just stored. If you want to view the value, you would need to type x to see its contents.\n\n5.2.1 Environment tab\nNow that you’ve created two objects, there are some interesting things to notice in the upper right corner. The Environment tab displays any objects which are defined in memory. Currently, both objects you’ve created should be labeled “Values”, but later on we will start to see objects labeled “Data” and “Functions”.",
+    "title": "\n2  What is Code\n",
+    "section": "\n5.2 Creating Objects",
+    "text": "5.2 Creating Objects\nIt seems a bit silly to use R as a calculator when it can do so much more for us! A key aspect of working in R is the idea of storing values into objects. When storing a value into an object, your code will look something like this: x &lt;- 5\nBelieve it or not, there is a lot going on in this simple line of code. So, let’s break it down.\n\n\n\nx is the name of the object we are creating\n\n5 is the value we want to store inside x\n\n\n&lt;- is an operator that binds the name x to the value 5\n\n\nThe &lt;- works similar to an = sign, but we are specifically using an &lt;- because we believe it makes the action of assignment more explicit.\n\n\n\n\n\n\nPractice Activity\n\n\n\nCreate two objects in your console, one named x which has the value 3 stored in it and one named y which has the value 4 stored in it.\n\n\nYou should have noticed when you created x and y that the values are not printed, they are just stored. If you want to view the value, you would need to type x to see its contents.\n\n5.2.1 Environment tab\nNow that you’ve created two objects, there are some interesting things to notice in the upper right corner. The Environment tab displays any objects which are defined in memory. Currently, both objects you’ve created should be labeled “Values”, but later on we will start to see objects labeled “Data” and “Functions”.",
+    "crumbs": [
+      "Fundamentals of Coding",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>What is Code</span>"
+    ]
+  },
+  {
+    "objectID": "01-what-is-code.html#the-history-tab-top-right",
+    "href": "01-what-is-code.html#the-history-tab-top-right",
+    "title": "\n2  What is Code\n",
+    "section": "\n5.3 The History Tab (Top Right)",
+    "text": "5.3 The History Tab (Top Right)\nAnother useful tab in this pane is the History tab, which shows you a running list of every command you’ve ever run. At this point you should have run (at least) five lines of code, all of which should be displayed in the history.",
+    "crumbs": [
+      "Fundamentals of Coding",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>What is Code</span>"
+    ]
+  },
+  {
+    "objectID": "01-what-is-code.html#updating-objects",
+    "href": "01-what-is-code.html#updating-objects",
+    "title": "\n2  What is Code\n",
+    "section": "\n5.4 Updating Objects",
+    "text": "5.4 Updating Objects\nCurrently, the values of x and y are 3 and 4 respectively, but we might need to update their values. If we want to change the values of x or y, we simply need to assign them new values.\n\nx &lt;- 8\nz &lt;- x + y\ny &lt;- 5\n\n\n\n\n\n\n\nPractice Activity\n\n\n\nCode tracing is a great technique for understanding what happens to an object at each line of code. Use the table below to trace the values of x, y, and z for each of the three lines of code above.\n\n\n\n\nLine\nx\ny\nz\n\n\n\nLine 1\n\n4\nDoes not exist\n\n\nLine 2\n\n\n\n\n\nLine 3",
+    "crumbs": [
+      "Fundamentals of Coding",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>What is Code</span>"
+    ]
+  },
+  {
+    "objectID": "01-what-is-code.html#scripts",
+    "href": "01-what-is-code.html#scripts",
+    "title": "\n2  What is Code\n",
+    "section": "\n6.1 Scripts",
+    "text": "6.1 Scripts\nAn R script is a document that can store your code! Specifically, an R script is a plain text file whose entire purpose is to store R commands. Instead of typing code line-by-line into the console, we can write our code in a script, save it, and run it whenever we need.\nWorking in an R script has several advantages. First, it allows us to easily edit and fix mistakes without rewriting code from scratch. Second, scripts provide a complete record of the steps we took to perform an analysis, making our work easier to understand, reproduce, and share with others (or with our future selves!). Finally, scripts help us organize our code, encouraging clearer structure, comments, and good programming habits as our projects grow.\nLet’s create our first R script!\n\n6.1.1 Creating an R Script\nIn the upper left hand corner, you should see an image of a white sheet with a green plus sign. If you click this button you should see something like the image below:\n\nIf you click on the R Script option, a new file should appear and your RStudio should look something like this:\n\n\n\n\n\n\n\nPractice Activity\n\n\n\nCreate an R Script in your RStudio!\n\n\n\n6.1.2 The Editor Pane\nNow that we have a document to edit, we can see the fourth pane in RStudio—the editor pane. There are many different files we can create in RStudio. The logo in the top left of the document indicates the type of file we have open. An R script file has a blue circle with the letter R.\nLet’s start typing in the script, so we can explore some of the other buttons available to us.\n\n6.1.3 Running Code\nCopy the code below into your R script, so we can explore the various ways to run code.\na &lt;- 1\nb &lt;- 4\nc &lt;- a + b\n\nfname &lt;- \"Jane\"\nlname &lt;- \"Hollander\"\nNow that we have code in the script we can see that code numbers are provided on the left. This is a handy way to see where in the code the errors occur. There are a few ways to run code:\n\nplace your cursor on the line you want to run and click the run button\nplace your cursor on the line you want to run and hit Command + Enter (or Control + Enter)\n\nEither of these options will run the line of code that your cursor is on and then hop to the next line (if there is one).\n\n\n\n\n\n\nPractice Activity\n\n\n\nRun each of the five lines of code in your R script. Try both methods of running code and see which one you prefer!\n\n\n\n6.1.4 Saving Your R Script\nYou’ll notice that currently your script is labeled “Untitled1” that is because we haven’t saved the file anywhere. If we were to try and close our file before saving RStudio would tell us that our document had unsaved changes. Let’s save our document so we have access to it later on!\n You can save your file a few different ways. First, you can always use Command + S (or Control + S) to save a file. Second, you can click on the blue floppy disk immediately below your file name.\nEither of these options should open a popup menu for you to select where you want the script to be saved. Navigate to your stat-1810 folder that lives in your Documents folder. Change the file name to week-1.R.\n\n6.1.5 Files tab\nNow that you’ve saved your script, it should appear in the Files tab in the lower right corner. By default, the Files tab starts at your computer’s working directory (the hard drive). If we wanted to get to a specific file, we could click through the path to get to that file.\nTo get to the week-1.R file I needed to click through two folders:\n\nDocuments\nstat-1810",
+    "crumbs": [
+      "Fundamentals of Coding",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>What is Code</span>"
+    ]
+  },
+  {
+    "objectID": "01-what-is-code.html#writing-code-for-people",
+    "href": "01-what-is-code.html#writing-code-for-people",
+    "title": "\n2  What is Code\n",
+    "section": "\n6.2 Writing Code for People",
+    "text": "6.2 Writing Code for People\nWhile scripts are a great way to store our code, scripts often don’t make it easy for people to understand the processes enacted in the code. Yet, in almost every data science setting someone else will be reading your code. So, it is important to learn how to write readable code. As you become more proficient at programming, you will realize quickly that writing readable code is more challenging than writing working code but it is possibly just as important as getting a working solution.\n\n6.2.1 Code Comments\nOne way to make code easier to understand is the use of code comments. Since an R script can only contain R code, a code comment is your way of interweaving a written description into a script. Fundamentally, a code comment starts after a #. The # symbol indicates to R that this line of text should not be executed as code.\n\n\nDescriptive Comments\nActionable Comments\n\n\n\nYou can use code comments to describe the actions taken by the code. Notice how each code comment below describes what is happening in the subsequent lines. Stylistically, it is important to have a space between the # and the text so the comment is easier to read.\n\n# Creating variables x and y\nx &lt;- 8\ny &lt;- 5\n\n# Creating z to depend on current values of x and y\nz &lt;- x + y\n\n\n\nYou can also use code comments to comment out a line of code, so it is not executed. Note that we are still using a space after the # to make the line of code (being commented out) easier to read.\n\n# Creating variables x and y\nx &lt;- 8\ny &lt;- 5\n\n# Creating z to depend on current values of x and y\n# z &lt;- x + y\n\n\n\n\n\n\n\n\n\n\nHow many # to use?\n\n\n\nTechnically, you could use as many # as you want when making a code comment (e.g., #### Creating variables x and y). However, it is not recommended to use more than one # for consistency and readability.",
     "crumbs": [
       "Fundamentals of Coding",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>What is Code</span>"
@@ -195,6 +239,28 @@
     ]
   },
   {
+    "objectID": "04-data-is-friend.html#rectangular-data",
+    "href": "04-data-is-friend.html#rectangular-data",
+    "title": "\n5  Data is Friend\n",
+    "section": "",
+    "text": "5.1.1 Data Frames in R\nData frames are a specific object type in R, data.frame(), and can be indexed the same as matrices. It may be useful to actually look at your data before beginning to work with it to see the format of the data. The following functions in R help us learn information about our data sets:\n\n\nclass(): outputs the object type\n\nnames(): outputs the variable (column) names\n\nhead(): outputs the first 6 rows of a dataframe\n\nglimpse() or str(): output a transpose of dataframe or matrix; shows the data types\n\nsummary() outputs 6-number summaries or frequencies for all variables in the data set depending on the variables data type\n\ndata$variable: extracts a specific variable (column) from the data set\n\nYou may also choose to click on the data set name in your Environment window pane in R and the data set will pop up in a new tab in the script pane.\nLet’s start with looking at a dataset that is included in a package in R.\nThe cereal dataset is included in the liver package. To open this dataset, we nead to load the package liver first, and then we can use the data() function to look at the cereal data.\n\n# load liver package\nlibrary(liver)\n\n# load cereal data which is included in the package\ndata(cereal)\n\n# look at the first couple of rows\nhead(cereal)\n\n                       name manuf type calories protein fat sodium fiber carbo\n1                 100% Bran     N cold       70       4   1    130  10.0   5.0\n2         100% Natural Bran     Q cold      120       3   5     15   2.0   8.0\n3                  All-Bran     K cold       70       4   1    260   9.0   7.0\n4 All-Bran with Extra Fiber     K cold       50       4   0    140  14.0   8.0\n5            Almond Delight     R cold      110       2   2    200   1.0  14.0\n6   Apple Cinnamon Cheerios     G cold      110       2   2    180   1.5  10.5\n  sugars potass vitamins shelf weight cups   rating\n1      6    280       25     3      1 0.33 68.40297\n2      8    135        0     3      1 1.00 33.98368\n3      5    320       25     3      1 0.33 59.42551\n4      0    330       25     3      1 0.50 93.70491\n5      8     -1       25     3      1 0.75 34.38484\n6     10     70       25     1      1 0.75 29.50954\n\n# get a summary of the data\nstr(cereal)\n\n'data.frame':   77 obs. of  16 variables:\n $ name    : Factor w/ 77 levels \"100% Bran\",\"100% Natural Bran\",..: 1 2 3 4 5 6 7 8 9 10 ...\n $ manuf   : Factor w/ 7 levels \"A\",\"G\",\"K\",\"N\",..: 4 6 3 3 7 2 3 2 7 5 ...\n $ type    : Factor w/ 2 levels \"cold\",\"hot\": 1 1 1 1 1 1 1 1 1 1 ...\n $ calories: int  70 120 70 50 110 110 110 130 90 90 ...\n $ protein : int  4 3 4 4 2 2 2 3 2 3 ...\n $ fat     : int  1 5 1 0 2 2 0 2 1 0 ...\n $ sodium  : int  130 15 260 140 200 180 125 210 200 210 ...\n $ fiber   : num  10 2 9 14 1 1.5 1 2 4 5 ...\n $ carbo   : num  5 8 7 8 14 10.5 11 18 15 13 ...\n $ sugars  : int  6 8 5 0 8 10 14 8 6 5 ...\n $ potass  : int  280 135 320 330 -1 70 30 100 125 190 ...\n $ vitamins: int  25 0 25 25 25 25 25 25 25 25 ...\n $ shelf   : int  3 3 3 3 3 1 2 3 1 3 ...\n $ weight  : num  1 1 1 1 1 1 1 1.33 1 1 ...\n $ cups    : num  0.33 1 0.33 0.5 0.75 0.75 1 0.75 0.67 0.67 ...\n $ rating  : num  68.4 34 59.4 93.7 34.4 ...\n\n\n\n\n\n\n\n\nCheck In\n\n\n\n\nWhat does a row in the data represent?\nWhat kinds of variables are available in the data? How many are there?\nWhat questions do you have about the variables after just looking at the data?\n\n\n\nJust looking at a data frame in R, we can’t tell how the variables are measures and what they all mean! We will always want to look at a data dictionary to understand what the columns really mean. Any good data provider should provide a data dictionary along with the data!\nIn this case, we can find the data dictionary in the help file for the data in R by running:\n\n?cereal\n\n\n\n\n\n\n\nCheck In\n\n\n\n\nAccording to the data dictionary, what does a row represent in the data?\nWhat does the variable shelf measure and what are the possible values? Should this be treated as a categorical or a numeric variable?\nWhat is the unit for the sodium variable? What about fiber?",
+    "crumbs": [
+      "Fundamentals of Coding",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Data is Friend</span>"
+    ]
+  },
+  {
+    "objectID": "04-data-is-friend.html#reading-in-data",
+    "href": "04-data-is-friend.html#reading-in-data",
+    "title": "\n5  Data is Friend\n",
+    "section": "\n5.2 Reading in Data",
+    "text": "5.2 Reading in Data\nIn order to use statistical software to do anything interesting, we need to be able to get data into the program so that we can work with it effectively.\n\n5.2.1 File Paths\nBefore we can read in data, we need to tell R where to look for the data file!\nA file path describes where a certain file or directory lives on your computer. Any time that you are working in R, there is a working directory, which is the baseline directory that R is then looking for other files from. You can find your current working directory with:\n\ngetwd()\n\n[1] \"/Users/czmann/Documents/r-revamp/course-pack\"\n\n\nThere are two different kinds of file paths that you can define to indicate the location of a file or directory:\n\nabsolute file path: full path from the root directory on your computer. Note this will only work on your computer!\nrelative file path: path based on the relationship with a current working directory in terms of a hierarchichy of directories\n\nLet’s look at an example of relative versus absolute file paths. In the example below the “labs” directory is the working directory. The directories that “labs” are in are called it’s parent directories, which are referenced with \"../\" in the relative file paths.\n\n\n\n\n\n\n\nImportant\n\n\n\nSince absolute file paths only work on your computer, we will always use relative file paths in this course.\n\n\n\n5.2.2 Types of Data Files\nWe will also need to tell R what kind of data it an expect. In this class, are focusing on rectangular data, with rows indicating observations and columns that show variables. This type of data can be stored on the computer in multiple ways which indicate rows and columns in different ways:\n\n\nas raw text, usually in a file that ends with .txt, .tsv, .csv, .dat, or sometimes, there will be no file extension at all.\n\n\n.csv “Comma-separated”\n\n.txt plain text\n\nrows will always be separated in new lines\ncolumns can be separated with different delimiters including tabs, spaces, commas, or other delimeters\n\n\n\n\n\nin a spreadsheet. Spreadsheets, such as those created by MS Excel, Google Sheets use a special type of markup that is specific to the filetype and the program it’s designed to work with. Therefore, special functionality is required for working with them in R.\n\n.xls\n.xlsx\n\n\n\nTo work with data in R, it’s important to know how to read in text files (CSV, tab-delimited, etc.). It can be helpful to also know how to read in XLSX files.\nLet’s practice recognizing different kinds of data files.\n\n\n\n\n\n\nCheck In\n\n\n\nWhat kind of data file are each of the following? Note what kind of delimeter is used to separate columns.\n\n\n\n\nFile A\nFile B\nFile C\nSources\n\n\n\n\n\n\n\n\n\n\n\n\n\nFile A\nFile B\nFile C\n\n\n\n\nNote: there are a lot of other ways to store data that we just won’t talk about in this class!\n\n5.2.3 Reading in Data with readr and readxl\n\n\n\nread_csv() is for reading in .csv files\n\nread_txv() is for tab-separated data\n\nread_table() is for any data with “columns” (white space separating)\n\nread_delim() is for special “delimiters” separating data\n\nread_xlsx() is specifically for dealing with Excel files\n\n\n# load the readr package (or alternatively the tidyverse package)\nlibrary(readr)\n\n# here we are using a URL\nsurveys &lt;- read_csv(file = \"https://raw.githubusercontent.com/earobinson95/stat331-calpoly/master/lab-assignments/Lab2-graphics/surveys.csv\")\n\n# here is an example of a relative file path to an actual data file!\nsurveys &lt;- read_csv(file = \"../data/surveys.csv\")",
+    "crumbs": [
+      "Fundamentals of Coding",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Data is Friend</span>"
+    ]
+  },
+  {
     "objectID": "05-data-visualizations.html",
     "href": "05-data-visualizations.html",
     "title": "6  Data Visualizations",
@@ -210,7 +276,40 @@
     "href": "06-data-wrangling.html",
     "title": "7  Data Wrangling",
     "section": "",
-    "text": "7.1 Welcome to the tidyverse!",
+    "text": "7.1 Welcome to the tidyverse!\nSince R is open source, there are many different options for functions that can accomplish the same task. Over time, full sets of functions and packages have been developed with the purpose of working well together for data analysis and visualization.\nIn this class, we will use the tidyverse set of packages to visualize and wrangle data. This decision impacts the way that we will think about working with data (in a good way - in our opinion!).\nIn their own words, the tidyverse developers desscribe it as:\nMost of the functionality you will need for an entire data analysis workflow will have the cohesive grammar of the tidyverse. Already, you have learned how to read in data with readr and visualize data with ggplot2.",
+    "crumbs": [
+      "Data Wrangling and Visualization",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Data Wrangling</span>"
+    ]
+  },
+  {
+    "objectID": "06-data-wrangling.html#welcome-to-the-tidyverse",
+    "href": "06-data-wrangling.html#welcome-to-the-tidyverse",
+    "title": "7  Data Wrangling",
+    "section": "",
+    "text": "an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures.1",
+    "crumbs": [
+      "Data Wrangling and Visualization",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Data Wrangling</span>"
+    ]
+  },
+  {
+    "objectID": "06-data-wrangling.html#data-manipulation-and-cleaning",
+    "href": "06-data-wrangling.html#data-manipulation-and-cleaning",
+    "title": "7  Data Wrangling",
+    "section": "7.2 Data Manipulation and Cleaning",
+    "text": "7.2 Data Manipulation and Cleaning\n\n\n\n\n\n\nCheck In\n\n\n\nIn groups, describe in words steps you would take from cereal data to get the output for each of the following:\n\nWhat is the ratio of fiber to sugars in each cereal?\nCreate a new dataset that only has Nabisco cereals and displays the protein, fat, and sodium in each.\nCreate a table that shows, for each manufacturer the average and standard deviation of the grams of sugar in their cereals, along with how many cereals are in the data for each manufacturer. Order the table from most sugar (on average) to least.\n\n\n\ndplyr is part of the tidyverse that provides us with the Grammar of Data Manipulation.\n\nThis package gives us the tools to wrangle, manipulate, and tidy our data with ease.\nCheck out the dplyr cheatsheet.\n\n\n\n\n\n\n\nCheck In\n\n\n\nIn groups match the dplyr verbs to your suggested steps:\n\nWhat is the ratio of fiber to sugars in each cereal?\nCreate a new dataset that only has Nabisco cereals and displays the protein, fat, and sodium in each.\nCreate a table that shows, for each manufacturer the average and standard deviation of the grams of sugar in their cereals, along with how many cereals are in the data for each manufacturer. Order the table from most sugar (on average) to least.\n\n\n\n\n\n\n\n\n\nRequired Reading\n\n\n\nTo review what we covered this week, refer to Chapter 3: Data Transformation in R4DS https://r4ds.hadley.nz/data-transform.html",
+    "crumbs": [
+      "Data Wrangling and Visualization",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Data Wrangling</span>"
+    ]
+  },
+  {
+    "objectID": "06-data-wrangling.html#footnotes",
+    "href": "06-data-wrangling.html#footnotes",
+    "title": "7  Data Wrangling",
+    "section": "",
+    "text": "https://www.tidyverse.org/↩︎",
     "crumbs": [
       "Data Wrangling and Visualization",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Data Wrangling</span>"
@@ -302,149 +401,6 @@
     "crumbs": [
       "Modeling and Functions",
       "<span class='chapter-number'>15</span>  <span class='chapter-title'>Simulation</span>"
-    ]
-  },
-  {
-    "objectID": "01-what-is-code.html#the-console-tab",
-    "href": "01-what-is-code.html#the-console-tab",
-    "title": "2  What is Code",
-    "section": "5.1 The Console Tab",
-    "text": "5.1 The Console Tab\nIt is possible to run code directly in the console! This code can be simple arithmetic like 2 + 2 or 3 * 6 or 6 - 4. The output of each line is showed below (e.g, [1] 4). Next week we will learn what the [1] means with the output, so for now we will focus on the number that is output.\n\n\n\n\n\n\n\nPractice-exercisePractice Activity\n\n\n\nRun these same three lines of code in your console.",
-    "crumbs": [
-      "Fundamentals of Coding",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>What is Code</span>"
-    ]
-  },
-  {
-    "objectID": "01-what-is-code.html#the-history-tab-top-right",
-    "href": "01-what-is-code.html#the-history-tab-top-right",
-    "title": "2  What is Code",
-    "section": "5.3 The History Tab (Top Right)",
-    "text": "5.3 The History Tab (Top Right)\nAnother useful tab in this pane is the History tab, which shows you a running list of every command you’ve ever run. At this point you should have run (at least) five lines of code, all of which should be displayed in the history.",
-    "crumbs": [
-      "Fundamentals of Coding",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>What is Code</span>"
-    ]
-  },
-  {
-    "objectID": "01-what-is-code.html#updating-objects",
-    "href": "01-what-is-code.html#updating-objects",
-    "title": "2  What is Code",
-    "section": "5.4 Updating Objects",
-    "text": "5.4 Updating Objects\nCurrently, the values of x and y are 3 and 4 respectively, but we might need to update their values. If we want to change the values of x or y, we simply need to assign them new values.\n\nx &lt;- 8\nz &lt;- x + y\ny &lt;- 5\n\n\n\n\n\n\n\nPractice-exercisePractice Activity\n\n\n\nCode tracing is a great technique for understanding what happens to an object at each line of code. Use the table below to trace the values of x, y, and z for each of the three lines of code above.\n\n\n\n\n\nLine\nx\ny\nz\n\n\n\n\nLine 1\n\n4\nDoes not exist\n\n\nLine 2\n\n\n\n\n\nLine 3",
-    "crumbs": [
-      "Fundamentals of Coding",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>What is Code</span>"
-    ]
-  },
-  {
-    "objectID": "01-what-is-code.html#scripts",
-    "href": "01-what-is-code.html#scripts",
-    "title": "2  What is Code",
-    "section": "6.1 Scripts",
-    "text": "6.1 Scripts\nAn R script is a document that can store your code! Specifically, an R script is a plain text file whose entire purpose is to store R commands. Instead of typing code line-by-line into the console, we can write our code in a script, save it, and run it whenever we need.\nWorking in an R script has several advantages. First, it allows us to easily edit and fix mistakes without rewriting code from scratch. Second, scripts provide a complete record of the steps we took to perform an analysis, making our work easier to understand, reproduce, and share with others (or with our future selves!). Finally, scripts help us organize our code, encouraging clearer structure, comments, and good programming habits as our projects grow.\nLet’s create our first R script!\n\n6.1.1 Creating an R Script\nIn the upper left hand corner, you should see an image of a white sheet with a green plus sign. If you click this button you should see something like the image below:\n\nIf you click on the R Script option, a new file should appear and your RStudio should look something like this:\n\n\n\n\n\n\n\nPractice-exercisePractice Activity\n\n\n\nCreate an R Script in your RStudio!\n\n\n\n\n6.1.2 The Editor Pane\nNow that we have a document to edit, we can see the fourth pane in RStudio—the editor pane. There are many different files we can create in RStudio. The logo in the top left of the document indicates the type of file we have open. An R script file has a blue circle with the letter R.\nLet’s start typing in the script, so we can explore some of the other buttons available to us.\n\n\n6.1.3 Running Code\nCopy the code below into your R script, so we can explore the various ways to run code.\na &lt;- 1\nb &lt;- 4\nc &lt;- a + b\n\nfname &lt;- \"Jane\"\nlname &lt;- \"Hollander\"\nNow that we have code in the script we can see that code numbers are provided on the left. This is a handy way to see where in the code the errors occur. There are a few ways to run code:\n\nplace your cursor on the line you want to run and click the run button\nplace your cursor on the line you want to run and hit Command + Enter (or Control + Enter)\n\nEither of these options will run the line of code that your cursor is on and then hop to the next line (if there is one).\n\n\n\n\n\n\nPractice-exercisePractice Activity\n\n\n\nRun each of the five lines of code in your R script. Try both methods of running code and see which one you prefer!\n\n\n\n\n6.1.4 Saving Your R Script\nYou’ll notice that currently your script is labeled “Untitled1” that is because we haven’t saved the file anywhere. If we were to try and close our file before saving RStudio would tell us that our document had unsaved changes. Let’s save our document so we have access to it later on!\n You can save your file a few different ways. First, you can always use Command + S (or Control + S) to save a file. Second, you can click on the blue floppy disk immediately below your file name.\nEither of these options should open a popup menu for you to select where you want the script to be saved. Navigate to your stat-1810 folder that lives in your Documents folder. Change the file name to week-1.R.\n\n\n6.1.5 Files tab\nNow that you’ve saved your script, it should appear in the Files tab in the lower right corner. By default, the Files tab starts at your computer’s working directory (the hard drive). If we wanted to get to a specific file, we could click through the path to get to that file.\nTo get to the week-1.R file I needed to click through two folders:\n\nDocuments\nstat-1810",
-    "crumbs": [
-      "Fundamentals of Coding",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>What is Code</span>"
-    ]
-  },
-  {
-    "objectID": "01-what-is-code.html#what-makes-r-different",
-    "href": "01-what-is-code.html#what-makes-r-different",
-    "title": "2  What is Code",
-    "section": "4.1 What makes R different?",
-    "text": "4.1 What makes R different?\nR is a statistical programming language. Unlike more general-purpose languages, R is optimized for working with data and doing statistics. R was created by Ross Ihaka and Robert Gentleman in 1993 (hence “R”) and was formally released by the R Core Group in 1997 (a group of 20-ish volunteers who are the only people who can change the base, built-in functionality of R). If you want to build an independent, standalone graphical interface, or run a web server, R is probably not the ideal language to use (you might want C / Python or PHP / Python, respectively). If you want to vacuum up a bunch of data, fit several regression models, and then compare the models, R is a great option and will be faster than working in a more general-purpose language like C or base Python.\nOne thing to know about R is that it is open-source. This means that no company owns R (like there is for SAS or Matlab) and that developers cannot charge for the use of their R software. This does not mean that all of your code needs to be public (you can keep your code private), but it is important to be a good open-source citizen by sharing your code publicly when possible (in STAT 3820 you will learn about GitHub), contributing to public projects and packages, creating your own packages, and using R for ethical and respectful projects.\n\n\n\n\n\n\nNoteThe History of R\n\n\n\nIf you would like to learn more about the history of R, here is an excellent article written by Roger Peng.",
-    "crumbs": [
-      "Fundamentals of Coding",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>What is Code</span>"
-    ]
-  },
-  {
-    "objectID": "06-data-wrangling.html#data-manipulation-and-cleaning",
-    "href": "06-data-wrangling.html#data-manipulation-and-cleaning",
-    "title": "7  Data Wrangling",
-    "section": "7.2 Data Manipulation and Cleaning",
-    "text": "7.2 Data Manipulation and Cleaning\n\n\n\n\n\n\nCheck In\n\n\n\nIn groups, describe in words steps you would take from cereal data to get the output for each of the following:\n\nWhat is the ratio of fiber to sugars in each cereal?\nCreate a new dataset that only has Nabisco cereals and displays the protein, fat, and sodium in each.\nCreate a table that shows, for each manufacturer the average and standard deviation of the grams of sugar in their cereals, along with how many cereals are in the data for each manufacturer. Order the table from most sugar (on average) to least.\n\n\n\ndplyr is part of the tidyverse that provides us with the Grammar of Data Manipulation.\n\nThis package gives us the tools to wrangle, manipulate, and tidy our data with ease.\nCheck out the dplyr cheatsheet.\n\n\n\n\n\n\n\nCheck In\n\n\n\nIn groups match the dplyr verbs to your suggested steps:\n\nWhat is the ratio of fiber to sugars in each cereal?\nCreate a new dataset that only has Nabisco cereals and displays the protein, fat, and sodium in each.\nCreate a table that shows, for each manufacturer the average and standard deviation of the grams of sugar in their cereals, along with how many cereals are in the data for each manufacturer. Order the table from most sugar (on average) to least.\n\n\n\n\n\n\n\n\n\nRequired Reading\n\n\n\nTo review what we covered this week, refer to Chapter 3: Data Transformation in R4DS https://r4ds.hadley.nz/data-transform.html",
-    "crumbs": [
-      "Data Wrangling and Visualization",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Data Wrangling</span>"
-    ]
-  },
-  {
-    "objectID": "06-data-wrangling.html#welcome-to-the-tidyverse",
-    "href": "06-data-wrangling.html#welcome-to-the-tidyverse",
-    "title": "7  Data Wrangling",
-    "section": "",
-    "text": "an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures.1",
-    "crumbs": [
-      "Data Wrangling and Visualization",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Data Wrangling</span>"
-    ]
-  },
-  {
-    "objectID": "06-data-wrangling.html#footnotes",
-    "href": "06-data-wrangling.html#footnotes",
-    "title": "7  Data Wrangling",
-    "section": "",
-    "text": "https://www.tidyverse.org/↩︎",
-    "crumbs": [
-      "Data Wrangling and Visualization",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Data Wrangling</span>"
-    ]
-  },
-  {
-    "objectID": "01-what-is-code.html#writing-code-for-people",
-    "href": "01-what-is-code.html#writing-code-for-people",
-    "title": "2  What is Code",
-    "section": "6.2 Writing Code for People",
-    "text": "6.2 Writing Code for People\nWhile scripts are a great way to store our code, scripts often don’t make it easy for people to understand the processes enacted in the code. Yet, in almost every data science setting someone else will be reading your code. So, it is important to learn how to write readable code. As you become more proficient at programming, you will realize quickly that writing readable code is more challenging than writing working code but it is possibly just as important as getting a working solution.\n\n6.2.1 Code Comments\nOne way to make code easier to understand is the use of code comments. Since an R script can only contain R code, a code comment is your way of interweaving a written description into a script. Fundamentally, a code comment starts after a #. The # symbol indicates to R that this line of text should not be executed as code.\n\nDescriptive CommentsActionable Comments\n\n\nYou can use code comments to describe the actions taken by the code. Notice how each code comment below describes what is happening in the subsequent lines. Stylistically, it is important to have a space between the # and the text so the comment is easier to read.\n\n# Creating variables x and y\nx &lt;- 8\ny &lt;- 5\n\n# Creating z to depend on current values of x and y\nz &lt;- x + y\n\n\n\nYou can also use code comments to comment out a line of code, so it is not executed. Note that we are still using a space after the # to make the line of code (being commented out) easier to read.\n\n# Creating variables x and y\nx &lt;- 8\ny &lt;- 5\n\n# Creating z to depend on current values of x and y\n# z &lt;- x + y\n\n\n\n\n\n\n\n\n\n\nNoteHow many # to use?\n\n\n\nTechnically, you could use as many # as you want when making a code comment (e.g., #### Creating variables x and y). However, it is not recommended to use more than one # for consistency and readability.",
-    "crumbs": [
-      "Fundamentals of Coding",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>What is Code</span>"
-    ]
-  },
-  {
-    "objectID": "01-what-is-code.html#actionable-comments",
-    "href": "01-what-is-code.html#actionable-comments",
-    "title": "2  What is Code",
-    "section": "6.3 Actionable Comments",
-    "text": "6.3 Actionable Comments\n\n# Creating variables x and y\nx &lt;- 8\ny &lt;- 5\n\n# Creating z to depend on current values of x and y\n# z &lt;- x + y",
-    "crumbs": [
-      "Fundamentals of Coding",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>What is Code</span>"
-    ]
-  },
-  {
-    "objectID": "01-what-is-code.html#exiting-rstudio",
-    "href": "01-what-is-code.html#exiting-rstudio",
-    "title": "2  What is Code",
-    "section": "6.3 Exiting RStudio",
-    "text": "6.3 Exiting RStudio",
-    "crumbs": [
-      "Fundamentals of Coding",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>What is Code</span>"
-    ]
-  },
-  {
-    "objectID": "04-data-is-friend.html#rectangular-data",
-    "href": "04-data-is-friend.html#rectangular-data",
-    "title": "\n5  Data is Friend\n",
-    "section": "",
-    "text": "5.1.1 Data Frames in R\nData frames are a specific object type in R, data.frame(), and can be indexed the same as matrices. It may be useful to actually look at your data before beginning to work with it to see the format of the data. The following functions in R help us learn information about our data sets:\n\n\nclass(): outputs the object type\n\nnames(): outputs the variable (column) names\n\nhead(): outputs the first 6 rows of a dataframe\n\nglimpse() or str(): output a transpose of dataframe or matrix; shows the data types\n\nsummary() outputs 6-number summaries or frequencies for all variables in the data set depending on the variables data type\n\ndata$variable: extracts a specific variable (column) from the data set\n\nYou may also choose to click on the data set name in your Environment window pane in R and the data set will pop up in a new tab in the script pane.",
-    "crumbs": [
-      "Fundamentals of Coding",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Data is Friend</span>"
-    ]
-  },
-  {
-    "objectID": "04-data-is-friend.html#reading-in-data",
-    "href": "04-data-is-friend.html#reading-in-data",
-    "title": "\n5  Data is Friend\n",
-    "section": "\n5.2 Reading in Data",
-    "text": "5.2 Reading in Data\nIn order to use statistical software to do anything interesting, we need to be able to get data into the program so that we can work with it effectively.\n\n5.2.1 Types of Data Files\nFor the moment, we’ll focus on rectangular data, with rows indicating observations and columns that show variables. This type of data can be stored on the computer in multiple ways:\n\n\nas raw text, usually in a file that ends with .txt, .tsv, .csv, .dat, or sometimes, there will be no file extension at all.\n\n\n.csv “Comma-separated”\n\n.txt plain text - could be just text, comma-separated, tab-separated, etc.\n\n\n\nin a spreadsheet. Spreadsheets, such as those created by MS Excel, Google Sheets use a special type of markup that is specific to the filetype and the program it’s designed to work with. Therefore, special functionality is required for working with them in R.\n\n.xls\n.xlsx\n\n\n\nTo work with data in R, it’s important to know how to read in text files (CSV, tab-delimited, etc.). It can be helpful to also know how to read in XLSX files.\nNote: there are a lot of other ways to store data that we just won’t talk about in this class!\n\n5.2.2 File Paths\nBefore we can read in data, we need to tell R where to look for the data file!\nA file path describes where a certain file or directory lives on your computer. Any time that you are working in R, there is a working directory, which is the baseline directory that R is then looking for other files from. You can find your current working directory with:\n\ngetwd()\n\n[1] \"/Users/czmann/Documents/r-revamp/course-pack\"\n\n\nThere are two different kinds of file paths that you can define to indicate the location of a file or directory:\n\nabsolute file path: full path from the root directory on your computer. Note this will only work on your computer!\nrelative file path: path based on the relationship with a current working directory in terms of a hierarchichy of directories\n\nLet’s look at an example of relative versus absolute file paths. In the example below the “labs” directory is the working directory. The directories that “labs” are in are called it’s parent directories, which are referenced with \"../\" in the relative file paths.\n\n\n\n\n\n\n\nImportant\n\n\n\nSince absolute file paths only work on your computer, we will always use relative file paths in this course.\n\n\n\n5.2.3 Reading in Data with readr and readxl\n\n\n\nread_csv() is for reading in .csv files\n\nread_txv() is for tab-separated data\n\nread_table() is for any data with “columns” (white space separating)\n\nread_delim() is for special “delimiters” separating data\n\nread_xlsx() is specifically for dealing with Excel files\n\n\n# load the readr package (or alternatively the tidyverse package)\nlibrary(readr)\n\n# here we are using a URL\nsurveys &lt;- read_csv(file = \"https://raw.githubusercontent.com/earobinson95/stat331-calpoly/master/lab-assignments/Lab2-graphics/surveys.csv\")\n\n# here is an example of a relative file path to an actual data file!\nsurveys &lt;- read_csv(file = \"../data/surveys.csv\")",
-    "crumbs": [
-      "Fundamentals of Coding",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Data is Friend</span>"
     ]
   }
 ]

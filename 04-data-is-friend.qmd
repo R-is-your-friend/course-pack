@@ -22,7 +22,9 @@ There are a lot of different ways that we can look at data in the world and stor
 
 There are also multiple ways that rectangular data can be stored in R! We will primarily work with `data.frame()` and `tibble()` ojects. It is important to know the type and format of the data you're working with! It is much easier to create data visualizations or conduct statistical analyses if the data you use is in the right shape. 
 
-In a perfect world, all data would come in the right format for our needs, but this is often not the case. We will spend the next few weeks learning about how to use R to read in data and reformat our data so that it can be used in a specific analysis. 
+In a perfect world, all data would come in the right format for our needs, but this is often not the case. We will spend the next few weeks learning about how to use R to read in data and reformat our data so that it can be used in a specific analysis.
+
+
 
 ### Data Frames in R
 
@@ -37,25 +39,54 @@ Data frames are a specific object type in R, `data.frame()`, and can be indexed 
 
 You may also choose to click on the data set name in your Environment window pane in R and the data set will pop up in a new tab in the script pane.
 
+Let's start with looking at a dataset that is included in a *package* in R. 
+
+The `cereal` dataset is included in the `liver` package. To open this dataset, we nead to load the package `liver` first, and then we can use the `data()` function to look at the `cereal` data.
+
+```{r}
+# load liver package
+library(liver)
+
+# load cereal data which is included in the package
+data(cereal)
+
+# look at the first couple of rows
+head(cereal)
+
+# get a summary of the data
+str(cereal)
+```
+
+:::{.callout-check-in .icon}
+1. What does a *row* in the data represent?
+
+2. What kinds of *variables* are available in the data? How many are there?
+
+3. What questions do you have about the variables after just looking at the data?
+:::
+
+Just looking at a data frame in R, we can't tell how the variables are measures and what they all mean! We will always want to look at a **data dictionary** to understand what the columns really mean. Any good data provider should provide a data dictionary along with the data!
+
+In this case, we can find the data dictionary in the help file for the data in R by running:
+
+```{r}
+?cereal
+```
+
+
+:::{.callout-check-in .icon}
+1. According to the data dictionary, what does a row represent in the data?
+
+2. What does the variable `shelf` measure and what are the possible values? Should this be treated as a categorical or a numeric variable?
+
+3. What is the unit for the `sodium` variable? What about `fiber`?
+:::
+
+
 ## Reading in Data
 
 In order to use statistical software to do anything interesting, we need to be able to get data into the program so that we can work with it effectively. 
 
-### Types of Data Files
-
-For the moment, we'll focus on rectangular data, with rows indicating observations and columns that show variables. This type of data can be stored on the computer in multiple ways:
-
-- **as raw text**, usually in a file that ends with `.txt`, `.tsv`, `.csv`, `.dat`, or sometimes, there will be no file extension at all. 
-  + `.csv` "Comma-separated"
-  + `.txt` plain text - could be just text, comma-separated, tab-separated, etc.
-
-- **in a spreadsheet**. Spreadsheets, such as those created by MS Excel, Google Sheets use a special type of markup that is specific to the filetype and the program it's designed to work with. Therefore, special functionality is required for working with them in R.
-  + `.xls`
-  + `.xlsx`
-
-To work with data in R, it's important to know how to read in text files (CSV, tab-delimited, etc.). It can be helpful to also know how to read in XLSX files. 
-
-Note: there are a lot of other ways to store data that we just won't talk about in this class!
 
 
 ### File Paths
@@ -82,6 +113,57 @@ Let's look at an example of relative versus absolute file paths. In the example 
 :::callout-important
 Since absolute file paths **only** work on **your computer**, we will **always use relative file paths** in this course.
 :::
+
+### Types of Data Files
+
+We will also need to tell R what kind of data it an expect. In this class, are focusing on rectangular data, with rows indicating observations and columns that show variables.  This type of data can be stored on the computer in multiple ways which indicate rows and columns in different ways:
+
+- **as raw text**, usually in a file that ends with `.txt`, `.tsv`, `.csv`, `.dat`, or sometimes, there will be no file extension at all. 
+  + `.csv` "Comma-separated"
+  + `.txt` plain text
+    + rows will always be separated in new lines
+    + columns can be separated with different *delimiters* including tabs, spaces, commas, or other delimeters
+
+- **in a spreadsheet**. Spreadsheets, such as those created by MS Excel, Google Sheets use a special type of markup that is specific to the filetype and the program it's designed to work with. Therefore, special functionality is required for working with them in R.
+  + `.xls`
+  + `.xlsx`
+
+To work with data in R, it's important to know how to read in text files (CSV, tab-delimited, etc.). It can be helpful to also know how to read in XLSX files. 
+
+Let's practice recognizing different kinds of data files.
+
+:::{.callout-check-in .icon}
+What kind of data file are each of the following? Note what kind of *delimeter* is used to separate columns.
+:::
+
+
+::: panel-tabset
+### File A
+
+![](images/04-csv-file.png)
+
+
+### File B
+
+![](images/04-tsv-file.png)
+
+### File C
+
+![](images/04-pipe-file.png)
+
+### Sources
+
+-   [File A](https://people.sc.fsu.edu/~jburkardt/data/csv/csv.html)
+-   [File B](https://github.com/ccusa/Disaster_Vulnerability_Map/blob/master/sample-data.tsv)
+-   [File C](https://chadbaldwin.net/2021/03/24/quick-parse-csv-file.html)
+:::
+
+
+
+
+
+Note: there are a lot of other ways to store data that we just won't talk about in this class!
+
 
 ### Reading in Data with `readr` and `readxl`
 

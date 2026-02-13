@@ -301,8 +301,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li>
 <a href="#reading-in-data" id="toc-reading-in-data" class="nav-link" data-scroll-target="#reading-in-data"><span class="header-section-number">5.2</span> Reading in Data</a>
   <ul class="collapse">
-<li><a href="#types-of-data-files" id="toc-types-of-data-files" class="nav-link" data-scroll-target="#types-of-data-files"><span class="header-section-number">5.2.1</span> Types of Data Files</a></li>
-  <li><a href="#file-paths" id="toc-file-paths" class="nav-link" data-scroll-target="#file-paths"><span class="header-section-number">5.2.2</span> File Paths</a></li>
+<li><a href="#file-paths" id="toc-file-paths" class="nav-link" data-scroll-target="#file-paths"><span class="header-section-number">5.2.1</span> File Paths</a></li>
+  <li><a href="#types-of-data-files" id="toc-types-of-data-files" class="nav-link" data-scroll-target="#types-of-data-files"><span class="header-section-number">5.2.2</span> Types of Data Files</a></li>
   <li><a href="#reading-in-data-with-readr-and-readxl" id="toc-reading-in-data-with-readr-and-readxl" class="nav-link" data-scroll-target="#reading-in-data-with-readr-and-readxl"><span class="header-section-number">5.2.3</span> Reading in Data with <code>readr</code> and <code>readxl</code></a></li>
   </ul>
 </li>
@@ -372,38 +372,103 @@ https://r4ds.hadley.nz/quarto.html  -->
 <code>data$variable</code>: extracts a specific variable (column) from the data set</li>
 </ul>
 <p>You may also choose to click on the data set name in your Environment window pane in R and the data set will pop up in a new tab in the script pane.</p>
+<p>Let’s start with looking at a dataset that is included in a <em>package</em> in R.</p>
+<p>The <code>cereal</code> dataset is included in the <code>liver</code> package. To open this dataset, we nead to load the package <code>liver</code> first, and then we can use the <code><a href="https://rdrr.io/r/utils/data.html">data()</a></code> function to look at the <code>cereal</code> data.</p>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># load liver package</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://book-data-science-r.netlify.app">liver</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># load cereal data which is included in the package</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">cereal</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># look at the first couple of rows</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">cereal</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                       name manuf type calories protein fat sodium fiber carbo
+1                 100% Bran     N cold       70       4   1    130  10.0   5.0
+2         100% Natural Bran     Q cold      120       3   5     15   2.0   8.0
+3                  All-Bran     K cold       70       4   1    260   9.0   7.0
+4 All-Bran with Extra Fiber     K cold       50       4   0    140  14.0   8.0
+5            Almond Delight     R cold      110       2   2    200   1.0  14.0
+6   Apple Cinnamon Cheerios     G cold      110       2   2    180   1.5  10.5
+  sugars potass vitamins shelf weight cups   rating
+1      6    280       25     3      1 0.33 68.40297
+2      8    135        0     3      1 1.00 33.98368
+3      5    320       25     3      1 0.33 59.42551
+4      0    330       25     3      1 0.50 93.70491
+5      8     -1       25     3      1 0.75 34.38484
+6     10     70       25     1      1 0.75 29.50954</code></pre>
+</div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># get a summary of the data</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">cereal</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   77 obs. of  16 variables:
+ $ name    : Factor w/ 77 levels "100% Bran","100% Natural Bran",..: 1 2 3 4 5 6 7 8 9 10 ...
+ $ manuf   : Factor w/ 7 levels "A","G","K","N",..: 4 6 3 3 7 2 3 2 7 5 ...
+ $ type    : Factor w/ 2 levels "cold","hot": 1 1 1 1 1 1 1 1 1 1 ...
+ $ calories: int  70 120 70 50 110 110 110 130 90 90 ...
+ $ protein : int  4 3 4 4 2 2 2 3 2 3 ...
+ $ fat     : int  1 5 1 0 2 2 0 2 1 0 ...
+ $ sodium  : int  130 15 260 140 200 180 125 210 200 210 ...
+ $ fiber   : num  10 2 9 14 1 1.5 1 2 4 5 ...
+ $ carbo   : num  5 8 7 8 14 10.5 11 18 15 13 ...
+ $ sugars  : int  6 8 5 0 8 10 14 8 6 5 ...
+ $ potass  : int  280 135 320 330 -1 70 30 100 125 190 ...
+ $ vitamins: int  25 0 25 25 25 25 25 25 25 25 ...
+ $ shelf   : int  3 3 3 3 3 1 2 3 1 3 ...
+ $ weight  : num  1 1 1 1 1 1 1 1.33 1 1 ...
+ $ cups    : num  0.33 1 0.33 0.5 0.75 0.75 1 0.75 0.67 0.67 ...
+ $ rating  : num  68.4 34 59.4 93.7 34.4 ...</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-check-in callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Check In
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>What does a <em>row</em> in the data represent?</p></li>
+<li><p>What kinds of <em>variables</em> are available in the data? How many are there?</p></li>
+<li><p>What questions do you have about the variables after just looking at the data?</p></li>
+</ol>
+</div>
+</div>
+<p>Just looking at a data frame in R, we can’t tell how the variables are measures and what they all mean! We will always want to look at a <strong>data dictionary</strong> to understand what the columns really mean. Any good data provider should provide a data dictionary along with the data!</p>
+<p>In this case, we can find the data dictionary in the help file for the data in R by running:</p>
+<div class="cell">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">?</span><span class="va">cereal</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-check-in callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Check In
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>According to the data dictionary, what does a row represent in the data?</p></li>
+<li><p>What does the variable <code>shelf</code> measure and what are the possible values? Should this be treated as a categorical or a numeric variable?</p></li>
+<li><p>What is the unit for the <code>sodium</code> variable? What about <code>fiber</code>?</p></li>
+</ol>
+</div>
+</div>
 </section></section><section id="reading-in-data" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="reading-in-data">
 <span class="header-section-number">5.2</span> Reading in Data</h2>
 <p>In order to use statistical software to do anything interesting, we need to be able to get data into the program so that we can work with it effectively.</p>
-<section id="types-of-data-files" class="level3" data-number="5.2.1"><h3 data-number="5.2.1" class="anchored" data-anchor-id="types-of-data-files">
-<span class="header-section-number">5.2.1</span> Types of Data Files</h3>
-<p>For the moment, we’ll focus on rectangular data, with rows indicating observations and columns that show variables. This type of data can be stored on the computer in multiple ways:</p>
-<ul>
-<li>
-<strong>as raw text</strong>, usually in a file that ends with <code>.txt</code>, <code>.tsv</code>, <code>.csv</code>, <code>.dat</code>, or sometimes, there will be no file extension at all.
-<ul>
-<li>
-<code>.csv</code> “Comma-separated”</li>
-<li>
-<code>.txt</code> plain text - could be just text, comma-separated, tab-separated, etc.</li>
-</ul>
-</li>
-<li>
-<strong>in a spreadsheet</strong>. Spreadsheets, such as those created by MS Excel, Google Sheets use a special type of markup that is specific to the filetype and the program it’s designed to work with. Therefore, special functionality is required for working with them in R.
-<ul>
-<li><code>.xls</code></li>
-<li><code>.xlsx</code></li>
-</ul>
-</li>
-</ul>
-<p>To work with data in R, it’s important to know how to read in text files (CSV, tab-delimited, etc.). It can be helpful to also know how to read in XLSX files.</p>
-<p>Note: there are a lot of other ways to store data that we just won’t talk about in this class!</p>
-</section><section id="file-paths" class="level3" data-number="5.2.2"><h3 data-number="5.2.2" class="anchored" data-anchor-id="file-paths">
-<span class="header-section-number">5.2.2</span> File Paths</h3>
+<section id="file-paths" class="level3" data-number="5.2.1"><h3 data-number="5.2.1" class="anchored" data-anchor-id="file-paths">
+<span class="header-section-number">5.2.1</span> File Paths</h3>
 <p>Before we can read in data, we need to tell R where to look for the data file!</p>
 <p>A <strong>file path</strong> describes where a certain file or directory lives on your computer. Any time that you are working in R, there is a <em>working directory</em>, which is the baseline directory that R is then looking for other files from. You can find your current working directory with:</p>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "/Users/czmann/Documents/r-revamp/course-pack"</code></pre>
 </div>
@@ -428,6 +493,74 @@ Important
 <p>Since absolute file paths <strong>only</strong> work on <strong>your computer</strong>, we will <strong>always use relative file paths</strong> in this course.</p>
 </div>
 </div>
+</section><section id="types-of-data-files" class="level3" data-number="5.2.2"><h3 data-number="5.2.2" class="anchored" data-anchor-id="types-of-data-files">
+<span class="header-section-number">5.2.2</span> Types of Data Files</h3>
+<p>We will also need to tell R what kind of data it an expect. In this class, are focusing on rectangular data, with rows indicating observations and columns that show variables. This type of data can be stored on the computer in multiple ways which indicate rows and columns in different ways:</p>
+<ul>
+<li>
+<strong>as raw text</strong>, usually in a file that ends with <code>.txt</code>, <code>.tsv</code>, <code>.csv</code>, <code>.dat</code>, or sometimes, there will be no file extension at all.
+<ul>
+<li>
+<code>.csv</code> “Comma-separated”</li>
+<li>
+<code>.txt</code> plain text
+<ul>
+<li>rows will always be separated in new lines</li>
+<li>columns can be separated with different <em>delimiters</em> including tabs, spaces, commas, or other delimeters</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<strong>in a spreadsheet</strong>. Spreadsheets, such as those created by MS Excel, Google Sheets use a special type of markup that is specific to the filetype and the program it’s designed to work with. Therefore, special functionality is required for working with them in R.
+<ul>
+<li><code>.xls</code></li>
+<li><code>.xlsx</code></li>
+</ul>
+</li>
+</ul>
+<p>To work with data in R, it’s important to know how to read in text files (CSV, tab-delimited, etc.). It can be helpful to also know how to read in XLSX files.</p>
+<p>Let’s practice recognizing different kinds of data files.</p>
+<div class="callout callout-style-default callout-check-in callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Check In
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>What kind of data file are each of the following? Note what kind of <em>delimeter</em> is used to separate columns.</p>
+</div>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">File A</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">File B</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">File C</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false">Sources</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p><img src="images/04-csv-file.png" class="img-fluid"></p>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p><img src="images/04-tsv-file.png" class="img-fluid"></p>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<p><img src="images/04-pipe-file.png" class="img-fluid"></p>
+</div>
+<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
+<ul>
+<li><a href="https://people.sc.fsu.edu/~jburkardt/data/csv/csv.html">File A</a></li>
+<li><a href="https://github.com/ccusa/Disaster_Vulnerability_Map/blob/master/sample-data.tsv">File B</a></li>
+<li><a href="https://chadbaldwin.net/2021/03/24/quick-parse-csv-file.html">File C</a></li>
+</ul>
+</div>
+</div>
+</div>
+<p>Note: there are a lot of other ways to store data that we just won’t talk about in this class!</p>
 </section><section id="reading-in-data-with-readr-and-readxl" class="level3" data-number="5.2.3"><h3 data-number="5.2.3" class="anchored" data-anchor-id="reading-in-data-with-readr-and-readxl">
 <span class="header-section-number">5.2.3</span> Reading in Data with <code>readr</code> and <code>readxl</code>
 </h3>
@@ -444,7 +577,7 @@ Important
 <code>read_xlsx()</code> is specifically for dealing with Excel files</li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># load the readr package (or alternatively the tidyverse package)</span></span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># load the readr package (or alternatively the tidyverse package)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org">readr</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># here we are using a URL</span></span>
