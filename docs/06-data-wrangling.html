@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.6.40">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
 <title>7&nbsp; Data Wrangling – R is Your Friend</title>
 <style>
 code{white-space: pre-wrap;}
@@ -20,8 +17,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
-
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
@@ -42,8 +72,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-8d5d1c1f6dca18e4caeb975c9081c4e0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-68e6e3334075c8ee5f7e394c08fcb2ae.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-dark-68e6e3334075c8ee5f7e394c08fcb2ae.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -70,16 +99,11 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-
-
 </head>
-
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -90,13 +114,9 @@ ul.task-list li input[type="checkbox"] {
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">R is Your Friend</a> 
         <div class="sidebar-tools-main tools-wide">
@@ -104,26 +124,26 @@ ul.task-list li input[type="checkbox"] {
     <div class="dropdown">
       <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+<li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
               <i class="bi bi-twitter pe-1"></i>
             Twitter
             </a>
           </li>
           <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=%7Curl%7C">
               <i class="bi bi-facebook pe-1"></i>
             Facebook
             </a>
           </li>
           <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
               <i class="bi bi-linkedin pe-1"></i>
             LinkedIn
             </a>
           </li>
       </ul>
-    </div>
+</div>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
     </div>
@@ -135,7 +155,7 @@ ul.task-list li input[type="checkbox"] {
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
@@ -149,8 +169,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./00-setup.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Computer is Friend</span></span></a>
@@ -181,7 +201,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
@@ -190,8 +210,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-data-visualizations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Visualizations</span></span></a>
@@ -234,7 +254,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
@@ -243,8 +263,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./12-writing-functions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Writing Functions</span></span></a>
@@ -263,28 +283,36 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#welcome-to-the-tidyverse" id="toc-welcome-to-the-tidyverse" class="nav-link active" data-scroll-target="#welcome-to-the-tidyverse"><span class="header-section-number">7.1</span> Welcome to the tidyverse!</a></li>
-  <li><a href="#data-manipulation-and-cleaning" id="toc-data-manipulation-and-cleaning" class="nav-link" data-scroll-target="#data-manipulation-and-cleaning"><span class="header-section-number">7.2</span> Data Manipulation and Cleaning</a></li>
+<li><a href="#welcome-to-the-tidyverse" id="toc-welcome-to-the-tidyverse" class="nav-link active" data-scroll-target="#welcome-to-the-tidyverse"><span class="header-section-number">7.1</span> Welcome to the tidyverse!</a></li>
+  <li><a href="#data-wrangling" id="toc-data-wrangling" class="nav-link" data-scroll-target="#data-wrangling"><span class="header-section-number">7.2</span> Data Wrangling</a></li>
+  <li>
+<a href="#dplyr-for-data-wrangling" id="toc-dplyr-for-data-wrangling" class="nav-link" data-scroll-target="#dplyr-for-data-wrangling"><span class="header-section-number">7.3</span> <code>dplyr</code> for Data Wrangling</a>
+  <ul class="collapse">
+<li><a href="#filter-and-filter_out" id="toc-filter-and-filter_out" class="nav-link" data-scroll-target="#filter-and-filter_out"><span class="header-section-number">7.3.1</span> <code>filter()</code> and <code>filter_out()</code></a></li>
+  <li><a href="#piping-operator" id="toc-piping-operator" class="nav-link" data-scroll-target="#piping-operator"><span class="header-section-number">7.3.2</span> piping operator <code>|&gt;</code></a></li>
+  <li><a href="#arrange" id="toc-arrange" class="nav-link" data-scroll-target="#arrange"><span class="header-section-number">7.3.3</span> <code>arrange()</code></a></li>
+  <li><a href="#select" id="toc-select" class="nav-link" data-scroll-target="#select"><span class="header-section-number">7.3.4</span> <code>select()</code></a></li>
+  <li><a href="#mutate" id="toc-mutate" class="nav-link" data-scroll-target="#mutate"><span class="header-section-number">7.3.5</span> <code>mutate()</code></a></li>
+  <li><a href="#summarize" id="toc-summarize" class="nav-link" data-scroll-target="#summarize"><span class="header-section-number">7.3.6</span> <code>summarize()</code></a></li>
+  <li><a href="#group_by" id="toc-group_by" class="nav-link" data-scroll-target="#group_by"><span class="header-section-number">7.3.7</span> <code>group_by()</code></a></li>
   </ul>
-</nav>
+</li>
+  </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-data-visualizations.html">Data Wrangling and Visualization</a></li><li class="breadcrumb-item"><a href="./06-data-wrangling.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Wrangling</span></a></li></ol></nav>
-<div class="quarto-title">
-<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Wrangling</span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-data-visualizations.html">Data Wrangling and Visualization</a></li><li class="breadcrumb-item"><a href="./06-data-wrangling.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Wrangling</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title">
+<span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Wrangling</span>
+</h1>
 </div>
 
 
@@ -298,10 +326,7 @@ ul.task-list li input[type="checkbox"] {
   
 
 
-</header>
-
-
-<div class="callout callout-style-simple callout-none no-icon callout-titled">
+</header><div class="callout callout-style-simple callout-none no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
@@ -314,24 +339,122 @@ Learning Objectives
 <ul>
 <li>Identify the rectangular dataset required for a given task.</li>
 <li>Identify required sequence of steps to get from one rectangular dataset to another.</li>
-<li>Apply data manipulation verbs (<code>filter()</code>, <code>select()</code>, <code>group_by()</code>, <code>summarize()</code>, <code>mutate()</code>) to get from one rectangular dataset to another</li>
+<li>Apply data manipulation verbs (<code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code>, <code>select()</code>, <code>group_by()</code>, <code>summarize()</code>, <code>mutate()</code>) to get from one rectangular dataset to another</li>
 <li>Describe step-by-step data cleaning process in lay terms appropriately and understand the consequences of data cleaning steps.</li>
 </ul>
 </div>
 </div>
-<section id="welcome-to-the-tidyverse" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="welcome-to-the-tidyverse"><span class="header-section-number">7.1</span> Welcome to the tidyverse!</h2>
+<section id="welcome-to-the-tidyverse" class="level2" data-number="7.1"><h2 data-number="7.1" class="anchored" data-anchor-id="welcome-to-the-tidyverse">
+<span class="header-section-number">7.1</span> Welcome to the tidyverse!</h2>
 <p>Since R is open source, there are many different options for functions that can accomplish the same task. Over time, full sets of functions and packages have been developed with the purpose of working well together for data analysis and visualization.</p>
 <p>In this class, we will use the <code>tidyverse</code> set of packages to visualize and wrangle data. This <strong>decision</strong> impacts the way that we will think about working with data (in a good way - in our opinion!).</p>
-<p>In their own words, the <code>tidyverse</code> developers desscribe it as:</p>
+<p>In their own words, the <code>tidyverse</code> developers describe it as:</p>
 <blockquote class="blockquote">
 <p>an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 </blockquote>
 <p>Most of the functionality you will need for an entire data analysis workflow will have the <strong>cohesive grammar</strong> of the tidyverse. Already, you have learned how to read in data with <code>readr</code> and visualize data with <code>ggplot2</code>.</p>
 <p><img src="images/06-data-science-workflow.png" class="img-fluid"></p>
-</section>
-<section id="data-manipulation-and-cleaning" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="data-manipulation-and-cleaning"><span class="header-section-number">7.2</span> Data Manipulation and Cleaning</h2>
+</section><section id="data-wrangling" class="level2" data-number="7.2"><h2 data-number="7.2" class="anchored" data-anchor-id="data-wrangling">
+<span class="header-section-number">7.2</span> Data Wrangling</h2>
+<p>We are going to keep working with the <code>cereal</code> dataset in the <code>liver</code> package. Take a minute to remind yourself what the data looks like!</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">Load Data</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">First Rows</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Column Types</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># load liver package</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://book-data-science-r.netlify.app">liver</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># load cereal data which is included in the package</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">cereal</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="cell">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">cereal</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                       name manuf type calories protein fat sodium fiber carbo
+1                 100% Bran     N cold       70       4   1    130  10.0   5.0
+2         100% Natural Bran     Q cold      120       3   5     15   2.0   8.0
+3                  All-Bran     K cold       70       4   1    260   9.0   7.0
+4 All-Bran with Extra Fiber     K cold       50       4   0    140  14.0   8.0
+5            Almond Delight     R cold      110       2   2    200   1.0  14.0
+6   Apple Cinnamon Cheerios     G cold      110       2   2    180   1.5  10.5
+  sugars potass vitamins shelf weight cups   rating
+1      6    280       25     3      1 0.33 68.40297
+2      8    135        0     3      1 1.00 33.98368
+3      5    320       25     3      1 0.33 59.42551
+4      0    330       25     3      1 0.50 93.70491
+5      8     -1       25     3      1 0.75 34.38484
+6     10     70       25     1      1 0.75 29.50954</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<div class="cell">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">cereal</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   77 obs. of  16 variables:
+ $ name    : Factor w/ 77 levels "100% Bran","100% Natural Bran",..: 1 2 3 4 5 6 7 8 9 10 ...
+ $ manuf   : Factor w/ 7 levels "A","G","K","N",..: 4 6 3 3 7 2 3 2 7 5 ...
+ $ type    : Factor w/ 2 levels "cold","hot": 1 1 1 1 1 1 1 1 1 1 ...
+ $ calories: int  70 120 70 50 110 110 110 130 90 90 ...
+ $ protein : int  4 3 4 4 2 2 2 3 2 3 ...
+ $ fat     : int  1 5 1 0 2 2 0 2 1 0 ...
+ $ sodium  : int  130 15 260 140 200 180 125 210 200 210 ...
+ $ fiber   : num  10 2 9 14 1 1.5 1 2 4 5 ...
+ $ carbo   : num  5 8 7 8 14 10.5 11 18 15 13 ...
+ $ sugars  : int  6 8 5 0 8 10 14 8 6 5 ...
+ $ potass  : int  280 135 320 330 -1 70 30 100 125 190 ...
+ $ vitamins: int  25 0 25 25 25 25 25 25 25 25 ...
+ $ shelf   : int  3 3 3 3 3 1 2 3 1 3 ...
+ $ weight  : num  1 1 1 1 1 1 1 1.33 1 1 ...
+ $ cups    : num  0.33 1 0.33 0.5 0.75 0.75 1 0.75 0.67 0.67 ...
+ $ rating  : num  68.4 34 59.4 93.7 34.4 ...</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Let’s start exploring the data. Maybe I want to look at the distribution of fiber for cereals from different manufacturers.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true"><code>ggplot</code> review</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">solution</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<p>Recreate the plot below trying not to look at the code!</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="06-data-wrangling_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div class="cell">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span><span class="va">cereal</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">fiber</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_histogram</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">facet_wrap</span><span class="op">(</span><span class="fu">vars</span><span class="op">(</span><span class="va">manuf</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Fiber (g)"</span>,</span>
+<span>       y <span class="op">=</span> <span class="st">""</span>,</span>
+<span>       subtitle <span class="op">=</span> <span class="st">"Number of Cereals"</span>,</span>
+<span>       title <span class="op">=</span> <span class="st">"Cereal Fiber by Manufacturer"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+<p>Okay, there is a lot going on here and some manufacturers don’t have that many cereals anyway!</p>
+<p>I would rather just look at the two biggest manufacturers, General Mills and Kelloggs and while I am at it, it would be nice to change the labels from “G” and “K” to these recognizable names. But how to do this?</p>
+<p><strong>Most of the the time, the data we have isn’t exactly what we need for a specific plot or analysis.</strong> This is where data <em>wrangling</em>, <em>cleaning</em>, and <em>manipulation</em> come in, which is the focus of the next couple of weeks of class.</p>
+<p>Before jumping into any code, it is important to think about what the data is that we want for a plot or analysis and the steps that will take us from the current data to that version.</p>
 <div class="callout callout-style-default callout-check-in callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -342,19 +465,216 @@ Check In
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>In groups</strong>, describe in words steps you would take from <code>cereal</code> data to get the output for each of the following:</p>
+<p><strong>In groups</strong>, first <strong>draw</strong> the output that is described and then <strong>describe</strong> in words the <strong>steps</strong> you would take from <code>cereal</code> data to get the output for each of the following:</p>
 <ol type="1">
+<li><p>Plot just the fiber for Kelloggs and General Mills and make the manufacturer labels more clear.</p></li>
 <li><p>What is the ratio of fiber to sugars in each cereal?</p></li>
 <li><p>Create a new dataset that only has Nabisco cereals and displays the protein, fat, and sodium in each.</p></li>
 <li><p>Create a table that shows, for each manufacturer the average and standard deviation of the grams of sugar in their cereals, along with how many cereals are in the data for each manufacturer. Order the table from most sugar (on average) to least.</p></li>
 </ol>
 </div>
 </div>
+</section><section id="dplyr-for-data-wrangling" class="level2" data-number="7.3"><h2 data-number="7.3" class="anchored" data-anchor-id="dplyr-for-data-wrangling">
+<span class="header-section-number">7.3</span> <code>dplyr</code> for Data Wrangling</h2>
 <p><code>dplyr</code> is part of the <strong>tidyverse</strong> that provides us with the <em>Grammar of Data Manipulation</em>.</p>
 <ul>
 <li>This package gives us the tools to <strong>wrangle, manipulate, and tidy</strong> our data with ease.</li>
 <li>Check out the <code>dplyr</code> <a href="https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf">cheatsheet</a>.</li>
 </ul>
+<p>Each <code>dplyr</code> verb describes a common task for working with rectangular data. In all tidyverse functions, <strong>data comes first</strong> – literally, as it’s the first argument to any function.</p>
+<p>In addition, you don’t use <code>df$variable</code> to access a variable - you refer to the variable by its name alone (“bare” names). This makes the syntax much cleaner and easier to read, which is another principle of the tidy philosophy.</p>
+<p>The primary verbs are:</p>
+<ul>
+<li>
+<code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> / <code>filter_out()</code>
+</li>
+<li><code>arrange()</code></li>
+<li><code>select()</code></li>
+<li><code>mutate()</code></li>
+<li><code>summarize()</code></li>
+<li>Use <code>group_by()</code> to perform group wise operations</li>
+<li>Use the pipe operator (<code>|&gt;</code> or <code>%&gt;%</code>) to chain together data wrangling operations</li>
+</ul>
+<section id="filter-and-filter_out" class="level3" data-number="7.3.1"><h3 data-number="7.3.1" class="anchored" data-anchor-id="filter-and-filter_out">
+<span class="header-section-number">7.3.1</span> <code>filter()</code> and <code>filter_out()</code>
+</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="https://github.com/allisonhorst/stats-illustrations/raw/main/rstats-artwork/dplyr_filter.jpg" class="img-fluid figure-img" alt="Cartoon showing three fuzzy monsters either selecting or crossing out rows of a data table. If the type of animal in the table is “otter” and the site is “bay”, a monster is drawing a purple rectangle around the row. If those conditions are not met, another monster is putting a line through the column indicating it will be excluded. Stylized text reads “dplyr::filter() - keep rows that satisfy your conditions.”"></p>
+<figcaption>dplyr filter() by Allison Horst</figcaption></figure>
+</div>
+<p>Sometimes rather than thinking about <em>keeping</em> rows based on some criteria, it makes more sense to think about <em>dropping</em> rows based on a criteria. This is when the brand new <code>filter_out()</code> is useful!</p>
+<section id="useful-comparison-operations-in-r" class="level4 unnumbered note"><h4 class="unnumbered anchored" data-anchor-id="useful-comparison-operations-in-r">Useful comparison operations in R</h4>
+<p>We might not always want to only filter on a variable set equal to a certain category or value, the following operations can help you combine logical operations in <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code>.</p>
+<ul>
+<li>
+<code>&gt;</code> greater than</li>
+<li>
+<code>&lt;</code> less than</li>
+<li>
+<code>==</code> equal to</li>
+<li>
+<code>%in%</code> identifies if an element belongs to a vector</li>
+<li>
+<code>|</code>, <code>when_any()</code> or</li>
+<li>
+<code>,</code>, <code>&amp;</code>, <code>when_all()</code> and</li>
+</ul></section><div class="callout callout-style-default callout-check-in callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Check In
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>How can you join two logical statements with an “or” in <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code>?</p></li>
+<li><p>How can you join two logical statements with an “and” in <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code>?</p></li>
+<li><p>How can you join two logical statements with an “or” in <code>filter_out()</code>?</p></li>
+</ol>
+</div>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true">practice</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false">solution</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<p>Create a new dataset with only Kellogg’s and General Mills cereals.</p>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<p>More elegant solution using <code>%in%</code>:</p>
+<div class="cell">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">cereal</span>,</span>
+<span>       <span class="va">manuf</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"K"</span>, <span class="st">"G"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>|</code> also gets you there:</p>
+<div class="cell">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">cereal</span>,</span>
+<span>       <span class="va">manuf</span> <span class="op">==</span> <span class="st">"K"</span> <span class="op">|</span> <span class="va">manuf</span> <span class="op">==</span> <span class="st">"G"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Think about it – why is the first solution above preferable?</p>
+</div>
+</div>
+</div>
+</section><section id="piping-operator" class="level3" data-number="7.3.2"><h3 data-number="7.3.2" class="anchored" data-anchor-id="piping-operator">
+<span class="header-section-number">7.3.2</span> piping operator <code>|&gt;</code>
+</h3>
+<p>Okay now we at least have gotten down to the two manufacturers we are interested! Let’s use this data to create a new plot.</p>
+<p>My first idea is that I could save a newdataset called <code>plot_data</code> and then make the plot with that dataset:</p>
+<div class="cell">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># save new data</span></span>
+<span><span class="va">plot_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">cereal</span>,</span>
+<span>       <span class="va">manuf</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"K"</span>, <span class="st">"G"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># plot with that data</span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="va">plot_data</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">fiber</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_histogram</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">facet_wrap</span><span class="op">(</span><span class="fu">vars</span><span class="op">(</span><span class="va">manuf</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Fiber (g)"</span>,</span>
+<span>       y <span class="op">=</span> <span class="st">""</span>,</span>
+<span>       subtitle <span class="op">=</span> <span class="st">"Number of Cereals"</span>,</span>
+<span>       title <span class="op">=</span> <span class="st">"Cereal Fiber by Manufacturer"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="06-data-wrangling_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This is fine, but if I am not actually going to use my <code>plot_data</code> again, I don’t really need to save it.</p>
+<p>Okay, instead I could put this new data into the <code>data</code> argument in ggplot:</p>
+<div class="cell">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">cereal</span>,</span>
+<span>       <span class="va">manuf</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"K"</span>, <span class="st">"G"</span><span class="op">)</span><span class="op">)</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">fiber</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_histogram</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">facet_wrap</span><span class="op">(</span><span class="fu">vars</span><span class="op">(</span><span class="va">manuf</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Fiber (g)"</span>,</span>
+<span>       y <span class="op">=</span> <span class="st">""</span>,</span>
+<span>       subtitle <span class="op">=</span> <span class="st">"Number of Cereals"</span>,</span>
+<span>       title <span class="op">=</span> <span class="st">"Cereal Fiber by Manufacturer"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="06-data-wrangling_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>That definitely works, but it’s super hard to read and see what is going on!</p>
+<p>This is where the <strong>piping operator</strong> comes in! The pipeing operator lets us “pipe” the output from one line of code into the next.</p>
+<p>There are two piping operators: the native pipe <code>|&gt;</code> and the matgittr pipe <code>%&gt;%</code>. We will use the native pipe <code>|&gt;</code>, but you will still see the matgittr pipe around as an FYI.</p>
+<div class="cell">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">cereal</span>,</span>
+<span>       <span class="va">manuf</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"K"</span>, <span class="st">"G"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">fiber</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">geom_histogram</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">facet_wrap</span><span class="op">(</span><span class="fu">vars</span><span class="op">(</span><span class="va">manuf</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Fiber (g)"</span>,</span>
+<span>         y <span class="op">=</span> <span class="st">""</span>,</span>
+<span>         subtitle <span class="op">=</span> <span class="st">"Number of Cereals"</span>,</span>
+<span>         title <span class="op">=</span> <span class="st">"Cereal Fiber by Manufacturer"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="06-data-wrangling_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="arrange" class="level3" data-number="7.3.3"><h3 data-number="7.3.3" class="anchored" data-anchor-id="arrange">
+<span class="header-section-number">7.3.3</span> <code>arrange()</code>
+</h3>
+</section><section id="select" class="level3" data-number="7.3.4"><h3 data-number="7.3.4" class="anchored" data-anchor-id="select">
+<span class="header-section-number">7.3.4</span> <code>select()</code>
+</h3>
+<ul>
+<li><p><code>var3:var5</code>: <code>select(df, var3:var5)</code> will give you a data frame with columns var3, anything between var3 and var 5, and var5</p></li>
+<li>
+<p><code>!(&lt;set of variables&gt;)</code> will give you any columns that aren’t in the set of variables in parentheses</p>
+<ul>
+<li>
+<code>(&lt;set of vars 1&gt;) &amp; (&lt;set of vars 2&gt;)</code> will give you any variables that are in both set 1 and set 2. <code>(&lt;set of vars 1&gt;) | (&lt;set of vars 2&gt;)</code> will give you any variables that are in either set 1 or set 2.</li>
+<li>
+<code><a href="https://rdrr.io/r/base/c.html">c()</a></code> combines sets of variables.</li>
+</ul>
+</li>
+</ul>
+<p><code>dplyr</code> also defines a lot of variable selection “helpers” that can be used inside <code>select()</code> statements. These statements work with bare column names (so you don’t have to put quotes around the column names when you use them).</p>
+<ul>
+<li>
+<code>everything()</code> matches all variables</li>
+<li>
+<code>last_col()</code> matches the last variable. <code>last_col(offset = n)</code> selects the n-th to last variable.</li>
+<li>
+<code>starts_with("xyz")</code> will match any columns with names that start with xyz. Similarly, <code>ends_with()</code> does exactly what you’d expect as well.</li>
+<li>
+<code>contains("xyz")</code> will match any columns with names containing the literal string “xyz”. Note, <code>contains</code> does not work with regular expressions (you don’t need to know what that means right now).</li>
+<li>
+<code>matches(regex)</code> takes a regular expression as an argument and returns all columns matching that expression.</li>
+<li>
+<code>num_range(prefix, range)</code> selects any columns that start with prefix and have numbers matching the provided numerical range.</li>
+</ul>
+<p>There are also selectors that deal with character vectors. These can be useful if you have a list of important variables and want to just keep those variables.</p>
+<ul>
+<li>
+<code>all_of(char)</code> matches all variable names in the character vector <code>char</code>. If one of the variables doesn’t exist, this will return an error.</li>
+<li>
+<code>any_of(char)</code> matches the contents of the character vector <code>char</code>, but does not throw an error if the variable doesn’t exist in the data set.</li>
+</ul>
+<p>There’s one final selector -</p>
+<ul>
+<li>
+<code>where()</code> applies a function to each variable and selects those for which the function returns TRUE. This provides a lot of flexibility and opportunity to be creative.</li>
+</ul></section><section id="mutate" class="level3" data-number="7.3.5"><h3 data-number="7.3.5" class="anchored" data-anchor-id="mutate">
+<span class="header-section-number">7.3.5</span> <code>mutate()</code>
+</h3>
+</section><section id="summarize" class="level3" data-number="7.3.6"><h3 data-number="7.3.6" class="anchored" data-anchor-id="summarize">
+<span class="header-section-number">7.3.6</span> <code>summarize()</code>
+</h3>
+</section><section id="group_by" class="level3" data-number="7.3.7"><h3 data-number="7.3.7" class="anchored" data-anchor-id="group_by">
+<span class="header-section-number">7.3.7</span> <code>group_by()</code>
+</h3>
 <div class="callout callout-style-default callout-check-in callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -373,6 +693,45 @@ Check In
 </ol>
 </div>
 </div>
+<!--# `filter`
+
+# `select`
+
+> include **columns** based on one or more logical statements
+
+3.  What symbol do you use to **remove** a column from the dataset?
+
+# `mutate()`
+
+> create new columns or change existing columns
+
+4.  What are the three arguments of the `if_else()` function?
+
+# `arrange()`
+
+> Organize the rows of the data in order of a particular variable.
+
+5.  By default what order does the `arrange()` function put values in?
+
+6.  What can you add **inside** the `arrange()` function to change the default order?
+
+# `arrange()` friends
+
+7.  What does the `n` argument of `slice_max()` and `slice_min()` do?
+
+# `summarize`
+
+> compute a table of summaries
+
+8.  What are common summary functions you might want to use?
+
+# `group_by`
+
+> put rows into groups based on values in column(s)
+
+9.  What happens when you group by **two** variables?
+
+-->
 <div class="callout callout-style-default callout-required-reading callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -388,16 +747,10 @@ Required Reading
 </div>
 
 
-</section>
-<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
+</section></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
 <ol>
 <li id="fn1"><p>https://www.tidyverse.org/<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section>
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -957,9 +1310,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./05-data-visualizations.html" class="pagination-link" aria-label="Data Visualizations">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Visualizations</span></span>
       </a>          
@@ -971,7 +1322,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
-
 
 
 
