@@ -33,13 +33,17 @@ programs these details will suddenly become very important.
 
 <!-- #### ✅ Check-ins: 2 -->
 
-# Hardware {#hardware}
+## Hardware {#hardware}
 
 The components that make up the physical computer are the **hardware**. This
 3-minute video is focused on desktops, but the same components are commonly
 found in laptops, cell phones, and even smart watches.
 
+::: {.callout-required-video}
+::: youtube-video-container
 {{< video https://www.youtube.com/embed/Rdm8E59L8Og >}}
+:::
+:::
 
 ::: {.callout-practice-exercise}
 Examine the hardware on your computer using one of the following methods:
@@ -60,14 +64,16 @@ This most likely will start with ARM, Intel, AMD, or Apple M*
 - How much hard drive space do you have?
 :::
 
-## Operating Systems {#operating-systems}
+### Operating Systems {#operating-systems}
 
 Operating systems (OS), such as Windows and MacOS, are sophisticated programs that
 allow CPUs to keep track of multiple programs and tasks and execute them at the
 same time. This 2-minute video describes different operating systems. 
 
+::: {.callout-required-video}
 ::: youtube-video-container
 {{< video https://www.youtube.com/embed/RhHMgkUdhdk >}}
+:::
 :::
 
 Broadly, you should know (1) what operating system your computer uses
@@ -82,7 +88,7 @@ If your system hasn't been updated in a while, consider updating it now. System
 updates may break software you'll install to work with R in the next few weeks. 
 :::
 
-## File Systems {#file-systems}
+### File Systems {#file-systems}
 
 File systems are places you save files (shocking!). These systems are modeled
 after physical file cabinets, where documents are kept in a hierarchical 
@@ -98,15 +104,17 @@ Regardless of how you tend to organize your personal files, it is helpful to
 understand the basics of what is meant by a computer **file system**--a way to
 organize data stored on a hard drive. 
 
+::: {.callout-required-video}
 ::: youtube-video-container
 {{< video https://www.youtube.com/embed/BV0-EPUYuQc >}}
+:::
 :::
 
 ::: {.callout-note}
 # You can stop watching at 4:16.
 :::
 
-### Local & Network File Systems
+#### Local & Network File Systems
 
 There are two primary types of file systems:
 
@@ -129,14 +137,16 @@ location of the data on your computer. For this class, we strongly prefer for
 files to be stored **locally** because working "in the cloud" can cause strange
 errors that are difficult to diagnose.
 
-## File Paths {#file-paths}
+### File Paths {#file-paths}
 
 It's not enough to know about a computer's file system, we also need to know how
 computers remember the location of what is stored where. Specifically, we need
 to understand **file paths**.
 
+::: {.callout-required-video}
 ::: youtube-video-container
 {{< video https://www.youtube.com/embed/BMT3JUWmqYY >}}
+:::
 :::
 
 When you write a program, you may have to reference external files - data
@@ -179,7 +189,7 @@ example, the "base folder" would be `stat-1810`. In Week 4 we will learn about
 RStudio projects (`.Rproj`), a tool for setting the base folder of a project
 without having to write any code!
 
-### Making Good File Names
+#### Making Good File Names
 
 You might have noticed a few things about how we chose to name the folders in 
 the previous example. First, the main folder was named `stat-1810` not 
@@ -221,7 +231,7 @@ Take a screenshot of your class directory, showing:
 2.  a Week 1 sub-folder 
 :::
 
-# Software
+## Software
 
 <!-- What is software and how does it differ from hardware? -->
 
@@ -237,7 +247,7 @@ If for any reason you cannot download R or RStudio onto your laptop, please let
 me know as soon as possible so we can figure something out.
 :::
 
-## What do I need to install?
+### What do I need to install?
 
 It's a good idea to be skeptical when someone is telling you to install things.
 🤨 Here's a very broad overview of what each of these programs or services
@@ -252,7 +262,7 @@ does and why I'm asking you to install or sign up for them.
 
 : Logos for and descriptions of what each of the programs you will use in STAT 1810.
 
-## Installing `R`
+### Installing `R`
 
 <!-- I don't think we need to have instructions for updating R? -->
 
@@ -269,7 +279,7 @@ computer's operating system.
 {{< video https://www.youtube.com/watch?v=YrEe2TLr3MI >}}
 :::
 
-### If you are a *Windows* user:
+#### If you are a *Windows* user:
 
 -   Click on “Download R for Windows”
 
@@ -304,7 +314,7 @@ To do this you need to:
 ![](images/00-uninstall-old-r-version.png){fig-alt="A screenshot of selecting the (...) option to uninstall the older version of R."}
 :::
 
-### If you are *macOS* user:
+#### If you are *macOS* user:
 
 -   Click on “Download R for (Mac) OS X”
 
@@ -334,12 +344,12 @@ computing power will be limited, and you will need an internet connection at all
 times to do your work.
 :::
 
-### If you are a *Linux* user:
+#### If you are a *Linux* user:
 
 Click on “Download R for Linux” and choose your distribution for more
 information on installing `R` for your setup.
 
-## Step 2: Install RStudio
+### Step 2: Install RStudio
 
 RStudio is an Integrated Development Environment (IDE) for `R`. What does that
 mean? Well, if you think of `R` as a language, which it is, you can think of
@@ -368,6 +378,6 @@ Clicking the button will begin installing RStudio. Once the download has
 completed, you will need to open the application file (on a Mac this is a `.dmg`
 file, on Windows this is an `exe` file). 
 
-# Let's start working in `R`! 🥳
+## Let's start working in `R`! 🥳
 
 ![](images/00-typing-R.gif){fig-alt="A video of Hadley Wickham (author of many R packages) pretending to type and saying 'just typing R code'."}
