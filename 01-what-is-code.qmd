@@ -39,7 +39,20 @@ on your computer, install and load packages, and access documentation
 
 ## What is code?
 
-<!-- Need to fill this in! -->
+Code is a set of instructions that tells a computer what to do and programming 
+languages provide a structured way for humans to communicate these instructions
+to computers. Similar to a recipe giving step-by-step directions to bake a cake,
+code gives step-by-step directions for a computer to follow. Because computers
+require very precise instructions, programming languages have specific rules
+about how code must be written (kind of like constraining that your recipe can
+only be written with metric units). 
+
+One of the main advantages of code is that it allows tasks to be performed
+automatically and repeatedly. Instead of manually performing calculations or
+organizing information, we can write code that tells the computer how to carry
+out those steps for us. Once written, code can be run again and again, making
+it easier to work with large amounts of data and ensuring that the same process
+is applied consistently each time it is run.
 
 ### What makes R different?
 
@@ -151,7 +164,7 @@ to type `x` to see its contents.
 Type `x` and `y` in the console to preview the contents of these objects!
 :::
 
-#### Environment tab
+### Environment tab
 
 Now that you've created two objects, there are some interesting things
 to notice in the upper right corner. The Environment tab displays any
@@ -241,7 +254,7 @@ should look something like this:
 Create an R Script in your RStudio!
 :::
 
-#### The Editor Pane
+### The Editor Pane
 
 Now that we have a document to edit, we can see the fourth pane in RStudio---the
 editor pane. There are many different files we can create in RStudio. The 
@@ -282,21 +295,31 @@ Run each of the five lines of code in your R script. Try both methods of running
 code and see which one you prefer!
 :::
 
-#### Saving Your R Script 
+### Saving Your R Script 
 
+::: columns
+::: {.column width="55%"}
 You'll notice that currently your script is labeled "Untitled1" that is because
 we haven't saved the file anywhere. If we were to try and close our file before
 saving RStudio would tell us that our document had unsaved changes. Let's save 
 our document so we have access to it later on!
 
-![](images/01-rstudio-unsaved-changes.png){fig-alt="A screenshot of the popup that appears when you attempt to close RStudio without saving your R script. The popup says 'The document Untitled1 has unsaved changes. Do you want to save these changes. The options provided are 'Save' (in blue), 'Don't Save', and 'Cancel.' The save button is what should be selected."}
 You can save your file a few different ways. First, you can always use Command + S (or Control + S) to save a file. Second, you can click on the [blue floppy disk](images/01-rstudio-save.png){fig-alt="A screenshot of the blue floppy disk icon that lives on the top left below the file name."} immediately below your file name. 
 
 Either of these options should open a popup menu for you to select where you
 want the script to be saved. Navigate to your `stat-1810` folder that lives in
 your `Documents` folder. Change the file name to `week-1.R`.
+:::
 
-#### Files tab
+::: {.column width="5%"}
+:::
+
+::: {.column width="40%"}
+![](images/01-rstudio-unsaved-changes.png){fig-alt="A screenshot of the popup that appears when you attempt to close RStudio without saving your R script. The popup says 'The document Untitled1 has unsaved changes. Do you want to save these changes. The options provided are 'Save' (in blue), 'Don't Save', and 'Cancel.' The save button is what should be selected."}
+:::
+:::
+
+### Files tab
 
 Now that you've saved your script, it should appear in the Files tab in the
 lower right corner. By default, the Files tab starts at your computer's working
@@ -337,7 +360,7 @@ a `#`. The `#` symbol indicates to R that this line of text **should not** be
 executed as code. 
 
 ::: {.panel-tabset}
-# Descriptive Comments
+## Descriptive Comments
 
 You can use code comments to describe the actions taken by the code. Notice 
 how each code comment below *describes* what is happening in the subsequent 
@@ -382,11 +405,11 @@ use more than one `#` for consistency and readability.
 
 ## Exiting RStudio
 
+::: columns
+::: {.column width="55%"}
 Now that we've accomplished what we set out to do, we can close RStudio. When 
 you try and close RStudio, you should get a message like the one below. You 
 might wonder what this message means. Let us tell you!
-
-![](images/01-rstudio-exit-message.png){fig-alt="A screenshot of the message that appears when you attempt to close RStudio after running code. The message asks if you want to 'Save workspace image to ~/.Rdata?' with options Save, Don't Save, and Cancel."}
 
 When you exit an R session, you’re faced with the question of whether or not to
 save your workspace. The workspace is an image of all the objects you created
@@ -394,6 +417,15 @@ while you were working in R into a file called `.RData`. If you save your
 workspace, when you reopen RStudio that workspace will be loaded and all the 
 objects you created previously will be available to you. This might sound like
 something you might want, but actually can cause some major headaches. 
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="40%"}
+![](images/01-rstudio-exit-message.png){fig-alt="A screenshot of the message that appears when you attempt to close RStudio after running code. The message asks if you want to 'Save workspace image to ~/.Rdata?' with options Save, Don't Save, and Cancel."}
+:::
+:::
 
 Loading a saved workspace turns your R script from a program, where everything
 happens based on a series of known steps, to something more akin to a 
@@ -411,13 +443,22 @@ Click "Cancel" in the pop-up window above (with the message about saving the
 workspace image). Now, at the top file menu for RStudio, click on Tools. In the
 dropdown menu that appears, click on "Global Options". 
 
-![](images/01-rstudio-global-options-annotated.png){fig-alt="A screenshot of the menu that appears when you click on 'Tools' from the top menu of RStudio. At the bottom of the menu that appears, 'Global Options' is highlighted in red and blue indicating this is the option you want to select."}
+![](images/01-rstudio-global-options-annotated.png){fig-alt="A screenshot of the menu that appears when you click on 'Tools' from the top menu of RStudio. At the bottom of the menu that appears, 'Global Options' is highlighted in red and blue indicating this is the option you want to select." width="30%"}
 
+::: columns
+::: {.column width="55%"}
 In the menu that appears, you want to uncheck the box next to "Restore .RData
 into workspace at startup." Next, you should select "Never" from the dropdown
 menu next to "Save workspace to .RData on exit" (there are three options). Once
 you've changed these options, click "OK" and the popup window should close. 
+:::
 
+::: {.column width="5%"}
+:::
+
+::: {.column width="40%"}
 ![](images/01-rstudio-save-rdata-annotated.png){fig-alt="A screenshot of the popup window that appears after you select 'Global Options' from the previous menu. The popup window has A LOT of options, but there is a red box outlining the section we need to focus on. Under 'Workspace' there is a checkbox next to a line that says 'Restore .RData'. This box should be unchecked. The next line says 'Save workspace to .RData on exit.'. Next to this line there is a dropdown menu with three options: Always, Never, Ask. We need to change this option to 'Never'. Once these options have been modified, click on 'OK' to exit."}
+:::
+:::
 
 Now, it is safe to exit RStudio!

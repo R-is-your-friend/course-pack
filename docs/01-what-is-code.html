@@ -472,18 +472,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
 <li><a href="#the-console-tab" id="toc-the-console-tab" class="nav-link" data-scroll-target="#the-console-tab"><span class="header-section-number">2.4.1</span> The Console Tab</a></li>
   <li><a href="#creating-objects" id="toc-creating-objects" class="nav-link" data-scroll-target="#creating-objects"><span class="header-section-number">2.4.2</span> Creating Objects</a></li>
-  <li><a href="#the-history-tab-top-right" id="toc-the-history-tab-top-right" class="nav-link" data-scroll-target="#the-history-tab-top-right"><span class="header-section-number">2.4.3</span> The History Tab (Top Right)</a></li>
-  <li><a href="#updating-objects" id="toc-updating-objects" class="nav-link" data-scroll-target="#updating-objects"><span class="header-section-number">2.4.4</span> Updating Objects</a></li>
+  <li><a href="#environment-tab" id="toc-environment-tab" class="nav-link" data-scroll-target="#environment-tab"><span class="header-section-number">2.4.3</span> Environment tab</a></li>
+  <li><a href="#the-history-tab-top-right" id="toc-the-history-tab-top-right" class="nav-link" data-scroll-target="#the-history-tab-top-right"><span class="header-section-number">2.4.4</span> The History Tab (Top Right)</a></li>
+  <li><a href="#updating-objects" id="toc-updating-objects" class="nav-link" data-scroll-target="#updating-objects"><span class="header-section-number">2.4.5</span> Updating Objects</a></li>
   </ul>
 </li>
   <li>
 <a href="#saving-your-code" id="toc-saving-your-code" class="nav-link" data-scroll-target="#saving-your-code"><span class="header-section-number">2.5</span> Saving Your Code</a>
   <ul class="collapse">
 <li><a href="#scripts" id="toc-scripts" class="nav-link" data-scroll-target="#scripts"><span class="header-section-number">2.5.1</span> Scripts</a></li>
-  <li><a href="#writing-code-for-people" id="toc-writing-code-for-people" class="nav-link" data-scroll-target="#writing-code-for-people"><span class="header-section-number">2.5.2</span> Writing Code for People</a></li>
+  <li><a href="#the-editor-pane" id="toc-the-editor-pane" class="nav-link" data-scroll-target="#the-editor-pane"><span class="header-section-number">2.5.2</span> The Editor Pane</a></li>
+  <li><a href="#saving-your-r-script" id="toc-saving-your-r-script" class="nav-link" data-scroll-target="#saving-your-r-script"><span class="header-section-number">2.5.3</span> Saving Your R Script</a></li>
+  <li><a href="#files-tab" id="toc-files-tab" class="nav-link" data-scroll-target="#files-tab"><span class="header-section-number">2.5.4</span> Files tab</a></li>
+  <li><a href="#writing-code-for-people" id="toc-writing-code-for-people" class="nav-link" data-scroll-target="#writing-code-for-people"><span class="header-section-number">2.5.5</span> Writing Code for People</a></li>
   </ul>
 </li>
-  <li><a href="#exiting-rstudio" id="toc-exiting-rstudio" class="nav-link" data-scroll-target="#exiting-rstudio"><span class="header-section-number">2.7</span> Exiting RStudio</a></li>
+  <li><a href="#exiting-rstudio" id="toc-exiting-rstudio" class="nav-link" data-scroll-target="#exiting-rstudio"><span class="header-section-number">2.6</span> Exiting RStudio</a></li>
   </ul></nav>
     </div>
 <!-- main -->
@@ -540,7 +544,8 @@ Figure&nbsp;2.1: Important locations and buttons in RStudio.
 <p>On the left, you will find the Console pane. The Console is where you will see your code execute! In the top right, you can find the Environment and History tabs. These tabs show any objects you’ve created and a history of the code you ran. In the bottom right, you will find the Files, Help, and Packages tabs. These tabs allow you to access files on your computer, install and load packages, and access documentation (help) pages for functions you might be trying to use.</p>
 </section><section id="what-is-code" class="level2" data-number="2.3"><h2 data-number="2.3" class="anchored" data-anchor-id="what-is-code">
 <span class="header-section-number">2.3</span> What is code?</h2>
-<!-- Need to fill this in! -->
+<p>Code is a set of instructions that tells a computer what to do and programming languages provide a structured way for humans to communicate these instructions to computers. Similar to a recipe giving step-by-step directions to bake a cake, code gives step-by-step directions for a computer to follow. Because computers require very precise instructions, programming languages have specific rules about how code must be written (kind of like constraining that your recipe can only be written with metric units).</p>
+<p>One of the main advantages of code is that it allows tasks to be performed automatically and repeatedly. Instead of manually performing calculations or organizing information, we can write code that tells the computer how to carry out those steps for us. Once written, code can be run again and again, making it easier to work with large amounts of data and ensuring that the same process is applied consistently each time it is run.</p>
 <section id="what-makes-r-different" class="level3" data-number="2.3.1"><h3 data-number="2.3.1" class="anchored" data-anchor-id="what-makes-r-different">
 <span class="header-section-number">2.3.1</span> What makes R different?</h3>
 <p>R is a statistical programming language. Unlike more general-purpose languages, R is optimized for working with data and doing statistics. R was created by Ross Ihaka and Robert Gentleman in 1993 (hence “R”) and was formally released by the <strong>R Core Group</strong> in 1997 (a group of 20-ish volunteers who are the <em>only</em> people who can change the base, built-in functionality of <code>R</code>). If you want to build an independent, standalone graphical interface, or run a web server, R is probably not the ideal language to use (you might want C / Python or PHP / Python, respectively). If you want to vacuum up a bunch of data, fit several regression models, and then compare the models, R is a great option and will be faster than working in a more general-purpose language like C or base Python.</p>
@@ -602,7 +607,7 @@ Important
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Practice-exercise</span>Practice Activity
+<span class="screen-reader-only">Practice-exercise</span>Practice Exercise
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -631,7 +636,7 @@ Important
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Practice-exercise</span>Practice Activity
+<span class="screen-reader-only">Practice-exercise</span>Practice Exercise
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -645,23 +650,23 @@ Important
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Practice-exercise</span>Practice Activity
+<span class="screen-reader-only">Practice-exercise</span>Practice Exercise
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>Type <code>x</code> and <code>y</code> in the console to preview the contents of these objects!</p>
 </div>
 </div>
-<section id="environment-tab" class="level4" data-number="2.4.2.1"><h4 data-number="2.4.2.1" class="anchored" data-anchor-id="environment-tab">
-<span class="header-section-number">2.4.2.1</span> Environment tab</h4>
+</section><section id="environment-tab" class="level3" data-number="2.4.3"><h3 data-number="2.4.3" class="anchored" data-anchor-id="environment-tab">
+<span class="header-section-number">2.4.3</span> Environment tab</h3>
 <p>Now that you’ve created two objects, there are some interesting things to notice in the upper right corner. The Environment tab displays any objects which are defined in memory. Currently, both objects you’ve created should be labeled “Values”, but later on we will start to see objects labeled “Data” and “Functions”.</p>
 <p><img src="images/01-rstudio-environment-annotated.png" class="img-fluid" alt="Screenshot of the environment pane after creating the objects x and y. A Orange box is drawn around the names x and y with the annotation 'object name' and a second box is drawn around the values 3 and 4 with an annotation 'object value'. The screenshot also highlights the broom icon with a red box drawn around it, and an annotation indicating that this icon will remove all the objects from the environment."></p>
-</section></section><section id="the-history-tab-top-right" class="level3" data-number="2.4.3"><h3 data-number="2.4.3" class="anchored" data-anchor-id="the-history-tab-top-right">
-<span class="header-section-number">2.4.3</span> The History Tab (Top Right)</h3>
+</section><section id="the-history-tab-top-right" class="level3" data-number="2.4.4"><h3 data-number="2.4.4" class="anchored" data-anchor-id="the-history-tab-top-right">
+<span class="header-section-number">2.4.4</span> The History Tab (Top Right)</h3>
 <p>Another useful tab in this pane is the History tab, which shows you a running list of every command you’ve ever run. At this point you should have run (at least) five lines of code, all of which should be displayed in the history.</p>
 <p><img src="images/01-rstudio-history-annotated.png" class="img-fluid" alt="Screenshot of the history pane. This pane preserves all commands that have been run from the console or from evaluating code cells or scripts. The image highlights the broom icon in a red box and an accompanying annotation stating that this icon will clear the history (of the code that has been run)."></p>
-</section><section id="updating-objects" class="level3" data-number="2.4.4"><h3 data-number="2.4.4" class="anchored" data-anchor-id="updating-objects">
-<span class="header-section-number">2.4.4</span> Updating Objects</h3>
+</section><section id="updating-objects" class="level3" data-number="2.4.5"><h3 data-number="2.4.5" class="anchored" data-anchor-id="updating-objects">
+<span class="header-section-number">2.4.5</span> Updating Objects</h3>
 <p>Currently, the values of <code>x</code> and <code>y</code> are <code>3</code> and <code>4</code> respectively, but we might need to update their values. If we want to change the values of <code>x</code> or <code>y</code>, we simply need to assign them new values.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">8</span></span>
@@ -674,7 +679,7 @@ Important
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Practice-exercise</span>Practice Activity
+<span class="screen-reader-only">Practice-exercise</span>Practice Exercise
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -731,19 +736,19 @@ Important
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Practice-exercise</span>Practice Activity
+<span class="screen-reader-only">Practice-exercise</span>Practice Exercise
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>Create an R Script in your RStudio!</p>
 </div>
 </div>
-</section><section id="the-editor-pane" class="level4" data-number="2.5.1.2"><h4 data-number="2.5.1.2" class="anchored" data-anchor-id="the-editor-pane">
-<span class="header-section-number">2.5.1.2</span> The Editor Pane</h4>
+</section></section><section id="the-editor-pane" class="level3" data-number="2.5.2"><h3 data-number="2.5.2" class="anchored" data-anchor-id="the-editor-pane">
+<span class="header-section-number">2.5.2</span> The Editor Pane</h3>
 <p>Now that we have a document to edit, we can see the fourth pane in RStudio—the editor pane. There are many different files we can create in RStudio. The logo in the top left of the document indicates the type of file we have open. An R script file has a blue circle with the letter R.</p>
 <p>Let’s start typing in the script, so we can explore some of the other buttons available to us.</p>
-</section><section id="running-code" class="level4" data-number="2.5.1.3"><h4 data-number="2.5.1.3" class="anchored" data-anchor-id="running-code">
-<span class="header-section-number">2.5.1.3</span> Running Code</h4>
+<section id="running-code" class="level4" data-number="2.5.2.1"><h4 data-number="2.5.2.1" class="anchored" data-anchor-id="running-code">
+<span class="header-section-number">2.5.2.1</span> Running Code</h4>
 <p>Copy the code below into your R script, so we can explore the various ways to run code.</p>
 <pre><code>a &lt;- 1
 b &lt;- 4
@@ -763,20 +768,28 @@ lname &lt;- "Hollander"</code></pre>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Practice-exercise</span>Practice Activity
+<span class="screen-reader-only">Practice-exercise</span>Practice Exercise
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>Run each of the five lines of code in your R script. Try both methods of running code and see which one you prefer!</p>
 </div>
 </div>
-</section><section id="saving-your-r-script" class="level4" data-number="2.5.1.4"><h4 data-number="2.5.1.4" class="anchored" data-anchor-id="saving-your-r-script">
-<span class="header-section-number">2.5.1.4</span> Saving Your R Script</h4>
+</section></section><section id="saving-your-r-script" class="level3" data-number="2.5.3"><h3 data-number="2.5.3" class="anchored" data-anchor-id="saving-your-r-script">
+<span class="header-section-number">2.5.3</span> Saving Your R Script</h3>
+<div class="columns">
+<div class="column" style="width:55%;">
 <p>You’ll notice that currently your script is labeled “Untitled1” that is because we haven’t saved the file anywhere. If we were to try and close our file before saving RStudio would tell us that our document had unsaved changes. Let’s save our document so we have access to it later on!</p>
-<p><img src="images/01-rstudio-unsaved-changes.png" class="img-fluid" alt="A screenshot of the popup that appears when you attempt to close RStudio without saving your R script. The popup says 'The document Untitled1 has unsaved changes. Do you want to save these changes. The options provided are 'Save' (in blue), 'Don't Save', and 'Cancel.' The save button is what should be selected."> You can save your file a few different ways. First, you can always use Command + S (or Control + S) to save a file. Second, you can click on the <a href="images/01-rstudio-save.png" data-fig-alt="A screenshot of the blue floppy disk icon that lives on the top left below the file name.">blue floppy disk</a> immediately below your file name.</p>
+<p>You can save your file a few different ways. First, you can always use Command + S (or Control + S) to save a file. Second, you can click on the <a href="images/01-rstudio-save.png" data-fig-alt="A screenshot of the blue floppy disk icon that lives on the top left below the file name.">blue floppy disk</a> immediately below your file name.</p>
 <p>Either of these options should open a popup menu for you to select where you want the script to be saved. Navigate to your <code>stat-1810</code> folder that lives in your <code>Documents</code> folder. Change the file name to <code>week-1.R</code>.</p>
-</section><section id="files-tab" class="level4" data-number="2.5.1.5"><h4 data-number="2.5.1.5" class="anchored" data-anchor-id="files-tab">
-<span class="header-section-number">2.5.1.5</span> Files tab</h4>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:40%;">
+<p><img src="images/01-rstudio-unsaved-changes.png" class="img-fluid" alt="A screenshot of the popup that appears when you attempt to close RStudio without saving your R script. The popup says 'The document Untitled1 has unsaved changes. Do you want to save these changes. The options provided are 'Save' (in blue), 'Don't Save', and 'Cancel.' The save button is what should be selected."></p>
+</div>
+</div>
+</section><section id="files-tab" class="level3" data-number="2.5.4"><h3 data-number="2.5.4" class="anchored" data-anchor-id="files-tab">
+<span class="header-section-number">2.5.4</span> Files tab</h3>
 <p>Now that you’ve saved your script, it should appear in the Files tab in the lower right corner. By default, the Files tab starts at your computer’s working directory (the hard drive). If we wanted to get to a specific file, we could click through the path to get to that file.</p>
 <p>To get to the <code>week-1.R</code> file I needed to click through two folders:</p>
 <ol type="1">
@@ -784,19 +797,22 @@ lname &lt;- "Hollander"</code></pre>
 <li><code>stat-1810</code></li>
 </ol>
 <p><img src="images/01-rstudio-file-path-annotated.png" class="img-fluid" alt="A series of three screenshots demonstrating how to get to the week-1.R file saved in the stat-1810 folder. The first screenshot shows the 'Home' directory, which is similar to the C Drive on a PC. The Documents folder is outlined in red, as that is the folder that needs to be clicked on. The second screenshot shows the files stored in the Documents folder. There are six folders and the stat-1810 folder is highlighted in red. The third screenshot shows the week-1.R file which lives in the stat-1810 folder. At the top of the screenshot there is a red box highlighting the path to get to the week-1.R file (Home > Documents > stat-1810)."></p>
-</section></section><section id="writing-code-for-people" class="level3" data-number="2.5.2"><h3 data-number="2.5.2" class="anchored">
-<span class="header-section-number">2.5.2</span> Writing Code for People</h3>
+</section><section id="writing-code-for-people" class="level3" data-number="2.5.5"><h3 data-number="2.5.5" class="anchored" data-anchor-id="writing-code-for-people">
+<span class="header-section-number">2.5.5</span> Writing Code for People</h3>
 <p>While scripts are a great way to store our code, scripts often don’t make it easy for people to understand the processes enacted in the code. Yet, in almost every data science setting someone else will be reading your code. So, it is important to learn how to write readable code. As you become more proficient at programming, you will realize quickly that writing readable code is more challenging than writing working code but it is possibly just as important as getting a working solution.</p>
 <!-- add a section about good object names -->
 <!-- ::: {.panel-tabset} -->
 <!-- for camel case versus snake case -->
 <!-- x and y are bad names -->
 <!-- first and last are better names, but still not great -->
-<section id="code-comments" class="level4" data-number="2.5.2.1"><h4 data-number="2.5.2.1" class="anchored">
-<span class="header-section-number">2.5.2.1</span> Code Comments</h4>
+<section id="code-comments" class="level4" data-number="2.5.5.1"><h4 data-number="2.5.5.1" class="anchored" data-anchor-id="code-comments">
+<span class="header-section-number">2.5.5.1</span> Code Comments</h4>
 <p>One way to make code easier to understand is the use of code comments. Since an R script can only contain R code, a code comment is your way of interweaving a written description into a script. Fundamentally, a code comment starts after a <code>#</code>. The <code>#</code> symbol indicates to R that this line of text <strong>should not</strong> be executed as code.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="" aria-current="page">Descriptive Comments</a></li></ul>
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="" aria-current="page">Descriptive Comments</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Actionable Comments</a></li>
+</ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <p>You can use code comments to describe the actions taken by the code. Notice how each code comment below <em>describes</em> what is happening in the subsequent lines. Stylistically, it is important to have a space between the <code>#</code> and the text so the comment is easier to read.</p>
@@ -808,8 +824,8 @@ lname &lt;- "Hollander"</code></pre>
 <span><span class="co"># Creating z to depend on current values of x and y</span></span>
 <span><span class="va">z</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">+</span> <span class="va">y</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<section id="actionable-comments" class="level2" data-number="2.6"><h2 data-number="2.6" class="anchored" data-anchor-id="actionable-comments">
-<span class="header-section-number">2.6</span> Actionable Comments</h2>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <p>You can also use code comments to comment out a line of code, so it is not executed. Note that we are still using a space after the <code>#</code> to make the line of code (being commented out) easier to read.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Creating variables x and y</span></span>
@@ -819,7 +835,6 @@ lname &lt;- "Hollander"</code></pre>
 <span><span class="co"># Creating z to depend on current values of x and y</span></span>
 <span><span class="co"># z &lt;- x + y</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</section>
 </div>
 </div>
 </div>
@@ -836,17 +851,31 @@ lname &lt;- "Hollander"</code></pre>
 <p>Technically, you could use as many <code>#</code> as you want when making a code comment (e.g., <code>#### Creating variables x and y</code>). However, it is not recommended to use more than one <code>#</code> for consistency and readability.</p>
 </div>
 </div>
-</section></section></section><section id="exiting-rstudio" class="level2" data-number="2.7"><h2 data-number="2.7" class="anchored" data-anchor-id="exiting-rstudio">
-<span class="header-section-number">2.7</span> Exiting RStudio</h2>
+</section></section></section><section id="exiting-rstudio" class="level2" data-number="2.6"><h2 data-number="2.6" class="anchored" data-anchor-id="exiting-rstudio">
+<span class="header-section-number">2.6</span> Exiting RStudio</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
 <p>Now that we’ve accomplished what we set out to do, we can close RStudio. When you try and close RStudio, you should get a message like the one below. You might wonder what this message means. Let us tell you!</p>
-<p><img src="images/01-rstudio-exit-message.png" class="img-fluid" alt="A screenshot of the message that appears when you attempt to close RStudio after running code. The message asks if you want to 'Save workspace image to ~/.Rdata?' with options Save, Don't Save, and Cancel."></p>
 <p>When you exit an R session, you’re faced with the question of whether or not to save your workspace. The workspace is an image of all the objects you created while you were working in R into a file called <code>.RData</code>. If you save your workspace, when you reopen RStudio that workspace will be loaded and all the objects you created previously will be available to you. This might sound like something you might want, but actually can cause some major headaches.</p>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:40%;">
+<p><img src="images/01-rstudio-exit-message.png" class="img-fluid" alt="A screenshot of the message that appears when you attempt to close RStudio after running code. The message asks if you want to 'Save workspace image to ~/.Rdata?' with options Save, Don't Save, and Cancel."></p>
+</div>
+</div>
 <p>Loading a saved workspace turns your R script from a program, where everything happens based on a series of known steps, to something more akin to a cardboard box full of assorted pages and pictures that you don’t remember where they came from and why you made them. This has two major issues. First, this action can clutter your workspace with lots of objects you don’t need. Second, the versions of the variables stored in your workspaces might be different from what you want them to be (or think they are) and will cause issues in your code.</p>
 <p>Fundamentally, you should never need to save your workspace because your scripts should contain <strong>all</strong> the code you need to create the objects that you want to store. So, let’s walk you through how to <strong>never</strong> save your workspace.</p>
 <p>Click “Cancel” in the pop-up window above (with the message about saving the workspace image). Now, at the top file menu for RStudio, click on Tools. In the dropdown menu that appears, click on “Global Options”.</p>
-<p><img src="images/01-rstudio-global-options-annotated.png" class="img-fluid" alt="A screenshot of the menu that appears when you click on 'Tools' from the top menu of RStudio. At the bottom of the menu that appears, 'Global Options' is highlighted in red and blue indicating this is the option you want to select."></p>
+<p><img src="images/01-rstudio-global-options-annotated.png" class="img-fluid" style="width:30.0%" alt="A screenshot of the menu that appears when you click on 'Tools' from the top menu of RStudio. At the bottom of the menu that appears, 'Global Options' is highlighted in red and blue indicating this is the option you want to select."></p>
+<div class="columns">
+<div class="column" style="width:55%;">
 <p>In the menu that appears, you want to uncheck the box next to “Restore .RData into workspace at startup.” Next, you should select “Never” from the dropdown menu next to “Save workspace to .RData on exit” (there are three options). Once you’ve changed these options, click “OK” and the popup window should close.</p>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:40%;">
 <p><img src="images/01-rstudio-save-rdata-annotated.png" class="img-fluid" alt="A screenshot of the popup window that appears after you select 'Global Options' from the previous menu. The popup window has A LOT of options, but there is a red box outlining the section we need to focus on. Under 'Workspace' there is a checkbox next to a line that says 'Restore .RData'. This box should be unchecked. The next line says 'Save workspace to .RData on exit.'. Next to this line there is a dropdown menu with three options: Always, Never, Ask. We need to change this option to 'Never'. Once these options have been modified, click on 'OK' to exit."></p>
+</div>
+</div>
 <p>Now, it is safe to exit RStudio!</p>
 
 
