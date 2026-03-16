@@ -2,66 +2,66 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://r-is-your-friend.github.io/course-pack/index.html</loc>
-    <lastmod>2026-01-09T23:21:07.493Z</lastmod>
+    <lastmod>2026-01-07T15:06:15.596Z</lastmod>
   </url>
   <url>
     <loc>https://r-is-your-friend.github.io/course-pack/00-setup.html</loc>
-    <lastmod>2026-01-09T23:21:07.473Z</lastmod>
+    <lastmod>2026-03-16T22:24:32.871Z</lastmod>
   </url>
   <url>
     <loc>https://r-is-your-friend.github.io/course-pack/01-what-is-code.html</loc>
-    <lastmod>2026-02-12T22:53:03.037Z</lastmod>
+    <lastmod>2026-03-16T21:37:30.258Z</lastmod>
   </url>
   <url>
     <loc>https://r-is-your-friend.github.io/course-pack/02-r-is-friend.html</loc>
-    <lastmod>2025-12-05T21:00:04.338Z</lastmod>
+    <lastmod>2025-12-19T20:58:26.078Z</lastmod>
   </url>
   <url>
     <loc>https://r-is-your-friend.github.io/course-pack/03-control-flow.html</loc>
-    <lastmod>2026-01-09T23:21:07.473Z</lastmod>
+    <lastmod>2026-01-08T18:58:39.891Z</lastmod>
   </url>
   <url>
     <loc>https://r-is-your-friend.github.io/course-pack/04-data-is-friend.html</loc>
-    <lastmod>2026-02-13T19:53:56.493Z</lastmod>
+    <lastmod>2026-03-07T13:28:12.333Z</lastmod>
   </url>
   <url>
     <loc>https://r-is-your-friend.github.io/course-pack/05-data-visualizations.html</loc>
-    <lastmod>2026-01-09T23:29:24.304Z</lastmod>
+    <lastmod>2026-01-12T15:59:45.219Z</lastmod>
   </url>
   <url>
     <loc>https://r-is-your-friend.github.io/course-pack/06-data-wrangling.html</loc>
-    <lastmod>2026-03-10T21:45:21.805Z</lastmod>
+    <lastmod>2026-03-16T21:08:31.135Z</lastmod>
   </url>
   <url>
     <loc>https://r-is-your-friend.github.io/course-pack/07-more-wrangling.html</loc>
-    <lastmod>2026-01-09T23:31:26.673Z</lastmod>
+    <lastmod>2026-01-12T15:59:45.219Z</lastmod>
   </url>
   <url>
     <loc>https://r-is-your-friend.github.io/course-pack/08-strings.html</loc>
-    <lastmod>2026-01-09T23:32:47.180Z</lastmod>
+    <lastmod>2026-01-12T15:59:45.219Z</lastmod>
   </url>
   <url>
     <loc>https://r-is-your-friend.github.io/course-pack/09-dates.html</loc>
-    <lastmod>2026-01-09T23:35:28.690Z</lastmod>
+    <lastmod>2026-01-12T15:59:45.219Z</lastmod>
   </url>
   <url>
     <loc>https://r-is-your-friend.github.io/course-pack/10-factors.html</loc>
-    <lastmod>2026-01-09T23:36:33.781Z</lastmod>
+    <lastmod>2026-01-12T15:59:45.220Z</lastmod>
   </url>
   <url>
     <loc>https://r-is-your-friend.github.io/course-pack/11-communication.html</loc>
-    <lastmod>2026-01-09T23:35:19.090Z</lastmod>
+    <lastmod>2025-12-19T20:58:26.079Z</lastmod>
   </url>
   <url>
     <loc>https://r-is-your-friend.github.io/course-pack/12-writing-functions.html</loc>
-    <lastmod>2025-12-05T21:00:04.339Z</lastmod>
+    <lastmod>2025-12-19T20:58:26.079Z</lastmod>
   </url>
   <url>
     <loc>https://r-is-your-friend.github.io/course-pack/13-regression.html</loc>
-    <lastmod>2026-01-09T23:36:16.133Z</lastmod>
+    <lastmod>2025-12-19T20:58:26.079Z</lastmod>
   </url>
   <url>
     <loc>https://r-is-your-friend.github.io/course-pack/14-simulation.html</loc>
-    <lastmod>2025-12-05T21:00:04.339Z</lastmod>
+    <lastmod>2025-12-19T20:58:26.079Z</lastmod>
   </url>
 </urlset>
