@@ -47,7 +47,7 @@ function Div(el)
     if el.classes:includes('callout-practice-exercise') then
       local content = el.content
       local callout = quarto.Callout(
-        {title="Practice Activity", type="practice-exercise", content=content, appearance="default"}
+        {title="Practice Exercise", type="practice-exercise", content=content, appearance="default"}
       )
       return callout
     end
