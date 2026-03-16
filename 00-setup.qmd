@@ -6,9 +6,9 @@ coursework, you will learn good practices for managing and storing files for
 this course. 
 
 Before you learn how to program, it can be helpful to learn a few simple things
-about how computers work. Modern computers hide a lot of the about where and how
-files are stored, but later in the course when you start writing programs these
-details will suddenly become very important.
+about how computers work. Modern computers hide a lot of the details about where
+and how files are stored, but later in the course when you start writing
+programs these details will suddenly become very important.
 
 
 ::: callout
@@ -222,6 +222,8 @@ Take a screenshot of your class directory, showing:
 :::
 
 # Software
+
+<!-- What is software and how does it differ from hardware? -->
 
 This course is all about you learning skills for working with data in R, so you
 will need to have **local** installations of both R and RStudio on your
