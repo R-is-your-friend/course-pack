@@ -163,6 +163,7 @@ We might not always want to only filter on a variable set equal to a certain cat
 -   `<` less than
 -   `==` equal to
 -   `%in%` identifies if an element belongs to a vector
+-   `is.na()` binary evaluation of missing values
 -   `|`, `when_any()` or
 -   `,`, `&`, `when_all()` and 
 :::
@@ -246,12 +247,39 @@ That definitely works, but it's super hard to read and see what is going on!
 
 This is where the **piping operator** comes in! The pipeing operator lets us "pipe" the output from one line of code into the next. 
 
-There are two piping operators: the native pipe `|>` and the matgittr pipe `%>%`. We will use the native pipe `|>`, but you will still see the matgittr pipe around as an FYI.
+There are two piping operators: the native pipe `|>` and the original" pipe `%>%`. We will use the native pipe `|>`, but you will still see the "original" pipe around as an FYI.
 
+The pipe operator takes whatever is to the left of it, and inputs that as the **first** argument in the function to the right.
+
+For example, instead of `head(cereal)`,
 
 ```{r}
-filter(cereal,
-       manuf %in% c("K", "G")) |> 
+cereal |> 
+  head()
+```
+
+Building onto this, the first argument in `filter()` (and all other `dplyr` verbs) is the data frame, so we can do:
+
+```{r}
+cereal |> 
+  filter(manuf %in% c("K", "G")) |> 
+  head()
+```
+
+Again, this is so much better to read rather than
+```{r}
+#| eval: false
+
+head(filter(cereal, manuf %in% c("K", "G")))
+```
+especially as our analyses get more complicated and with more steps!
+
+
+We can put this all together for readable code for our plot! Note that the first argument in `ggplot()` is also the data.
+
+```{r}
+cereal |> 
+  filter(manuf %in% c("K", "G")) |> 
   ggplot(aes(x = fiber)) +
     geom_histogram() +
     facet_wrap(vars(manuf)) +
@@ -265,7 +293,18 @@ filter(cereal,
 ### `arrange()`
 
 
+
+
+These functions implicitly arrange the data before slicing it (selecting rows).
+
++ `slice_min()` -- select rows with the lowest value(s) of a variable
++ `slice_max()` -- select rows with the highest value(s) of a variable
+
+
 ### `select()`
+
+We **select** which variables we would like to remain in the data.
+
 
 -   `var3:var5`: `select(df, var3:var5)` will give you a data frame with columns var3, anything between var3 and var 5, and var5
 
