@@ -146,15 +146,33 @@ The primary verbs are:
 -   Use the pipe operator (`|>` or `%>%`) to chain together data wrangling operations
 
 
+Note that none of these `dplyr` verbs change the original object (which is typical for coding in R). You need to store your result if you want to use it as a new object.
+
+
 ### `filter()` and `filter_out()`
 
 ![dplyr filter() by Allison Horst](https://github.com/allisonhorst/stats-illustrations/raw/main/rstats-artwork/dplyr_filter.jpg){fig-alt="Cartoon showing three fuzzy monsters either selecting or crossing out rows of a data table. If the type of animal in the table is “otter” and the site is “bay”, a monster is drawing a purple rectangle around the row. If those conditions are not met, another monster is putting a line through the column indicating it will be excluded. Stylized text reads “dplyr::filter() - keep rows that satisfy your conditions.”"}
+
+Much of the time there are only certain observations in a dataset that you want to use in analysis and there may also be other observations that you want to remove for various reasons. `filter()` and `filter_out()` let us specify which **rows** to keep or get rid of in a dataframe.
+
+`filter()` *keeps* only the *rows* that meet logical condition(s) we provide. The arguments for `filter()` are a data frame (or tibble) and logical conditions using bare variable names. Provided conditions that are separated with a comma `,` are combined using AND. Any row that would return `TRUE` based on the logical conditions is kept, while others are dropped.
+
+
+Let's only keep cereals with less than 5 grams of sugar by Quaker Oats.
+
+```{r}
+filter(.data = cereal,
+        sugars < 5,
+        manuf == "Q")
+```
+
+Note that there is no argument name for the logical conditions, they just directly follow the data.
 
 
 Sometimes rather than thinking about *keeping* rows based on some criteria, it makes more sense to think about *dropping* rows based on a criteria. This is when the brand new `filter_out()` is useful!
 
 
-::: note
+::: callout
 #### Useful comparison operations in R {-}
 
 We might not always want to only filter on a variable set equal to a certain category or value, the following operations can help you combine logical operations in `filter()`.
@@ -164,18 +182,32 @@ We might not always want to only filter on a variable set equal to a certain cat
 -   `==` equal to
 -   `%in%` identifies if an element belongs to a vector
 -   `is.na()` binary evaluation of missing values
--   `|`, `when_any()` or
--   `,`, `&`, `when_all()` and 
+-   `|`, `when_any()` OR
+-   `,`, `&`, `when_all()` AND
 :::
 
-:::{.callout-check-in .icon}
-1.  How can you join two logical statements with an "or" in `filter()`?
+Let's remove cereals that are missing a rating OR has an illogical grams of sugar (-1).
 
-2.  How can you join two logical statements with an "and" in `filter()`?
+```{r}
+clean_cereal <- filter_out(.data = cereal,
+                            when_any(is.na(rating),
+                                     sugars < 0))
 
-3.  How can you join two logical statements with an "or" in `filter_out()`?
+nrow(clean_cereal)
+nrow(cereal)
+```
 
+We can see here, that `cereal` is unchanged, but one observation was dropped when creating `clean_cereal`.
+
+::: callout
+#### Missing values
+
+In `filter()` and `filter_out()`, if the logical condition returns a missing value, this is automatically treated as `FALSE`.
 :::
+
+
+
+
 
 
 ::: panel-tabset
@@ -190,22 +222,45 @@ More elegant solution using `%in%`:
 ```{r}
 #| eval: false
 
-filter(cereal,
+filter(.data = cereal,
        manuf %in% c("K", "G"))
 ```
 
-`|` also gets you there:
+`when_any()` (or `|`) also gets you there:
 
 ```{r}
 #| eval: false
 
-filter(cereal,
-       manuf == "K" | manuf == "G")
+filter(.data = cereal,
+       when_any(manuf == "K", manuf == "G"))
 ```
 
 Think about it -- why is the first solution above preferable?
 
 :::
+
+:::{.callout-check-in .icon}
+1.  How can you join two logical statements with an "or" in `filter()`?
+
+2.  How can you join two logical statements with an "and" in `filter()`?
+
+3.  How can you join two logical statements with an "or" in `filter_out()`?
+
+:::
+
+::: callout
+
+#### Related Functions
+
+These functions select rows by **row number**.
+
++ `slice()` -- select rows with the specified indicies
++ `slice_head()` -- select the first `n` rows
++ `slice_tail()` -- select the last `n` rows
++ `slice_sample()` -- randomly select `n` rows
+
+:::
+
 
 ### piping operator `|>`
 
@@ -215,8 +270,8 @@ My first idea is that I could save a newdataset called `plot_data` and then make
 
 ```{r}
 # save new data
-plot_data <- filter(cereal,
-       manuf %in% c("K", "G"))
+plot_data <- filter(.data = cereal,
+                    manuf %in% c("K", "G"))
 
 # plot with that data
 ggplot(plot_data, aes(x = fiber)) +
@@ -233,8 +288,9 @@ This is fine, but if I am not actually going to use my `plot_data` again, I don'
 Okay, instead I could put this new data into the `data` argument in ggplot:
 
 ```{r}
-ggplot(filter(cereal,
-       manuf %in% c("K", "G")), aes(x = fiber)) +
+ggplot(filter(.data = cereal,
+              manuf %in% c("K", "G")), 
+       aes(x = fiber)) +
   geom_histogram() +
   facet_wrap(vars(manuf)) +
   labs(x = "Fiber (g)",
@@ -251,14 +307,14 @@ There are two piping operators: the native pipe `|>` and the original" pipe `%>%
 
 The pipe operator takes whatever is to the left of it, and inputs that as the **first** argument in the function to the right.
 
-For example, instead of `head(cereal)`,
+For example, instead of `head(x = cereal)`,
 
 ```{r}
 cereal |> 
   head()
 ```
 
-Building onto this, the first argument in `filter()` (and all other `dplyr` verbs) is the data frame, so we can do:
+Building onto this, the first argument in `filter()` (and all other `dplyr` verbs) is the data `.data = `, so we can do:
 
 ```{r}
 cereal |> 
@@ -270,7 +326,7 @@ Again, this is so much better to read rather than
 ```{r}
 #| eval: false
 
-head(filter(cereal, manuf %in% c("K", "G")))
+head(filter(.data = cereal, manuf %in% c("K", "G")))
 ```
 especially as our analyses get more complicated and with more steps!
 
@@ -292,13 +348,46 @@ cereal |>
 
 ### `arrange()`
 
+`arrange()` is a dplyr verb for sorting rows in the table by one or more variables. The arguments are data and one or more variables (separated by commas).
 
+Arrange automatically sorts rows in *ascending* order based on the variable provided, so it is often used with a helper function, `desc()`, which reverses the order of a variable, sorting it in descending order. 
+
+Multiple arguments can be passed to `arrange()` to sort the data frame by multiple columns hierarchically; each column can be modified with `desc()` separately.
+
+```{r}
+cereal |> 
+  arrange(sodium) |> 
+  head()
+```
+
+
+```{r}
+cereal |> 
+  arrange(desc(sodium)) |> 
+  head()
+```
 
 
 These functions implicitly arrange the data before slicing it (selecting rows).
 
 + `slice_min()` -- select rows with the lowest value(s) of a variable
 + `slice_max()` -- select rows with the highest value(s) of a variable
+
+```{r}
+cereal |> 
+  slice_max(order_by = sugars, n = 3)
+```
+
+Efficiency note: It is more efficient (and less prone to user-error!) to use `slice_max()` or `slice_min()` than `arrange()` followed by `filter()` or `slice_head()`.
+
+:::{.callout-check-in .icon}
+1.  Will the first cereal in the output of `arrange(.data = cereal, potass)` be the cereal with the largest or the smallest amount of potassium?
+
+2. What can you add inside of `arrange()` to change the default order?
+
+3. What does adding multiple variables to arrange do (e.g. `arrange(.data = cereal, potass, sugars)`?
+
+:::
 
 
 ### `select()`
@@ -319,7 +408,7 @@ We **select** which variables we would like to remain in the data.
 -   `last_col()` matches the last variable. `last_col(offset = n)` selects the n-th to last variable.
 -   `starts_with("xyz")` will match any columns with names that start with xyz. Similarly, `ends_with()` does exactly what you'd expect as well.
 -   `contains("xyz")` will match any columns with names containing the literal string "xyz". Note, `contains` does not work with regular expressions (you don't need to know what that means right now).
--   `matches(regex)` takes a regular expression as an argument and returns all columns matching that expression.
+-   `matches(regex)` takes a regular expression as an argument and returns all columns matching that expression. We will learn about regular expressions later in the course!
 -   `num_range(prefix, range)` selects any columns that start with prefix and have numbers matching the provided numerical range.
 
 There are also selectors that deal with character vectors. These can be useful if you have a list of important variables and want to just keep those variables.
@@ -327,11 +416,18 @@ There are also selectors that deal with character vectors. These can be useful i
 -   `all_of(char)` matches all variable names in the character vector `char`. If one of the variables doesn't exist, this will return an error.
 -   `any_of(char)` matches the contents of the character vector `char`, but does not throw an error if the variable doesn't exist in the data set.
 
-There's one final selector -
+There's one final selector. While the rest of the selectors use the variable **names** this lets you choose columns based on the actual **values** of the variables.
 
 -   `where()` applies a function to each variable and selects those for which the function returns TRUE. This provides a lot of flexibility and opportunity to be creative.
 
+:::{.callout-check-in .icon}
+1.  Which variables will be in the output of `cereal |> select(fiber:vitamins)`?
 
+2. What symbol(s) do you use to **remove** a variable from the dataset?
+
+3. Which helper function lets you choose variables based on their **values** rather than their **names**?
+
+:::
 
 
 
@@ -340,10 +436,28 @@ There's one final selector -
 
 
 
+:::{.callout-check-in .icon}
+1.  What are the three arguments of the `if_else()` function?
+
+
+:::
+
 ### `summarize()`
 
 
+:::{.callout-check-in .icon}
+1.  What are common summary functions you might want to use?
+
+
+:::
+
 ### `group_by()`
+
+:::{.callout-check-in .icon}
+9.  What happens when you group by **two** variables?
+
+:::
+
 
 :::{.callout-check-in .icon}
 **In groups** match the `dplyr` verbs to your suggested steps:
@@ -357,47 +471,6 @@ There's one final selector -
 
 
 
-
-
-<!--# `filter`
-
-# `select`
-
-> include **columns** based on one or more logical statements
-
-3.  What symbol do you use to **remove** a column from the dataset?
-
-# `mutate()`
-
-> create new columns or change existing columns
-
-4.  What are the three arguments of the `if_else()` function?
-
-# `arrange()`
-
-> Organize the rows of the data in order of a particular variable.
-
-5.  By default what order does the `arrange()` function put values in?
-
-6.  What can you add **inside** the `arrange()` function to change the default order?
-
-# `arrange()` friends
-
-7.  What does the `n` argument of `slice_max()` and `slice_min()` do?
-
-# `summarize`
-
-> compute a table of summaries
-
-8.  What are common summary functions you might want to use?
-
-# `group_by`
-
-> put rows into groups based on values in column(s)
-
-9.  What happens when you group by **two** variables?
-
--->
 
 
 :::{.callout-required-reading .icon}

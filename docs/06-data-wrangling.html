@@ -311,7 +311,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#welcome-to-the-tidyverse" id="toc-welcome-to-the-tidyverse" class="nav-link active" data-scroll-target="#welcome-to-the-tidyverse"><span class="header-section-number">7.1</span> Welcome to the tidyverse!</a></li>
   <li><a href="#data-wrangling" id="toc-data-wrangling" class="nav-link" data-scroll-target="#data-wrangling"><span class="header-section-number">7.2</span> Data Wrangling</a></li>
   <li><a href="#dplyr-for-data-wrangling" id="toc-dplyr-for-data-wrangling" class="nav-link" data-scroll-target="#dplyr-for-data-wrangling"><span class="header-section-number">7.3</span> <code>dplyr</code> for Data Wrangling</a>
-  <ul class="collapse">
+  <ul>
   <li><a href="#filter-and-filter_out" id="toc-filter-and-filter_out" class="nav-link" data-scroll-target="#filter-and-filter_out"><span class="header-section-number">7.3.1</span> <code>filter()</code> and <code>filter_out()</code></a></li>
   <li><a href="#piping-operator" id="toc-piping-operator" class="nav-link" data-scroll-target="#piping-operator"><span class="header-section-number">7.3.2</span> piping operator <code>|&gt;</code></a></li>
   <li><a href="#arrange" id="toc-arrange" class="nav-link" data-scroll-target="#arrange"><span class="header-section-number">7.3.3</span> <code>arrange()</code></a></li>
@@ -508,6 +508,7 @@ Check In
 <li>Use <code>group_by()</code> to perform group wise operations</li>
 <li>Use the pipe operator (<code>|&gt;</code> or <code>%&gt;%</code>) to chain together data wrangling operations</li>
 </ul>
+<p>Note that none of these <code>dplyr</code> verbs change the original object (which is typical for coding in R). You need to store your result if you want to use it as a new object.</p>
 <section id="filter-and-filter_out" class="level3" data-number="7.3.1">
 <h3 data-number="7.3.1" class="anchored" data-anchor-id="filter-and-filter_out"><span class="header-section-number">7.3.1</span> <code>filter()</code> and <code>filter_out()</code></h3>
 <div class="quarto-figure quarto-figure-center">
@@ -516,9 +517,36 @@ Check In
 <figcaption>dplyr filter() by Allison Horst</figcaption>
 </figure>
 </div>
+<p>Much of the time there are only certain observations in a dataset that you want to use in analysis and there may also be other observations that you want to remove for various reasons. <code>filter()</code> and <code>filter_out()</code> let us specify which <strong>rows</strong> to keep or get rid of in a dataframe.</p>
+<p><code>filter()</code> <em>keeps</em> only the <em>rows</em> that meet logical condition(s) we provide. The arguments for <code>filter()</code> are a data frame (or tibble) and logical conditions using bare variable names. Provided conditions that are separated with a comma <code>,</code> are combined using AND. Any row that would return <code>TRUE</code> based on the logical conditions is kept, while others are dropped.</p>
+<p>Let’s only keep cereals with less than 5 grams of sugar by Quaker Oats.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(<span class="at">.data =</span> cereal,</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>        sugars <span class="sc">&lt;</span> <span class="dv">5</span>,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>        manuf <span class="sc">==</span> <span class="st">"Q"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            name manuf type calories protein fat sodium fiber carbo sugars
+1    Puffed Rice     Q cold       50       1   0      0   0.0    13      0
+2   Puffed Wheat     Q cold       50       2   0      0   1.0    10      0
+3 Quaker Oatmeal     Q  hot      100       5   2      0   2.7    -1     -1
+  potass vitamins shelf weight cups   rating
+1     15        0     3    0.5 1.00 60.75611
+2     50        0     3    0.5 1.00 63.00565
+3    110        0     1    1.0 0.67 50.82839</code></pre>
+</div>
+</div>
+<p>Note that there is no argument name for the logical conditions, they just directly follow the data.</p>
 <p>Sometimes rather than thinking about <em>keeping</em> rows based on some criteria, it makes more sense to think about <em>dropping</em> rows based on a criteria. This is when the brand new <code>filter_out()</code> is useful!</p>
-<section id="useful-comparison-operations-in-r" class="level4 unnumbered note">
-<h4 class="unnumbered anchored" data-anchor-id="useful-comparison-operations-in-r">Useful comparison operations in R</h4>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Useful comparison operations in R
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>We might not always want to only filter on a variable set equal to a certain category or value, the following operations can help you combine logical operations in <code>filter()</code>.</p>
 <ul>
 <li><code>&gt;</code> greater than</li>
@@ -526,10 +554,61 @@ Check In
 <li><code>==</code> equal to</li>
 <li><code>%in%</code> identifies if an element belongs to a vector</li>
 <li><code>is.na()</code> binary evaluation of missing values</li>
-<li><code>|</code>, <code>when_any()</code> or</li>
-<li><code>,</code>, <code>&amp;</code>, <code>when_all()</code> and</li>
+<li><code>|</code>, <code>when_any()</code> OR</li>
+<li><code>,</code>, <code>&amp;</code>, <code>when_all()</code> AND</li>
 </ul>
-</section>
+</div>
+</div>
+<p>Let’s remove cereals that are missing a rating OR has an illogical grams of sugar (-1).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>clean_cereal <span class="ot">&lt;-</span> <span class="fu">filter_out</span>(<span class="at">.data =</span> cereal,</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">when_any</span>(<span class="fu">is.na</span>(rating),</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                                     sugars <span class="sc">&lt;</span> <span class="dv">0</span>))</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(clean_cereal)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 76</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(cereal)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 77</code></pre>
+</div>
+</div>
+<p>We can see here, that <code>cereal</code> is unchanged, but one observation was dropped when creating <code>clean_cereal</code>.</p>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Missing values
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In <code>filter()</code> and <code>filter_out()</code>, if the logical condition returns a missing value, this is automatically treated as <code>FALSE</code>.</p>
+</div>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true">practice</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false">solution</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<p>Create a new dataset with only Kellogg’s and General Mills cereals.</p>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<p>More elegant solution using <code>%in%</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(<span class="at">.data =</span> cereal,</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>       manuf <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"K"</span>, <span class="st">"G"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>when_any()</code> (or <code>|</code>) also gets you there:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(<span class="at">.data =</span> cereal,</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">when_any</span>(manuf <span class="sc">==</span> <span class="st">"K"</span>, manuf <span class="sc">==</span> <span class="st">"G"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Think about it – why is the first solution above preferable?</p>
+</div>
+</div>
+</div>
 <div class="callout callout-style-default callout-check-in callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -547,25 +626,23 @@ Check In
 </ol>
 </div>
 </div>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true">practice</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false">solution</a></li></ul>
-<div class="tab-content">
-<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
-<p>Create a new dataset with only Kellogg’s and General Mills cereals.</p>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
 </div>
-<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
-<p>More elegant solution using <code>%in%</code>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(cereal,</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>       manuf <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"K"</span>, <span class="st">"G"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout-title-container flex-fill">
+Related Functions
 </div>
-<p><code>|</code> also gets you there:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(cereal,</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>       manuf <span class="sc">==</span> <span class="st">"K"</span> <span class="sc">|</span> manuf <span class="sc">==</span> <span class="st">"G"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Think about it – why is the first solution above preferable?</p>
-</div>
+<div class="callout-body-container callout-body">
+<p>These functions select rows by <strong>row number</strong>.</p>
+<ul>
+<li><code>slice()</code> – select rows with the specified indicies</li>
+<li><code>slice_head()</code> – select the first <code>n</code> rows</li>
+<li><code>slice_tail()</code> – select the last <code>n</code> rows</li>
+<li><code>slice_sample()</code> – randomly select <code>n</code> rows</li>
+</ul>
 </div>
 </div>
 </section>
@@ -574,22 +651,22 @@ Check In
 <p>Okay now we at least have gotten down to the two manufacturers we are interested! Let’s use this data to create a new plot.</p>
 <p>My first idea is that I could save a newdataset called <code>plot_data</code> and then make the plot with that dataset:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># save new data</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>plot_data <span class="ot">&lt;-</span> <span class="fu">filter</span>(cereal,</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>       manuf <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"K"</span>, <span class="st">"G"</span>))</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># plot with that data</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plot_data, <span class="fu">aes</span>(<span class="at">x =</span> fiber)) <span class="sc">+</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(manuf)) <span class="sc">+</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Fiber (g)"</span>,</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">""</span>,</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Number of Cereals"</span>,</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Cereal Fiber by Manufacturer"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># save new data</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>plot_data <span class="ot">&lt;-</span> <span class="fu">filter</span>(<span class="at">.data =</span> cereal,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>                    manuf <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"K"</span>, <span class="st">"G"</span>))</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># plot with that data</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plot_data, <span class="fu">aes</span>(<span class="at">x =</span> fiber)) <span class="sc">+</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(manuf)) <span class="sc">+</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Fiber (g)"</span>,</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">""</span>,</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Number of Cereals"</span>,</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Cereal Fiber by Manufacturer"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="06-data-wrangling_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="06-data-wrangling_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -597,18 +674,19 @@ Check In
 <p>This is fine, but if I am not actually going to use my <code>plot_data</code> again, I don’t really need to save it.</p>
 <p>Okay, instead I could put this new data into the <code>data</code> argument in ggplot:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">filter</span>(cereal,</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>       manuf <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"K"</span>, <span class="st">"G"</span>)), <span class="fu">aes</span>(<span class="at">x =</span> fiber)) <span class="sc">+</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(manuf)) <span class="sc">+</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Fiber (g)"</span>,</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">""</span>,</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Number of Cereals"</span>,</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Cereal Fiber by Manufacturer"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">filter</span>(<span class="at">.data =</span> cereal,</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>              manuf <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"K"</span>, <span class="st">"G"</span>)), </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> fiber)) <span class="sc">+</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(manuf)) <span class="sc">+</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Fiber (g)"</span>,</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">""</span>,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Number of Cereals"</span>,</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Cereal Fiber by Manufacturer"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="06-data-wrangling_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="06-data-wrangling_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -617,10 +695,10 @@ Check In
 <p>This is where the <strong>piping operator</strong> comes in! The pipeing operator lets us “pipe” the output from one line of code into the next.</p>
 <p>There are two piping operators: the native pipe <code>|&gt;</code> and the original” pipe <code>%&gt;%</code>. We will use the native pipe <code>|&gt;</code>, but you will still see the “original” pipe around as an FYI.</p>
 <p>The pipe operator takes whatever is to the left of it, and inputs that as the <strong>first</strong> argument in the function to the right.</p>
-<p>For example, instead of <code>head(cereal)</code>,</p>
+<p>For example, instead of <code>head(x = cereal)</code>,</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>cereal <span class="sc">|&gt;</span> </span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>cereal <span class="sc">|&gt;</span> </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                       name manuf type calories protein fat sodium fiber carbo
 1                 100% Bran     N cold       70       4   1    130  10.0   5.0
@@ -638,11 +716,11 @@ Check In
 6     10     70       25     1      1 0.75 29.50954</code></pre>
 </div>
 </div>
-<p>Building onto this, the first argument in <code>filter()</code> (and all other <code>dplyr</code> verbs) is the data frame, so we can do:</p>
+<p>Building onto this, the first argument in <code>filter()</code> (and all other <code>dplyr</code> verbs) is the data <code>.data =</code>, so we can do:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>cereal <span class="sc">|&gt;</span> </span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(manuf <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"K"</span>, <span class="st">"G"</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>cereal <span class="sc">|&gt;</span> </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(manuf <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"K"</span>, <span class="st">"G"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                       name manuf type calories protein fat sodium fiber carbo
 1                  All-Bran     K cold       70       4   1    260   9.0   7.0
@@ -662,24 +740,24 @@ Check In
 </div>
 <p>Again, this is so much better to read rather than</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">filter</span>(cereal, manuf <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"K"</span>, <span class="st">"G"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">filter</span>(<span class="at">.data =</span> cereal, manuf <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"K"</span>, <span class="st">"G"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>especially as our analyses get more complicated and with more steps!</p>
 <p>We can put this all together for readable code for our plot! Note that the first argument in <code>ggplot()</code> is also the data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>cereal <span class="sc">|&gt;</span> </span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(manuf <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"K"</span>, <span class="st">"G"</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> fiber)) <span class="sc">+</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(manuf)) <span class="sc">+</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Fiber (g)"</span>,</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">""</span>,</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">subtitle =</span> <span class="st">"Number of Cereals"</span>,</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">title =</span> <span class="st">"Cereal Fiber by Manufacturer"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>cereal <span class="sc">|&gt;</span> </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(manuf <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"K"</span>, <span class="st">"G"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> fiber)) <span class="sc">+</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(manuf)) <span class="sc">+</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Fiber (g)"</span>,</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">""</span>,</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">subtitle =</span> <span class="st">"Number of Cereals"</span>,</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">title =</span> <span class="st">"Cereal Fiber by Manufacturer"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="06-data-wrangling_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="06-data-wrangling_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -687,11 +765,92 @@ Check In
 </section>
 <section id="arrange" class="level3" data-number="7.3.3">
 <h3 data-number="7.3.3" class="anchored" data-anchor-id="arrange"><span class="header-section-number">7.3.3</span> <code>arrange()</code></h3>
+<p><code>arrange()</code> is a dplyr verb for sorting rows in the table by one or more variables. The arguments are data and one or more variables (separated by commas).</p>
+<p>Arrange automatically sorts rows in <em>ascending</em> order based on the variable provided, so it is often used with a helper function, <code>desc()</code>, which reverses the order of a variable, sorting it in descending order.</p>
+<p>Multiple arguments can be passed to <code>arrange()</code> to sort the data frame by multiple columns hierarchically; each column can be modified with <code>desc()</code> separately.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>cereal <span class="sc">|&gt;</span> </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(sodium) <span class="sc">|&gt;</span> </span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 name manuf type calories protein fat sodium fiber carbo sugars
+1 Frosted Mini-Wheats     K cold      100       3   0      0   3.0    14      7
+2               Maypo     A  hot      100       4   1      0   0.0    16      3
+3         Puffed Rice     Q cold       50       1   0      0   0.0    13      0
+4        Puffed Wheat     Q cold       50       2   0      0   1.0    10      0
+5      Quaker Oatmeal     Q  hot      100       5   2      0   2.7    -1     -1
+6      Raisin Squares     K cold       90       2   0      0   2.0    15      6
+  potass vitamins shelf weight cups   rating
+1    100       25     2    1.0 0.80 58.34514
+2     95       25     2    1.0 1.00 54.85092
+3     15        0     3    0.5 1.00 60.75611
+4     50        0     3    0.5 1.00 63.00565
+5    110        0     1    1.0 0.67 50.82839
+6    110       25     3    1.0 0.50 55.33314</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>cereal <span class="sc">|&gt;</span> </span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(sodium)) <span class="sc">|&gt;</span> </span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            name manuf type calories protein fat sodium fiber carbo sugars
+1     Product 19     K cold      100       3   0    320     1    20      3
+2       Cheerios     G cold      110       6   2    290     2    17      1
+3    Corn Flakes     K cold      100       2   0    290     1    21      2
+4  Rice Krispies     K cold      110       2   0    290     0    22      3
+5      Corn Chex     R cold      110       2   0    280     0    22      3
+6 Golden Grahams     G cold      110       1   1    280     0    15      9
+  potass vitamins shelf weight cups   rating
+1     45      100     3      1 1.00 41.50354
+2    105       25     1      1 1.25 50.76500
+3     35       25     1      1 1.00 45.86332
+4     35       25     1      1 1.00 40.56016
+5     25       25     1      1 1.00 41.44502
+6     45       25     2      1 0.75 23.80404</code></pre>
+</div>
+</div>
 <p>These functions implicitly arrange the data before slicing it (selecting rows).</p>
 <ul>
 <li><code>slice_min()</code> – select rows with the lowest value(s) of a variable</li>
 <li><code>slice_max()</code> – select rows with the highest value(s) of a variable</li>
 </ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>cereal <span class="sc">|&gt;</span> </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(<span class="at">order_by =</span> sugars, <span class="at">n =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   name manuf type calories protein fat sodium fiber carbo
+1          Golden Crisp     P cold      100       2   0     45     0    11
+2                Smacks     K cold      110       2   1     70     1     9
+3           Apple Jacks     K cold      110       2   0    125     1    11
+4 Post Nat. Raisin Bran     P cold      120       3   1    200     6    11
+5     Total Raisin Bran     G cold      140       3   1    190     4    15
+  sugars potass vitamins shelf weight cups   rating
+1     15     40       25     1   1.00 0.88 35.25244
+2     15     40       25     2   1.00 0.75 31.23005
+3     14     30       25     2   1.00 1.00 33.17409
+4     14    260       25     3   1.33 0.67 37.84059
+5     14    230      100     3   1.50 1.00 28.59278</code></pre>
+</div>
+</div>
+<p>Efficiency note: It is more efficient (and less prone to user-error!) to use <code>slice_max()</code> or <code>slice_min()</code> than <code>arrange()</code> followed by <code>filter()</code> or <code>slice_head()</code>.</p>
+<div class="callout callout-style-default callout-check-in callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Check In
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>Will the first cereal in the output of <code>arrange(.data = cereal, potass)</code> be the cereal with the largest or the smallest amount of potassium?</p></li>
+<li><p>What can you add inside of <code>arrange()</code> to change the default order?</p></li>
+<li><p>What does adding multiple variables to arrange do (e.g.&nbsp;<code>arrange(.data = cereal, potass, sugars)</code>?</p></li>
+</ol>
+</div>
+</div>
 </section>
 <section id="select" class="level3" data-number="7.3.4">
 <h3 data-number="7.3.4" class="anchored" data-anchor-id="select"><span class="header-section-number">7.3.4</span> <code>select()</code></h3>
@@ -710,7 +869,7 @@ Check In
 <li><code>last_col()</code> matches the last variable. <code>last_col(offset = n)</code> selects the n-th to last variable.</li>
 <li><code>starts_with("xyz")</code> will match any columns with names that start with xyz. Similarly, <code>ends_with()</code> does exactly what you’d expect as well.</li>
 <li><code>contains("xyz")</code> will match any columns with names containing the literal string “xyz”. Note, <code>contains</code> does not work with regular expressions (you don’t need to know what that means right now).</li>
-<li><code>matches(regex)</code> takes a regular expression as an argument and returns all columns matching that expression.</li>
+<li><code>matches(regex)</code> takes a regular expression as an argument and returns all columns matching that expression. We will learn about regular expressions later in the course!</li>
 <li><code>num_range(prefix, range)</code> selects any columns that start with prefix and have numbers matching the provided numerical range.</li>
 </ul>
 <p>There are also selectors that deal with character vectors. These can be useful if you have a list of important variables and want to just keep those variables.</p>
@@ -718,19 +877,81 @@ Check In
 <li><code>all_of(char)</code> matches all variable names in the character vector <code>char</code>. If one of the variables doesn’t exist, this will return an error.</li>
 <li><code>any_of(char)</code> matches the contents of the character vector <code>char</code>, but does not throw an error if the variable doesn’t exist in the data set.</li>
 </ul>
-<p>There’s one final selector -</p>
+<p>There’s one final selector. While the rest of the selectors use the variable <strong>names</strong> this lets you choose columns based on the actual <strong>values</strong> of the variables.</p>
 <ul>
 <li><code>where()</code> applies a function to each variable and selects those for which the function returns TRUE. This provides a lot of flexibility and opportunity to be creative.</li>
 </ul>
+<div class="callout callout-style-default callout-check-in callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Check In
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>Which variables will be in the output of <code>cereal |&gt; select(fiber:vitamins)</code>?</p></li>
+<li><p>What symbol(s) do you use to <strong>remove</strong> a variable from the dataset?</p></li>
+<li><p>Which helper function lets you choose variables based on their <strong>values</strong> rather than their <strong>names</strong>?</p></li>
+</ol>
+</div>
+</div>
 </section>
 <section id="mutate" class="level3" data-number="7.3.5">
 <h3 data-number="7.3.5" class="anchored" data-anchor-id="mutate"><span class="header-section-number">7.3.5</span> <code>mutate()</code></h3>
+<div class="callout callout-style-default callout-check-in callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Check In
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>What are the three arguments of the <code>if_else()</code> function?</li>
+</ol>
+</div>
+</div>
 </section>
 <section id="summarize" class="level3" data-number="7.3.6">
 <h3 data-number="7.3.6" class="anchored" data-anchor-id="summarize"><span class="header-section-number">7.3.6</span> <code>summarize()</code></h3>
+<div class="callout callout-style-default callout-check-in callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Check In
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>What are common summary functions you might want to use?</li>
+</ol>
+</div>
+</div>
 </section>
 <section id="group_by" class="level3" data-number="7.3.7">
 <h3 data-number="7.3.7" class="anchored" data-anchor-id="group_by"><span class="header-section-number">7.3.7</span> <code>group_by()</code></h3>
+<div class="callout callout-style-default callout-check-in callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Check In
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol start="9" type="1">
+<li>What happens when you group by <strong>two</strong> variables?</li>
+</ol>
+</div>
+</div>
 <div class="callout callout-style-default callout-check-in callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -749,45 +970,6 @@ Check In
 </ol>
 </div>
 </div>
-<!--# `filter`
-
-# `select`
-
-> include **columns** based on one or more logical statements
-
-3.  What symbol do you use to **remove** a column from the dataset?
-
-# `mutate()`
-
-> create new columns or change existing columns
-
-4.  What are the three arguments of the `if_else()` function?
-
-# `arrange()`
-
-> Organize the rows of the data in order of a particular variable.
-
-5.  By default what order does the `arrange()` function put values in?
-
-6.  What can you add **inside** the `arrange()` function to change the default order?
-
-# `arrange()` friends
-
-7.  What does the `n` argument of `slice_max()` and `slice_min()` do?
-
-# `summarize`
-
-> compute a table of summaries
-
-8.  What are common summary functions you might want to use?
-
-# `group_by`
-
-> put rows into groups based on values in column(s)
-
-9.  What happens when you group by **two** variables?
-
--->
 <div class="callout callout-style-default callout-required-reading callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">

@@ -47,6 +47,7 @@ format:
       dark: [darkly, customcallouts.scss]
     code-copy: true
     code-annotations: below
+    toc-depth: 4
   # pdf:
   #   documentclass: scrreprt
 
