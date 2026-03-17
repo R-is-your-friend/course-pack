@@ -6,11 +6,11 @@
 -   Locate different panes of RStudio
 -   Use the Console to run code
 -   Use Environment tab to identify what objects have been created
--   
--   
+<!-- -   Explaining how code works -->
+<!-- -   Create, edit, and save an R script -->
 :::
 
-# Welcome to RStudio!
+## Welcome to RStudio!
 
 RStudio is the integrated development environment (IDE) we will be using
 to interact with R. RStudio is a very powerful environment that has lots
@@ -37,11 +37,24 @@ the Files, Help, and Packages tabs. These tabs allow you to access files
 on your computer, install and load packages, and access documentation
 (help) pages for functions you might be trying to use.
 
-# What is code?
+## What is code?
 
-<!-- Need to fill this in! -->
+Code is a set of instructions that tells a computer what to do and programming 
+languages provide a structured way for humans to communicate these instructions
+to computers. Similar to a recipe giving step-by-step directions to bake a cake,
+code gives step-by-step directions for a computer to follow. Because computers
+require very precise instructions, programming languages have specific rules
+about how code must be written (kind of like constraining that your recipe can
+only be written with metric units). 
 
-## What makes R different?
+One of the main advantages of code is that it allows tasks to be performed
+automatically and repeatedly. Instead of manually performing calculations or
+organizing information, we can write code that tells the computer how to carry
+out those steps for us. Once written, code can be run again and again, making
+it easier to work with large amounts of data and ensuring that the same process
+is applied consistently each time it is run.
+
+### What makes R different?
 
 R is a statistical programming language. Unlike more general-purpose languages,
 R is optimized for working with data and doing statistics. R was created by Ross
@@ -69,7 +82,7 @@ respectful projects.
 If you would like to learn more about the history of R, here is an [excellent article written by Roger Peng](https://bookdown.org/rdpeng/rprogdatascience/history-and-overview-of-r.html).
 :::
 
-# Running Code (in the Console)
+## Running Code (in the Console)
 
 When you open RStudio, the console pane should display information
 related to your R session. You should see something like the message
@@ -105,7 +118,7 @@ RStudio or RStudio tells you it doesn't detect R on your laptop you
 either forgot to install R or installed it in an unexpected location.
 :::
 
-## The Console Tab
+### The Console Tab
 
 It is possible to run code directly in the console! This code can be
 simple arithmetic like `2 + 2` or `3 * 6` or `6 - 4`. The output of each
@@ -119,7 +132,7 @@ is output.
 Run these same three lines of code in your console.
 :::
 
-## Creating Objects
+### Creating Objects
 
 It seems a bit silly to use R as a calculator when it can do so much
 more for us! A key aspect of working in R is the idea of storing values
@@ -147,6 +160,10 @@ You should have noticed when you created `x` and `y` that the values are not
 printed, they are just stored. If you want to view the value, you would need 
 to type `x` to see its contents.
 
+::: callout-practice-exercise
+Type `x` and `y` in the console to preview the contents of these objects!
+:::
+
 ### Environment tab
 
 Now that you've created two objects, there are some interesting things
@@ -157,7 +174,7 @@ objects labeled "Data" and "Functions".
 
 ![](images/01-rstudio-environment-annotated.png){fig-alt="Screenshot of the environment pane after creating the objects x and y. A Orange box is drawn around the names x and y with the annotation 'object name' and a second box is drawn around the values 3 and 4 with an annotation 'object value'. The screenshot also highlights the broom icon with a red box drawn around it, and an annotation indicating that this icon will remove all the objects from the environment."}
 
-## The History Tab (Top Right)
+### The History Tab (Top Right)
 
 Another useful tab in this pane is the History tab, which shows you a
 running list of every command you've ever run. At this point you should
@@ -166,7 +183,7 @@ in the history.
 
 ![](images/01-rstudio-history-annotated.png){fig-alt="Screenshot of the history pane. This pane preserves all commands that have been run from the console or from evaluating code cells or scripts. The image highlights the broom icon in a red box and an accompanying annotation stating that this icon will clear the history (of the code that has been run)."}
 
-## Updating Objects
+### Updating Objects
 
 Currently, the values of `x` and `y` are `3` and `4` respectively, but
 we might need to update their values. If we want to change the values of
@@ -197,14 +214,14 @@ of `x`, `y`, and `z` for each of the three lines of code above.
 | Line 3 |        |         |                       |
 :::
 
-# Saving Your Code
+## Saving Your Code
 
 This process of updating objects in the console seems a bit tedious and error 
 prone. If we made a mistake we can't modify our previous code, so we will need
 to write another line of code. Moreover, it would be a bit tedious to get a
 history of all the code we ran. Enter R scripts! 
 
-## Scripts
+### Scripts
 
 An R script is a document that can store your code! Specifically, an R script is
 a plain text file whose entire purpose is to store R commands. Instead of typing
@@ -220,7 +237,7 @@ structure, comments, and good programming habits as our projects grow.
 
 Let's create our first R script!
 
-### Creating an R Script
+#### Creating an R Script
 
 In the upper left hand corner, you should see an image of a white sheet with a 
 green plus sign. If you click this button you should see something like the 
@@ -247,7 +264,7 @@ An R script file has a blue circle with the letter R.
 Let's start typing in the script, so we can explore some of the other buttons 
 available to us. 
 
-### Running Code
+#### Running Code
 
 Copy the code below into your R script, so we can explore the various ways to 
 run code. 
@@ -261,7 +278,7 @@ fname <- "Jane"
 lname <- "Hollander"
 ```
 
-Now that we have code in the script we can see that code numbers are provided on
+Now that we have code in the script we can see that line numbers are provided on
 the left. This is a handy way to see where in the code the errors occur. There
 are a few ways to run code:
 
@@ -280,17 +297,27 @@ code and see which one you prefer!
 
 ### Saving Your R Script 
 
+::: columns
+::: {.column width="55%"}
 You'll notice that currently your script is labeled "Untitled1" that is because
 we haven't saved the file anywhere. If we were to try and close our file before
 saving RStudio would tell us that our document had unsaved changes. Let's save 
 our document so we have access to it later on!
 
-![](images/01-rstudio-unsaved-changes.png){fig-alt="A screenshot of the popup that appears when you attempt to close RStudio without saving your R script. The popup says 'The document Untitled1 has unsaved changes. Do you want to save these changes. The options provided are 'Save' (in blue), 'Don't Save', and 'Cancel.' The save button is what should be selected."}
 You can save your file a few different ways. First, you can always use Command + S (or Control + S) to save a file. Second, you can click on the [blue floppy disk](images/01-rstudio-save.png){fig-alt="A screenshot of the blue floppy disk icon that lives on the top left below the file name."} immediately below your file name. 
 
 Either of these options should open a popup menu for you to select where you
 want the script to be saved. Navigate to your `stat-1810` folder that lives in
 your `Documents` folder. Change the file name to `week-1.R`.
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="40%"}
+![](images/01-rstudio-unsaved-changes.png){fig-alt="A screenshot of the popup that appears when you attempt to close RStudio without saving your R script. The popup says 'The document Untitled1 has unsaved changes. Do you want to save these changes. The options provided are 'Save' (in blue), 'Don't Save', and 'Cancel.' The save button is what should be selected."}
+:::
+:::
 
 ### Files tab
 
@@ -306,7 +333,7 @@ To get to the `week-1.R` file I needed to click through two folders:
 
 ![](images/01-rstudio-file-path-annotated.png){fig-alt="A series of three screenshots demonstrating how to get to the week-1.R file saved in the stat-1810 folder. The first screenshot shows the 'Home' directory, which is similar to the C Drive on a PC. The Documents folder is outlined in red, as that is the folder that needs to be clicked on. The second screenshot shows the files stored in the Documents folder. There are six folders and the stat-1810 folder is highlighted in red. The third screenshot shows the week-1.R file which lives in the stat-1810 folder. At the top of the screenshot there is a red box highlighting the path to get to the week-1.R file (Home > Documents > stat-1810)."}
 
-## Writing Code for People
+### Writing Code for People
 
 While scripts are a great way to store our code, scripts often don't make it 
 easy for people to understand the processes enacted in the code. Yet, in almost 
@@ -316,7 +343,15 @@ programming, you will realize quickly that writing readable code is more
 challenging than writing working code but it is possibly just as important as 
 getting a working solution. 
 
-### Code Comments
+<!-- add a section about good object names -->
+<!-- ::: {.panel-tabset} -->
+<!-- for camel case versus snake case -->
+
+<!-- x and y are bad names -->
+<!-- first and last are better names, but still not great -->
+
+
+#### Code Comments
 
 One way to make code easier to understand is the use of code comments. Since 
 an R script can only contain R code, a code comment is your way of interweaving
@@ -325,8 +360,7 @@ a `#`. The `#` symbol indicates to R that this line of text **should not** be
 executed as code. 
 
 ::: {.panel-tabset}
-
-# Descriptive Comments
+## Descriptive Comments
 
 You can use code comments to describe the actions taken by the code. Notice 
 how each code comment below *describes* what is happening in the subsequent 
@@ -343,7 +377,7 @@ z <- x + y
 
 ```
 
-# Actionable Comments
+## Actionable Comments
 
 You can also use code comments to comment out a line of code, so it is not
 executed. Note that we are still using a space after the `#` to make the line
@@ -369,13 +403,13 @@ use more than one `#` for consistency and readability.
 :::
 
 
-# Exiting RStudio
+## Exiting RStudio
 
+::: columns
+::: {.column width="55%"}
 Now that we've accomplished what we set out to do, we can close RStudio. When 
 you try and close RStudio, you should get a message like the one below. You 
 might wonder what this message means. Let us tell you!
-
-![](images/01-rstudio-exit-message.png){fig-alt="A screenshot of the message that appears when you attempt to close RStudio after running code. The message asks if you want to 'Save workspace image to ~/.Rdata?' with options Save, Don't Save, and Cancel."}
 
 When you exit an R session, you’re faced with the question of whether or not to
 save your workspace. The workspace is an image of all the objects you created
@@ -383,6 +417,15 @@ while you were working in R into a file called `.RData`. If you save your
 workspace, when you reopen RStudio that workspace will be loaded and all the 
 objects you created previously will be available to you. This might sound like
 something you might want, but actually can cause some major headaches. 
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="40%"}
+![](images/01-rstudio-exit-message.png){fig-alt="A screenshot of the message that appears when you attempt to close RStudio after running code. The message asks if you want to 'Save workspace image to ~/.Rdata?' with options Save, Don't Save, and Cancel."}
+:::
+:::
 
 Loading a saved workspace turns your R script from a program, where everything
 happens based on a series of known steps, to something more akin to a 
@@ -400,15 +443,22 @@ Click "Cancel" in the pop-up window above (with the message about saving the
 workspace image). Now, at the top file menu for RStudio, click on Tools. In the
 dropdown menu that appears, click on "Global Options". 
 
-![](images/01-rstudio-global-options-annotated.png){fig-alt="A screenshot of the menu that appears when you click on 'Tools' from the top menu of RStudio. At the bottom of the menu that appears, 'Global Options' is highlighted in red and blue indicating this is the option you want to select."}
+![](images/01-rstudio-global-options-annotated.png){fig-alt="A screenshot of the menu that appears when you click on 'Tools' from the top menu of RStudio. At the bottom of the menu that appears, 'Global Options' is highlighted in red and blue indicating this is the option you want to select." width="30%"}
 
+::: columns
+::: {.column width="55%"}
 In the menu that appears, you want to uncheck the box next to "Restore .RData
 into workspace at startup." Next, you should select "Never" from the dropdown
 menu next to "Save workspace to .RData on exit" (there are three options). Once
 you've changed these options, click "OK" and the popup window should close. 
+:::
 
+::: {.column width="5%"}
+:::
+
+::: {.column width="40%"}
 ![](images/01-rstudio-save-rdata-annotated.png){fig-alt="A screenshot of the popup window that appears after you select 'Global Options' from the previous menu. The popup window has A LOT of options, but there is a red box outlining the section we need to focus on. Under 'Workspace' there is a checkbox next to a line that says 'Restore .RData'. This box should be unchecked. The next line says 'Save workspace to .RData on exit.'. Next to this line there is a dropdown menu with three options: Always, Never, Ask. We need to change this option to 'Never'. Once these options have been modified, click on 'OK' to exit."}
-
-
+:::
+:::
 
 Now, it is safe to exit RStudio!
