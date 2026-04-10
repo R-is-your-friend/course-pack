@@ -2,9 +2,221 @@
 
 ::: callout
 ## Learning Objectives
-+ 
-+ 
-+
+
++ Identify three of the foundational data types in R
++ Explain similarities and differences between different object types
++ Use indexing to extract elements from different object types
++ Use functions to calculate summary statistics
++ Use logical values and indexing to calculate summary statistics
+:::
+
+## Data Types
+
+In the last class, you learned how to create simple objects (e.g., `x <- 1221`, 
+`name <- "jane"`), but we never talked about the difference between a value 
+like `1221` and `"jane"`. These two values have different **data types**---one
+is a **number** and one is a **character** (really, a set of characters). These 
+are two of what are called the ["atomic" data types in R](https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Vectors). Let's 
+dig into these data types more!
+
+### Numeric Values
+
+You've seen a lot of numbers in your day, so it probably wouldn't surprise you
+to know that there are different types of numbers. There are numbers **with**
+decimals and there are numbers **without** decimals. Technically, R separates
+these two types of numbers into their own data types---**doubles** and
+**integers**.
+
+#### Double (Real) Values
+
+If a number has a decimal value (e.g., `26.2`), then R will store the number 
+as a double (real) numeric. 
+
+```{r}
+#| echo: true
+#| eval: true
+#| label: example-make-double
+
+room <- 26.2
+typeof(room)
+```
+
+::: {.callout-tip}
+# `typeof()`
+
+The `typeof()` function tells you the storage type that R is using internally to
+hold the data. You can think of this function asking the question, 
+"How is this data physically stored in memory?". 
+:::
+
+#### Integer Values
+
+Numbers that **do not** have decimals are called `integer`s. If you want a number
+to be stored as an `integer`, you need to tell R to do so. Otherwise, your
+number will still be stored as a `double`.
+
+::: columns
+::: {.column width="48%"}
+
+Defaults to `double`:
+
+```{r}
+#| echo: true
+#| eval: true
+#| label: example-make-integer-double
+
+room <- 1221
+typeof(room)
+```
+
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+Adding an `L` to the end creates an `integer`:
+
+```{r}
+#| echo: true
+#| eval: true
+#| label: example-make-integer-1
+
+room <- 1221L
+typeof(room)
+```
+:::
+:::
+
+::: {.callout-opinion}
+
+You might wonder why `L` is used to create an `integer`. Wouldn't an `I` make 
+more sense?
+
+Because R is written mostly in C (another programming language), it likely
+inherits some naming conventions from C. In C, `L` is used to denote a (long)
+integer. Moreover, it would be confusing to use an `I` to indicate an `integer`
+since you use a `"i"` suffix to create a complex number. 
+
+:::
+
+::: {.callout-tip}
+# Other ways to create an `integer`
+
+Adding an `L` at the end of a number is one way to make an integer, but this
+really only works when we are creating our objects by hand. More frequently, 
+we will be given a vector of numbers which we may want to transform into 
+integer values. The `as.integer()` function can help us do just that!
+
+```{r}
+#| echo: true
+#| eval: true
+#| label: example-make-integer-2
+
+room <- as.integer(1221)
+typeof(room)
+```
+:::
+
+<!-- We could choose to highlight how `class()` returns the same value (numeric) for -->
+<!-- both doubles and integers.  -->
+
+<!-- class() tells you the high-level type that R uses to decide how to behave with -->
+<!-- the object. Think of it as asking: "What role does this object play?"  -->
+
+<!-- Imagine a chef's knife: -->
+<!-- typeof() → "It's made of stainless steel" (the raw material) -->
+<!-- class() → "It's a kitchen tool" (the role it plays) -->
+
+### Character Values
+
+### Logical Values
+
+```{r}
+passed <- TRUE
+typeof(passed)
+```
+
+### Other Data Types
+
+So far, we've covered real (double), integer, character, and logical data types.
+These form all but two of the atomic data types. The only two that remain are
+**complex** and **raw**. As you might expect from its name, the complex data
+type is used to store complex numbers (e.g., `4 + 3i`). The raw data type is 
+possibly the least used data type, whose purpose is to store data at the byte
+level.
+
+In STAT 1810 and 3820 we will **only** work with real, integer, character, and
+logical data types!
+
+## Object Types
+<!-- Intro to vectors, lists, matrices, dataframes, tibbles.  -->
+<!-- Building up objects -->
+<!-- Small object (from last week) is a scalar value -->
+<!-- Bigger object is a vector (multiple values) -->
+<!-- What if we have multiple vectors? -->
+<!-- To store them in a matrix, they all need to be the same data type. -->
+<!-- If they are different data types, then we need a list.  -->
+<!-- What if the vectors are all the same length? -->
+<!-- Then we can use a data frame (or a tibble)! -->
+
+<!-- In the lab they learned about using the c() function to make a vector. -->
+<!-- The last problem explored datatype coercion when a string is added to a vector of numbers -->
+
+### Vectors
+<!-- Give basic info / examples. -->
+<!-- How to create each type of structure. -->
+
+
+### Multiple Vectors
+<!-- Relate structures to each other – e.g., a column of a matrix / dataframe / tibble is a vector. -->
+
+#### Do all of the vectors have the same data type?
+<!-- matrices! -->
+
+
+#### Do the vectors have different data types?
+<!-- lists! -->
+
+#### Are the vectors all the same length?
+<!-- dataframes or tibbles! -->
+
+
+::: {.callout-check-in}
+<!-- How to recognize what each type looks like printed out. -->
+
+:::
+
+## Indexing Objects
+<!-- Indexing and subsetting -->
+<!-- Accessing columns in a dataframe / tibble via $. -->
+<!-- Accessing elements via []. -->
+<!-- Accessing elements via T / F. -->
+
+### Vectors
+
+### Matrices
+
+### Lists
+
+### Dataframes
+
+
+::: {.callout-check-in}
+<!-- Give them data / coding scenarios and they pick which structure would be
+most appropriate and then code a small example. -->
+
 :::
 
 
+## Mathematical Operations
+<!-- Can do math via indexing – add 1 to the first element, then the second element, etc. -->
+<!-- Vectorized math. -->
+<!-- But many functions are vectorized -- +, -, x. /, exp, log, ==, etc. -->
+
+### Operations on Columns
+
+### Operations on Rows
+
+### Operations with Logical Values
+<!-- Finding sums / proportions via T / F. -->

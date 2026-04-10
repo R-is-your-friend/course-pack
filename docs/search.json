@@ -142,9 +142,9 @@
   {
     "objectID": "02-r-is-friend.html",
     "href": "02-r-is-friend.html",
-    "title": "3  R is Friend",
+    "title": "\n3  R is Friend\n",
     "section": "",
-    "text": "Learning Objectives",
+    "text": "3.1 Data Types\nIn the last class, you learned how to create simple objects (e.g., x &lt;- 1221, name &lt;- \"jane\"), but we never talked about the difference between a value like 1221 and \"jane\". These two values have different data types—one is a number and one is a character (really, a set of characters). These are two of what are called the “atomic” data types in R. Let’s dig into these data types more!",
     "crumbs": [
       "Fundamentals of Coding",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>R is Friend</span>"
@@ -346,6 +346,50 @@
     "crumbs": [
       "Modeling and Functions",
       "<span class='chapter-number'>15</span>  <span class='chapter-title'>Simulation</span>"
+    ]
+  },
+  {
+    "objectID": "02-r-is-friend.html#data-types",
+    "href": "02-r-is-friend.html#data-types",
+    "title": "\n3  R is Friend\n",
+    "section": "",
+    "text": "3.1.1 Numeric Values\nYou’ve seen a lot of numbers in your day, so it probably wouldn’t surprise you to know that there are different types of numbers. There are numbers with decimals and there are numbers without decimals. Technically, R separates these two types of numbers into their own data types—doubles and integers.\n\n3.1.1.1 Double (Real) Values\nIf a number has a decimal value (e.g., 26.2), then R will store the number as a double (real) numeric.\n\nroom &lt;- 26.2\ntypeof(room)\n\n[1] \"double\"\n\n\n\n\n\n\n\n\nTiptypeof()\n\n\n\nThe typeof() function tells you the storage type that R is using internally to hold the data. You can think of this function asking the question, “How is this data physically stored in memory?”.\n\n\n\n3.1.1.2 Integer Values\nNumbers that do not have decimals are called integers. If you want a number to be stored as an integer, you need to tell R to do so. Otherwise, your number will still be stored as a double.\n\n\nDefaults to double:\n\nroom &lt;- 1221\ntypeof(room)\n\n[1] \"double\"\n\n\n\n\n\nAdding an L to the end creates an integer:\n\nroom &lt;- 1221L\ntypeof(room)\n\n[1] \"integer\"\n\n\n\n\n\n\n\n\n\n\nOpinionJust our opinion...\n\n\n\nYou might wonder why L is used to create an integer. Wouldn’t an I make more sense?\nBecause R is written mostly in C (another programming language), it likely inherits some naming conventions from C. In C, L is used to denote a (long) integer. Moreover, it would be confusing to use an I to indicate an integer since you use a \"i\" suffix to create a complex number.\n\n\n\n\n\n\n\n\nTipOther ways to create an integer\n\n\n\nAdding an L at the end of a number is one way to make an integer, but this really only works when we are creating our objects by hand. More frequently, we will be given a vector of numbers which we may want to transform into integer values. The as.integer() function can help us do just that!\n\nroom &lt;- as.integer(1221)\ntypeof(room)\n\n[1] \"integer\"\n\n\n\n\n\n\n\n\n\n\n\n\n3.1.2 Character Values\n\n3.1.3 Logical Values\n\npassed &lt;- TRUE\ntypeof(passed)\n\n[1] \"logical\"\n\n\n\n3.1.4 Other Data Types\nSo far, we’ve covered real (double), integer, character, and logical data types. These form all but two of the atomic data types. The only two that remain are complex and raw. As you might expect from its name, the complex data type is used to store complex numbers (e.g., 4 + 3i). The raw data type is possibly the least used data type, whose purpose is to store data at the byte level.\nIn STAT 1810 and 3820 we will only work with real, integer, character, and logical data types!",
+    "crumbs": [
+      "Fundamentals of Coding",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>R is Friend</span>"
+    ]
+  },
+  {
+    "objectID": "02-r-is-friend.html#object-types",
+    "href": "02-r-is-friend.html#object-types",
+    "title": "\n3  R is Friend\n",
+    "section": "\n3.2 Object Types",
+    "text": "3.2 Object Types\n\n\n\n\n\n\n\n\n\n\n\n\n3.2.1 Vectors\n\n\n\n3.2.2 Multiple Vectors\n\n\n3.2.2.1 Do all of the vectors have the same data type?\n\n\n3.2.2.2 Do the vectors have different data types?\n\n\n3.2.2.3 Are the vectors all the same length?\n\n\n\n\n\n\n\nCheck-inCheck In",
+    "crumbs": [
+      "Fundamentals of Coding",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>R is Friend</span>"
+    ]
+  },
+  {
+    "objectID": "02-r-is-friend.html#indexing-objects",
+    "href": "02-r-is-friend.html#indexing-objects",
+    "title": "\n3  R is Friend\n",
+    "section": "\n3.3 Indexing Objects",
+    "text": "3.3 Indexing Objects\n\n\n\n\n\n3.3.1 Vectors\n\n3.3.2 Matrices\n\n3.3.3 Lists\n\n3.3.4 Dataframes\n\n\n\n\n\n\nCheck-inCheck In",
+    "crumbs": [
+      "Fundamentals of Coding",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>R is Friend</span>"
+    ]
+  },
+  {
+    "objectID": "02-r-is-friend.html#mathematical-operations",
+    "href": "02-r-is-friend.html#mathematical-operations",
+    "title": "\n3  R is Friend\n",
+    "section": "\n3.4 Mathematical Operations",
+    "text": "3.4 Mathematical Operations\n\n\n\n\n3.4.1 Operations on Columns\n\n3.4.2 Operations on Rows\n\n3.4.3 Operations with Logical Values",
+    "crumbs": [
+      "Fundamentals of Coding",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>R is Friend</span>"
     ]
   }
 ]
