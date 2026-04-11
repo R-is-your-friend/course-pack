@@ -400,7 +400,7 @@ shows <- c("Tale of a Thousand Stars", "Bad Buddy",
 ```
 
 But, to us, these make it harder to see the length of the vector. So, that is 
-why we chose to use a new line for every entry of the vector. 
+why we chose to use a new line for every element of the vector. 
 
 ```{r}
 #| eval: true
@@ -436,10 +436,10 @@ top_bl <- list(shows, release_years)
 top_bl
 ```
 The output of a list is a bit unexpected, so let's break it down. The `[[]]` 
-represents the number of the entry. So, `[[1]]` represents the `shows` and
+represents the number of the component. So, `[[1]]` represents the `shows` and
 `[[2]]` represents the `release_years`. The `[]` represents the number of the
-item *within* each entry. So, `"Tale of a Thousand Stars"` is the first (`[1]`)
-item of the first entry (`[[1]]`). 
+item *within* each component. So, `"Tale of a Thousand Stars"` is the first
+(`[1]`) item of the first component (`[[1]]`). 
 
 We find it easier to think of lists as cubby bins. Each `[[]]` represents a bin
 and the `[]` represent the items in the bin. Within a bin the objects are the 
@@ -447,7 +447,7 @@ and the `[]` represent the items in the bin. Within a bin the objects are the
 
 ![A `list` analogy with a cubby bin. Each cubby has different types of items (e.g., puzzles, dolls, legos) but within a cubby the items are all the same.](images/02-list-cubbies.jpg){fig-alt="A picture of a wood cubby bin with six different cubby slots. Each cubby is a different color (red, yellow, blue, green, purple, orange) and each cubby contains different types of objects (legos, books, cars, paints, dolls). However, within a cubby bin the items are all the same. Meaning, the bin of dolls does not also contain legos." width=50%}
 
-We could have modified our method for creating the list by giving each entry 
+We could have modified our method for creating the list by giving each component
 a name. 
 
 ```{r}
@@ -458,9 +458,9 @@ top_bl
 ```
 
 Notice now there are `$` symbols instead of `[[]]` symbols. The `$` in
-front of `show_name` and `release_year` represents the **name** of that entry. 
-We technically call this a *named list* since every entry has a name.
-
+front of `show_name` and `release_year` represents the **name** of that 
+component. We technically call this a *named list* since every component has a
+name.
 
 ![A `list` analogy with a cubby bin. Similar to before, each cubby has different types of items (e.g., puzzles, dolls, legos) but within a cubby the items are all the same. However, now the cubbies all have names identifying the contents of the cubby.](images/02-lists-labeled-cubbies.png){fig-alt="Another picture of a cubby bin with nine different cubby slots. The difference with this cubby bin is that each bin has a label indicating its contents (legos, dolls, trucks, balls, art supplies)." width=50%}
 
@@ -495,7 +495,7 @@ data.frame(show_name = shows,
 
 While a dataframe is a list, the output looks **very** different. Each variable
 (`show_name`, `release_year`) is slotted into a column. The numbers on the side
-(`1`, `2`, `3`, `4`) represent the entry number.
+(`1`, `2`, `3`, `4`) represent the element number.
 
 
 ::: {.callout-check-in}
@@ -522,7 +522,7 @@ harvest_window <- c(3, 5, 12, 12, 5, 3)
 
 Using the output below, identify what type of object you believe was created.
 
-5. What type of object?
+5. What type of object is this?
 
 ```{r}
 #| label: identify-object-1
@@ -531,7 +531,7 @@ Using the output below, identify what type of object you believe was created.
 list(trees, harvest_window)
 ```
 
-6. What type of object?
+6. What type of object is this?
 
 ```{r}
 #| label: identify-object-2
@@ -540,7 +540,7 @@ list(trees, harvest_window)
 matrix(harvest_window, nrow = 3)
 ```
 
-7. What type of object?
+7. What type of object is this?
 
 ```{r}
 #| label: identify-object-3
@@ -549,7 +549,7 @@ matrix(harvest_window, nrow = 3)
 data.frame(fruits, trees)
 ```
 
-8. What type of object?
+8. What type of object is this?
 
 ```{r}
 #| label: identify-object-4
@@ -557,30 +557,396 @@ data.frame(fruits, trees)
 
 list(tree = trees, harvest_window = harvest_window)
 ```
+
+9. What type of object is this?
+
+```{r}
+#| label: identify-object-5
+#| echo: false
+
+trees
+```
 :::
 
 ## Indexing Objects
+
+We will often find ourselves in the position where we are interested in
+extracting a component / components of an object. Extracting components from
+an object is more frequently called "subsetting," where the subset is a smaller
+part of the larger object. Fundamentally, subsetting is done using **indexing**
+where the index / indices refer to elements you wish to be kept (or discarded)
+from the larger object. 
+
+Let's see how subsetting works on each of the objects we learned about
+previously.
+
+
 <!-- Indexing and subsetting -->
-<!-- Accessing columns in a dataframe / tibble via $. -->
 <!-- Accessing elements via []. -->
+<!-- Accessing columns in a dataframe / tibble via $. -->
 <!-- Accessing elements via T / F. -->
 
 ### Vectors
 
+We extract components of a vector using bracketing (`[]`). The value(s) inside 
+the brackets indicate what indices should be kept. There are two methods for 
+indexing what values should be kept---numbers and logical values. 
+
+#### Indexing with Numbers
+
+Every element of a vector is assigned a number representing its position 
+(location) in the vector. R starts counting at `1`^[Other languages, like Python, 
+start counting at `0`.]. So, a vector with have indices starting at `1` and 
+ending at its last element. 
+
+The vector of `shows` below has `r length(shows)` elements, so it will have 
+indices from `1` up to `r length(shows)`.
+
+```{r}
+#| label: bracketing-with-numbers
+
+shows <- c("Tale of a Thousand Stars", 
+           "Bad Buddy", 
+           "Moonlight Chicken", 
+           "Not Me")
+
+```
+
+If we wanted to extract **a single element** of `shows` we would write
+something like `shows[3]`, which would output `"`r shows[3]`"`. 
+
+Once we want to extract **more than one** element of `shows`, then we need to
+make a **vector** containing the indices we want to keep. Remember, we create
+a vector using the `c()` function. 
+
+So, if we wanted the first two elements of `shows`, we could write something 
+like:
+
+```{r}
+#| label: vector-index-1
+shows[c(1, 2)]
+```
+
+If we wanted the second and forth elements, we could write something like:
+
+```{r}
+#| label: vector-index-2
+shows[c(2, 4)]
+```
+
+::: {.callout-tip}
+# Vector Shortcut
+
+If you want to create a vector of consecutive numbers (e.g., `1` through `5`), 
+you don't have to type out `c(1, 2, 3, 4, 5)`. There is a shortcut! 
+
+The `:` operator can generate a sequences of numbers. For example, `1:5` would 
+generate a sequence of numbers from `1` to `5` (`r 1:5`). So, if you wanted the
+first three elements of `shows` you could instead write `shows[1:3]`. 
+
+Much faster!
+:::
+
+#### Indexing with Logicals
+
+The second method of subsetting uses logical values (`TRUE`, `FALSE`) instead 
+of numbers to grab the desired indices. Each logical value represents whether 
+that specific index / element should be retained.
+
+```{r}
+#| label: bracketing-with-logicals
+
+shows[c(FALSE, TRUE, FALSE, TRUE)]
+```
+
+Notice this vector is longer than the previous method (`shows[c(2, 4)]`)! The
+vector of logicals must be the **same** length as the original vector, since
+each logical value  refers to whether that specific element of the vector should
+be kept!
+
+::: {.callout-check-in}
+
+Given this vector, write code to perform the following operations. *Can you find
+__multiple__ methods?*
+
+```{r}
+#| label: vector-check-in
+fruits <- c("apple",
+            "orange", 
+            "lemon", 
+            "lime", 
+            "mango", 
+            "peach")
+fruits
+```
+
+10. Grab the first three elements.
+
+11. Grab the first, third, and fifth element.
+:::
+
+
 ### Matrices
-<!-- Relate structures to each other – e.g., a column of a matrix / dataframe / tibble is a vector. -->
+
+Where a vector had **one** dimension (length) a matrix has **two**
+dimensions---rows and columns. Because we now have a second dimension, there are
+two elements in the brackets (`[]`) we use to index. 
+
+```{r}
+#| label: create-matrix
+
+name_matrix <- matrix(names, nrow = 2)
+name_matrix
+```
+
+Now when we bracket, we will use something like `[2, 2]`. The first number
+refers to the **row** and the second number refers to the **column**. So, 
+`[2, 2]` extracts the observation from the second row and second column:
+
+```{r}
+#| label: extract-matrix-entry
+
+name_matrix[2, 2]
+```
+
+If we wanted to grab an entire row we would leave the second value out, thereby
+grabbing **every** column:
+
+```{r}
+#| label: extract-matrix-row
+
+name_matrix[2,]
+```
+
+If we wanted to grab an entire column we would leave the first value out,
+thereby grabbing **every** row:
+
+```{r}
+#| label: extract-matrix-column
+
+name_matrix[,2]
+```
+
+Grabbing multiple rows / columns works the same way as a what we did with a 
+vector, where we need to create a vector of rows / columns we want to keep. 
+
+::: columns
+::: {.column width="48%"}
+```{r}
+#| label: extract-matrix-columns-rows-1
+
+## Rows 1 & 2, Column 2
+name_matrix[1:2 , 2]
+```
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+```{r}
+#| label: extract-matrix-columns-rows-2
+
+## Row 2, Columns 2 & 3
+name_matrix[2, 2:3]
+```
+:::
+:::
+
+::: {.callout-important}
+# Vectors everywhere!
+
+Notice that all of the above actions for subsetting a matrix resulted in a 
+**vector**. That is because each of these actions isolated a **single** row or a 
+**single** column. So, the resulting object only had **one** dimension (not
+two). 
+
+We could have gotten a matrix, but we would have needed to isolate **multiple**
+rows or **multiple** columns:
+
+```{r}
+## All Rows, Columns 2 & 3
+name_matrix[, 2:3]
+```
+::: 
+
+::: {.callout-check-in}
+
+Given this matrix, write code to perform the following operations. *Can you find
+__multiple__ methods?*
+
+```{r}
+trees <- c("Malus domestica", 
+           "Citrus sinensis", 
+           "Citrus limon", 
+           "Citrus aurantifolia", 
+           "Mangifera indica", 
+           "Prunus persica")
+
+tree_matrix <- matrix(trees, ncol = 2)
+tree_matrix
+```
+
+12. Grab the tree in the second row, second column.
+
+13. Grab the trees in the first two rows. 
+
+14. Grab the trees in the second column. 
+:::
+
 
 ### Lists
 
-### Dataframes
+Lists differ from matrices and vectors in one key way, the use of `[[]]` to 
+isolate a component. Where a matrix used `[3, ]` to isolate the third row, a 
+list uses `[[3]]` to isolate the third component. 
 
+Recall the list we made earlier:
+
+```{r}
+#| label: old-bl-list
+
+top_bl <- list(show_name = shows, 
+               release_year = release_years, 
+               characters = characters)
+
+top_bl
+```
+
+If we wanted to isolate the characters, we could use `[[3]]` to grab that 
+component of the list:
+
+```{r}
+#| label: grab-list-entry-brackets-index
+
+top_bl[[2]]
+```
+
+Alternatively, we could have used a `$` to isolate this component because it has 
+a name:
+
+```{r}
+#| label: grab-list-entry-name
+
+top_bl$release_year
+```
+
+Notice that each of these are once again a vector! If we wanted to grab an 
+element from either of these vectors, we can use the method we learned 
+previously (bracketing). 
+
+<!-- I haven't talked about the third option: [["release_year"]] -->
+
+```{r}
+#| label: grab-list-entry-brackets-index-element
+
+top_bl[[2]][3]
+```
+
+You could probably see how this might get confusing! The `[[]]` and the `[]`
+next to each other makes this code a bit difficult to understand. You can,
+however, read code like a book---going from left to right. Starting on the left, 
+we know the `top_bl[[3]]` grabs the third component from the list `top_bl`. 
+We've also learned that this element is a vector. So, when we see the `[3]` we
+know that this is extracting the third element of the vector. 
+
+This might take a bit of practice, but you'll get there!
 
 ::: {.callout-check-in}
-<!-- Give them data / coding scenarios and they pick which structure would be
-most appropriate and then code a small example. -->
+
+Given this list, write code to perform the following operations. *Can you find
+__multiple__ methods?*
+
+```{r}
+harvest_window <- c(3, 5, 12, 12, 5, 3)
+
+fruit_tree_harvest <- list(fruit = fruits, 
+                           tree = trees, 
+                           harvest_window = harvest_window)
+fruit_tree_harvest
+```
+
+15. Grab the first component (`fruit`).  
+
+16. Grab the third tree from the `tree` component.
+:::
+
+### Dataframes
+
+Recall that a dataframe is a special type of list, where every component has the
+same length. So, the methods we learned for extracting components from a list
+will also work here. 
+
+```{r}
+shows_releases <- data.frame(show_name = shows,
+                            release_year = release_years)
+shows_releases
+```
+
+To grab a column from a dataframe you can use `[[]]` or you can use a `$`. We
+prefer using a `$`, since the components (columns) of a dataframe are 
+**required** to have names.
+
+::: columns
+::: {.column width="48%"}
+```{r}
+shows_releases$show_name
+```
 
 :::
 
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+
+<!-- I technically never covered this option, so it might be confusing? -->
+```{r}
+shows_releases[["show_name"]]
+```
+:::
+:::
+
+Interestingly, since a dataframe is made up of vectors with the same length, 
+you can also extract components using the notation we learned for matrices. 
+
+::: columns
+::: {.column width="48%"}
+**Grab the First Row**
+```{r}
+shows_releases[1, ]
+```
+
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+**Grab the Second Column**
+```{r}
+shows_releases[, 2]
+```
+
+:::
+:::
+
+::: {.callout-check-in}
+
+Given this dataframe, write code to perform the following operations. *Can you find
+__multiple__ methods?*
+
+```{r}
+fruit_trees <- data.frame(fruits, trees, harvest_window)
+fruit_trees
+```
+
+17. Grab the second column (`trees`).
+
+18. Grab the third and forth columns (`trees`, `harvest_window`).
+
+19. Grab the second row of all three columns.
+:::
 
 ## Mathematical Operations
 <!-- Can do math via indexing – add 1 to the first element, then the second element, etc. -->
@@ -592,4 +958,8 @@ most appropriate and then code a small example. -->
 ### Operations on Rows
 
 ### Operations with Logical Values
+
+<!-- year == 2021 -->
+<!-- year > 2022 -->
+<!-- year >= 2022 -->
 <!-- Finding sums / proportions via T / F. -->
