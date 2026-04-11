@@ -113,7 +113,7 @@ integer values. The `as.integer()` function can help us do just that!
 #| eval: true
 #| label: example-make-integer-2
 
-room <- c(1410, 1221)
+room <- 1410
 room <- as.integer(room)
 typeof(room)
 ```
@@ -158,11 +158,11 @@ character.
 #| echo: true
 #| label: convert-number-to-character
 
-year <- c(1988, 1989, 1990, 1991, 1992)
+year <- 1988
 as.character(year)
 ```
 
-Notice now the numbers all have quotations around them!
+Notice the number now has quotations around it!
 :::
 
 ### Logical Values
@@ -178,16 +178,34 @@ typeof(passed)
 ::: {.callout-tip}
 # Relationship with Numeric Values
 
-Logical values have binary numerical representations. A `TRUE` is represented 
-by a `1` and a `FALSE` is represented by a `0`. 
+Logical values have binary numerical representations.
 
+::: columns
+::: {.column width="48%"}
+A `TRUE` is represented by a `1`.
 ```{r}
 #| echo: true
-#| label: numeric-logicals
+#| label: numeric-logicals-1
 
-passes <- c(TRUE, TRUE, FALSE, TRUE, FALSE)
-as.numeric(passes)
+as.numeric(TRUE)
 ```
+
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+A `FALSE` is represented by a `0`. 
+```{r}
+#| echo: true
+#| label: numeric-logicals-2
+
+as.numeric(FALSE)
+
+```
+:::
+:::
 :::
 
 ### Other Data Types
@@ -213,31 +231,332 @@ logical data types!
 <!-- What if the vectors are all the same length? -->
 <!-- Then we can use a data frame (or a tibble)! -->
 
-<!-- In the lab they learned about using the c() function to make a vector. -->
-<!-- The last problem explored datatype coercion when a string is added to a vector of numbers -->
+Now that we've learned about the different types of data values, let's learn
+about the different ways data could be stored. 
 
-### Vectors
 <!-- Give basic info / examples. -->
 <!-- How to create each type of structure. -->
 
+### Vectors
+
+You encountered a vector in your last lab assignment! Vectors are created using
+the `c()` function (which stands for concatenate). Vectors have a few important
+qualities:
+
+- They have **one** dimension, their length. 
+- Their entries must all have the **same** data type. 
+
+```{r}
+#| echo: true
+#| label: making-vector-size
+
+names <- c("Jim", "Weun", "Pat", "Pran", "Phupha", "Tian")
+length(names)
+```
+
+In the last lab, you added a character to a vector of numbers. Even though the
+objects had different data types, R didn't output an error message. Indeed, it
+concatenated the objects together into one vector. But what data type was the
+resulting vector?
+
+```{r}
+#| echo: true
+#| label: code-from-lab
+
+c(67, 13, 1989, "hello")
+```
+
+It made all the numbers into characters! This is called **data type coercion**, 
+where R changes / coerces the data type of elements of the vector so they are
+all the same data type. 
+
+::: {.callout-check-in}
+
+For each of the examples below, identify what data type do you believe the
+vector will have.
+
+1. `c(67, 13, 1989, TRUE)`
+2. `c("hello", "goodbye", TRUE)`
+3. `c("TRUE", FALSE, TRUE, "FALSE")`
+:::
 
 ### Multiple Vectors
-<!-- Relate structures to each other – e.g., a column of a matrix / dataframe / tibble is a vector. -->
+
+When working with data, we will find ourselves with *multiple* vectors---one for
+each variable that was recorded. When assembling multiple vectors into an object
+the key question is whether the vectors all have the **same** data type or 
+**different** data types.
 
 #### Do all of the vectors have the same data type?
-<!-- matrices! -->
 
+Vectors that all have the **same** data type can be made into a matrix. A matrix
+has **two** dimensions---rows and columns. We can create a matrix of values from
+a vector by specifying the number of rows (`nrow`) or the number of columns 
+(`ncol`). 
+
+```{r}
+#| echo: true
+#| label: vector-of-characters
+
+names <- c("Jim", "Weun", "Pat", "Pran", "Phupha", "Tian")
+```
+
+::: columns
+::: {.column width="48%"}
+
+Specifying the number of rows (`nrow`):
+
+```{r}
+#| label: nrow-matrix
+#| echo: true
+
+matrix(names, nrow = 3)
+```
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+
+Specifying the number of columns (`ncol`):
+
+```{r}
+#| label: ncol-matrix
+#| echo: true
+
+matrix(names, ncol = 3)
+```
+:::
+:::
+
+The vector above has length `r length(names)`, which is divisible by 3. What do
+you think will happen if the length of the vector isn't divisible by the number
+of rows?
+
+```{r}
+#| echo: true
+#| label: recycling-wrong-length
+#| warning: true
+
+new_names <- c("Jim", "Weun", "Pat", "Pran", "Phupha", "Black", "Sean")
+
+matrix(new_names, ncol = 3)
+
+```
+First, R gives a warning message telling us that the length of the vector 
+(`r length(new_names)`) is not a multiple of the number of rows we input (`3`). 
+Then, it **recycles** the first value of the vector (`r new_names[1]`) to fill
+the spot where there wasn't a value. 
+
+This can produce misleading data, so we should **always** make sure the length
+of our vector is a multiple of the dimension of the matrix (e.g., rows, columns)
+we are trying to make. 
+
+::: {.callout-check-in}
+4. Draw out how this matrix will look:
+
+```{r}
+#| eval: false
+#| label: matrix-draw-dimensions
+
+shows <- c("Tale of a Thousand Stars", 
+           "Bad Buddy", 
+           "Moonlight Chicken", 
+           "Not Me")
+
+matrix(shows, ncol = 2)
+```
+:::
+
+::: {.callout-opinion}
+You might have noticed that the formatting of `shows` is a bit different from
+what we used before. Why is that?
+
+One of the formatting guidelines for writing code is that your code should not
+be more than 80 characters long. This line of code is 82 characters long:
+
+```{r}
+#| eval: false
+#| label: long-lines-of-code
+
+shows <- c("Tale of a Thousand Stars", "Bad Buddy", "Moonlight Chicken", "Not Me")
+```
+
+Since it is longer than 80 characters, we need to break up the code. Meaning, we
+need to use a new line (return) somewhere in our code. There are few different 
+ways we could have done this:
+
+```{r}
+#| eval: false
+#| label: long-lines-of-code-possible-fixes
+
+shows <- c("Tale of a Thousand Stars", "Bad Buddy", "Moonlight Chicken", 
+           "Not Me")
+
+shows <- c("Tale of a Thousand Stars", "Bad Buddy", 
+           "Moonlight Chicken", "Not Me")
+
+```
+
+But, to us, these make it harder to see the length of the vector. So, that is 
+why we chose to use a new line for every entry of the vector. 
+
+```{r}
+#| eval: true
+#| label: long-lines-of-code-better-fix
+
+shows <- c("Tale of a Thousand Stars", 
+           "Bad Buddy", 
+           "Moonlight Chicken", 
+           "Not Me")
+```
+
+:::
 
 #### Do the vectors have different data types?
-<!-- lists! -->
+
+What if we wanted to combine vectors that have **different** data types? Since 
+a matrix requires all the entries to be the same data type, we will need to find
+a new solution! 
+
+A **list** is an object that allows entries to be different data types. Suppose
+for each show we have its release date. The name of the show is a `character` 
+and the release date of the show is `numeric`. We can use a list to combine 
+these two vectors into one object (`top_bl`). 
+
+
+
+```{r}
+#| label: create-list
+
+release_years <- c(2021, 2021, 2023, 2022)
+
+top_bl <- list(shows, release_years)
+top_bl
+```
+The output of a list is a bit unexpected, so let's break it down. The `[[]]` 
+represents the number of the entry. So, `[[1]]` represents the `shows` and
+`[[2]]` represents the `release_years`. The `[]` represents the number of the
+item *within* each entry. So, `"Tale of a Thousand Stars"` is the first (`[1]`)
+item of the first entry (`[[1]]`). 
+
+We find it easier to think of lists as cubby bins. Each `[[]]` represents a bin
+and the `[]` represent the items in the bin. Within a bin the objects are the 
+**same** data type, but each bin can have different types of objects. 
+
+![A `list` analogy with a cubby bin. Each cubby has different types of items (e.g., puzzles, dolls, legos) but within a cubby the items are all the same.](images/02-list-cubbies.jpg){fig-alt="A picture of a wood cubby bin with six different cubby slots. Each cubby is a different color (red, yellow, blue, green, purple, orange) and each cubby contains different types of objects (legos, books, cars, paints, dolls). However, within a cubby bin the items are all the same. Meaning, the bin of dolls does not also contain legos." width=50%}
+
+We could have modified our method for creating the list by giving each entry 
+a name. 
+
+```{r}
+#| label: create-list-2
+
+top_bl <- list(show_name = shows, release_year = release_years)
+top_bl
+```
+
+Notice now there are `$` symbols instead of `[[]]` symbols. The `$` in
+front of `show_name` and `release_year` represents the **name** of that entry. 
+We technically call this a *named list* since every entry has a name.
+
+
+![A `list` analogy with a cubby bin. Similar to before, each cubby has different types of items (e.g., puzzles, dolls, legos) but within a cubby the items are all the same. However, now the cubbies all have names identifying the contents of the cubby.](images/02-lists-labeled-cubbies.png){fig-alt="Another picture of a cubby bin with nine different cubby slots. The difference with this cubby bin is that each bin has a label indicating its contents (legos, dolls, trucks, balls, art supplies)." width=50%}
+
 
 #### Are the vectors all the same length?
 <!-- dataframes or tibbles! -->
 
+Technically, a list can have **both** entries with different data types
+**and** entries with different lengths. Both `show_name` and `release_year` 
+have `r length(shows)` items. However, there is more than one character in 
+each show. We can add these characters to a list in the same way as before:
+
+```{r}
+characters <- c("Jim", "Weun", "Pat", "Pran", "Phupha", "Black", "Sean")
+
+top_bl <- list(show_name = shows, 
+               release_year = release_years, 
+               characters = characters)
+top_bl
+```
+
+The list has no problem having entries with different lengths! But, if your
+entries all happen to have the **same** length, then you can use a special type
+of list---a dataframe. 
+
+```{r}
+#| label: make-dataframe
+
+data.frame(show_name = shows,
+           release_year = release_years)
+```
+
+While a dataframe is a list, the output looks **very** different. Each variable
+(`show_name`, `release_year`) is slotted into a column. The numbers on the side
+(`1`, `2`, `3`, `4`) represent the entry number.
+
 
 ::: {.callout-check-in}
-<!-- How to recognize what each type looks like printed out. -->
+```{r}
+#| echo: false
+#| label: identify-object-fruit-info
 
+fruits <- c("apple",
+            "orange", 
+            "lemon", 
+            "lime", 
+            "mango", 
+            "peach")
+
+trees <- c("Malus domestica", 
+           "Citrus sinensis", 
+           "Citrus limon", 
+           "Citrus aurantifolia", 
+           "Mangifera indica", 
+           "Prunus persica")
+
+harvest_window <- c(3, 5, 12, 12, 5, 3)
+```
+
+Using the output below, identify what type of object you believe was created.
+
+5. What type of object?
+
+```{r}
+#| label: identify-object-1
+#| echo: false
+ 
+list(trees, harvest_window)
+```
+
+6. What type of object?
+
+```{r}
+#| label: identify-object-2
+#| echo: false
+
+matrix(harvest_window, nrow = 3)
+```
+
+7. What type of object?
+
+```{r}
+#| label: identify-object-3
+#| echo: false
+
+data.frame(fruits, trees)
+```
+
+8. What type of object?
+
+```{r}
+#| label: identify-object-4
+#| echo: false
+
+list(tree = trees, harvest_window = harvest_window)
+```
 :::
 
 ## Indexing Objects
@@ -249,6 +568,7 @@ logical data types!
 ### Vectors
 
 ### Matrices
+<!-- Relate structures to each other – e.g., a column of a matrix / dataframe / tibble is a vector. -->
 
 ### Lists
 
