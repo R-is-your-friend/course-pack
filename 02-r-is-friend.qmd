@@ -113,7 +113,8 @@ integer values. The `as.integer()` function can help us do just that!
 #| eval: true
 #| label: example-make-integer-2
 
-room <- as.integer(1221)
+room <- c(1410, 1221)
+room <- as.integer(room)
 typeof(room)
 ```
 :::
@@ -130,12 +131,64 @@ typeof(room)
 
 ### Character Values
 
+A `character` value is somewhat the opposite of a number in that it contains 
+qualitative information. In R, the `character` data type represents objects 
+that can have any number of characters (e.g., `"a"`, `"ab"`, `"abc"`). A 
+`character` data type can be identified by the use of quotation marks (`""`)
+surrounding the values. 
+
+```{r}
+#| echo: true
+#| eval: true
+#| label: example-character-integer
+
+first_name <- "lilly"
+typeof(first_name)
+```
+
+::: {.callout-tip}
+# Converting a number into a `character`
+
+Converting between data types is something we will frequently find ourselves 
+doing. Time related variables (e.g., `year`, `month`) are variables that are 
+typically read in as numeric but we are often interested in using them as a
+character. 
+
+```{r}
+#| echo: true
+#| label: convert-number-to-character
+
+year <- c(1988, 1989, 1990, 1991, 1992)
+as.character(year)
+```
+
+Notice now the numbers all have quotations around them!
+:::
+
 ### Logical Values
+
+The last data type is one we haven't seen before. Logicals have two possible 
+values---`TRUE` and `FALSE`. 
 
 ```{r}
 passed <- TRUE
 typeof(passed)
 ```
+
+::: {.callout-tip}
+# Relationship with Numeric Values
+
+Logical values have binary numerical representations. A `TRUE` is represented 
+by a `1` and a `FALSE` is represented by a `0`. 
+
+```{r}
+#| echo: true
+#| label: numeric-logicals
+
+passes <- c(TRUE, TRUE, FALSE, TRUE, FALSE)
+as.numeric(passes)
+```
+:::
 
 ### Other Data Types
 

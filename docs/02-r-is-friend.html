@@ -625,7 +625,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="callout-body-container callout-body">
 <p>Adding an <code>L</code> at the end of a number is one way to make an integer, but this really only works when we are creating our objects by hand. More frequently, we will be given a vector of numbers which we may want to transform into integer values. The <code><a href="https://rdrr.io/r/base/integer.html">as.integer()</a></code> function can help us do just that!</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">room</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="fl">1221</span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">room</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1410</span>, <span class="fl">1221</span><span class="op">)</span></span>
+<span><span class="va">room</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="va">room</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/typeof.html">typeof</a></span><span class="op">(</span><span class="va">room</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "integer"</code></pre>
@@ -642,13 +643,63 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- class() → "It's a kitchen tool" (the role it plays) -->
 </section></section><section id="character-values" class="level3" data-number="3.1.2"><h3 data-number="3.1.2" class="anchored" data-anchor-id="character-values">
 <span class="header-section-number">3.1.2</span> Character Values</h3>
+<p>A <code>character</code> value is somewhat the opposite of a number in that it contains qualitative information. In R, the <code>character</code> data type represents objects that can have any number of characters (e.g., <code>"a"</code>, <code>"ab"</code>, <code>"abc"</code>). A <code>character</code> data type can be identified by the use of quotation marks (<code>""</code>) surrounding the values.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">first_name</span> <span class="op">&lt;-</span> <span class="st">"lilly"</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/typeof.html">typeof</a></span><span class="op">(</span><span class="va">first_name</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Converting a number into a <code>character</code>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Converting between data types is something we will frequently find ourselves doing. Time related variables (e.g., <code>year</code>, <code>month</code>) are variables that are typically read in as numeric but we are often interested in using them as a character.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">year</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1988</span>, <span class="fl">1989</span>, <span class="fl">1990</span>, <span class="fl">1991</span>, <span class="fl">1992</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "1988" "1989" "1990" "1991" "1992"</code></pre>
+</div>
+</div>
+<p>Notice now the numbers all have quotations around them!</p>
+</div>
+</div>
 </section><section id="logical-values" class="level3" data-number="3.1.3"><h3 data-number="3.1.3" class="anchored" data-anchor-id="logical-values">
 <span class="header-section-number">3.1.3</span> Logical Values</h3>
+<p>The last data type is one we haven’t seen before. Logicals have two possible values—<code>TRUE</code> and <code>FALSE</code>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">passed</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">passed</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/typeof.html">typeof</a></span><span class="op">(</span><span class="va">passed</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "logical"</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Relationship with Numeric Values
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Logical values have binary numerical representations. A <code>TRUE</code> is represented by a <code>1</code> and a <code>FALSE</code> is represented by a <code>0</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">passes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">passes</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 1 0 1 0</code></pre>
+</div>
+</div>
 </div>
 </div>
 </section><section id="other-data-types" class="level3" data-number="3.1.4"><h3 data-number="3.1.4" class="anchored" data-anchor-id="other-data-types">
