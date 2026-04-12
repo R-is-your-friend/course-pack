@@ -37,8 +37,8 @@ as a double (real) numeric.
 #| eval: true
 #| label: example-make-double
 
-room <- 26.2
-typeof(room)
+distance <- 26.2
+typeof(distance)
 ```
 
 ::: {.callout-tip}
@@ -949,17 +949,143 @@ fruit_trees
 :::
 
 ## Mathematical Operations
-<!-- Can do math via indexing – add 1 to the first element, then the second element, etc. -->
-<!-- Vectorized math. -->
-<!-- But many functions are vectorized -- +, -, x. /, exp, log, ==, etc. -->
 
-### Operations on Columns
+Now that we know how to extract elements from each of these objects, let's 
+learn how to perform mathematical operations! 
 
-### Operations on Rows
+Suppose we have a matrix of numerical values:
+
+```{r}
+nums <- c(47, 13, 49, 46, 47, 4, 7, 0, 44, 24, 13, 1)
+
+nums_matrix <- matrix(nums, ncol = 4)
+nums_matrix
+```
+We could multiply **every** value of `nums_matrix` by `-1` with this simple
+code:
+
+```{r}
+nums_matrix * -1
+```
+
+Notice how we didn't need to give R specific instructions to multiply each
+specific value of `nums_matrix` by `-1`? That is the magic of **vectorized** 
+operations---actions that can be done to an entire vector (or matrix)!
+
+Similar to mathematical operations, there are functions that also operate on 
+vectors of values. Take the square root function (`sqrt()`):
+
+```{r}
+sqrt(nums_matrix)
+```
+### Operations on Columns & Rows
+
+It is possible that we might want to perform an operation on a row (or column) 
+of values and *save the updated values back into the original row (or column)*.
+To do this, we have three steps we need to follow: 
+
+1. extract the component(s) of interest
+2. perform the mathematical operation
+3. save the values back into their original position
+
+Let's see how this might look in the context of `nums_matrix`. Suppose we want
+to subtract 30 from all numbers in the first and second rows of the third
+column. The first two steps are fairly simple, we extract the first and second rows
+with `nums_matrix[1:2, 3]`, and we can do subtraction easily with just a `- 30`. 
+
+```{r}
+nums_matrix[1:2, 3] - 30
+```
+
+The saving back into the original position is the tricky part! We need to 
+assign (`<-`) the values we changed back into their original position
+(`nums_matrix[1:2, 3]`). So, our code should look like this:
+
+```{r}
+nums_matrix[1:2, 3] <- nums_matrix[1:2, 3] - 30
+nums_matrix
+```
 
 ### Operations with Logical Values
 
-<!-- year == 2021 -->
-<!-- year > 2022 -->
-<!-- year >= 2022 -->
-<!-- Finding sums / proportions via T / F. -->
+We touched on how we can use logical values to isolate specific components of 
+an object. Previously, we created these vectors of logical values ourselves 
+(e.g., `c(FALSE, TRUE, FALSE, TRUE)`), but this is rarely done in practice. 
+Instead, we typically acquire a vector of logical values using a **relational
+statement**, a statement which asks how the values of an object relate to a 
+specific value (e.g., `40`). 
+
+#### Relational Statements
+
+Let's explore these ideas with a vector of values. We can transform our
+`nums_matrix` into a vector using the `c()` function:
+
+```{r}
+#| label: make-matrix-into-vector
+
+nums_vector <- c(nums_matrix)
+nums_vector
+```
+
+Suppose I wanted to know what indices of `nums_vector` were equal to `13`. I 
+could write this as a relational statement: `nums_vector == 13`. The output of
+this statement is a vector of logical values indicating whether the value of
+a particular index satisfied the condition being checked (`== 13`):
+
+```{r}
+#| label: equality-relation
+
+nums_vector == 13
+```
+
+::: {.callout-important}
+# Why two `=` signs?
+
+Notice that checking *equality* requires **two** `=` signs (`==`). This is 
+because a single `=` sign assigns a value into an object (similar to `<-`). 
+:::
+
+#### Mathematical Operations with Logical Values
+
+Because logical values have equivalent numerical values (`TRUE` = `1`, 
+`FALSE` = `0`), we can perform mathematical operations with these vectors! If 
+I wanted to know **how many** values in `nums_vector` were equal to (`== 13`), 
+then I could **sum** the resulting vector of logicals:
+
+```{r}
+#| label: sum-logicals
+
+sum(nums_vector == 13)
+```
+
+The output here is `r sum(nums_vector == 13)`, which agrees with what we 
+saw before. There were `r sum((nums_vector == 13) == TRUE)` values of `TRUE` 
+and `r sum((nums_vector == 13) == FALSE)` values of `FALSE`, which added
+together gives you a sum of `r sum(nums_vector == 13)`. 
+
+We can also use the sums we calculated from these logical values to calculate
+**proportions**. Recall that a proportion is the number of instances of an 
+event (e.g., `== 13`) out of the total number of possible instances. The total
+possible instances is the number of indices in the vector, or the `length()` of
+the vector!
+
+Let's find the proportion of numbers in `nums_vector` that are greater than or
+equal to 40. 
+
+```{r}
+#| label: logical-proportion
+
+sum(nums_vector >= 40) / length(nums_vector)
+```
+
+::: {.callout-note}
+# Common Relational Statements
+
+The most commonly used relational statements you will encounter are as follows:
+
+- `==` means "equal to"
+- `!=` means "not equal to"
+- `>` or `<` means "greater than" or "less than" (note the strict equality)
+- `>=` or `<=` means "greater than or equal to" or "less than or equal to"
+:::
+

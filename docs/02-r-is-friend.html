@@ -506,9 +506,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li>
 <a href="#mathematical-operations" id="toc-mathematical-operations" class="nav-link" data-scroll-target="#mathematical-operations"><span class="header-section-number">3.4</span> Mathematical Operations</a>
   <ul>
-<li><a href="#operations-on-columns" id="toc-operations-on-columns" class="nav-link" data-scroll-target="#operations-on-columns"><span class="header-section-number">3.4.1</span> Operations on Columns</a></li>
-  <li><a href="#operations-on-rows" id="toc-operations-on-rows" class="nav-link" data-scroll-target="#operations-on-rows"><span class="header-section-number">3.4.2</span> Operations on Rows</a></li>
-  <li><a href="#operations-with-logical-values" id="toc-operations-with-logical-values" class="nav-link" data-scroll-target="#operations-with-logical-values"><span class="header-section-number">3.4.3</span> Operations with Logical Values</a></li>
+<li><a href="#operations-on-columns-rows" id="toc-operations-on-columns-rows" class="nav-link" data-scroll-target="#operations-on-columns-rows"><span class="header-section-number">3.4.1</span> Operations on Columns &amp; Rows</a></li>
+  <li>
+<a href="#operations-with-logical-values" id="toc-operations-with-logical-values" class="nav-link" data-scroll-target="#operations-with-logical-values"><span class="header-section-number">3.4.2</span> Operations with Logical Values</a>
+  <ul class="collapse">
+<li><a href="#relational-statements" id="toc-relational-statements" class="nav-link" data-scroll-target="#relational-statements"><span class="header-section-number">3.4.2.1</span> Relational Statements</a></li>
+  <li><a href="#mathematical-operations-with-logical-values" id="toc-mathematical-operations-with-logical-values" class="nav-link" data-scroll-target="#mathematical-operations-with-logical-values"><span class="header-section-number">3.4.2.2</span> Mathematical Operations with Logical Values</a></li>
+  </ul>
+</li>
   </ul>
 </li>
   </ul></nav>
@@ -560,8 +565,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="header-section-number">3.1.1.1</span> Double (Real) Values</h4>
 <p>If a number has a decimal value (e.g., <code>26.2</code>), then R will store the number as a double (real) numeric.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">room</span> <span class="op">&lt;-</span> <span class="fl">26.2</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/typeof.html">typeof</a></span><span class="op">(</span><span class="va">room</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">distance</span> <span class="op">&lt;-</span> <span class="fl">26.2</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/typeof.html">typeof</a></span><span class="op">(</span><span class="va">distance</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "double"</code></pre>
 </div>
@@ -1419,22 +1424,144 @@ $harvest_window
 </div>
 </section></section><section id="mathematical-operations" class="level2" data-number="3.4"><h2 data-number="3.4" class="anchored" data-anchor-id="mathematical-operations">
 <span class="header-section-number">3.4</span> Mathematical Operations</h2>
-<!-- Can do math via indexing – add 1 to the first element, then the second element, etc. -->
-<!-- Vectorized math. -->
-<!-- But many functions are vectorized -- +, -, x. /, exp, log, ==, etc. -->
-<section id="operations-on-columns" class="level3" data-number="3.4.1"><h3 data-number="3.4.1" class="anchored" data-anchor-id="operations-on-columns">
-<span class="header-section-number">3.4.1</span> Operations on Columns</h3>
-</section><section id="operations-on-rows" class="level3" data-number="3.4.2"><h3 data-number="3.4.2" class="anchored" data-anchor-id="operations-on-rows">
-<span class="header-section-number">3.4.2</span> Operations on Rows</h3>
-</section><section id="operations-with-logical-values" class="level3" data-number="3.4.3"><h3 data-number="3.4.3" class="anchored" data-anchor-id="operations-with-logical-values">
-<span class="header-section-number">3.4.3</span> Operations with Logical Values</h3>
-<!-- year == 2021 -->
-<!-- year > 2022 -->
-<!-- year >= 2022 -->
-<!-- Finding sums / proportions via T / F. -->
+<p>Now that we know how to extract elements from each of these objects, let’s learn how to perform mathematical operations!</p>
+<p>Suppose we have a matrix of numerical values:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb95"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nums</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">47</span>, <span class="fl">13</span>, <span class="fl">49</span>, <span class="fl">46</span>, <span class="fl">47</span>, <span class="fl">4</span>, <span class="fl">7</span>, <span class="fl">0</span>, <span class="fl">44</span>, <span class="fl">24</span>, <span class="fl">13</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">nums_matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="va">nums</span>, ncol <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
+<span><span class="va">nums_matrix</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3] [,4]
+[1,]   47   46    7   24
+[2,]   13   47    0   13
+[3,]   49    4   44    1</code></pre>
+</div>
+</div>
+<p>We could multiply <strong>every</strong> value of <code>nums_matrix</code> by <code>-1</code> with this simple code:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb97"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nums_matrix</span> <span class="op">*</span> <span class="op">-</span><span class="fl">1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3] [,4]
+[1,]  -47  -46   -7  -24
+[2,]  -13  -47    0  -13
+[3,]  -49   -4  -44   -1</code></pre>
+</div>
+</div>
+<p>Notice how we didn’t need to give R specific instructions to multiply each specific value of <code>nums_matrix</code> by <code>-1</code>? That is the magic of <strong>vectorized</strong> operations—actions that can be done to an entire vector (or matrix)!</p>
+<p>Similar to mathematical operations, there are functions that also operate on vectors of values. Take the square root function (<code><a href="https://rdrr.io/r/base/MathFun.html">sqrt()</a></code>):</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb99"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">nums_matrix</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         [,1]     [,2]     [,3]     [,4]
+[1,] 6.855655 6.782330 2.645751 4.898979
+[2,] 3.605551 6.855655 0.000000 3.605551
+[3,] 7.000000 2.000000 6.633250 1.000000</code></pre>
+</div>
+</div>
+<section id="operations-on-columns-rows" class="level3" data-number="3.4.1"><h3 data-number="3.4.1" class="anchored" data-anchor-id="operations-on-columns-rows">
+<span class="header-section-number">3.4.1</span> Operations on Columns &amp; Rows</h3>
+<p>It is possible that we might want to perform an operation on a row (or column) of values and <em>save the updated values back into the original row (or column)</em>. To do this, we have three steps we need to follow:</p>
+<ol type="1">
+<li>extract the component(s) of interest</li>
+<li>perform the mathematical operation</li>
+<li>save the values back into their original position</li>
+</ol>
+<p>Let’s see how this might look in the context of <code>nums_matrix</code>. Suppose we want to subtract 30 from all numbers in the first and second rows of the third column. The first two steps are fairly simple, we extract the first and second rows with <code>nums_matrix[1:2, 3]</code>, and we can do subtraction easily with just a <code>- 30</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb101"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nums_matrix</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">]</span> <span class="op">-</span> <span class="fl">30</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -23 -30</code></pre>
+</div>
+</div>
+<p>The saving back into the original position is the tricky part! We need to assign (<code>&lt;-</code>) the values we changed back into their original position (<code>nums_matrix[1:2, 3]</code>). So, our code should look like this:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb103"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nums_matrix</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">nums_matrix</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">]</span> <span class="op">-</span> <span class="fl">30</span></span>
+<span><span class="va">nums_matrix</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3] [,4]
+[1,]   47   46  -23   24
+[2,]   13   47  -30   13
+[3,]   49    4   44    1</code></pre>
+</div>
+</div>
+</section><section id="operations-with-logical-values" class="level3" data-number="3.4.2"><h3 data-number="3.4.2" class="anchored" data-anchor-id="operations-with-logical-values">
+<span class="header-section-number">3.4.2</span> Operations with Logical Values</h3>
+<p>We touched on how we can use logical values to isolate specific components of an object. Previously, we created these vectors of logical values ourselves (e.g., <code>c(FALSE, TRUE, FALSE, TRUE)</code>), but this is rarely done in practice. Instead, we typically acquire a vector of logical values using a <strong>relational statement</strong>, a statement which asks how the values of an object relate to a specific value (e.g., <code>40</code>).</p>
+<section id="relational-statements" class="level4" data-number="3.4.2.1"><h4 data-number="3.4.2.1" class="anchored" data-anchor-id="relational-statements">
+<span class="header-section-number">3.4.2.1</span> Relational Statements</h4>
+<p>Let’s explore these ideas with a vector of values. We can transform our <code>nums_matrix</code> into a vector using the <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> function:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb105"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nums_vector</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">nums_matrix</span><span class="op">)</span></span>
+<span><span class="va">nums_vector</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  47  13  49  46  47   4 -23 -30  44  24  13   1</code></pre>
+</div>
+</div>
+<p>Suppose I wanted to know what indices of <code>nums_vector</code> were equal to <code>13</code>. I could write this as a relational statement: <code>nums_vector == 13</code>. The output of this statement is a vector of logical values indicating whether the value of a particular index satisfied the condition being checked (<code>== 13</code>):</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb107"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nums_vector</span> <span class="op">==</span> <span class="fl">13</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Why two <code>=</code> signs?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Notice that checking <em>equality</em> requires <strong>two</strong> <code>=</code> signs (<code>==</code>). This is because a single <code>=</code> sign assigns a value into an object (similar to <code>&lt;-</code>).</p>
+</div>
+</div>
+</section><section id="mathematical-operations-with-logical-values" class="level4" data-number="3.4.2.2"><h4 data-number="3.4.2.2" class="anchored" data-anchor-id="mathematical-operations-with-logical-values">
+<span class="header-section-number">3.4.2.2</span> Mathematical Operations with Logical Values</h4>
+<p>Because logical values have equivalent numerical values (<code>TRUE</code> = <code>1</code>, <code>FALSE</code> = <code>0</code>), we can perform mathematical operations with these vectors! If I wanted to know <strong>how many</strong> values in <code>nums_vector</code> were equal to (<code>== 13</code>), then I could <strong>sum</strong> the resulting vector of logicals:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb109"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">nums_vector</span> <span class="op">==</span> <span class="fl">13</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2</code></pre>
+</div>
+</div>
+<p>The output here is 2, which agrees with what we saw before. There were 2 values of <code>TRUE</code> and 10 values of <code>FALSE</code>, which added together gives you a sum of 2.</p>
+<p>We can also use the sums we calculated from these logical values to calculate <strong>proportions</strong>. Recall that a proportion is the number of instances of an event (e.g., <code>== 13</code>) out of the total number of possible instances. The total possible instances is the number of indices in the vector, or the <code><a href="https://rdrr.io/r/base/length.html">length()</a></code> of the vector!</p>
+<p>Let’s find the proportion of numbers in <code>nums_vector</code> that are greater than or equal to 40.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb111"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">nums_vector</span> <span class="op">&gt;=</span> <span class="fl">40</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">nums_vector</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.4166667</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Common Relational Statements
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The most commonly used relational statements you will encounter are as follows:</p>
+<ul>
+<li>
+<code>==</code> means “equal to”</li>
+<li>
+<code>!=</code> means “not equal to”</li>
+<li>
+<code>&gt;</code> or <code>&lt;</code> means “greater than” or “less than” (note the strict equality)</li>
+<li>
+<code>&gt;=</code> or <code>&lt;=</code> means “greater than or equal to” or “less than or equal to”</li>
+</ul>
+</div>
+</div>
 
 
-</section></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+</section></section></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
 <ol>
 <li id="fn1"><p>Other languages, like Python, start counting at <code>0</code>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
