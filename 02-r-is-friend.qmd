@@ -489,14 +489,14 @@ of list---a dataframe.
 ```{r}
 #| label: make-dataframe
 
-data.frame(show_name = shows,
-           release_year = release_years)
+shows_releases <- data.frame(show_name = shows,
+                             release_year = release_years)
+shows_releases
 ```
 
 While a dataframe is a list, the output looks **very** different. Each variable
 (`show_name`, `release_year`) is slotted into a column. The numbers on the side
 (`1`, `2`, `3`, `4`) represent the element number.
-
 
 ::: {.callout-check-in}
 ```{r}
@@ -879,7 +879,7 @@ will also work here.
 
 ```{r}
 shows_releases <- data.frame(show_name = shows,
-                            release_year = release_years)
+                             release_year = release_years)
 shows_releases
 ```
 
@@ -905,6 +905,20 @@ shows_releases$show_name
 shows_releases[["show_name"]]
 ```
 :::
+:::
+
+::: {.callout-note}
+# Adding Additional Columns
+
+The `$` operator is also what we can use to add new columns to a dataframe! 
+Suppose I want to add a column of the rating information for each show to the
+`shows_years` dataframe:
+
+```{r}
+shows_releases$rating <- c(9.5, 9.6, 9.1, 9.4)
+shows_releases
+```
+
 :::
 
 Interestingly, since a dataframe is made up of vectors with the same length, 
@@ -1078,6 +1092,8 @@ equal to 40.
 sum(nums_vector >= 40) / length(nums_vector)
 ```
 
+::: columns
+::: {.column width="48%"}
 ::: {.callout-note}
 # Common Relational Statements
 
@@ -1088,4 +1104,25 @@ The most commonly used relational statements you will encounter are as follows:
 - `>` or `<` means "greater than" or "less than" (note the strict equality)
 - `>=` or `<=` means "greater than or equal to" or "less than or equal to"
 :::
+:::
 
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+::: {.callout-note}
+# Common Mathematical Operations
+
+The most commonly used mathematical operations you will encounter are as
+follows:
+
+- `mean()` 
+- `min()`
+- `max()`
+- `median()`
+- `+`, `-`, `/`, `*`
+- `%%` (modulus arithmetic) (e.g., `3 %% 2` = `r 3 %% 2`)
+:::
+
+:::
+:::
