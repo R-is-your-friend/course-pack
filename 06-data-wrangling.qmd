@@ -381,19 +381,61 @@ cereal |>
 Efficiency note: It is more efficient (and less prone to user-error!) to use `slice_max()` or `slice_min()` than `arrange()` followed by `filter()` or `slice_head()`.
 
 :::{.callout-check-in .icon}
-1.  Will the first cereal in the output of `arrange(.data = cereal, potass)` be the cereal with the largest or the smallest amount of potassium?
+1.  Will the first cereal in the output of `data |> arrange(potass)` be the cereal with the largest or the smallest amount of potassium?
 
 2. What can you add inside of `arrange()` to change the default order?
 
-3. What does adding multiple variables to arrange do (e.g. `arrange(.data = cereal, potass, sugars)`?
+3. What does adding multiple variables to arrange do (e.g. `data |> arrange(potass, sugars)`?
 
 :::
 
+:::panel-tabset
+
+#### Try it
+
+1. Find the cereal with the largest amount of fiber. Output just the row for that cereal.
+
+2. Sort the cereals by manufacturer and from the largest to the smallest amount of fiber (within each manufacturer).
+
+#### Solutions
+
+1. 
+
+```{r}
+#| label: slice-practice
+#| eval: false
+
+cereal |> 
+  slice_max(order_by = fiber)
+```
+
+2. 
+
+```{r}
+#| label: arrange-practice
+#| eval: false
+
+cereal |> 
+  arrange(manuf, desc(fiber))
+```
+
+
+:::
 
 ### `select()`
 
-We **select** which variables we would like to remain in the data.
+Sometimes, we don't want to work with a set of 50 variables when we're only interested in 5. When that happens, we might be able to pick the variables we want by index (e.g. `df[, c(1, 3, 5)]`), but this is tedius **and** bad practice (not reproducible).
 
+In `dplyr`, we **select** which variables we would like to remain in the data.
+
+The simplest way to indicate which variables you would like to select is just to name them one by one with commas in between:
+
+```{r}
+cereal |> 
+  select(name, manuf, type) |> 
+  slice_head()
+```
+However, there is some helpful syntax that let us more flexibly select groups of columns together. This syntax mirrors the base R syntax you learned for using indices, but works with bare column names (you don't have to put quotes around the column names when you use them).
 
 -   `var3:var5`: `select(df, var3:var5)` will give you a data frame with columns var3, anything between var3 and var 5, and var5
 
@@ -401,6 +443,7 @@ We **select** which variables we would like to remain in the data.
 
     -   `(<set of vars 1>) & (<set of vars 2>)` will give you any variables that are in both set 1 and set 2. `(<set of vars 1>) | (<set of vars 2>)` will give you any variables that are in either set 1 or set 2.
     -   `c()` combines sets of variables.
+- `-` removes that variable
 
 `dplyr` also defines a lot of variable selection "helpers" that can be used inside `select()` statements. These statements work with bare column names (so you don't have to put quotes around the column names when you use them).
 
@@ -420,6 +463,27 @@ There's one final selector. While the rest of the selectors use the variable **n
 
 -   `where()` applies a function to each variable and selects those for which the function returns TRUE. This provides a lot of flexibility and opportunity to be creative.
 
+
+
+#### Related function -- `rename()`
+
+You can rename variables within `select()` with the syntax `<new variable name>` = `<old variable name>`:
+
+```{r}
+cereal |> 
+  select(cereal_name = name) |> 
+  slice_head()
+```
+However, notice that this also only keeps the variable, now called `cereal_name`!
+
+If you are not already using `select()` to keep certain variables, you should use the function `rename()`. `rename()` renames variables without removing any of them.
+
+```{r}
+cereal |> 
+  rename(cereal_name = name) |> 
+  slice_head()
+```
+
 :::{.callout-check-in .icon}
 1.  Which variables will be in the output of `cereal |> select(fiber:vitamins)`?
 
@@ -430,34 +494,364 @@ There's one final selector. While the rest of the selectors use the variable **n
 :::
 
 
+:::panel-tabset
 
+#### Try it
+
+1. Create a new cereal dataset that only has the name of the cereal and any numeric columns.
+
+2. Create a new cereal dataset that has the name of the cereal and columns that start with the letter "c".
+
+3. Use `select()` to rename the variable `type` to `temp`, still keeping all fo the variables and in the same order.
+
+#### Solutions
+
+1. 
+
+```{r}
+#| label: numeric-cereal
+
+cereal_num <- cereal |> 
+  select(name, where(fn = is.numeric))
+```
+
+2.
+
+```{r}
+#| label: c-cereal
+
+cereal_c <- cereal |> 
+  select(name, starts_with("c"))
+
+```
+
+3. 
+
+```{r}
+#| label: select-rename
+
+cereal_rename <- cereal |> 
+  select(name, manuf,
+         temp = type,
+         everything())
+```
+
+Notice how annoying this is!! This is why we use `rename()` if all we want to do is rename a column or two.
+
+:::
 
 ### `mutate()`
 
+Up to this point, we've been primarily focusing on how to decrease the dimensionality of our data set in various ways (i.e., remove rows or columns from the original data set).
 
+However, we often want to create or edit columns! The tidyverse verb for this is `mutate()`.
+
+We can **mutate** the data to **include a new variable** by using the syntax 
+
+`mutate(<new variable name> = ...)`. 
+
+Note that the `<new variable name>` needs to be something that does not already exist as a column in the data!
+
+```{r}
+#| eval: false
+#| echo: true
+cereal |> 
+  mutate(potass_per_cup = potass / cups)
+```
+
+```{r}
+#| eval: true
+#| echo: false
+cereal |> 
+  mutate(potass_per_cup = potass / cups)  |> 
+  knitr::kable() |> 
+  kableExtra::scroll_box(height = "200px") |> 
+  kableExtra::kable_styling(font_size = 30)
+```
+
+
+Or we can **mutate** the data to **revise an existing variable** by using the syntax 
+
+`mutate(<existing variable name> = ...)`:
+
+```{r}
+#| eval: false
+#| echo: true
+cereal |> 
+  mutate(potass = potass / 100)
+```
+
+```{r}
+#| eval: true
+#| echo: false
+cereal |> 
+  mutate(potass = potass / 100)  |> 
+  knitr::kable() |> 
+  kableExtra::scroll_box(height = "200px") |> 
+  kableExtra::kable_styling(font_size = 30)
+```
+
+
+#### `mutate()` helpers
+
+`mutate()` works with **vectorized** functions. 
+
+![](images/06-vectorized.png)
+As review, vectorized functions take a vector as an input and return a vector, with the function applied to each element of the vector individually. This makes sense -- when you create or revise a variable with `mutate()`, you are wanting to apply some function to each data entry in the variable individually. 
+
+Some examples of common vectorized that you will use with `mutate()` are:
+
++ `as.factor()`, `as.numeric()`, etc. -- change variable type
++ `+`, `-`, `*`, `/` -- basic mathematical operations
++ `%%` -- modulo (returns the remainder when doing division)
++ `if_else()` or `case_when()` -- shortcut for `if-else` loop (we will learn more about these later in the next chapter!)
+
+#### Where is my variable?
+
+By default, a revised column will stay where it is, but a **new** variable will be tacked on to the end of the data set as the last column. Using `.after` or `.before` arguments allows you to place the new variable in the middle of the data set.
+
+```{r}
+#| eval: false
+#| echo: true
+cereal |> 
+  mutate(potass_per_cup = potass / cups,
+         .after = potass)
+```
+
+```{r}
+#| eval: true
+#| echo: false
+cereal |> 
+  mutate(potass_per_cup = potass / cups,
+         .after = potass)  |> 
+  knitr::kable() |> 
+  kableExtra::scroll_box(height = "200px") |> 
+  kableExtra::kable_styling(font_size = 30)
+```
+
+#### Creating or revising multiple variables
+
+You don't need to add another call to mutate to create or revise multiple variables at once! Just add a comma and a new line. Note that `mutate()` will run each line *in order*.
+
+```{r}
+#| eval: false
+#| echo: true
+cereal |> 
+  mutate(potass = potass / 100,
+         potass_per_cup = potass / cups,
+         .after = potass)
+```
+
+```{r}
+#| eval: true
+#| echo: false
+cereal |> 
+  mutate(potass = potass / 100,
+         potass_per_cup = potass / cups,
+         .after = potass)  |> 
+  knitr::kable() |> 
+  kableExtra::scroll_box(height = "200px") |> 
+  kableExtra::kable_styling(font_size = 30)
+```
 
 :::{.callout-check-in .icon}
-1.  What are the three arguments of the `if_else()` function?
 
+1. How do you create a new variable using `mutate()`? How do you revise an existing variable?
+
+
+2. Can we create / revise multiple variables in the same `mutate()` call?
 
 :::
 
 ### `summarize()`
 
+To answer specific question or to get our data ready for  plotting, we often want to calculate **summaries** of variable over multiple rows (i.e. aggregate or collapse our data).
+
+On it's own, `summarize()` takes a data frame with many rows of data and reduces it down to **one row** of data using some function. 
+
+As a trivial example, we may want to find the mean and standard deviation of the potassium amount in all cereals in the data:
+
+```{r}
+#| eval: false
+#| echo: true
+cereal |> 
+  summarize(mean_potass = mean(potass),
+            sd_potass = sd(potass))
+```
+
+Notice that it is best practice to name the new columns that we created with `summarize()` (`<new summarized variable> = ...`). 
+
+If we don't, the variable names will end up being whatever we typed in `summarize()`, which is long and annoying!
+
+```{r}
+#| eval: false
+#| echo: true
+cereal |> 
+  summarize(mean(potass),
+            sd(potass))
+```
+#### `summarize()` helpers
+
+`summarize()` applies **summary** functions to columns to create a new table. Summary functions are functions that take a vector and return a single value. 
+
+![](images/06-summary.png)
+Some common functions to use with `summarize()` include:
+
+- `mean()`, `median()`, `sd()`, `sum()`
+- `min()`, `max()`
+- `n()`, `n_distinct()` -- counts the number of (distinct) elements
+- `first()`, `last()`, `nth()` -- extract the first, last, or nth element
+
+
+The real power of `summarize()`, though, is in combination with `group_by()`. We'll see more `summarize()` examples, but it's easier to make good examples when you have all the tools.
+
 
 :::{.callout-check-in .icon}
-1.  What are common summary functions you might want to use?
 
+1. When you use `summarize()` with a dataframe with n rows, how many rows will the output be? How many columns? 
+2.  What are common summary functions you might want to use?
 
 :::
 
 ### `group_by()`
 
-:::{.callout-check-in .icon}
-9.  What happens when you group by **two** variables?
+[[INTRO]]
+
+In order to conduct operations on subsets of a datset separately, we need to first **group** the data with `group_by()` to separate the data into different groups/subsets based on a **categrical** variable.
+
+Let's look at some elements of the cereal data, grouped by the manufacturer.
+
+When `group_by()` is used on it's own, it looks like nothing happens! However, `group_by()` has added a special grouping attribute to the dataframe, which other `dplyr` verbs will regonize.
+
+```{r}
+#| echo: true
+#| eval: false
+cereal |> 
+  group_by(type)
+```
+
+#### `group_by()` + `summarize()`
+
+We can take **summaries** of variables in a dataframe, by subgroups defined by a categorical variable by combining `group_by()` and `summarize()`.
+
+Let's find the mean potassium now for each manufacturer.
+
+```{r}
+#| echo: true
+#| eval: false
+cereal |> 
+  group_by(manuf) |> 
+  summarise(mean_potass = mean(potass),
+            n_cereal = n())
+```
+
+```{r}
+#| eval: true
+#| echo: false
+cereal |> 
+  group_by(manuf) |> 
+  summarise(mean_sugar = mean(sugars),
+            n_cereal = n())  |> 
+  knitr::kable() |> 
+  kableExtra::kable_styling(font_size = 30)
+```
+
+
+You can include as many variables as you want to group on. Groups will just be created with all combinations of the categories of the variables that you provide.
+
+:::callout-tip
+### Transparency with `n()`
+
+Whenever you calculate summarizes, it is best practice to include the number of rows that went into each calculation! Then you or others will know if a mean actually only included 3 observations etc. 
+
+The function `n()` with `summarize()` is your friend, which calculates just that!
 
 :::
 
+#### `group_by()` + `mutate()`
+
+
+We can create new variables in a dataframe, that are calculated for subgroups defined by a categorical variable by combining `group_by()` and `mutate()`.
+
+This is primarily useful if you want to compare an individual row's value of a column to a summarized value of the column for their subgroup.
+
+For example, let's find how much each cereal's potassium deviates from the mean potassium of the manufacturer of that cereal.
+
+```{r}
+#| echo: true
+#| eval: false
+cereal |> 
+  group_by(manuf) |> 
+  mutate(mean_potass = mean(potass),
+         potass_dev = potass - mean_potass) |> 
+  arrange(manuf, desc(potass)) |> 
+  select(name, manuf, contains("potass"))
+```
+
+```{r}
+#| eval: true
+#| echo: false
+cereal |> 
+  group_by(manuf) |> 
+  mutate(mean_potass = mean(potass),
+         potass_dev = potass - mean_potass) |> 
+  arrange(manuf, desc(potass)) |> 
+  select(name, manuf, contains("potass")) |> 
+  knitr::kable() |> 
+  kableExtra::scroll_box(height = "300px") |> 
+  kableExtra::kable_styling(font_size = 30)
+```
+
+:::callout-important
+### What's the difference? (a big one)
+
+What do you notice about what happens to the data when we combine `group_by()` with `summarize()` versus `mutate()`??
+
+Remember, `summarize()` collapses/aggregates the data. This means that `group_by() + summarize()` results in data with:
+
+- columns: grouping variables plus any variables you create in `summarize()`
+- rows: number of groups
+
+On the other hand `mutate()` just edits or creates new columns, so `group_by() + mutate()` results in data with:
+
+- columns: all original variables plus any variables you create in `mutate()`
+- rows: original number of rows
+
+:::
+
+
+
+:::{.callout-check-in .icon}
+1.  What happens when you group by **two** variables?
+
+2. How many rows and columns will this data frame have? (Try to figure this out before running  code)
+
+```{r}
+#| eval: false
+
+cereal |> 
+  group_by(manuf) |> 
+  mutate(fiber_carb_rat = mean(fiber / carbo))
+```
+
+3. How many rows and columns will this data frame have? (Try to figure this out before running  code)
+
+```{r}
+#| eval: false
+
+cereal |> 
+  group_by(manuf) |> 
+  summarize(fiber_carb_rat = mean(fiber / carbo))
+```
+
+:::
+
+
+
+
+### Putting it Together
+
+The power of `dplyr` with the pipe operator is that we can combine verbs in one "pipeline" to wrangle data. 
 
 :::{.callout-check-in .icon}
 **In groups** match the `dplyr` verbs to your suggested steps:
