@@ -819,6 +819,11 @@ On the other hand `mutate()` just edits or creates new columns, so `group_by() +
 
 :::
 
+#### `group_by()` + `slice()`
+
+
+[[NEED TO ADD]]
+
 
 
 :::{.callout-check-in .icon}
