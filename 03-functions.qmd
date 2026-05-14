@@ -1,0 +1,23 @@
+# Functions
+
+::: callout
+## Learning Objectives
++ 
++ 
++
+:::
+
+
+<!-- [10 minute] Motivation: copy paste code over and over from example in previous class -->
+<!-- [20 minute lecture] Functions -->
+<!-- Syntax -->
+<!-- Arguments + Parameters (multiple)? -->
+<!-- Debugging -- print(), run line by line, etc. -->
+
+<!-- [30 minute Lab? Activity?] Write your first function (decoder vibe)? -->
+
+
+<!-- [10 minute lecture] Input validation -->
+<!-- [10 minute lecture] Environment + Scope + Name Masking + Dynamic Lookup -- activity based? give examples and ask them to identify where the values are pulled from? -->
+
+
