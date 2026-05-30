@@ -489,7 +489,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
 
 
-</header><div class="callout callout-style-simple callout-none no-icon callout-titled">
+</header><hr>
+<hr>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
@@ -510,7 +512,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="conditionals-in-everyday-life" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="conditionals-in-everyday-life">
 <span class="header-section-number">4.1</span> Conditionals in Everyday Life</h2>
 <p>We are going to teach you about conditionals in R, but before we do it is good to remember that we use these types of statements <em>all</em> the time. Anytime you use if-then logic you are using a conditional!</p>
-<p><img src="images/03-conditionals.png" class="img-fluid" alt=""> These ideas go back to the practice activity we did with paper airplanes. With conditionals, we need to state <em>exactly</em> what we mean because the computer will do whatever we tell it to do.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/03-conditionals.png" class="img-fluid figure-img" alt="A comic of a stick person and a series of speech bubbles. The person says 'I'll be in your city tomorrow if you want to hangout.' The person they are talking to (presumably in the background) responds 'But where will you be if I don't want to hang out?' The person then says 'You know, I just remembered I'm busy.' The bottom of the comic says 'Why I try not to be pedantic about conditionals."></p>
+<figcaption>Image from Randal Munroe, xkcd.com, available under a CC-By 2.5 license.</figcaption></figure>
+</div>
+<p>These ideas go back to the practice activity we did with paper airplanes. With conditionals, we need to state <em>exactly</em> what we mean because the computer will do whatever we tell it to do.</p>
 </section><section id="conditional-statements" class="level2" data-number="4.2"><h2 data-number="4.2" class="anchored" data-anchor-id="conditional-statements">
 <span class="header-section-number">4.2</span> Conditional Statements</h2>
 <p>A conditional statement determines what code is evaluated. In general, conditional statements look something like this:</p>
@@ -533,26 +539,163 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span>  <span class="va">y</span> <span class="op">&lt;-</span> <span class="fl">4</span></span>
 <span><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>There are a few things we need to notice about the syntax. First, we are using two words <code>if</code> and <code>else</code> to build the control flow. These are reserved names that R recognizes exactly for this type of task. Second, the condition being checked comes after <code>if</code> and is contained in parentheses. The “stuff to do” when the condition is <code>TRUE</code> is enclosed in <code><a href="https://rdrr.io/r/base/Paren.html">{}</a></code>. This makes it easier to see what code is attached to each case.</p>
-<p>If the condition is <code>FALSE</code>, then R will execute the “other stuff to do” contained in the <code><a href="https://rdrr.io/r/base/Paren.html">{}</a></code> after <code>else</code>.</p>
+<p>There are a few things we need to notice about the syntax. First, we are using two words <code>if</code> and <code>else</code> to build the control flow. These are reserved names that R recognizes exactly for this type of task. Second, the condition being checked comes after <code>if</code> and is contained in parentheses (<code>x &gt; 2</code>). The “stuff to do” when the condition is <code>TRUE</code> is enclosed in <code><a href="https://rdrr.io/r/base/Paren.html">{}</a></code> <strong>immediately after</strong> the <code>if()</code> statement. If the condition is <code>FALSE</code>, then R will execute the “other stuff to do” contained in the <code><a href="https://rdrr.io/r/base/Paren.html">{}</a></code> after <code>else</code>.</p>
 <p><strong>What value should <code>y</code> have?</strong></p>
 <!-- this would be a good spot for an interactive code blurb -->
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Code Style
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We could have written the above code as:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">2</span><span class="op">)</span> <span class="va">y</span> <span class="op">&lt;-</span> <span class="fl">8</span>  <span class="kw">else</span> <span class="va">y</span> <span class="op">&lt;-</span> <span class="fl">4</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>and we would have gotten the same result. So, why should we make our code so <strong>long</strong>?</p>
+<p>A braced expression, <code><a href="https://rdrr.io/r/base/Paren.html">{}</a></code>, defines the most important hierarchy of R code. So, we want to make the hierarchy easy to understand. To do this, our code should follow these three principles:</p>
+<ol type="1">
+<li><p>A <code>{</code> should be the last character on the line (e.g., <code>if (x &gt; 2) {</code> ).</p></li>
+<li><p>The contents <em>inside</em> the <code>{</code> should be indented by two spaces.</p></li>
+<li><p>A <code>}</code> should be the first character on the line (e.g., <code>} else {</code>)</p></li>
+<li><p>A space should be included between <code>if</code> and the <code>(</code> starting the condition</p></li>
+</ol>
+<p>Each of these principles of code style come from the <a href="https://style.tidyverse.org/syntax.html">Syntax section of the tidyverse style guide</a>. We will use this style guide throughout the course!</p>
+</div>
+</div>
 </section><section id="conditional-statements-as-diagrams" class="level3" data-number="4.2.2"><h3 data-number="4.2.2" class="anchored" data-anchor-id="conditional-statements-as-diagrams">
 <span class="header-section-number">4.2.2</span> Conditional Statements as Diagrams</h3>
+<p>We find it quite useful to represent control flows as diagrams! By drawing out the diagram (even if it is simple), you can more clearly anticipate what the result of the process will be.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/03-simple-conditional-diagram.png" class="img-fluid figure-img" alt="A simple diagram of what comprises an if/else conditional. At the top there is a green diamond and the inside of the diamond reads 'Condition to Check'. There are two arrows exiting the diamond, one pointing to the right that reads 'TRUE' and one pointing down that reads 'FALSE'. These represent the outcome of the conditional check. At the end of the 'TRUE' arrow there is a rectangle that reads 'Thing to do' representing what is done if the condition is met (TRUE). As the end of the 'FALSE' arrow there is a circle that reads 'Other thing to do' representing what is done if the condition is not met (FALSE)."></p>
+<figcaption>Diagram of a simple conditional (if/else) statement</figcaption></figure>
+</div>
 </section><section id="chaining-conditional-statements" class="level3" data-number="4.2.3"><h3 data-number="4.2.3" class="anchored" data-anchor-id="chaining-conditional-statements">
 <span class="header-section-number">4.2.3</span> Chaining Conditional Statements</h3>
-<p>[20 minutes] Activity: Give half the students one prompt and half another – sketch diagram and trade for coding/implementation</p>
-<!-- ### Help tab -->
-<!-- The help tab is a wonderful way to get help with how to use an R or python function. -->
-<!-- ![The help tab makes it easy to get access to function documentation within Rstudio, so you don't have to switch windows.](../images/tools/Rstudio-help-tab.png){fig-alt="Screenshot of RStudio help tab. Search bar is highlighted and annotated with 'search for function name here', and then the main window is annotated with 'Documentation appears here'."} -->
-<!-- By default, you can search for an R function name in the search window, and documentation for matching functions will appear in the main part of the pane.  -->
+<p>Once we have a working understanding of <em>simple</em> conditional statements, we can start to imagine more complex conditional statements.</p>
+<p>Suppose we wanted to create a control flow to know how much in federal taxes someone in the US might pay. Based on the <a href="https://www.irs.gov/filing/federal-income-tax-rates-and-brackets">current IRS tax rates</a> we have the following outcomes:</p>
+<table class="caption-top table">
+<thead><tr class="header">
+<th>Income Range</th>
+<th>Taxes</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>$0 to $11,925</td>
+<td>10%</td>
+</tr>
+<tr class="even">
+<td>$11,926 to $48,475</td>
+<td>12%</td>
+</tr>
+<tr class="odd">
+<td>$48,476 $103,350</td>
+<td>22%</td>
+</tr>
+<tr class="even">
+<td>$103,351 $197,300</td>
+<td>24%</td>
+</tr>
+<tr class="odd">
+<td>$197,301 $250,525</td>
+<td>32%</td>
+</tr>
+<tr class="even">
+<td>$250,526 $626,350</td>
+<td>35%</td>
+</tr>
+<tr class="odd">
+<td>$626,351 and above</td>
+<td>37%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Step 1:</strong> Draw out the diagram for the control flow. What conditions are being checked at each stage? If a condition is true what is the outcome? If a condition is false, what happens?</p>
+<div class="callout callout-style-default callout-note callout-empty-content callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Check Your Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+</div>
+<p><strong>Step 2:</strong> Translate your diagram into R code!</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Checking Multiple Conditions
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In our previous control flow we only used <code>if</code> and <code>else</code>, but that only works if you have <strong>one</strong> condition you need to check. Since we are dealing with more than one condition to check (spoiler!), we will need another control flow.</p>
+<p><code>else if ()</code> works similar to an <code>if ()</code> statement, where you give it a condition to check. This is how we can chain <strong>multiple</strong> conditions.</p>
+<pre><code>if (condition 1) {
+  stuff to do 
+} else if (condition 2) {
+  other stuff to do
+} else {
+  other other stuff to do
+}</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Check Your Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="va">income</span> <span class="op">&lt;</span> <span class="fl">11925</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">tax</span> <span class="op">&lt;-</span> <span class="fl">0.10</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">income</span> <span class="op">&lt;=</span> <span class="fl">48475</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">tax</span> <span class="op">&lt;-</span> <span class="fl">0.12</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">income</span> <span class="op">&lt;=</span> <span class="fl">103350</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">tax</span> <span class="op">&lt;-</span> <span class="fl">0.22</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">income</span> <span class="op">&lt;=</span> <span class="fl">197300</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">tax</span> <span class="op">&lt;-</span> <span class="fl">0.24</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">income</span> <span class="op">&lt;=</span> <span class="fl">250525</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">tax</span> <span class="op">&lt;-</span> <span class="fl">0.32</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">income</span> <span class="op">&lt;</span> <span class="fl">626350</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="va">tax</span> <span class="op">&lt;-</span> <span class="fl">0.35</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>    <span class="va">tax</span> <span class="op">&lt;-</span> <span class="fl">0.37</span></span>
+<span>  <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
 </section></section><section id="loops" class="level2" data-number="4.3"><h2 data-number="4.3" class="anchored" data-anchor-id="loops">
 <span class="header-section-number">4.3</span> Loops</h2>
 <!-- [15 minute lecture] Loops -->
 <!-- While + break -->
 <!-- for -->
-<!-- [20 minutes] Activity: Give half the students one prompt and half another -- sketch diagram and trade for coding/implementation -->
-<!-- Something like FizzBuzz -->
+<!-- [A visual demonstration of for loops iterating through a vector of monsters to dress them up for a parade. Image by [Allison Horst](https://allisonhorst.com/allison-horst). -->
+<!-- ](https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/3a446c03-34c7-470e-b147-1ae3d1321503_rw_3840.png?h=9b2c6ebeee7504e4c1a44dffe0707a35){fig-alt="Illustrated for loop example. Input vector is a parade of monsters, including monsters that are circles, triangles, and squares. The for loop they enter has an if-else statement: if the monster is a triangle, it gets sunglasses. Otherwise, it gets a hat. The output is the parade of monsters where the same input parade of monsters shows up, now wearing either sunglasses (if triangular) or a hat (if any other shape)."} -->
+<!-- ### Help tab -->
+<!-- The help tab is a wonderful way to get help with how to use an R or python function. -->
+<!-- ![The help tab makes it easy to get access to function documentation within Rstudio, so you don't have to switch windows.](../images/tools/Rstudio-help-tab.png){fig-alt="Screenshot of RStudio help tab. Search bar is highlighted and annotated with 'search for function name here', and then the main window is annotated with 'Documentation appears here'."} -->
+<!-- By default, you can search for an R function name in the search window, and documentation for matching functions will appear in the main part of the pane.  -->
 
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
