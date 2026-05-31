@@ -118,7 +118,7 @@ if (condition 1) {
 
 ### Multiple Conditions for Tax Brackets
 
-Suppose we wanted to create a control flow to know how much in federal taxes someone in the US might pay. Based on the [current IRS tax rates](https://www.irs.gov/filing/federal-income-tax-rates-and-brackets) we have the following outcomes:
+Suppose we wanted to create a control flow to know how much in federal taxes someone in the US might pay. Based on the [current IRS tax rates](https://www.irs.gov/filing/federal-income-tax-rates-and-brackets) we have the following outcomes[^03-control-flow-1]:
 
 | Income Range         | Taxes |
 |----------------------|-------|
@@ -130,15 +130,24 @@ Suppose we wanted to create a control flow to know how much in federal taxes som
 | \$250,526 \$626,350  | 35%   |
 | \$626,351 and above  | 37%   |
 
-**Step 1:** Draw out the diagram for the control flow. What conditions are being checked at each stage? If a condition is true what is the outcome? If a condition is false, what happens?
+[^03-control-flow-1]: Technically, this is a bit of an over simplification. 
+If you make $75,000 you actually pay 10% for the first $11,925, then 12% for the
+next $36,550 (to get to $48,475), then 22% for the final $26,525. 
 
-::: {.callout-note collapse="TRUE"}
+**Step 1:** Draw out the diagram for the control flow. What conditions are being
+checked at each stage? If a condition is true what is the outcome? If a
+condition is false, what happens?
+
+::: {.callout-note collapse="true"}
 # Check Your Answer
+
+![](images/03-taxes-flowchart.png){fig-alt="A flowchart for figuring out what tax bracket someone should pay. The chart starts with an orange circle indicating the income (a numeric value) is being input into the flowchart. From there, there are a series of green diamonds each with a check for the income (e.g., income < $11,925). At each diamond there is an arrow pointing down with a value of TRUE next to the arrow, indicating that the condition checked was found to be TRUE. There is a second arrow pointing to the right with a value of FALSE next to the arrow, indicating that the contition checked was found to be false. Beneath each condition that found to be TRUE there is a blue rectangle with a tax percentage indicating the tax rate for that income bracket."}
 :::
+
 
 **Step 2:** Translate your diagram into R code!
 
-::: {.callout-note collapse="TRUE"}
+::: {.callout-note collapse="true"}
 # Check Your Answer
 
 ```{r}
@@ -163,9 +172,12 @@ if (income < 11925) {
 ```
 :::
 
-Okay, let's try it out! A "typical" Assistant Professor in the College of Science and Math at Cal Poly makes \$95,000. Based on your diagram, how much would a professor pay in taxes?
+Okay, let's try it out! A "typical" Assistant Professor in the College of 
+Science and Math at Cal Poly makes $95,000. Based on your diagram, how much
+would a professor pay in taxes?
 
-Let's check! Setting `income` to `95000`, our conditional statements tell us that the professor will pay `0.22` or 22% in taxes.
+Let's check! Setting `income` to `95000`, our conditional statements tell us
+that the professor will pay `0.22` or 22% in taxes.
 
 ```{r}
 #| label: income-conditionals
@@ -190,12 +202,12 @@ if (income < 11925) {
 ```
 
 What if we tried salaries for a variety of CSU employees? Jeffrey Armstrong,
-Cal Poly's President is paid \$611,203 [^03-control-flow-1], Midred Garcia, 
-the CSU Chancellor is paid $795,000 [^03-control-flow-2], and a full-time
+Cal Poly's President is paid $611,203 [^03-control-flow-2], Midred Garcia, 
+the CSU Chancellor is paid $795,000 [^03-control-flow-3], and a full-time
 janitor at Cal Poly can expect to make somewhere around $45,000. 
 
-[^03-control-flow-1]: Armstrong is also provided a house on Cal Poly's campus. 
-[^03-control-flow-2]: Garcia is also provided $96,000 for housing and $80,000 
+[^03-control-flow-2]: Armstrong is also provided a house on Cal Poly's campus. 
+[^03-control-flow-3]: Garcia is also provided $96,000 for housing and $80,000 
 for deferred compensation.
 
 Let's put these three salaries through our control flow to figure out how much 
@@ -323,7 +335,7 @@ of the Help tab.
 
 Either option should get you to a page that looks like this:
 
-![](images/03-case-when-help.png){fig-alt=""}
+![](images/03-case-when-help.png){fig-alt="A screenshot of the 'Help' tab in RStudio, where you can read documentation pages for R functions. There is a black diamond around the 'Help' title indicating that the purpose of the tab. There is a orange box around the search bar in the upper right corner indicating this is where you can search for a function's name. The help file displayed is for the case_when function in the dplyr package. The upper left corner of the documentation page displays the name of the function, followed by the name of the package the function lives in. Below, a title and description display what the purpose of the function is. Finally, at the bottom, an annotation arrow indicates that the 'arguments, value, and examples' can be found further down the page."}
 
 There are three parts to the help file:
 
@@ -431,7 +443,6 @@ case_when(num < 0 ~ "negative",
           num > 0 ~ "positive",
           .default = "zero")
 ```
-
 :::
 :::
 

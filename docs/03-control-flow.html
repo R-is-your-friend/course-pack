@@ -602,7 +602,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</code></pre>
 <section id="multiple-conditions-for-tax-brackets" class="level3" data-number="4.3.1"><h3 data-number="4.3.1" class="anchored" data-anchor-id="multiple-conditions-for-tax-brackets">
 <span class="header-section-number">4.3.1</span> Multiple Conditions for Tax Brackets</h3>
-<p>Suppose we wanted to create a control flow to know how much in federal taxes someone in the US might pay. Based on the <a href="https://www.irs.gov/filing/federal-income-tax-rates-and-brackets">current IRS tax rates</a> we have the following outcomes:</p>
+<p>Suppose we wanted to create a control flow to know how much in federal taxes someone in the US might pay. Based on the <a href="https://www.irs.gov/filing/federal-income-tax-rates-and-brackets">current IRS tax rates</a> we have the following outcomes<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>:</p>
 <table class="caption-top table">
 <thead><tr class="header">
 <th>Income Range</th>
@@ -640,8 +640,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 <p><strong>Step 1:</strong> Draw out the diagram for the control flow. What conditions are being checked at each stage? If a condition is true what is the outcome? If a condition is false, what happens?</p>
-<div class="callout callout-style-default callout-note callout-empty-content callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -650,15 +650,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-
+<p><img src="images/03-taxes-flowchart.png" class="img-fluid" alt="A flowchart for figuring out what tax bracket someone should pay. The chart starts with an orange circle indicating the income (a numeric value) is being input into the flowchart. From there, there are a series of green diamonds each with a check for the income (e.g., income < $11,925). At each diamond there is an arrow pointing down with a value of TRUE next to the arrow, indicating that the condition checked was found to be TRUE. There is a second arrow pointing to the right with a value of FALSE next to the arrow, indicating that the contition checked was found to be false. Beneath each condition that found to be TRUE there is a blue rectangle with a tax percentage indicating the tax rate for that income bracket."></p>
 </div>
 </div>
 </div>
 <p><strong>Step 2:</strong> Translate your diagram into R code!</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -667,7 +667,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse show">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="va">income</span> <span class="op">&lt;</span> <span class="fl">11925</span><span class="op">)</span> <span class="op">{</span></span>
@@ -713,7 +713,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>[1] 0.22</code></pre>
 </div>
 </div>
-<p>What if we tried salaries for a variety of CSU employees? Jeffrey Armstrong, Cal Poly’s President is paid $611,203 <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, Midred Garcia, the CSU Chancellor is paid $795,000 <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, and a full-time janitor at Cal Poly can expect to make somewhere around $45,000.</p>
+<p>What if we tried salaries for a variety of CSU employees? Jeffrey Armstrong, Cal Poly’s President is paid $611,203 <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, Midred Garcia, the CSU Chancellor is paid $795,000 <a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, and a full-time janitor at Cal Poly can expect to make somewhere around $45,000.</p>
 <p>Let’s put these three salaries through our control flow to figure out how much each employee will pay in taxes.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">income</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">611203</span>, <span class="fl">795000</span>, <span class="fl">45000</span><span class="op">)</span></span>
@@ -794,7 +794,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>You might be wondering, how would I have figured out the syntax for <code><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">case_when()</a></code> on my own? Well, let’s introduce you to the Help tab—your friend for getting help with how to use an R function.</p>
 <p>There are two ways to pull up the help file for a function. First, you can type a <code>?</code> before the function’s name <code><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">?case_when</a></code> in your Console. Second, you can type the name of the function in the search bar in the upper right corner of the Help tab.</p>
 <p>Either option should get you to a page that looks like this:</p>
-<p><img src="images/03-case-when-help.png" class="img-fluid" alt=""></p>
+<p><img src="images/03-case-when-help.png" class="img-fluid" alt="A screenshot of the 'Help' tab in RStudio, where you can read documentation pages for R functions. There is a black diamond around the 'Help' title indicating that the purpose of the tab. There is a orange box around the search bar in the upper right corner indicating this is where you can search for a function's name. The help file displayed is for the case_when function in the dplyr package. The upper left corner of the documentation page displays the name of the function, followed by the name of the package the function lives in. Below, a title and description display what the purpose of the function is. Finally, at the bottom, an annotation arrow indicates that the 'arguments, value, and examples' can be found further down the page."></p>
 <p>There are three parts to the help file:</p>
 <ol type="1">
 <li>The function arguments (inputs)</li>
@@ -911,8 +911,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
 <ol>
-<li id="fn1"><p>Armstrong is also provided a house on Cal Poly’s campus.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Garcia is also provided $96,000 for housing and $80,000 for deferred compensation.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Technically, this is a bit of an over simplification. If you make $75,000 you actually pay 10% for the first $11,925, then 12% for the next $36,550 (to get to $48,475), then 22% for the final $26,525.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Armstrong is also provided a house on Cal Poly’s campus.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Garcia is also provided $96,000 for housing and $80,000 for deferred compensation.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
