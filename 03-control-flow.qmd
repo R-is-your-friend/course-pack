@@ -9,6 +9,8 @@
 - What it means for a function to be vectorized
 - How to make a vectorized conditional statement
 - Where to access help on an R function
+- Recognize when to use a `for ()` loop instead of a `while ()` loop
+- Understand how to index a loop
 :::
 
 ```{r}
@@ -18,6 +20,9 @@
 library(dplyr)
 ```
 
+<!-- NEED TO ADD CHECKINS! -->
+<!-- ::: {.callout-check-in} -->
+<!-- ::: -->
 
 Control flow refers to statements in a computer program that that determines 
 when, how, and how many times code is evaluated. In this reading you will learn
