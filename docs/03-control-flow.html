@@ -476,7 +476,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li>
 <a href="#vectorized-operations" id="toc-vectorized-operations" class="nav-link" data-scroll-target="#vectorized-operations"><span class="header-section-number">4.4</span> Vectorized Operations</a>
   <ul>
-<li><a href="#vectorized-control-flow" id="toc-vectorized-control-flow" class="nav-link" data-scroll-target="#vectorized-control-flow"><span class="header-section-number">4.4.1</span> Vectorized Control Flow</a></li>
+<li><a href="#vectorized-conditional-statements" id="toc-vectorized-conditional-statements" class="nav-link" data-scroll-target="#vectorized-conditional-statements"><span class="header-section-number">4.4.1</span> Vectorized Conditional Statements</a></li>
   </ul>
 </li>
   <li>
@@ -485,7 +485,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><a href="#finding-new-fun-arguments" id="toc-finding-new-fun-arguments" class="nav-link" data-scroll-target="#finding-new-fun-arguments"><span class="header-section-number">4.5.1</span> Finding New (Fun) Arguments</a></li>
   </ul>
 </li>
-  <li><a href="#loops" id="toc-loops" class="nav-link" data-scroll-target="#loops"><span class="header-section-number">4.6</span> Loops</a></li>
+  <li>
+<a href="#loops" id="toc-loops" class="nav-link" data-scroll-target="#loops"><span class="header-section-number">4.6</span> Loops</a>
+  <ul>
+<li><a href="#while-loops" id="toc-while-loops" class="nav-link" data-scroll-target="#while-loops"><span class="header-section-number">4.6.1</span> <code>while ()</code> Loops</a></li>
+  <li>
+<a href="#for-loops" id="toc-for-loops" class="nav-link" data-scroll-target="#for-loops"><span class="header-section-number">4.6.2</span> <code>for()</code> Loops</a>
+  <ul class="collapse">
+<li><a href="#indexing-a-loop" id="toc-indexing-a-loop" class="nav-link" data-scroll-target="#indexing-a-loop"><span class="header-section-number">4.6.2.1</span> Indexing a Loop</a></li>
+  </ul>
+</li>
+  </ul>
+</li>
   </ul></nav>
     </div>
 <!-- main -->
@@ -517,10 +528,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li>
-</li><li>
-</li><li>
-</li></ul>
+<li>What a conditional statement is</li>
+<li>How to create a simple conditional statement with <code>if ()</code> and <code>else</code>
+</li>
+<li>How to series of conditional statements with <code>else if ()</code>
+</li>
+<li>What it means for a function to be vectorized</li>
+<li>How to make a vectorized conditional statement</li>
+<li>Where to access help on an R function</li>
+</ul>
 </div>
 </div>
 <p>Control flow refers to statements in a computer program that that determines when, how, and how many times code is evaluated. In this reading you will learn about the two main types of control flow structures—<code>if</code> statements and <code>for()</code> loops.</p>
@@ -584,14 +600,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section><section id="conditional-statements-as-diagrams" class="level3" data-number="4.2.2"><h3 data-number="4.2.2" class="anchored" data-anchor-id="conditional-statements-as-diagrams">
 <span class="header-section-number">4.2.2</span> Conditional Statements as Diagrams</h3>
-<p>We find it quite useful to represent control flows as diagrams! By drawing out the diagram (even if it is simple), you can more clearly anticipate what the result of the process will be.</p>
+<p>We find it quite useful to represent conditional statements as diagrams! By drawing out the diagram (even if it is simple), you can more clearly anticipate what the result of the process will be.</p>
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="images/03-simple-conditional-diagram.png" class="img-fluid figure-img" alt="A simple diagram of what comprises an if/else conditional. At the top there is a green diamond and the inside of the diamond reads 'Condition to Check'. There are two arrows exiting the diamond, one pointing to the right that reads 'TRUE' and one pointing down that reads 'FALSE'. These represent the outcome of the conditional check. At the end of the 'TRUE' arrow there is a rectangle that reads 'Thing to do' representing what is done if the condition is met (TRUE). As the end of the 'FALSE' arrow there is a circle that reads 'Other thing to do' representing what is done if the condition is not met (FALSE)."></p>
+<figure class="figure"><p><img src="images/03-simple-conditional-diagram.png" class="img-fluid figure-img" style="width:60.0%" alt="A simple diagram of what comprises an if/else conditional. At the top there is a green diamond and the inside of the diamond reads 'Condition to Check'. There are two arrows exiting the diamond, one pointing to the right that reads 'TRUE' and one pointing down that reads 'FALSE'. These represent the outcome of the conditional check. At the end of the 'TRUE' arrow there is a rectangle that reads 'Thing to do' representing what is done if the condition is met (TRUE). As the end of the 'FALSE' arrow there is a circle that reads 'Other thing to do' representing what is done if the condition is not met (FALSE)."></p>
 <figcaption>Diagram of a simple conditional (if/else) statement</figcaption></figure>
 </div>
 </section></section><section id="chaining-conditional-statements" class="level2" data-number="4.3"><h2 data-number="4.3" class="anchored" data-anchor-id="chaining-conditional-statements">
 <span class="header-section-number">4.3</span> Chaining Conditional Statements</h2>
-<p>In our previous control flow we only used <code>if</code> and <code>else</code>, but that only works if you have <strong>one</strong> condition you need to check. In many cases we have more than one condition to check, so we will need to modify our control flow.</p>
+<p>In our previous conditional statement we only used <code>if</code> and <code>else</code>, but that only works if you have <strong>two</strong> groups or <strong>one</strong> condition you need to check. In many cases we have more than one condition to check, so we will need to modify our conditional statement.</p>
 <p>When we have more than one condition to check, we can use an <code>else if ()</code> statement. <code>else if ()</code> works similar to an <code>if ()</code> statement, where you specify a condition to check in the parentheses. This looks something like:</p>
 <pre><code>if (condition 1) {
   stuff to do 
@@ -602,7 +618,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</code></pre>
 <section id="multiple-conditions-for-tax-brackets" class="level3" data-number="4.3.1"><h3 data-number="4.3.1" class="anchored" data-anchor-id="multiple-conditions-for-tax-brackets">
 <span class="header-section-number">4.3.1</span> Multiple Conditions for Tax Brackets</h3>
-<p>Suppose we wanted to create a control flow to know how much in federal taxes someone in the US might pay. Based on the <a href="https://www.irs.gov/filing/federal-income-tax-rates-and-brackets">current IRS tax rates</a> we have the following outcomes<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>:</p>
+<p>Suppose we wanted to create conditional statements to know how much in federal taxes someone in the US might pay. Based on the <a href="https://www.irs.gov/filing/federal-income-tax-rates-and-brackets">current IRS tax rates</a> we have the following outcomes<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>:</p>
 <table class="caption-top table">
 <thead><tr class="header">
 <th>Income Range</th>
@@ -639,14 +655,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<p><strong>Step 1:</strong> Draw out the diagram for the control flow. What conditions are being checked at each stage? If a condition is true what is the outcome? If a condition is false, what happens?</p>
-<div class="callout callout-style-default callout-note callout-titled">
+<p><strong>Step 1:</strong> Draw out the diagram for the conditional statements. What conditions are being checked at each stage? If a condition is true what is the outcome? If a condition is false, what happens?</p>
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Check Your Answer
+<span class="screen-reader-only">Tip</span>Check Your Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -657,13 +673,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p><strong>Step 2:</strong> Translate your diagram into R code!</p>
-<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Check Your Answer
+<span class="screen-reader-only">Tip</span>Check Your Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -714,7 +730,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>What if we tried salaries for a variety of CSU employees? Jeffrey Armstrong, Cal Poly’s President is paid $611,203 <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, Midred Garcia, the CSU Chancellor is paid $795,000 <a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, and a full-time janitor at Cal Poly can expect to make somewhere around $45,000.</p>
-<p>Let’s put these three salaries through our control flow to figure out how much each employee will pay in taxes.</p>
+<p>Let’s put these three salaries through our conditional statements to figure out how much each employee will pay in taxes.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">income</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">611203</span>, <span class="fl">795000</span>, <span class="fl">45000</span><span class="op">)</span></span>
 <span></span>
@@ -738,12 +754,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 ! the condition has length &gt; 1</code></pre>
 </div>
 </div>
-<p>Oh no! Our control flow didn’t work. What happened?</p>
+<p>Oh no! Our conditionals didn’t work. What happened?</p>
 <p>The error message we got (<code>"the condition has length &gt; 1"</code>) may seem strange at first, but it is actually <strong>incredibly</strong> informative.</p>
-<p>What the error is telling us is that <code>if (income &lt; 11925)</code> could not be evaluated because <code>income</code> has a length that is greater than 1. Meaning, our control flow can only work for scalar vectors (i.e., vectors with a single value).</p>
+<p>What the error is telling us is that <code>if (income &lt; 11925)</code> could not be evaluated because <code>income</code> has a length that is greater than 1. Meaning, our conditional statements can only work for scalar vectors (i.e., vectors with a single value).</p>
 </section></section><section id="vectorized-operations" class="level2" data-number="4.4"><h2 data-number="4.4" class="anchored" data-anchor-id="vectorized-operations">
 <span class="header-section-number">4.4</span> Vectorized Operations</h2>
-<p>So, what do we do if we want to use a control flow for a vector of values? Well, we need to switch from using <code>if ()</code>, <code>else if ()</code>, and <code>else</code> to using functions that accept vectors of values.</p>
+<p>So, what do we do if we want to use conditional statements for a vector of values? Well, we need to switch from using <code>if ()</code>, <code>else if ()</code>, and <code>else</code> to using functions that accept vectors of values.</p>
 <p>Luckily for us, vectorized operations are very common in R! Take for example finding the square root of a given number. The <code><a href="https://rdrr.io/r/base/MathFun.html">sqrt()</a></code> function accepts a <strong>vector</strong> of values an outputs the square root of each value.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nums</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">9</span>, <span class="fl">12</span>, <span class="fl">16</span>, <span class="fl">20</span>, <span class="fl">25</span><span class="op">)</span></span>
@@ -752,8 +768,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>[1] 1.732051 2.000000 3.000000 3.464102 4.000000 4.472136 5.000000</code></pre>
 </div>
 </div>
-<section id="vectorized-control-flow" class="level3" data-number="4.4.1"><h3 data-number="4.4.1" class="anchored" data-anchor-id="vectorized-control-flow">
-<span class="header-section-number">4.4.1</span> Vectorized Control Flow</h3>
+<section id="vectorized-conditional-statements" class="level3" data-number="4.4.1"><h3 data-number="4.4.1" class="anchored" data-anchor-id="vectorized-conditional-statements">
+<span class="header-section-number">4.4.1</span> Vectorized Conditional Statements</h3>
 <p>For our problem, we need to find a similar function that can accept a vector of salaries and match each salary with a tax rate. The <code><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">case_when()</a></code> function from the <strong>dplyr</strong> package does just that.</p>
 <p>The syntax for this function looks like this:</p>
 <div class="cell">
@@ -771,7 +787,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Let’s break it down! You should first notice that each “case” is a separate argument to the function. Meaning, each case is separated by a <code>,</code>. In our code, there are seven total cases.</p>
 <p>Within a case, there are two components, (1) the left hand side (LHS) and the right hand side (RHS). The LHS is the condition that is being checked. This is the same as what went inside of an <code>if ()</code> or an <code>else if ()</code>.</p>
 <p>In the middle you see a <code>~</code> symbol. You can read this as “then.” Meaning, if the condition on the LHS is <code>TRUE</code> <strong>then</strong> something should happen. What should happen? Well, that is exactly what the RHS specifies.</p>
-<p>The last, somewhat odd looking syntax is the <code>.default</code> at the end. This is similar to the <code>else {}</code> at the end of our control flow, where both are used as a “catch all” for cases that were not specified. Notice that because every case that</p>
+<p>The last, somewhat odd looking syntax is the <code>.default</code> at the end. This is similar to the <code>else {}</code> at the end of our conditional statements, where both are used as a “catch all” for cases that were not specified.</p>
 <p>But, does it work? Can <code><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">case_when()</a></code> provide a vector of tax brackets?</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">income</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">611203</span>, <span class="fl">795000</span>, <span class="fl">45000</span><span class="op">)</span></span>
@@ -794,7 +810,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>You might be wondering, how would I have figured out the syntax for <code><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">case_when()</a></code> on my own? Well, let’s introduce you to the Help tab—your friend for getting help with how to use an R function.</p>
 <p>There are two ways to pull up the help file for a function. First, you can type a <code>?</code> before the function’s name <code><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">?case_when</a></code> in your Console. Second, you can type the name of the function in the search bar in the upper right corner of the Help tab.</p>
 <p>Either option should get you to a page that looks like this:</p>
-<p><img src="images/03-case-when-help.png" class="img-fluid" alt="A screenshot of the 'Help' tab in RStudio, where you can read documentation pages for R functions. There is a black diamond around the 'Help' title indicating that the purpose of the tab. There is a orange box around the search bar in the upper right corner indicating this is where you can search for a function's name. The help file displayed is for the case_when function in the dplyr package. The upper left corner of the documentation page displays the name of the function, followed by the name of the package the function lives in. Below, a title and description display what the purpose of the function is. Finally, at the bottom, an annotation arrow indicates that the 'arguments, value, and examples' can be found further down the page."></p>
+<p><img src="images/03-case-when-help.png" class="img-fluid" style="width:70.0%" alt="A screenshot of the 'Help' tab in RStudio, where you can read documentation pages for R functions. There is a black diamond around the 'Help' title indicating that the purpose of the tab. There is a orange box around the search bar in the upper right corner indicating this is where you can search for a function's name. The help file displayed is for the case_when function in the dplyr package. The upper left corner of the documentation page displays the name of the function, followed by the name of the package the function lives in. Below, a title and description display what the purpose of the function is. Finally, at the bottom, an annotation arrow indicates that the 'arguments, value, and examples' can be found further down the page."></p>
 <p>There are three parts to the help file:</p>
 <ol type="1">
 <li>The function arguments (inputs)</li>
@@ -903,17 +919,197 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section></section><section id="loops" class="level2" data-number="4.6"><h2 data-number="4.6" class="anchored" data-anchor-id="loops">
 <span class="header-section-number">4.6</span> Loops</h2>
-<!-- While + break -->
-<!-- for -->
-<!-- [A visual demonstration of for loops iterating through a vector of monsters to dress them up for a parade. Image by [Allison Horst](https://allisonhorst.com/allison-horst). -->
-<!-- ](https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/3a446c03-34c7-470e-b147-1ae3d1321503_rw_3840.png?h=9b2c6ebeee7504e4c1a44dffe0707a35){fig-alt="Illustrated for loop example. Input vector is a parade of monsters, including monsters that are circles, triangles, and squares. The for loop they enter has an if-else statement: if the monster is a triangle, it gets sunglasses. Otherwise, it gets a hat. The output is the parade of monsters where the same input parade of monsters shows up, now wearing either sunglasses (if triangular) or a hat (if any other shape)."} -->
+<p>Looping is another form of control flow. Where conditionals largely determine <em>when</em> and <em>how</em> code is evaluated, looping decides <strong>how many times</strong> code is run. With looping, the same set of instructions can be repeated many times.</p>
+<p>Take for example the classic problem of updating a variable based on its current value. This would be a series of statements like <code>x &lt;- x + 1</code>. To accomplish this we first need to initialize a value for <code>x</code>, so we know where to start counting.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">0</span> </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Once <code>x</code> is initialized, we need to know when we should stop adding values. This question (“When should the loop stop?”) is what separates between the two types of loops—<code>while()</code> loops and <code>for()</code> loops.</p>
+<section id="while-loops" class="level3" data-number="4.6.1"><h3 data-number="4.6.1" class="anchored" data-anchor-id="while-loops">
+<span class="header-section-number">4.6.1</span> <code>while ()</code> Loops</h3>
+<p>A <code>while ()</code> loop specifies a set of instructions that should be done <strong>while</strong> a condition is met (<code>TRUE</code>). Let’s say we want to keep adding values to <code>x</code> until <code>x</code> has the value of <code>10</code>. So, we want to check the current value of <code>x</code>, and if the current value is less than 10 then we are okay with the loop continuing. However, as soon as <code>x</code> is greater than or equal to 10 we want the loop to end.</p>
+<p>We can write this as a relational comparison: <code>x &lt; 10</code>. If the current value of <code>x</code> is less than 10, this relational statement will return <code>TRUE</code>. If the current value of <code>x</code> is 10, this relational statement will return <code>FALSE</code> because we used a strict inequality.</p>
+<p>As with all coding processes, it is great to start with a diagram of how the process works <strong>before</strong> translating it into R code!</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="" aria-current="page">Flow Chart</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">R Code</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p><img src="images/03-while-loop-flowchart.png" class="img-fluid" style="width:50.0%" alt="A flowchart of the steps associated with a while loop. At the top there is an orange circle with an 'x' inside it and an arrow pointing down into the next step. This circle represents the current value of x being fed into the loop. The next step is represented by a green diamond with 'x < 10' written inside it. This is the relational statement being checked at each step of the loop. If the relation is found to be true, there is an arrow pointing to a blue rectangle with 'x <- x + 1' written inside. This indicates that if the value of x is less than 10 then the loop will add 1 to the current value of x. If the relation is found to be false, there is an arrow pointing to the right to a rectangle with 'end loop' written inside. This indicates that once the current value of x is greater than or equal to 10 the loop will stop."></p>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">while</span> <span class="op">(</span><span class="va">x</span> <span class="op">&lt;</span> <span class="fl">10</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">+</span> <span class="fl">1</span></span>
+<span><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+<p><strong>What do you think the value of <code>x</code> is?</strong></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Check Your Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>A common addition to loops is using the <code><a href="https://rdrr.io/r/base/print.html">print()</a></code> function to output the current value of <code>x</code>. This seems somewhat benign now, but a <code><a href="https://rdrr.io/r/base/print.html">print()</a></code> is an incredibly helpful tool in debugging! Adding a <code><a href="https://rdrr.io/r/base/print.html">print()</a></code> statement to your loop gives you a snapshot of each iteration, and can tell you where your loop is breaking.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">while</span> <span class="op">(</span><span class="va">x</span> <span class="op">&lt;</span> <span class="fl">10</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">+</span> <span class="fl">1</span></span>
+<span><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0
+[1] 1
+[1] 2
+[1] 3
+[1] 4
+[1] 5
+[1] 6
+[1] 7
+[1] 8
+[1] 9</code></pre>
+</div>
+</div>
+</section><section id="for-loops" class="level3" data-number="4.6.2"><h3 data-number="4.6.2" class="anchored" data-anchor-id="for-loops">
+<span class="header-section-number">4.6.2</span> <code>for()</code> Loops</h3>
+<p>Another type of loop is a <code>for ()</code> loop. A <code>for ()</code> differs from a <code>while ()</code> loop in that the loop is executed a specific number of times. This is what is often referred to as a “definite” loop. With a <code>while ()</code> loop we do not specify the number of times the loop should be run. Instead, we specify the condition under which the loop should stop (e.g., <code>x &lt; 10</code>). This is what is referred to as an “indefinite” loop.</p>
+<p>The following graphic provides a fun exploration of a <code>for ()</code> loop (in conjunction with a conditional statement!):</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/3a446c03-34c7-470e-b147-1ae3d1321503_rw_3840.png?h=9b2c6ebeee7504e4c1a44dffe0707a35" class="img-fluid figure-img" alt="Illustrated for loop example. Input vector is a parade of monsters, including monsters that are circles, triangles, and squares. The for loop they enter has an if-else statement: if the monster is a triangle, it gets sunglasses. Otherwise, it gets a hat. The output is the parade of monsters where the same input parade of monsters shows up, now wearing either sunglasses (if triangular) or a hat (if any other shape)."></p>
+<figcaption>A visual demonstration of for loops iterating through a vector of monsters to dress them up for a parade. Image by <a href="https://allisonhorst.com/allison-horst">Allison Horst</a>.</figcaption></figure>
+</div>
+<p>Here, we initialize a set of monsters inside the vector <code>parade</code>. The <code>for ()</code> loop declares that it will iterate (keep repeating) until every element <code>parade</code> (<code>monster</code>) has been used. The body of the loop declares what should be done to each <code>monster</code> (put on a hat, put on sunglasses).</p>
+<section id="indexing-a-loop" class="level4" data-number="4.6.2.1"><h4 data-number="4.6.2.1" class="anchored" data-anchor-id="indexing-a-loop">
+<span class="header-section-number">4.6.2.1</span> Indexing a Loop</h4>
+<p>In the above graphic <code>monster</code> is used as the counter (index) of the <code>parade</code> vector. This might seem a bit confusing at first because the elements of <code>parade</code> don’t have the name “monster.” Rather, the elements of <code>parade</code> are associated with an <strong>index</strong> (e.g., <code>parade[1]</code>). However, a <code>for ()</code> loop allows us to index the values we are looping over in a variety of ways.</p>
+<p>Let’s explore different indexing methods with the <code>month.name</code> vector that comes built-in to R:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">month.name</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "January"   "February"  "March"     "April"     "May"       "June"     
+ [7] "July"      "August"    "September" "October"   "November"  "December" </code></pre>
+</div>
+</div>
+<p>Suppose we wanted to loop over the values of <code>month.names</code> to print out the name of every month<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>. There are a few different ways we could go about this.</p>
+<p>First, we could take a similar approach as the graphic about and use a word (<code>month</code>) to increment the values of <code>month.name</code>. Notice that the loop still works if we use the letter <code>i</code> to increment. The word you use is not important, it is <em>how</em> you use it! Namely, the name you use to increment the loop needs to be the <strong>same</strong> name you use <em>inside</em> the loop (<code>print(i)</code>).</p>
+<div class="columns">
+<div class="column" style="width:48%;">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">for</span> <span class="op">(</span><span class="va">month</span> <span class="kw">in</span> <span class="va">month.name</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">month</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "January"
+[1] "February"
+[1] "March"
+[1] "April"
+[1] "May"
+[1] "June"
+[1] "July"
+[1] "August"
+[1] "September"
+[1] "October"
+[1] "November"
+[1] "December"</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:4%;">
+
+</div><div class="column" style="width:48%;">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="va">month.name</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">i</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "January"
+[1] "February"
+[1] "March"
+[1] "April"
+[1] "May"
+[1] "June"
+[1] "July"
+[1] "August"
+[1] "September"
+[1] "October"
+[1] "November"
+[1] "December"</code></pre>
+</div>
+</div>
+</div>
+</div>
+<p>Another option that you might see is specifying the exact number of times the loop should be done using numeric values. Take for example this loop:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">month.name</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "January"
+[1] "February"
+[1] "March"
+[1] "April"
+[1] "May"
+[1] "June"
+[1] "July"
+[1] "August"
+[1] "September"
+[1] "October"
+[1] "November"
+[1] "December"</code></pre>
+</div>
+</div>
+<p>This loop specifies that it should be run exactly 12 times (for values <code>1</code> through <code>12</code>). For each value of <code>i</code>, we print out the associated value of <code>month.names</code>. For example, when <code>i = 5</code>, the loop will print out <code>month.name[5]</code> which is <code>May</code>.</p>
+<p>We can no longer use <code>print(i)</code> in our loop because <code>i</code> is referring to the value of the counter (<code>1:12</code>) and not the value of <code>month.name</code>. Meaning, if we had <code>print(i)</code> inside the loop we would end up with the values <code>1:12</code> being output.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Fundamentals of Indexing
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Regardless of what method you choose, the values used to index a loop <strong>must come from a vector</strong>. Each of these methods produces a vector of values that can be used to index the loop:</p>
+<ul>
+<li><code>1:length(month.name)</code></li>
+<li><code>1:12</code></li>
+<li><code>seq_along(month.name)</code></li>
+<li><code>seq_len(12)</code></li>
+<li><code>month.name</code></li>
+</ul>
+<p>So, it is up to you to figure out what method makes the most sense to you!</p>
+</div>
+</div>
 
 
-</section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+</section></section></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
 <ol>
 <li id="fn1"><p>Technically, this is a bit of an over simplification. If you make $75,000 you actually pay 10% for the first $11,925, then 12% for the next $36,550 (to get to $48,475), then 22% for the final $26,525.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>Armstrong is also provided a house on Cal Poly’s campus.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>Garcia is also provided $96,000 for housing and $80,000 for deferred compensation.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Yes, we know this is silly. We just printed all the names in the previous code chunk!<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right

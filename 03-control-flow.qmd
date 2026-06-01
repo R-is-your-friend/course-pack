@@ -3,11 +3,12 @@
 ::: callout
 ## Learning Objectives
 
-- 
-
-- 
-
-- 
+- What a conditional statement is
+- How to create a simple conditional statement with `if ()` and `else`
+- How to series of conditional statements with `else if ()`
+- What it means for a function to be vectorized
+- How to make a vectorized conditional statement
+- Where to access help on an R function
 :::
 
 ```{r}
@@ -18,19 +19,27 @@ library(dplyr)
 ```
 
 
-Control flow refers to statements in a computer program that that determines when, how, and how many times code is evaluated. In this reading you will learn about the two main types of control flow structures---`if` statements and `for()` loops.
+Control flow refers to statements in a computer program that that determines 
+when, how, and how many times code is evaluated. In this reading you will learn
+about the two main types of control flow structures---`if` statements and
+`for()` loops.
 
 ## Conditionals in Everyday Life
 
-We are going to teach you about conditionals in R, but before we do it is good to remember that we use these types of statements *all* the time. Anytime you use if-then logic you are using a conditional!
+We are going to teach you about conditionals in R, but before we do it is good
+to remember that we use these types of statements *all* the time. Anytime you
+use if-then logic you are using a conditional!
 
 ![Image from Randal Munroe, xkcd.com, available under a CC-By 2.5 license.](images/03-conditionals.png){fig-alt="A comic of a stick person and a series of speech bubbles. The person says 'I'll be in your city tomorrow if you want to hangout.' The person they are talking to (presumably in the background) responds 'But where will you be if I don't want to hang out?' The person then says 'You know, I just remembered I'm busy.' The bottom of the comic says 'Why I try not to be pedantic about conditionals."}
 
-These ideas go back to the practice activity we did with paper airplanes. With conditionals, we need to state *exactly* what we mean because the computer will do whatever we tell it to do.
+These ideas go back to the practice activity we did with paper airplanes. With
+conditionals, we need to state *exactly* what we mean because the computer will
+do whatever we tell it to do.
 
 ## Conditional Statements
 
-A conditional statement determines what code is evaluated. In general, conditional statements look something like this:
+A conditional statement determines what code is evaluated. In general,
+conditional statements look something like this:
 
 ```         
 if (condition){
@@ -41,7 +50,11 @@ if (condition){
 }
 ```
 
-When the computer encounters a conditional statement, it first checks to see if the condition is met (`TRUE`) or if is is not met (`FALSE`). If the condition is `TRUE`, then the computer will execute the "stuff to do" inside the first set of `{}`. If the condition is `FALSE`, then the computer will execute the "other stuff to do" inside the second set of `{}`
+When the computer encounters a conditional statement, it first checks to see if
+the condition is met (`TRUE`) or if is is not met (`FALSE`). If the condition is
+`TRUE`, then the computer will execute the "stuff to do" inside the first set of
+`{}`. If the condition is `FALSE`, then the computer will execute the "other
+stuff to do" inside the second set of `{}`
 
 ### Conditional Statements in R
 
@@ -61,7 +74,13 @@ if (x > 2) {
 
 ```
 
-There are a few things we need to notice about the syntax. First, we are using two words `if` and `else` to build the control flow. These are reserved names that R recognizes exactly for this type of task. Second, the condition being checked comes after `if` and is contained in parentheses (`x > 2`). The "stuff to do" when the condition is `TRUE` is enclosed in `{}` **immediately after** the `if()` statement. If the condition is `FALSE`, then R will execute the "other stuff to do" contained in the `{}` after `else`.
+There are a few things we need to notice about the syntax. First, we are using
+two words `if` and `else` to build the control flow. These are reserved names
+that R recognizes exactly for this type of task. Second, the condition being
+checked comes after `if` and is contained in parentheses (`x > 2`). The "stuff
+to do" when the condition is `TRUE` is enclosed in `{}` **immediately after**
+the `if()` statement. If the condition is `FALSE`, then R will execute the 
+"other stuff to do" contained in the `{}` after `else`.
 
 **What value should `y` have?**
 
@@ -79,9 +98,12 @@ We could have written the above code as:
 if (x > 2) y <- 8  else y <- 4
 ```
 
-and we would have gotten the same result. So, why should we make our code so **long**?
+and we would have gotten the same result. So, why should we make our code so
+**long**?
 
-A braced expression, `{}`, defines the most important hierarchy of R code. So, we want to make the hierarchy easy to understand. To do this, our code should follow these three principles:
+A braced expression, `{}`, defines the most important hierarchy of R code. So, 
+we want to make the hierarchy easy to understand. To do this, our code should
+follow these three principles:
 
 1.  A `{` should be the last character on the line (e.g., `if (x > 2) {` ).
 
@@ -91,20 +113,29 @@ A braced expression, `{}`, defines the most important hierarchy of R code. So, w
 
 4.  A space should be included between `if` and the `(` starting the condition
 
-Each of these principles of code style come from the [Syntax section of the tidyverse style guide](https://style.tidyverse.org/syntax.html). We will use this style guide throughout the course!
+Each of these principles of code style come from the 
+[Syntax section of the tidyverse style guide](https://style.tidyverse.org/syntax.html). 
+We will use this style guide throughout the course!
 :::
 
 ### Conditional Statements as Diagrams
 
-We find it quite useful to represent control flows as diagrams! By drawing out the diagram (even if it is simple), you can more clearly anticipate what the result of the process will be.
+We find it quite useful to represent conditional statements as diagrams! By
+drawing out the diagram (even if it is simple), you can more clearly anticipate
+what the result of the process will be.
 
-![Diagram of a simple conditional (if/else) statement](images/03-simple-conditional-diagram.png){fig-alt="A simple diagram of what comprises an if/else conditional. At the top there is a green diamond and the inside of the diamond reads 'Condition to Check'. There are two arrows exiting the diamond, one pointing to the right that reads 'TRUE' and one pointing down that reads 'FALSE'. These represent the outcome of the conditional check. At the end of the 'TRUE' arrow there is a rectangle that reads 'Thing to do' representing what is done if the condition is met (TRUE). As the end of the 'FALSE' arrow there is a circle that reads 'Other thing to do' representing what is done if the condition is not met (FALSE)."}
+![Diagram of a simple conditional (if/else) statement](images/03-simple-conditional-diagram.png){fig-alt="A simple diagram of what comprises an if/else conditional. At the top there is a green diamond and the inside of the diamond reads 'Condition to Check'. There are two arrows exiting the diamond, one pointing to the right that reads 'TRUE' and one pointing down that reads 'FALSE'. These represent the outcome of the conditional check. At the end of the 'TRUE' arrow there is a rectangle that reads 'Thing to do' representing what is done if the condition is met (TRUE). As the end of the 'FALSE' arrow there is a circle that reads 'Other thing to do' representing what is done if the condition is not met (FALSE)." width="60%"}
 
 ## Chaining Conditional Statements
 
-In our previous control flow we only used `if` and `else`, but that only works if you have **one** condition you need to check. In many cases we have more than one condition to check, so we will need to modify our control flow.
+In our previous conditional statement we only used `if` and `else`, but that
+only works if you have **two** groups or **one** condition you need to check. 
+In many cases we have more than one condition to check, so we will need to
+modify our conditional statement.
 
-When we have more than one condition to check, we can use an `else if ()` statement. `else if ()` works similar to an `if ()` statement, where you specify a condition to check in the parentheses. This looks something like:
+When we have more than one condition to check, we can use an `else if ()`
+statement. `else if ()` works similar to an `if ()` statement, where you specify
+a condition to check in the parentheses. This looks something like:
 
 ```         
 if (condition 1) {
@@ -118,7 +149,9 @@ if (condition 1) {
 
 ### Multiple Conditions for Tax Brackets
 
-Suppose we wanted to create a control flow to know how much in federal taxes someone in the US might pay. Based on the [current IRS tax rates](https://www.irs.gov/filing/federal-income-tax-rates-and-brackets) we have the following outcomes[^03-control-flow-1]:
+Suppose we wanted to create conditional statements to know how much in federal
+taxes someone in the US might pay. Based on the [current IRS tax rates](https://www.irs.gov/filing/federal-income-tax-rates-and-brackets) we have
+the following outcomes[^03-control-flow-1]:
 
 | Income Range         | Taxes |
 |----------------------|-------|
@@ -134,11 +167,11 @@ Suppose we wanted to create a control flow to know how much in federal taxes som
 If you make $75,000 you actually pay 10% for the first $11,925, then 12% for the
 next $36,550 (to get to $48,475), then 22% for the final $26,525. 
 
-**Step 1:** Draw out the diagram for the control flow. What conditions are being
-checked at each stage? If a condition is true what is the outcome? If a
-condition is false, what happens?
+**Step 1:** Draw out the diagram for the conditional statements. What conditions
+are being checked at each stage? If a condition is true what is the outcome? If 
+a condition is false, what happens?
 
-::: {.callout-note collapse="true"}
+::: {.callout-tip collapse="true"}
 # Check Your Answer
 
 ![](images/03-taxes-flowchart.png){fig-alt="A flowchart for figuring out what tax bracket someone should pay. The chart starts with an orange circle indicating the income (a numeric value) is being input into the flowchart. From there, there are a series of green diamonds each with a check for the income (e.g., income < $11,925). At each diamond there is an arrow pointing down with a value of TRUE next to the arrow, indicating that the condition checked was found to be TRUE. There is a second arrow pointing to the right with a value of FALSE next to the arrow, indicating that the contition checked was found to be false. Beneath each condition that found to be TRUE there is a blue rectangle with a tax percentage indicating the tax rate for that income bracket."}
@@ -147,7 +180,7 @@ condition is false, what happens?
 
 **Step 2:** Translate your diagram into R code!
 
-::: {.callout-note collapse="true"}
+::: {.callout-tip collapse="true"}
 # Check Your Answer
 
 ```{r}
@@ -210,8 +243,8 @@ janitor at Cal Poly can expect to make somewhere around $45,000.
 [^03-control-flow-3]: Garcia is also provided $96,000 for housing and $80,000 
 for deferred compensation.
 
-Let's put these three salaries through our control flow to figure out how much 
-each employee will pay in taxes. 
+Let's put these three salaries through our conditional statements to figure out
+how much each employee will pay in taxes. 
 
 ```{r}
 #| label: conditional-with-vector
@@ -235,21 +268,21 @@ if (income < 11925) {
   }
 ```
 
-Oh no! Our control flow didn't work. What happened? 
+Oh no! Our conditionals didn't work. What happened? 
 
 The error message we got (`"the condition has length > 1"`) may seem strange at
 first, but it is actually **incredibly** informative. 
 
 What the error is telling us is that `if (income < 11925)` could not be
 evaluated because `income` has a length that is greater than 1. Meaning, our
-control flow can only work for scalar vectors (i.e., vectors with a single
-value).
+conditional statements can only work for scalar vectors (i.e., vectors with a
+single value).
 
 ## Vectorized Operations
 
-So, what do we do if we want to use a control flow for a vector of values? Well, 
-we need to switch from using `if ()`, `else if ()`, and `else` to using 
-functions that accept vectors of values. 
+So, what do we do if we want to use conditional statements for a vector of
+values? Well, we need to switch from using `if ()`, `else if ()`, and `else` to
+using functions that accept vectors of values. 
 
 Luckily for us, vectorized operations are very common in R! Take for example
 finding the square root of a given number. The `sqrt()` function accepts a 
@@ -262,7 +295,7 @@ nums <- c(3, 4, 9, 12, 16, 20, 25)
 sqrt(nums)
 ```
 
-### Vectorized Control Flow
+### Vectorized Conditional Statements
 
 For our problem, we need to find a similar function that can accept a vector 
 of salaries and match each salary with a tax rate. The `case_when()` function
@@ -299,9 +332,8 @@ condition on the LHS is `TRUE` **then** something should happen. What should
 happen? Well, that is exactly what the RHS specifies. 
 
 The last, somewhat odd looking syntax is the `.default` at the end. This is 
-similar to the `else {}` at the end of our control flow, where both are used
-as a "catch all" for cases that were not specified. Notice that because every 
-case that 
+similar to the `else {}` at the end of our conditional statements, where both
+are used as a "catch all" for cases that were not specified. 
 
 But, does it work? Can `case_when()` provide a vector of tax brackets?
 
@@ -335,7 +367,7 @@ of the Help tab.
 
 Either option should get you to a page that looks like this:
 
-![](images/03-case-when-help.png){fig-alt="A screenshot of the 'Help' tab in RStudio, where you can read documentation pages for R functions. There is a black diamond around the 'Help' title indicating that the purpose of the tab. There is a orange box around the search bar in the upper right corner indicating this is where you can search for a function's name. The help file displayed is for the case_when function in the dplyr package. The upper left corner of the documentation page displays the name of the function, followed by the name of the package the function lives in. Below, a title and description display what the purpose of the function is. Finally, at the bottom, an annotation arrow indicates that the 'arguments, value, and examples' can be found further down the page."}
+![](images/03-case-when-help.png){fig-alt="A screenshot of the 'Help' tab in RStudio, where you can read documentation pages for R functions. There is a black diamond around the 'Help' title indicating that the purpose of the tab. There is a orange box around the search bar in the upper right corner indicating this is where you can search for a function's name. The help file displayed is for the case_when function in the dplyr package. The upper left corner of the documentation page displays the name of the function, followed by the name of the package the function lives in. Below, a title and description display what the purpose of the function is. Finally, at the bottom, an annotation arrow indicates that the 'arguments, value, and examples' can be found further down the page." width="70%"}
 
 There are three parts to the help file:
 
@@ -448,11 +480,202 @@ case_when(num < 0 ~ "negative",
 
 ## Loops
 
-<!-- While + break -->
+Looping is another form of control flow. Where conditionals largely determine
+*when* and *how* code is evaluated, looping decides **how many times** code is
+run. With looping, the same set of instructions can be repeated many times. 
 
-<!-- for -->
+Take for example the classic problem of updating a variable based on its 
+current value. This would be a series of statements like `x <- x + 1`. To 
+accomplish this we first need to initialize a value for `x`, so we know where
+to start counting. 
 
-<!-- [A visual demonstration of for loops iterating through a vector of monsters to dress them up for a parade. Image by [Allison Horst](https://allisonhorst.com/allison-horst). -->
+```{r}
+#| label: initialize-loop
 
-<!-- ](https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/3a446c03-34c7-470e-b147-1ae3d1321503_rw_3840.png?h=9b2c6ebeee7504e4c1a44dffe0707a35){fig-alt="Illustrated for loop example. Input vector is a parade of monsters, including monsters that are circles, triangles, and squares. The for loop they enter has an if-else statement: if the monster is a triangle, it gets sunglasses. Otherwise, it gets a hat. The output is the parade of monsters where the same input parade of monsters shows up, now wearing either sunglasses (if triangular) or a hat (if any other shape)."} -->
+x <- 0 
+```
+
+Once `x` is initialized, we need to know when we should stop adding values. This
+question ("When should the loop stop?") is what separates between the two types
+of loops---`while()` loops and `for()` loops. 
+
+### `while ()` Loops
+
+A `while ()` loop specifies a set of instructions that should be done **while** 
+a condition is met (`TRUE`). Let's say we want to keep adding values to `x`
+until `x` has the value of `10`. So, we want to check the current value of `x`, 
+and if the current value is less than 10 then we are okay with the loop
+continuing. However, as soon as `x` is greater than or equal to 10 we want the 
+loop to end. 
+
+We can write this as a relational comparison: `x < 10`. If the current value of
+`x` is less than 10, this relational statement will return `TRUE`. If the 
+current value of `x` is 10, this relational statement will return `FALSE`
+because we used a strict inequality. 
+
+As with all coding processes, it is great to start with a diagram of how the 
+process works **before** translating it into R code!
+
+::: {.panel-tabset}
+
+## Flow Chart
+
+![](images/03-while-loop-flowchart.png){width="50%" fig-alt="A flowchart of the steps associated with a while loop. At the top there is an orange circle with an 'x' inside it and an arrow pointing down into the next step. This circle represents the current value of x being fed into the loop. The next step is represented by a green diamond with 'x < 10' written inside it. This is the relational statement being checked at each step of the loop. If the relation is found to be true, there is an arrow pointing to a blue rectangle with 'x <- x + 1' written inside. This indicates that if the value of x is less than 10 then the loop will add 1 to the current value of x. If the relation is found to be false, there is an arrow pointing to the right to a rectangle with 'end loop' written inside. This indicates that once the current value of x is greater than or equal to 10 the loop will stop."}
+
+## R Code
+```{r}
+#| label: simple-while
+
+while (x < 10){
+  x <- x + 1
+}
+```
+:::
+
+
+**What do you think the value of `x` is?**
+
+::: {.callout-tip collapse="true"}
+# Check Your Answer
+
+```{r}
+#| label: value-of-x
+
+x
+```
+
+:::
+
+A common addition to loops is using the `print()` function to output the current
+value of `x`. This seems somewhat benign now, but a `print()` is an incredibly 
+helpful tool in debugging! Adding a `print()` statement to your loop gives you 
+a snapshot of each iteration, and can tell you where your loop is breaking. 
+
+```{r}
+#| label: reset-x
+
+x <- 0
+```
+
+```{r}
+#| label: print-while
+#| eval: true
+
+while (x < 10){
+  print(x)
+  x <- x + 1
+}
+```
+
+### `for()` Loops
+
+Another type of loop is a `for ()` loop. A `for ()` differs from a `while ()` 
+loop in that the loop is executed a specific number of times. This is what is 
+often referred to as a "definite" loop. With a `while ()` loop we do not 
+specify the number of times the loop should be run. Instead, we specify the 
+condition under which the loop should stop (e.g., `x < 10`). This is what is 
+referred to as an "indefinite" loop.
+
+The following graphic provides a fun exploration of a `for ()` loop (in 
+conjunction with a conditional statement!):
+
+![A visual demonstration of for loops iterating through a vector of monsters to dress them up for a parade. Image by [Allison Horst](https://allisonhorst.com/allison-horst).](https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/3a446c03-34c7-470e-b147-1ae3d1321503_rw_3840.png?h=9b2c6ebeee7504e4c1a44dffe0707a35){fig-alt="Illustrated for loop example. Input vector is a parade of monsters, including monsters that are circles, triangles, and squares. The for loop they enter has an if-else statement: if the monster is a triangle, it gets sunglasses. Otherwise, it gets a hat. The output is the parade of monsters where the same input parade of monsters shows up, now wearing either sunglasses (if triangular) or a hat (if any other shape)."}
+
+Here, we initialize a set of monsters inside the vector `parade`. The `for ()`
+loop declares that it will iterate (keep repeating) until every element 
+`parade` (`monster`) has been used. The body of the loop declares what should 
+be done to each `monster` (put on a hat, put on sunglasses). 
+
+#### Indexing a Loop
+
+In the above graphic `monster` is used as the counter (index) of the `parade` 
+vector. This might seem a bit confusing at first because the elements of 
+`parade` don't have the name "monster." Rather, the elements of `parade` are 
+associated with an **index** (e.g., `parade[1]`). However, a `for ()` loop 
+allows us to index the values we are looping over in a variety of ways. 
+
+Let's explore different indexing methods with the `month.name` vector that 
+comes built-in to R:
+
+```{r}
+#| label: month-names
+
+month.name
+```
+
+Suppose we wanted to loop over the values of `month.names` to print out the name
+of every month[^03-control-flow-4]. There are a few different ways we could go
+about this. 
+
+First, we could take a similar approach as the graphic about and use a word 
+(`month`) to increment the values of `month.name`. Notice that the loop still 
+works if we use the letter `i` to increment. The word you use is not important, 
+it is *how* you use it! Namely, the name you use to increment the loop needs to
+be the **same** name you use *inside* the loop (`print(i)`). 
+
+::: columns
+::: {.column width="48%"}
+```{r}
+#| label: month-counter
+
+for (month in month.name){
+  print(month)
+}
+```
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+```{r}
+#| label: i-counter
+
+for (i in month.name){
+  print(i)
+}
+```
+
+:::
+:::
+
+Another option that you might see is specifying the exact number of times the 
+loop should be done using numeric values. Take for example this loop:
+
+```{r}
+#| label: number-counter-indexing
+
+for (i in 1:12){
+  print(month.name[i])
+}
+```
+
+This loop specifies that it should be run exactly 12 times (for values `1` 
+through `12`). For each value of `i`, we print out the associated value of 
+`month.names`. For example, when `i = 5`, the loop will print out 
+`month.name[5]` which is ``r month.name[5]``. 
+
+We can no longer use `print(i)` in our loop because `i` is referring to the
+value of the counter (`1:12`) and not the value of `month.name`. Meaning, if we
+had `print(i)` inside the loop we would end up with the values `1:12` being
+output. 
+
+::: {.callout-important}
+# Fundamentals of Indexing
+
+Regardless of what method you choose, the values used to index a loop **must
+come from a vector**. Each of these methods produces a vector of values that 
+can be used to index the loop:
+
+- `1:length(month.name)`
+- `1:12`
+- `seq_along(month.name)`
+- `seq_len(12)`
+- `month.name`
+
+So, it is up to you to figure out what method makes the most sense to you! 
+:::
+
+[^03-control-flow-4]: Yes, we know this is silly. We just printed all the names
+in the previous code chunk!
 
