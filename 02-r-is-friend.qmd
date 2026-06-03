@@ -418,8 +418,6 @@ for each show we have its release date. The name of the show is a `character`
 and the release date of the show is `numeric`. We can use a list to combine 
 these two vectors into one object (`top_bl`). 
 
-
-
 ```{r}
 #| label: create-list
 
@@ -573,12 +571,6 @@ from the larger object.
 
 Let's see how subsetting works on each of the objects we learned about
 previously.
-
-
-<!-- Indexing and subsetting -->
-<!-- Accessing elements via []. -->
-<!-- Accessing columns in a dataframe / tibble via $. -->
-<!-- Accessing elements via T / F. -->
 
 ### Vectors
 

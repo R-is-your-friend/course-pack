@@ -7,17 +7,218 @@
 +
 :::
 
+<!-- Functions they've seen so far: -->
+<!-- typeof() -->
+<!-- as.character() -->
+<!-- as.numeric -->
+<!-- c() -->
+<!-- matrix -->
+<!-- list  -->
+<!-- data.frame -->
+<!-- seq() -->
+<!-- sqrt() -->
+<!-- length() -->
+<!-- sum() -->
+<!-- case_when() -->
+<!-- print() -->
 
-<!-- [10 minute] Motivation: copy paste code over and over from example in previous class -->
-<!-- [20 minute lecture] Functions -->
-<!-- Syntax -->
-<!-- Arguments + Parameters (multiple)? -->
-<!-- Debugging -- print(), run line by line, etc. -->
+At this point, you've encountered almost 20 functions either built-in to R 
+(e.g., `sqrt()`) or that live in specific packages (e.g., `case_when()`). For
+each function, we've learned how we can use it to get the results we were after, 
+but we haven't dug into what makes a function a function. That's what this 
+reading is about!
 
-<!-- [30 minute Lab? Activity?] Write your first function (decoder vibe)? -->
+## Motivation
+
+It is common in statistics and data science to need to rescale a variable before
+including it in a model. Rescaling is quite helpful when variables are on 
+very different scales. In fact, for some machine learning methods (e.g., 
+K-nearest neighbors) it is critical that **every** variable be on the same 
+scale for an analysis. 
+
+Take for example, some common measures of the economy. The consumer price index
+(CPI) measures the yearly change in price for a representative basket of goods
+and services[^1] and is recorded as a weighted average of prices (e.g., $250). 
+Alternatively, the PPI (producer price index) measures the yearly change in
+prices paid to domestic producers of goods and services (e.g., $120). Finally, 
+the PCE (Personal Consumption Expenditures) is a slightly broader measure than
+CPI in that it attempts to measure both how much households are spending 
+(e.g., $14,000) and what they're spending their money on. 
+
+[^1]: [The Bureau of Labor Statistics (BLS)](https://www.bls.gov/cpi/questions-and-answers.htm)
+has a database of over 80,000 prices which they sample monthly for more than 200
+categories of products and services to determine the CPI and inflation rate. The
+BLS uses a huge basket because its goal is to get an accurate measure of price
+changes for consumer goods and services across the U.S. economy. 
+
+<!-- Data obtained from https://fred.stlouisfed.org/ -->
+
+::: columns
+::: {.column width="23%"}
+```{r}
+#| label: economy-year
+
+year <- c(2020, 
+          2021, 
+          2022, 
+          2023, 
+          2024, 
+          2025)
+```
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="23%"}
+```{r}
+#| label: economy-cpi
+
+cpi <- c(258.811, 
+         270.970, 
+         292.655, 
+         304.702, 
+         313.689, 
+         321.943)
+```
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="23%"}
+```{r}
+#| label: economy-ppi
+
+ppi <- c(119.24, 
+         119.46, 
+         127.82, 
+         139.98, 
+         142.80, 
+         146.16)
+```
+:::
+::: {.column width="2%"}
+:::
+
+::: {.column width="25%"}
+```{r}
+#| label: economy-pce
+
+pce <- c(14231.33,
+         16119.67,
+         17690.02,
+         18833.15,
+         19896.01,
+         20954.86)
+```
+:::
+:::
+
+Since we have economic measures for each year[^2], let's assemble them into a
+dataframe:
+
+[^2]: If we have vectors that are the **same** length, then each vector can be
+a column of a dataframe. If they were *different* lengths we would need to use
+a list to store them all together!
+
+```{r}
+economy <- data.frame(year = year, 
+                      cpi = cpi, 
+                      ppi = ppi, 
+                      pce = pce)
+
+economy
+```
+
+Notice how each of these variables are on different scales? Well, that's exactly
+why we might want (need) to rescale them! 
+
+### Min-Max Scaling 
+
+One common method for rescaling is called "min-max scaling." For any numeric
+vector, this method finds the maximum value and the minimum value and then uses
+these values to rescale each value of the vector. Mathematically, each $i^{th}$ 
+value of a vector $x$ is scaled based on this calculation:
+
+$$\frac{x_i - min(x)}{max(x) - mix(x)}$$
+For example, if we have a vector `x` with values `c(1, 2, 5, 7)`. Then the
+minimum of `x` is `1` and the maximum of `x` is `7`. We then use these values
+to rescale every value of `x`. This would look like the following code:
+
+```{r}
+#| label: example-min-max
+
+x <- c(1, 2, 5, 7)
+
+(x - min(x)) / (max(x) - min(x))
+```
+
+Notice that the minimum value is now 0 because `1 - 1` (the minimum is 1) is 0
+and the maximum value is now 1 because `(7 - 1) / (7 - 1)` (the maximum is 7) is
+1. 
+
+We could rescale every column of `economy` using the same code as above:
+
+```{r}
+#| label: repeated-rescaling
+#| eval: false
+
+economy$cpi <- (economy$cpi - min(economy$cpi)) / (max(economy$cpi) - min(economy$cpi))
+economy$ppi <- (economy$ppi - min(economy$ppi)) / (max(economy$ppi) - min(economy$pci))
+economy$pce <- (economy$pce - min(economy$pci)) / (max(economy$pce) - min(economy$pce))
+
+```
+
+There are a couple of issues with this process. By repeating this same process 
+multiple times, it is harder to understand what the code is doing **and** we've
+made our code more error prone. Did you notice the error we made?
+
+A better method would be to write a function that allows us to implement this 
+process anytime we want to rescale a numeric vector!
+
+### Don't Repeat Yourself
+
+The critical motivation behind functions is the "don't repeat yourself" (DRY)
+principle. In general, "you should consider writing a function whenever copied
+and pasted your code **more than twice** (i.e. you now have three copies of the
+same code)" (Wickham & Grolemund, 2020).
+
+One of our favorite papers, *Best Practices for Scientific Computing*, 
+summarizes this idea in a slightly different way:
+
+> Anything that is repeated in two or more places is more difficult to maintain.
+> Every time a change or correction is made, multiple locations must be updated,
+> which increases the chance of errors and inconsistencies. To avoid this,
+> programmers follow the DRY (Don't Repeat Yourself) Principle, which applies to
+> both data and code.
+
+The DRY Principle advocates that you *modularize* your code---break it into 
+smaller, independent, and reusable units. Modularizing your code helps you 
+understand what your code is doing and makes your code more easily re-purposed
+for other projects. 
+
+## Functions
 
 
-<!-- [10 minute lecture] Input validation -->
-<!-- [10 minute lecture] Environment + Scope + Name Masking + Dynamic Lookup -- activity based? give examples and ask them to identify where the values are pulled from? -->
+### Syntax
+
+
+### Arguments + Parameters
+
+<!-- add an argument that allows the user to choose between min/max and mean/sd scaling -->
+
+
+## Debugging
+
+<!-- print(), run line by line, etc. -->
+
+
+## Input validation
+
+
+## Environment, Scope, Name Masking & Dynamic Lookup
+
+<!-- give examples and ask them to identify where the values are pulled from? -->
 
 
