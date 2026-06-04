@@ -179,10 +179,10 @@ process anytime we want to rescale a numeric vector!
 
 ### Don't Repeat Yourself
 
-The critical motivation behind functions is the "don't repeat yourself" (DRY)
-principle. In general, "you should consider writing a function whenever copied
-and pasted your code **more than twice** (i.e. you now have three copies of the
-same code)" (Wickham & Grolemund, 2020).
+The critical motivation behind writing your own functions is the "don't 
+repeat yourself" (DRY) principle. In general, "you should consider writing a
+function whenever copied and pasted your code **more than twice** (i.e. you now
+have three copies of the same code)" (Wickham & Grolemund, 2020).
 
 One of our favorite papers, *Best Practices for Scientific Computing*, 
 summarizes this idea in a slightly different way:
@@ -190,8 +190,7 @@ summarizes this idea in a slightly different way:
 > Anything that is repeated in two or more places is more difficult to maintain.
 > Every time a change or correction is made, multiple locations must be updated,
 > which increases the chance of errors and inconsistencies. To avoid this,
-> programmers follow the DRY (Don't Repeat Yourself) Principle, which applies to
-> both data and code.
+> programmers follow the DRY (Don't Repeat Yourself) Principle.
 
 The DRY Principle advocates that you *modularize* your code---break it into 
 smaller, independent, and reusable units. Modularizing your code helps you 
@@ -200,14 +199,321 @@ for other projects.
 
 ## Functions
 
+We've been using functions for weeks now, but we haven't dug deep into what 
+makes a function a function.
 
 ### Syntax
 
+The first hurdle to learning to write a function in a programming language is 
+figuring out what syntax you should use. In R, a function is defined using 
+`function()` and has the following syntax:
 
-### Arguments + Parameters
+```{r}
+#| label: function-syntax
+
+rescale <- function(x){
+  (x - min(x)) / (max(x) - min(x))
+}
+```
+
+Let's break this down into pieces:
+
+![](images/03-function-syntax.png){fig-alt=""}
+</br>
+
+**Function Name:** When you are reading the code above, the first thing you see
+is the **name** of the function (`rescale`). This name is chosen by the user, so
+we could have equally chosen to name the function `bananna`. However, that seems
+like a bad name since it doesn't indicate what the goal of the function is. In
+general, we advocate to [use verbs as function names](https://style.tidyverse.org/functions.html#naming) 
+where the verb describes what the function does.
+
+**Function Arguments:** Inside the `()` after `function` is where the
+*arguments* (inputs) of the function are defined. Here we have one argument
+(`x`), but we will learn how to incorporate more than one argument. 
+
+**Function Body:** After the `function(x)` there is a `{` which starts the 
+*body* of the function. The body of the function is everything contained between
+the opening `{` and the closing `}`. 
+
+<!-- [^2: This type of function is not the only type in R: they are called closures (a name with origins in LISP) A closure has three components, its formals (its argument list), its body (expr in the ‘Usage’ section) and its environment which provides the enclosure of the evaluation frame when the closure is used.] -->
+
+**Beginning & Ending the Function:** Similar to other code styling principles
+we've learned, the guideline is for the opening `{` to be the *last* character
+on the line and for the closing `}` to be placed on its own line. These
+guidelines are to make your code easier to read / understand. The code below
+accomplishes the same task as above but is harder to read / understand what is
+happening:
+
+```{r}
+#| label: bad-function-style
+#| eval: false
+
+rescale <- function(x){ (x - min(x)) / (max(x) - min(x)) }
+```
+
+<!-- this should be a check-in but the callout isn't working :( -->
+::: {.callout-tip}
+
+1. Now that we have created the `rescale()` function, let's check our intuition
+for what the function should output (return) for different inputs. 
+
+```{r}
+x <- 3
+y <- 10:20
+z <- c(1, 4, 5, 6, "dog")
+```
+
+a. What would you expect `rescale()` to output when `x` is input?
+b. What would you expect `rescale()` to output when `y` is input?
+c. What would you expect `rescale()` to output when `z` is input?
+
+<!-- question about rescale being vectorized -->
+:::
+
+### Arguments & Parameters
+
+Currently, the `rescale()` function has only one argument (`x`), but what if it
+had more? What are other arguments that we might want the function to use?
+
+Well, suppose we had a vector with some missing values (`NA`s):
+
+```{r}
+#| label: vector-with-missing-values
+
+nums <- c(15:20, NA, 35:40, NA)  
+```
+
+If we were to try and use our `rescale()` function on `nums` we would get:
+
+```{r}
+rescale(nums)
+```
+
+That doesn't look right! What might be happening here? 
+
+When a vector has `NA` values, any mathematical operation (e.g., `+`, `-`) will
+result in an `NA` value. This is because R refuses to ignore the missing values
+(i.e., treat them as 0) unless the user specifies that is what they want. To
+specify that you want to remove the missing values, you need to use the `na.rm`
+argument:
+
+```{r}
+#| label: na-rm-arg
+
+mean(nums, na.rm = TRUE)
+```
+
+Let's incorporate something like this into our function!
+
+#### Removing Missing Values
+
+Similar to the `mean()` function, we could incorporate an `na.rm` argument into
+our `rescale()` function. We could allow the user to specify if they wanted 
+missing values to be removed (`TRUE`) or not (`FALSE`). Our calculations would 
+then change based on what the user specified:
+
+```{r}
+#| label: rescale-with-na-condition
+
+rescale <- function(x, na.rm){
+  if(na.rm == TRUE){
+    (x - min(x, na.rm = TRUE)) / (max(x, na.rm = TRUE) - min(x, na.rm = TRUE))
+  } else {
+    (x - min(x)) / (max(x) - min(x))
+  }
+}
+```
+
+To incorporate this argument we get to use our knowledge of control flow! 
+Specifically, we can use `if` and `else` to define two possible options of 
+what should happen based on the user's input. Our `rescale()` function should
+now work for vectors with missing values!
+
+```{r}
+rescale(nums, na.rm = TRUE)
+```
+
+However, notice what happens when we don't include an `na.rm` argument:
+
+```{r}
+#| label: not-including-required-argument
+#| error: true
+
+rescale(nums)
+```
+
+So, our function won't run unless the user provides a value to the `na.rm` 
+argument. This isn't what the `mean()` function does! Indeed, you can run
+`mean(nums)` and get `r mean(nums)`, which means that there is a 
+**default value** for the `na.rm` argument that is used if the user doesn't 
+specify a value. 
+
+If you look at the help file for the `mean()` function  (typing `?mean` into
+your Console), you will see that by default `na.rm` is set to `FALSE` 
+(`na.rm = FALSE`). We can incorporate something like this into our function!
+
+```{r}
+#| label: rescale-with-default-na-arg
+
+rescale <- function(x, na.rm = FALSE){
+  if(na.rm == TRUE){
+    (x - min(x, na.rm = TRUE)) / (max(x, na.rm = TRUE) - min(x, na.rm = TRUE))
+  } else {
+    (x - min(x)) / (max(x) - min(x))
+  }
+}
+```
+
+Now, if the user doesn't specify a value for `na.rm` it defaults to `FALSE`:
+
+```{r}
+#| label: no-longer-required-arg
+
+rescale(nums)
+```
+
+
+#### Choosing a Rescale Method
+
+Another addition we could make to our function is to allow the user to choose
+what rescaling method they want to use. Currently, our function uses min-max
+scaling, but there are other methods of scaling a vector of numbers. Arguably
+the most common scaling method is "normalization." With normalization, the 
+mean and standard deviation are used to rescale values. 
+
+Mathematically, each $i^{th}$ value of a vector $x$ is scaled based on this
+calculation:
+
+$$\frac{x_i - mean(x)}{std(x)}$$
 
 <!-- add an argument that allows the user to choose between min/max and mean/sd scaling -->
 
+
+### Explicit Returns
+
+We would be remiss without discussing the contentious topic of using `return()`
+statements in a function. We say "contentious" because many programmers have
+staunch views of using a `return()` statement, either for or against. We think 
+you should be aware of these views so you can decide which option you prefer.
+
+**Option 1**: Using an explicit return
+
+When we say "explicit return" we mean that there is a `return()` statement 
+built in to the body of the function. This would look something like this:
+
+```{r}
+#| label: explicit-return
+
+rescale <- function(x){
+  x_scaled <- (x - min(x)) / (max(x) - min(x))
+  return(x_scaled)
+}
+
+```
+
+Notice how the results of the rescaling are saved into an object (`x_scaled`) 
+and then the `return()` statement *explicitly* states that `x_scaled` should be
+returned (output). Here are a few pros and cons of this method!
+
+::: columns
+::: {.column width="48%"}
+✅ Pros of Using `return()`
+
+- Clarity and explicit intent
+- Consistency with other languages
+
+<!-- - Using a `return()` mimics the behavior that other programming languages  -->
+<!-- require (e.g., Python).  -->
+<!-- - A `return()` statement is easy to see (it is printed as a different color in -->
+<!-- RStudio), so it makes it easier to notice if your function is outputting what -->
+<!-- you want it to.  -->
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+⚠️ Cons of Using `return()`
+
+- More typing / slightly less idiomatic use of R
+- Can be overused in simple functions
+- Can complicate control flow unnecessarily
+
+<!-- - The R programming language does not require an explicit return. Instead, R -->
+<!-- will return the last value that was calculated.  -->
+<!-- - This typically means you need to save a object that will then be returned,  -->
+<!-- which adds an additional step to the code. -->
+
+:::
+:::
+
+**Option 2**: Not using an explicit return / Using last value calculated
+
+This option effectively removes the `return()` statement from the function. 
+Instead of using a `return()` statement, the function relies on R's behavior
+to return the last expression that was run. 
+
+```{r}
+#| label: no-explicit-return
+
+rescale <- function(x){
+  (x - min(x)) / (max(x) - min(x))
+}
+
+
+```
+
+::: columns
+::: {.column width="48%"}
+✅ Pros of Implicit Return (no `return()` statement)
+
+- Concise and idiomatic
+- Encourages "last expression" thinking
+
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+⚠️ Cons of Implicit Return
+
+- Less obvious for beginners
+- Harder to do early exits (i.e., your function ends early for certain inputs)
+:::
+:::
+
+
+**Choosing an Option**
+
+As an R programmer, you will need to decide for yourself which of these two 
+options you prefer. It might be hard to know without trying what option you
+would prefer, so we encourage you to play around and try both! 
+
+The key is that you must be mindful to not mix and match methods between the 
+two. Take for example a classic function writing mistake: 
+
+```{r}
+#| label: save-object-no-return
+#| eval: false
+
+rescale <- function(x){
+  x_scaled <- (x - min(x)) / (max(x) - min(x))
+}
+```
+
+If we were to try and use this function to rescale a vector (e.g., `rescale(y)`)
+nothing would be output! That is because the rescaled values are saved into an
+object (`x_scaled`) but never returned!
+
+::: {.callout-note}
+# Consistency with code style guide
+
+Technically, the code style guide we've been using takes an anti explicit return
+stance. If you want to hear more about their thinking, you can look at 
+[these examples](https://style.tidyverse.org/functions.html#return).
+:::
 
 ## Debugging
 
@@ -215,6 +521,10 @@ for other projects.
 
 
 ## Input validation
+
+<!-- checking if the input is numeric -->
+<!-- checking if there are NAs in a vector before calculating the mean -->
+
 
 
 ## Environment, Scope, Name Masking & Dynamic Lookup
