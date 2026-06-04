@@ -2,9 +2,11 @@
 
 ::: callout
 ## Learning Objectives
-+ 
-+ 
-+
++ Understand the components of a function
++ Outline how function arguments are used
++ Contrast arguments with and without default values
++ Illustrate how control flow can be used inside the body of a function
++ Explain the differences between explicit and implicit function returns
 :::
 
 <!-- Functions they've seen so far: -->
@@ -218,7 +220,7 @@ rescale <- function(x){
 
 Let's break this down into pieces:
 
-![](images/03-function-syntax.png){fig-alt=""}
+![](images/03-function-syntax.png){fig-alt="Basic syntax of a function in R. The function 'rescale' is assigned using '<-' to 'function(x)'. The function has one argument, x, which is dilineated with a red arrow and an annotation stating 'function argument (input)'. The body of the function is enclosed in curly brackets which are circled with dashed black lines. Inside the brackets, there is a single line of code '(x - min(x)) / (max(x) - min(x))' which is higlighted in orange with an annotation stating that this code represents the 'function body'."}
 </br>
 
 **Function Name:** When you are reading the code above, the first thing you see
