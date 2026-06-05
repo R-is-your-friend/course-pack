@@ -1,0 +1,1612 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>5&nbsp; wrap: 72 – R is Your Friend</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./04-data-is-friend.html" rel="next">
+<link href="./03a-control-flow.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-9de65633f6d0f5eeb0068d939eb6178f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-c56aa83846d244a7ab5588d901c86329.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-9de65633f6d0f5eeb0068d939eb6178f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+</head>
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-setup.html">Fundamentals of Coding</a></li><li class="breadcrumb-item"><a href="./03b-functions.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">wrap: 72</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">R is Your Friend</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/R-is-your-friend" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+<li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+              <i class="bi bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+              <i class="bi bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+              <i class="bi bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+</div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Fundamentals of Coding</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00-setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Computer is Friend</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-what-is-code.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">What is Code</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-r-is-friend.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">R is Friend</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03a-control-flow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Control Flow</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03b-functions.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">wrap: 72</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-data-is-friend.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data is Friend</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Data Wrangling and Visualization</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-data-visualizations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Visualizations</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-data-wrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data Wrangling</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-more-wrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">More Wrangling</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-strings.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Strings</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-dates.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Dates</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-factors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Factors</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-communication.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Communication</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Modeling and Functions</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-writing-functions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Writing Functions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-simulation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Simulation</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li>
+<a href="#functions" id="toc-functions" class="nav-link active" data-scroll-target="#functions"><span class="header-section-number">6</span> Functions</a>
+  <ul>
+<li>
+<a href="#motivation" id="toc-motivation" class="nav-link" data-scroll-target="#motivation"><span class="header-section-number">6.1</span> Motivation</a>
+  <ul class="collapse">
+<li><a href="#min-max-scaling" id="toc-min-max-scaling" class="nav-link" data-scroll-target="#min-max-scaling"><span class="header-section-number">6.1.1</span> Min-Max Scaling</a></li>
+  <li><a href="#dont-repeat-yourself" id="toc-dont-repeat-yourself" class="nav-link" data-scroll-target="#dont-repeat-yourself"><span class="header-section-number">6.1.2</span> Don’t Repeat Yourself</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#functions-1" id="toc-functions-1" class="nav-link" data-scroll-target="#functions-1"><span class="header-section-number">6.2</span> Functions</a>
+  <ul class="collapse">
+<li><a href="#syntax" id="toc-syntax" class="nav-link" data-scroll-target="#syntax"><span class="header-section-number">6.2.1</span> Syntax</a></li>
+  <li>
+<a href="#arguments-parameters" id="toc-arguments-parameters" class="nav-link" data-scroll-target="#arguments-parameters"><span class="header-section-number">6.2.2</span> Arguments &amp; Parameters</a>
+  <ul class="collapse">
+<li><a href="#removing-missing-values" id="toc-removing-missing-values" class="nav-link" data-scroll-target="#removing-missing-values"><span class="header-section-number">6.2.2.1</span> Removing Missing Values</a></li>
+  <li><a href="#choosing-a-rescale-method" id="toc-choosing-a-rescale-method" class="nav-link" data-scroll-target="#choosing-a-rescale-method"><span class="header-section-number">6.2.2.2</span> Choosing a Rescale Method</a></li>
+  </ul>
+</li>
+  <li><a href="#explicit-returns" id="toc-explicit-returns" class="nav-link" data-scroll-target="#explicit-returns"><span class="header-section-number">6.2.3</span> Explicit Returns</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#debugging" id="toc-debugging" class="nav-link" data-scroll-target="#debugging"><span class="header-section-number">6.3</span> Debugging</a>
+  <ul class="collapse">
+<li><a href="#print-statements" id="toc-print-statements" class="nav-link" data-scroll-target="#print-statements"><span class="header-section-number">6.3.1</span> <code>print()</code> Statements</a></li>
+  <li><a href="#running-the-function-body" id="toc-running-the-function-body" class="nav-link" data-scroll-target="#running-the-function-body"><span class="header-section-number">6.3.2</span> Running the Function Body</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#input-validation" id="toc-input-validation" class="nav-link" data-scroll-target="#input-validation"><span class="header-section-number">6.4</span> Input validation</a>
+  <ul class="collapse">
+<li><a href="#checking-a-single-data-type" id="toc-checking-a-single-data-type" class="nav-link" data-scroll-target="#checking-a-single-data-type"><span class="header-section-number">6.4.1</span> Checking a Single Data Type</a></li>
+  <li><a href="#checking-multiple-data-types" id="toc-checking-multiple-data-types" class="nav-link" data-scroll-target="#checking-multiple-data-types"><span class="header-section-number">6.4.2</span> Checking Multiple Data Types</a></li>
+  <li><a href="#checking-object-size" id="toc-checking-object-size" class="nav-link" data-scroll-target="#checking-object-size"><span class="header-section-number">6.4.3</span> Checking Object Size</a></li>
+  </ul>
+</li>
+  <li><a href="#environment-scope-name-masking-dynamic-lookup" id="toc-environment-scope-name-masking-dynamic-lookup" class="nav-link" data-scroll-target="#environment-scope-name-masking-dynamic-lookup"><span class="header-section-number">6.5</span> Environment, Scope, Name Masking &amp; Dynamic Lookup</a></li>
+  </ul>
+</li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-setup.html">Fundamentals of Coding</a></li><li class="breadcrumb-item"><a href="./03b-functions.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">wrap: 72</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title">
+<span class="chapter-number">5</span>&nbsp; <span class="chapter-title">wrap: 72</span>
+</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><hr>
+<p>editor: markdown:</p>
+<section id="functions" class="level1" data-number="6"><h1 data-number="6">
+<span class="header-section-number">6</span> Functions</h1>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Learning Objectives
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Understand the components of a function</li>
+<li>Outline how function arguments are used</li>
+<li>Contrast arguments with and without default values</li>
+<li>Illustrate how control flow can be used inside the body of a function</li>
+<li>Explain the differences between explicit and implicit function returns</li>
+</ul>
+</div>
+</div>
+<!-- Functions they've seen so far: -->
+<!-- typeof() -->
+<!-- as.character() -->
+<!-- as.numeric -->
+<!-- c() -->
+<!-- matrix -->
+<!-- list  -->
+<!-- data.frame -->
+<!-- seq() -->
+<!-- sqrt() -->
+<!-- length() -->
+<!-- sum() -->
+<!-- case_when() -->
+<!-- print() -->
+<p>At this point, you’ve encountered almost 20 functions either built-in to R (e.g., <code><a href="https://rdrr.io/r/base/MathFun.html">sqrt()</a></code>) or that live in specific packages (e.g., <code>case_when()</code>). For each function, we’ve learned how we can use it to get the results we were after, but we haven’t dug into what makes a function a function. That’s what this reading is about!</p>
+<section id="motivation" class="level2" data-number="6.1"><h2 data-number="6.1" class="anchored" data-anchor-id="motivation">
+<span class="header-section-number">6.1</span> Motivation</h2>
+<p>It is common in statistics and data science to need to rescale a variable before including it in a model. Rescaling is quite helpful when variables are on very different scales. In fact, for some machine learning methods (e.g., K-nearest neighbors) it is critical that <strong>every</strong> variable be on the same scale for an analysis.</p>
+<p>Take for example, some common measures of the economy. The consumer price index (CPI) measures the yearly change in price for a representative basket of goods and services<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> and is recorded as a weighted average of prices (e.g., $250). Alternatively, the PPI (producer price index) measures the yearly change in prices paid to domestic producers of goods and services (e.g., $120). Finally, the PCE (Personal Consumption Expenditures) is a slightly broader measure than CPI in that it attempts to measure both how much households are spending (e.g., $14,000) and what they’re spending their money on.</p>
+<!-- Data obtained from https://fred.stlouisfed.org/ -->
+<div class="columns">
+<div class="column" style="width:23%;">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">year</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2020</span>, </span>
+<span>          <span class="fl">2021</span>, </span>
+<span>          <span class="fl">2022</span>, </span>
+<span>          <span class="fl">2023</span>, </span>
+<span>          <span class="fl">2024</span>, </span>
+<span>          <span class="fl">2025</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:23%;">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cpi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">258.811</span>, </span>
+<span>         <span class="fl">270.970</span>, </span>
+<span>         <span class="fl">292.655</span>, </span>
+<span>         <span class="fl">304.702</span>, </span>
+<span>         <span class="fl">313.689</span>, </span>
+<span>         <span class="fl">321.943</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:23%;">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ppi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">119.24</span>, </span>
+<span>         <span class="fl">119.46</span>, </span>
+<span>         <span class="fl">127.82</span>, </span>
+<span>         <span class="fl">139.98</span>, </span>
+<span>         <span class="fl">142.80</span>, </span>
+<span>         <span class="fl">146.16</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:25%;">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">pce</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">14231.33</span>,</span>
+<span>         <span class="fl">16119.67</span>,</span>
+<span>         <span class="fl">17690.02</span>,</span>
+<span>         <span class="fl">18833.15</span>,</span>
+<span>         <span class="fl">19896.01</span>,</span>
+<span>         <span class="fl">20954.86</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<p>Since we have economic measures for each year<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, let’s assemble them into a dataframe:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">economy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">year</span>, </span>
+<span>                      cpi <span class="op">=</span> <span class="va">cpi</span>, </span>
+<span>                      ppi <span class="op">=</span> <span class="va">ppi</span>, </span>
+<span>                      pce <span class="op">=</span> <span class="va">pce</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">economy</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  year     cpi    ppi      pce
+1 2020 258.811 119.24 14231.33
+2 2021 270.970 119.46 16119.67
+3 2022 292.655 127.82 17690.02
+4 2023 304.702 139.98 18833.15
+5 2024 313.689 142.80 19896.01
+6 2025 321.943 146.16 20954.86</code></pre>
+</div>
+</div>
+<p>Notice how each of these variables are on different scales? Well, that’s exactly why we might want (need) to rescale them!</p>
+<section id="min-max-scaling" class="level3" data-number="6.1.1"><h3 data-number="6.1.1" class="anchored" data-anchor-id="min-max-scaling">
+<span class="header-section-number">6.1.1</span> Min-Max Scaling</h3>
+<p>One common method for rescaling is called “min-max scaling.” For any numeric vector, this method finds the maximum value and the minimum value and then uses these values to rescale each value of the vector. Mathematically, each <span class="math inline">\(i^{th}\)</span> value of a vector <span class="math inline">\(x\)</span> is scaled based on this calculation:</p>
+<p><span class="math display">\[\frac{x_i - min(x)}{max(x) - mix(x)}\]</span> For example, if we have a vector <code>x</code> with values <code>c(1, 2, 5, 7)</code>. Then the minimum of <code>x</code> is <code>1</code> and the maximum of <code>x</code> is <code>7</code>. We then use these values to rescale every value of <code>x</code>. This would look like the following code:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">5</span>, <span class="fl">7</span><span class="op">)</span></span>
+<span></span>
+<span><span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0000000 0.1666667 0.6666667 1.0000000</code></pre>
+</div>
+</div>
+<p>Notice that the minimum value is now 0 because <code>1 - 1</code> (the minimum is 1) is 0 and the maximum value is now 1 because <code>(7 - 1) / (7 - 1)</code> (the maximum is 7) is 1.</p>
+<p>We could rescale every column of <code>economy</code> using the same code as above:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">economy</span><span class="op">$</span><span class="va">cpi</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">economy</span><span class="op">$</span><span class="va">cpi</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">economy</span><span class="op">$</span><span class="va">cpi</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">economy</span><span class="op">$</span><span class="va">cpi</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">economy</span><span class="op">$</span><span class="va">cpi</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">economy</span><span class="op">$</span><span class="va">ppi</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">economy</span><span class="op">$</span><span class="va">ppi</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">economy</span><span class="op">$</span><span class="va">ppi</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">economy</span><span class="op">$</span><span class="va">ppi</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">economy</span><span class="op">$</span><span class="va">pci</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">economy</span><span class="op">$</span><span class="va">pce</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">economy</span><span class="op">$</span><span class="va">pce</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">economy</span><span class="op">$</span><span class="va">pci</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">economy</span><span class="op">$</span><span class="va">pce</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">economy</span><span class="op">$</span><span class="va">pce</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>There are a couple of issues with this process. By repeating this same process multiple times, it is harder to understand what the code is doing <strong>and</strong> we’ve made our code more error prone. Did you notice the error we made?</p>
+<p>A better method would be to write a function that allows us to implement this process anytime we want to rescale a numeric vector!</p>
+</section><section id="dont-repeat-yourself" class="level3" data-number="6.1.2"><h3 data-number="6.1.2" class="anchored" data-anchor-id="dont-repeat-yourself">
+<span class="header-section-number">6.1.2</span> Don’t Repeat Yourself</h3>
+<p>The critical motivation behind writing your own functions is the “don’t repeat yourself” (DRY) principle. In general, “you should consider writing a function whenever copied and pasted your code <strong>more than twice</strong> (i.e.&nbsp;you now have three copies of the same code)” (Wickham &amp; Grolemund, 2020).</p>
+<p>One of our favorite papers, <em>Best Practices for Scientific Computing</em>, summarizes this idea in a slightly different way:</p>
+<blockquote class="blockquote">
+<p>Anything that is repeated in two or more places is more difficult to maintain. Every time a change or correction is made, multiple locations must be updated, which increases the chance of errors and inconsistencies. To avoid this, programmers follow the DRY (Don’t Repeat Yourself) Principle.</p>
+</blockquote>
+<p>The DRY Principle advocates that you <em>modularize</em> your code—break it into smaller, independent, and reusable units. Modularizing your code helps you understand what your code is doing and makes your code more easily re-purposed for other projects.</p>
+</section></section><section id="functions-1" class="level2" data-number="6.2"><h2 data-number="6.2" class="anchored" data-anchor-id="functions-1">
+<span class="header-section-number">6.2</span> Functions</h2>
+<p>We’ve been using functions for weeks now, but we haven’t dug deep into what makes a function a function.</p>
+<section id="syntax" class="level3" data-number="6.2.1"><h3 data-number="6.2.1" class="anchored" data-anchor-id="syntax">
+<span class="header-section-number">6.2.1</span> Syntax</h3>
+<p>The first hurdle to learning to write a function in a programming language is figuring out what syntax you should use. In R, a function is defined using <code>function()</code> and has the following syntax:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rescale</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Let’s break this down into pieces:</p>
+<p><img src="images/03-function-syntax.png" class="img-fluid" alt="Basic syntax of a function in R. The function 'rescale' is assigned using '<-' to 'function(x)'. The function has one argument, x, which is dilineated with a red arrow and an annotation stating 'function argument (input)'. The body of the function is enclosed in curly brackets which are circled with dashed black lines. Inside the brackets, there is a single line of code '(x - min(x)) / (max(x) - min(x))' which is higlighted in orange with an annotation stating that this code represents the 'function body'."></p>
+<p><strong>Function Name:</strong> When you are reading the code above, the first thing you see is the <strong>name</strong> of the function (<code>rescale</code>). This name is chosen by the user, so we could have equally chosen to name the function <code>bananna</code>. However, that seems like a bad name since it doesn’t indicate what the goal of the function is. In general, we advocate to <a href="https://style.tidyverse.org/functions.html#naming">use verbs as function names</a> where the verb describes what the function does.</p>
+<p><strong>Function Arguments:</strong> Inside the <code>()</code> after <code>function</code> is where the <em>arguments</em> (inputs) of the function are defined. Here we have one argument (<code>x</code>), but we will learn how to incorporate more than one argument.</p>
+<p><strong>Function Body:</strong> After the <code>function(x)</code> there is a <code>{</code> which starts the <em>body</em> of the function. The body of the function is everything contained between the opening <code>{</code> and the closing <code>}</code>.</p>
+<!-- [^2: This type of function is not the only type in R: they are called closures (a name with origins in LISP) A closure has three components, its formals (its argument list), its body (expr in the ‘Usage’ section) and its environment which provides the enclosure of the evaluation frame when the closure is used.] -->
+<p><strong>Beginning &amp; Ending the Function:</strong> Similar to other code styling principles we’ve learned, the guideline is for the opening <code>{</code> to be the <em>last</em> character on the line and for the closing <code>}</code> to be placed on its own line. These guidelines are to make your code easier to read / understand. The code below accomplishes the same task as above but is harder to read / understand what is happening:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rescale</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span> <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-style-default callout-check-in callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Check-in</span>Check In
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Now that we have created the <code>rescale()</code> function, let’s check our intuition for what the function should output (return) for different inputs.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">3</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fl">10</span><span class="op">:</span><span class="fl">20</span></span>
+<span><span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span>, <span class="st">"dog"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol type="a">
+<li>What would you expect <code>rescale()</code> to output when <code>x</code> is input?</li>
+<li>What would you expect <code>rescale()</code> to output when <code>y</code> is input?</li>
+<li>What would you expect <code>rescale()</code> to output when <code>z</code> is input?</li>
+</ol>
+<!-- question about rescale being vectorized -->
+</div>
+</div>
+</section><section id="arguments-parameters" class="level3" data-number="6.2.2"><h3 data-number="6.2.2" class="anchored" data-anchor-id="arguments-parameters">
+<span class="header-section-number">6.2.2</span> Arguments &amp; Parameters</h3>
+<p>Currently, the <code>rescale()</code> function has only one argument (<code>x</code>), but what if it had more? What are other arguments that we might want the function to use?</p>
+<p>Well, suppose we had a vector with some missing values (<code>NA</code>s):</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nums</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">15</span><span class="op">:</span><span class="fl">20</span>, <span class="cn">NA</span>, <span class="fl">35</span><span class="op">:</span><span class="fl">40</span>, <span class="cn">NA</span><span class="op">)</span>  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>If we were to try and use our <code>rescale()</code> function on <code>nums</code> we would get:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">rescale</span><span class="op">(</span><span class="va">nums</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] NA NA NA NA NA NA NA NA NA NA NA NA NA NA</code></pre>
+</div>
+</div>
+<p>That doesn’t look right! What might be happening here?</p>
+<p>When a vector has <code>NA</code> values, any mathematical operation (e.g., <code>+</code>, <code>-</code>) will result in an <code>NA</code> value. This is because R refuses to ignore the missing values (i.e., treat them as 0) unless the user specifies that is what they want. To specify that you want to remove the missing values, you need to use the <code>na.rm</code> argument:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">nums</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 27.5</code></pre>
+</div>
+</div>
+<p>Let’s incorporate something like this into our function!</p>
+<section id="removing-missing-values" class="level4" data-number="6.2.2.1"><h4 data-number="6.2.2.1" class="anchored" data-anchor-id="removing-missing-values">
+<span class="header-section-number">6.2.2.1</span> Removing Missing Values</h4>
+<p>Similar to the <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> function, we could incorporate an <code>na.rm</code> argument into our <code>rescale()</code> function. We could allow the user to specify if they wanted missing values to be removed (<code>TRUE</code>) or not (<code>FALSE</code>). Our calculations would then change based on what the user specified:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rescale</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">na.rm</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="kw">if</span><span class="op">(</span><span class="va">na.rm</span> <span class="op">==</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>    <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>To incorporate this argument we get to use our knowledge of control flow! Specifically, we can use <code>if</code> and <code>else</code> to define two possible options of what should happen based on the user’s input. Our <code>rescale()</code> function should now work for vectors with missing values!</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">rescale</span><span class="op">(</span><span class="va">nums</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 0.00 0.04 0.08 0.12 0.16 0.20   NA 0.80 0.84 0.88 0.92 0.96 1.00   NA</code></pre>
+</div>
+</div>
+<p>However, notice what happens when we don’t include an <code>na.rm</code> argument:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">rescale</span><span class="op">(</span><span class="va">nums</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in `rescale()`:
+! argument "na.rm" is missing, with no default</code></pre>
+</div>
+</div>
+<p>So, our function won’t run unless the user provides a value to the <code>na.rm</code> argument. This isn’t what the <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> function does! Indeed, you can run <code>mean(nums)</code> and get NA, which means that there is a <strong>default value</strong> for the <code>na.rm</code> argument that is used if the user doesn’t specify a value.</p>
+<p>If you look at the help file for the <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> function (typing <code><a href="https://rdrr.io/r/base/mean.html">?mean</a></code> into your Console), you will see that by default <code>na.rm</code> is set to <code>FALSE</code> (<code>na.rm = FALSE</code>). We can incorporate something like this into our function!</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rescale</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">na.rm</span> <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="kw">if</span><span class="op">(</span><span class="va">na.rm</span> <span class="op">==</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>    <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Now, if the user doesn’t specify a value for <code>na.rm</code> it defaults to <code>FALSE</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">rescale</span><span class="op">(</span><span class="va">nums</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] NA NA NA NA NA NA NA NA NA NA NA NA NA NA</code></pre>
+</div>
+</div>
+</section><section id="choosing-a-rescale-method" class="level4" data-number="6.2.2.2"><h4 data-number="6.2.2.2" class="anchored" data-anchor-id="choosing-a-rescale-method">
+<span class="header-section-number">6.2.2.2</span> Choosing a Rescale Method</h4>
+<p>Another addition we could make to our function is to allow the user to choose what rescaling method they want to use. Currently, our function uses min-max scaling, but there are other methods of scaling a vector of numbers. Arguably the most common scaling method is “normalization.” With normalization, the mean and standard deviation are used to rescale values.</p>
+<p>Mathematically, each <span class="math inline">\(i^{th}\)</span> value of a vector <span class="math inline">\(x\)</span> is scaled based on this calculation:</p>
+<p><span class="math display">\[\frac{x_i - mean(x)}{std(x)}\]</span></p>
+<!-- add an argument that allows the user to choose between min/max and mean/sd scaling -->
+<p>What if we add an argument into the <code>rescale()</code> function that allows the user to specify what method should be used to rescale?! It would make the most sense for the argument to accept a <strong>character</strong> input for the name of the scaling method (e.g.&nbsp;<code>"min-max"</code>, <code>"normalize"</code>). Let’s see how we might incorporate this!</p>
+<p>Before incorporating this option in to the function, let’s write out how many possible options there will be:</p>
+<ol type="1">
+<li>
+<code>"min-max"</code> with <code>na.rm = TRUE</code>
+</li>
+<li>
+<code>"min-max"</code> with <code>na.rm = FALSE</code>
+</li>
+<li>
+<code>"normalize"</code> with <code>na.rm = TRUE</code>
+</li>
+<li>
+<code>"normalize"</code> with <code>na.rm = FALSE</code>
+</li>
+</ol>
+<p>There are two things we should notice here. First, since there are four options of what can happen, we will need to make use of <code>else if ()</code> statements. Second, each of these conditions requires <strong>two</strong> things to be true at the same time. Let’s learn how we can join relational statements together!</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Joining Relational Statements
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When you have two relational statements (e.g., <code>method =="normalize"</code>, <code>na.rm == TRUE</code>), there are <strong>two</strong> ways you can join them—an “and” or an “or.”</p>
+<p>With an “and” (<code>&amp;</code>) <em>both</em> statements must be <code>TRUE</code> simultaneously in order for the condition to be <code>TRUE</code>. If either statement is <code>FALSE</code>, then condition will return <code>FALSE</code>.</p>
+<p>With an “or” (<code>|</code>) <em>at least one</em> statement must be <code>TRUE</code> for the condition to be <code>TRUE</code>. An or is less stringent and will only be <code>FALSE</code> if <em>every</em> statement is <code>FALSE</code>.</p>
+<table class="caption-top table">
+<thead><tr class="header">
+<th>Relational Statement</th>
+<th>When is it <code>TRUE</code>?</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>x == 2 &amp; y == 4</code></td>
+<td>When <strong>both</strong> statements are <code>TRUE</code>
+</td>
+</tr>
+<tr class="even">
+<td><code>x == 2 | y == 4</code></td>
+<td>When <strong>one</strong> statement is <code>TRUE</code>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Okay, now we’re ready to try this out. We know we need four total options, so we’re going to use one <code>if ()</code>, two <code>else if ()</code>, and one <code>else</code>. We’re also going to need to join two relational statements together for each of these options. Here we go!</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rescale</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">na.rm</span> <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">method</span><span class="op">)</span><span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">method</span> <span class="op">==</span> <span class="st">"min-max"</span> <span class="op">&amp;</span> <span class="va">na.rm</span> <span class="op">==</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">method</span> <span class="op">==</span> <span class="st">"min-max"</span> <span class="op">&amp;</span> <span class="va">na.rm</span> <span class="op">==</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">method</span> <span class="op">==</span> <span class="st">"normalize"</span> <span class="op">&amp;</span> <span class="va">na.rm</span> <span class="op">==</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span><span class="op">{</span></span>
+<span>    <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Now that we’ve written it, let’s see if it works.</p>
+<div class="columns">
+<div class="column" style="width:48%;">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">rescale</span><span class="op">(</span><span class="va">nums</span>, </span>
+<span>        na.rm <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>        method <span class="op">=</span> <span class="st">"min-max"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 0.00 0.04 0.08 0.12 0.16 0.20   NA 0.80 0.84 0.88 0.92 0.96 1.00   NA</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:4%;">
+
+</div><div class="column" style="width:48%;">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">rescale</span><span class="op">(</span><span class="va">nums</span>, </span>
+<span>        na.rm <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>        method <span class="op">=</span> <span class="st">"normalize"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] -1.1797035 -1.0853272 -0.9909510 -0.8965747 -0.8021984 -0.7078221
+ [7]         NA  0.7078221  0.8021984  0.8965747  0.9909510  1.0853272
+[13]  1.1797035         NA</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-check-in callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Check-in</span>Check In
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We know <code>rescale()</code> works, so let’s test our intuition for what would happen for the following scenarios.</p>
+<ol type="1">
+<li><code>rescale(nums, method = "normalize")</code></li>
+<li><code>rescale(nums, method = "min-max")</code></li>
+<li><code>rescale(nums, na.rm = TRUE)</code></li>
+</ol>
+</div>
+</div>
+</section></section><section id="explicit-returns" class="level3" data-number="6.2.3"><h3 data-number="6.2.3" class="anchored" data-anchor-id="explicit-returns">
+<span class="header-section-number">6.2.3</span> Explicit Returns</h3>
+<p>Now that we’ve explored different options for function inputs, let’s talk more about function outputs. A function output is often called a “return” because of its tie to a <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> statement. You might wonder why you haven’t seen a <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> statement in a function yet and the answer is that <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> statements are a somewhat contentious topic among R programmers. We say “contentious” because many programmers have staunch views of using a <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> statement, either for or against. We think you should be aware of these views so you can decide which option you prefer.</p>
+<p><strong>Option 1</strong>: Using an explicit return</p>
+<p>When we say “explicit return” we mean that there is a <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> statement built in to the body of the function. This would look something like this:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rescale</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="va">x_scaled</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">x_scaled</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Notice how the results of the rescaling are saved into an object (<code>x_scaled</code>) and then the <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> statement <em>explicitly</em> states that <code>x_scaled</code> should be returned (output). Here are a few pros and cons of this method!</p>
+<div class="columns">
+<div class="column" style="width:48%;">
+<p>✅ Pros of Explicit <code><a href="https://rdrr.io/r/base/function.html">return()</a></code></p>
+<ul>
+<li>Clarity and explicit intent</li>
+<li>Consistency with other languages</li>
+</ul>
+<!-- - Using a `return()` mimics the behavior that other programming languages  --><!-- require (e.g., Python).  --><!-- - A `return()` statement is easy to see (it is printed as a different color in --><!-- RStudio), so it makes it easier to notice if your function is outputting what --><!-- you want it to.  -->
+</div><div class="column" style="width:4%;">
+
+</div><div class="column" style="width:48%;">
+<p>⚠️ Cons of Explicit <code><a href="https://rdrr.io/r/base/function.html">return()</a></code></p>
+<ul>
+<li>More typing / slightly less idiomatic use of R</li>
+<li>Can be overused in simple functions</li>
+<li>Can complicate control flow unnecessarily</li>
+</ul>
+<!-- - The R programming language does not require an explicit return. Instead, R --><!-- will return the last value that was calculated.  --><!-- - This typically means you need to save a object that will then be returned,  --><!-- which adds an additional step to the code. -->
+</div>
+</div>
+<p><strong>Option 2</strong>: Not using an explicit return / Using last value calculated</p>
+<p>This option effectively removes the <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> statement from the function. Instead of using a <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> statement, the function relies on R’s behavior to return the last expression that was run.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rescale</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="columns">
+<div class="column" style="width:48%;">
+<p>✅ Pros of Implicit Return (no <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> statement)</p>
+<ul>
+<li>Concise and idiomatic</li>
+<li>Encourages “last expression” thinking</li>
+</ul>
+</div><div class="column" style="width:4%;">
+
+</div><div class="column" style="width:48%;">
+<p>⚠️ Cons of Implicit Return</p>
+<ul>
+<li>Less obvious for beginners</li>
+<li>Harder to do early exits (i.e., your function ends early for certain inputs)</li>
+</ul>
+</div>
+</div>
+<p><strong>Choosing an Option</strong></p>
+<p>As an R programmer, you will need to decide for yourself which of these two options you prefer. It might be hard to know without trying what option you would prefer, so we encourage you to play around and try both!</p>
+<p>The key is that you must be mindful to not mix and match methods between the two. Take for example a classic function writing mistake:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rescale</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="va">x_scaled</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>If we were to try and use this function to rescale a vector (e.g., <code>rescale(y)</code>) nothing would be output! That is because the rescaled values are saved into an object (<code>x_scaled</code>) but never returned!</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Consistency with code style guide
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Technically, the code style guide we’ve been using takes an anti explicit return stance. If you want to hear more about their thinking, you can look at <a href="https://style.tidyverse.org/functions.html#return">these examples</a>.</p>
+</div>
+</div>
+</section></section><section id="debugging" class="level2" data-number="6.3"><h2 data-number="6.3" class="anchored" data-anchor-id="debugging">
+<span class="header-section-number">6.3</span> Debugging</h2>
+<p>Sometimes function writing doesn’t go as smoothly as what we’ve walked you through. Sometimes your function outputs something unexpected or sometimes it doesn’t run at all. This can be very frustrating, but there are a few methods you can used to try and hunt down the problem.</p>
+<section id="print-statements" class="level3" data-number="6.3.1"><h3 data-number="6.3.1" class="anchored" data-anchor-id="print-statements">
+<span class="header-section-number">6.3.1</span> <code>print()</code> Statements</h3>
+<p>Suppose our function wasn’t working as intended.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">10</span><span class="op">:</span><span class="fl">20</span></span>
+<span><span class="fu">rescale</span><span class="op">(</span><span class="va">x</span>, method <span class="op">=</span> <span class="st">"min-max"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] -1.5075567 -1.2060454 -0.9045340 -0.6030227 -0.3015113  0.0000000
+ [7]  0.3015113  0.6030227  0.9045340  1.2060454  1.5075567</code></pre>
+</div>
+</div>
+<p>How do we know it’s not working as intended? Well, with min-max scaling, the largest value should be 1 and there should be no negative numbers.</p>
+<p>One method for debugging is to add a <code><a href="https://rdrr.io/r/base/print.html">print()</a></code> statement into the body of the function. A <code><a href="https://rdrr.io/r/base/print.html">print()</a></code> statement does exactly what it sounds like, it prints the value of an object. For example, <code>print(nums)</code> would output <code>15, 16, 17, 18, 19, 20, NA, 35, 36, 37, 38, 39, 40, NA</code>. Let’s see how this might look.</p>
+<p>Here is the code for the broken function:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rescale</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">na.rm</span> <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">method</span><span class="op">)</span><span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">method</span> <span class="op">==</span> <span class="st">"min-max"</span> <span class="op">&amp;</span> <span class="va">na.rm</span> <span class="op">==</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">method</span> <span class="op">==</span> <span class="st">"minmax"</span> <span class="op">&amp;</span> <span class="va">na.rm</span> <span class="op">==</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">method</span> <span class="op">==</span> <span class="st">"normalize"</span> <span class="op">&amp;</span> <span class="va">na.rm</span> <span class="op">==</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span><span class="op">{</span></span>
+<span>    <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>You might have already spotted our error, but let’s suppose it was less obvious. Since it seems like the incorrect method is being used, we could add a <code><a href="https://rdrr.io/r/base/print.html">print()</a></code> statement at the beginning of the function to print out the value of <code>method</code> being input into the control flow.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rescale</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">na.rm</span> <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">method</span><span class="op">)</span><span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">method</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">method</span> <span class="op">==</span> <span class="st">"min-max"</span> <span class="op">&amp;</span> <span class="va">na.rm</span> <span class="op">==</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">method</span> <span class="op">==</span> <span class="st">"minmax"</span> <span class="op">&amp;</span> <span class="va">na.rm</span> <span class="op">==</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">method</span> <span class="op">==</span> <span class="st">"normalize"</span> <span class="op">&amp;</span> <span class="va">na.rm</span> <span class="op">==</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span><span class="op">{</span></span>
+<span>    <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">rescale</span><span class="op">(</span><span class="va">x</span>, method <span class="op">=</span> <span class="st">"min-max"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "min-max"</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] -1.5075567 -1.2060454 -0.9045340 -0.6030227 -0.3015113  0.0000000
+ [7]  0.3015113  0.6030227  0.9045340  1.2060454  1.5075567</code></pre>
+</div>
+</div>
+<p>Okay, so the value of <code>method</code> is what we expect (<code>"min-max"</code>), but the output is still wrong. By knowing the value of <code>method</code> we can go back and check where this value is being used. Doing this, we should notice that in the first <code>else if ()</code> we’ve used <code>"minmax"</code> instead of <code>"min-max"</code>. So, <code>rescale(x, method = "min-max")</code> was being thrown into the last condition (<code>else</code>) because <code>na.rm</code> was <code>FALSE</code> and the <code>method</code> didn’t match any of the values included in the control flow!</p>
+</section><section id="running-the-function-body" class="level3" data-number="6.3.2"><h3 data-number="6.3.2" class="anchored" data-anchor-id="running-the-function-body">
+<span class="header-section-number">6.3.2</span> Running the Function Body</h3>
+<p>Another method for finding the bug in a function is to run the <strong>function body</strong> line by line. To do this, you first need to create objects that correspond to the function’s arguments. The <code>rescale()</code> function has three arguments (<code>x</code>, <code>na.rm</code>, and <code>method</code>), so we will need to create three objects with values that should be used.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">10</span><span class="op">:</span><span class="fl">20</span></span>
+<span><span class="va">method</span> <span class="op">&lt;-</span> <span class="st">"min-max"</span></span>
+<span><span class="va">na.rm</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Now that we have objects for each of the function arguments, we can run the <strong>inside</strong> of the function. Specifically, we run this code:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="kw">if</span> <span class="op">(</span><span class="va">method</span> <span class="op">==</span> <span class="st">"min-max"</span> <span class="op">&amp;</span> <span class="va">na.rm</span> <span class="op">==</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">method</span> <span class="op">==</span> <span class="st">"min-max"</span> <span class="op">&amp;</span> <span class="va">na.rm</span> <span class="op">==</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">values</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">values</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">values</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">method</span> <span class="op">==</span> <span class="st">"normalize"</span> <span class="op">&amp;</span> <span class="va">na.rm</span> <span class="op">==</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span><span class="op">{</span></span>
+<span>    <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error:
+! object 'values' not found</code></pre>
+</div>
+</div>
+<p>By running the body of the function we can see that the code is using an object named <code>values</code> somewhere. The culprit is again the first <code>else if ()</code> line where <code>min(values)</code> is used instead of <code>min(x)</code>.</p>
+</section></section><section id="input-validation" class="level2" data-number="6.4"><h2 data-number="6.4" class="anchored" data-anchor-id="input-validation">
+<span class="header-section-number">6.4</span> Input validation</h2>
+<p>When we write functions we know what type of inputs the function should use. However, someone else using our function might not know what the function expects. We will walk you through a series of input checks from simple to more complex,</p>
+<section id="checking-a-single-data-type" class="level3" data-number="6.4.1"><h3 data-number="6.4.1" class="anchored" data-anchor-id="checking-a-single-data-type">
+<span class="header-section-number">6.4.1</span> Checking a Single Data Type</h3>
+<p>It might be obvious to us that the <code>rescale()</code> function should only be used with numeric values, but that might not be clear to someone else. We can prevent someone from giving our function a non-numeric input by adding a simple check at the beginning of the function:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rescale</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">na.rm</span> <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">method</span><span class="op">)</span><span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="co"># check if x is a numeric vector</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">is.numeric</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">method</span> <span class="op">==</span> <span class="st">"min-max"</span> <span class="op">&amp;</span> <span class="va">na.rm</span> <span class="op">==</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">method</span> <span class="op">==</span> <span class="st">"min-max"</span> <span class="op">&amp;</span> <span class="va">na.rm</span> <span class="op">==</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">method</span> <span class="op">==</span> <span class="st">"normalize"</span> <span class="op">&amp;</span> <span class="va">na.rm</span> <span class="op">==</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span><span class="op">{</span></span>
+<span>    <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The <code><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot()</a></code> function takes one input, the condition you want to check. Here, we are checking if <code>x</code> is a numeric vector. The <code><a href="https://rdrr.io/r/base/numeric.html">is.numeric()</a></code> function will output two possible values, <code>TRUE</code> and <code>FLASE</code>. If the output is <code>FALSE</code>, then <code><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot()</a></code> will terminate the function.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">letters</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"d"</span><span class="op">)</span></span>
+<span><span class="fu">rescale</span><span class="op">(</span><span class="va">letters</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in `rescale()`:
+! is.numeric(x) is not TRUE</code></pre>
+</div>
+</div>
+<p>Notice how the function outputs an error before it even gets to the function body? Technically, <code>rescale(letters)</code> should have produced an error because the argument <code>method</code> wasn’t specified. But, the function never even got there!</p>
+</section><section id="checking-multiple-data-types" class="level3" data-number="6.4.2"><h3 data-number="6.4.2" class="anchored" data-anchor-id="checking-multiple-data-types">
+<span class="header-section-number">6.4.2</span> Checking Multiple Data Types</h3>
+<p>In a similar vein, we could check <strong>multiple</strong> data types still using the <code><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot()</a></code> function. We also know the <code>na.rm</code> argument should be a logical value, and the <code>method</code> argument should be a character value. Let’s add these checks into the function!</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rescale</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">na.rm</span> <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">method</span><span class="op">)</span><span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="co"># check if all inputs are correct data type</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">is.numeric</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, </span>
+<span>            <span class="fu"><a href="https://rdrr.io/r/base/logical.html">is.logical</a></span><span class="op">(</span><span class="va">na.rm</span><span class="op">)</span>, </span>
+<span>            <span class="fu"><a href="https://rdrr.io/r/base/character.html">is.character</a></span><span class="op">(</span><span class="va">method</span><span class="op">)</span></span>
+<span>            <span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">method</span> <span class="op">==</span> <span class="st">"min-max"</span> <span class="op">&amp;</span> <span class="va">na.rm</span> <span class="op">==</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">method</span> <span class="op">==</span> <span class="st">"min-max"</span> <span class="op">&amp;</span> <span class="va">na.rm</span> <span class="op">==</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">method</span> <span class="op">==</span> <span class="st">"normalize"</span> <span class="op">&amp;</span> <span class="va">na.rm</span> <span class="op">==</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span><span class="op">{</span></span>
+<span>    <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>You might wonder why we don’t have three <code><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot()</a></code>s, one for each condition:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">is.numeric</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/logical.html">is.logical</a></span><span class="op">(</span><span class="va">na.rm</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">is.character</a></span><span class="op">(</span><span class="va">method</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>That is a great question! When you give <code><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot()</a></code> multiple inputs (e.g., <code>stopifnot(is.numeric(x), is.logical(na.rm)</code>), <strong>every</strong> input must be <code>TRUE</code> simultaneously for the function to run. If <em>any</em> of the inputs are <code>FALSE</code> the function will stop.</p>
+<p>This is the same as joining these statements with an <code>&amp;</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">is.numeric</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">&amp;</span> <span class="fu"><a href="https://rdrr.io/r/base/logical.html">is.logical</a></span><span class="op">(</span><span class="va">na.rm</span><span class="op">)</span> <span class="op">&amp;</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">is.character</a></span><span class="op">(</span><span class="va">method</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>So, we use the three inputs (separated by commas) because (1) it requires the least amount of typing (instead of three <code><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot()</a></code>s), and (2) it is easier to read (instead of using <code>&amp;</code>s).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">is.numeric</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, </span>
+<span>          <span class="fu"><a href="https://rdrr.io/r/base/logical.html">is.logical</a></span><span class="op">(</span><span class="va">na.rm</span><span class="op">)</span>, </span>
+<span>          <span class="fu"><a href="https://rdrr.io/r/base/character.html">is.character</a></span><span class="op">(</span><span class="va">method</span><span class="op">)</span></span>
+<span>          <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section><section id="checking-object-size" class="level3" data-number="6.4.3"><h3 data-number="6.4.3" class="anchored" data-anchor-id="checking-object-size">
+<span class="header-section-number">6.4.3</span> Checking Object Size</h3>
+<!-- checking if there are NAs in a vector before calculating the mean -->
+<!-- length(na.omit(x)) < length(x) -->
+<!-- checkin about verifying the length of x is greater than 1 -->
+<div class="callout callout-style-default callout-check-in callout-empty-content callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Check-in</span>Check In
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+</section></section><section id="environment-scope-name-masking-dynamic-lookup" class="level2" data-number="6.5"><h2 data-number="6.5" class="anchored" data-anchor-id="environment-scope-name-masking-dynamic-lookup">
+<span class="header-section-number">6.5</span> Environment, Scope, Name Masking &amp; Dynamic Lookup</h2>
+<!-- give examples and ask them to identify where the values are pulled from? -->
+<!-- argument order versus names -->
+
+
+</section></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+<ol>
+<li id="fn1"><p><a href="https://www.bls.gov/cpi/questions-and-answers.htm">The Bureau of Labor Statistics (BLS)</a> has a database of over 80,000 prices which they sample monthly for more than 200 categories of products and services to determine the CPI and inflation rate. The BLS uses a huge basket because its goal is to get an accurate measure of price changes for consumer goods and services across the U.S. economy.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>If we have vectors that are the <strong>same</strong> length, then each vector can be a column of a dataframe. If they were <em>different</em> lengths we would need to use a list to store them all together!<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/r-is-your-friend\.github\.io\/course-pack\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./03a-control-flow.html" class="pagination-link" aria-label="Control Flow">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Control Flow</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./04-data-is-friend.html" class="pagination-link" aria-label="Data is Friend">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data is Friend</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

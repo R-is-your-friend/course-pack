@@ -275,9 +275,7 @@ happening:
 rescale <- function(x){ (x - min(x)) / (max(x) - min(x)) }
 ```
 
-<!-- this should be a check-in but the callout isn't working :( -->
-
-::: callout-tip
+::: callout-check-in
 1.  Now that we have created the `rescale()` function, let's check our intuition
 for what the function should output (return) for different inputs.
 
@@ -494,9 +492,7 @@ rescale(nums,
 :::
 :::
 
-<!-- should be a check-in -->
-::: {.callout-tip}
-# Check-in
+::: callout-check-in
 
 We know `rescale()` works, so let's test our intuition for what would happen
 for the following scenarios. 
@@ -878,6 +874,9 @@ stopifnot(is.numeric(x),
 
 
 <!-- checkin about verifying the length of x is greater than 1 -->
+::: callout-check-in
+
+:::
 
 ## Environment, Scope, Name Masking & Dynamic Lookup
 
