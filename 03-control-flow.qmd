@@ -13,6 +13,8 @@
 - Understand how to index a loop
 :::
 
+<!-- checkin about how many of each function (if, else if, else) you would have for a given number of options -->
+
 ```{r}
 #| label: package-for-case-when
 #| echo: false
@@ -73,9 +75,9 @@ x <- 3
 
 if (x > 2) { 
   y <- 8
-} else {
+  } else {
   y <- 4
-}
+  }
 
 ```
 

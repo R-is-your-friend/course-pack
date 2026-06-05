@@ -541,6 +541,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </div>
 </div>
+<!-- checkin about how many of each function (if, else if, else) you would have for a given number of options -->
 <!-- NEED TO ADD CHECKINS! -->
 <!-- ::: {.callout-check-in} -->
 <!-- ::: -->
@@ -571,9 +572,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">2</span><span class="op">)</span> <span class="op">{</span> </span>
 <span>  <span class="va">y</span> <span class="op">&lt;-</span> <span class="fl">8</span></span>
-<span><span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
 <span>  <span class="va">y</span> <span class="op">&lt;-</span> <span class="fl">4</span></span>
-<span><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span>  <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>There are a few things we need to notice about the syntax. First, we are using two words <code>if</code> and <code>else</code> to build the control flow. These are reserved names that R recognizes exactly for this type of task. Second, the condition being checked comes after <code>if</code> and is contained in parentheses (<code>x &gt; 2</code>). The “stuff to do” when the condition is <code>TRUE</code> is enclosed in <code><a href="https://rdrr.io/r/base/Paren.html">{}</a></code> <strong>immediately after</strong> the <code>if()</code> statement. If the condition is <code>FALSE</code>, then R will execute the “other stuff to do” contained in the <code><a href="https://rdrr.io/r/base/Paren.html">{}</a></code> after <code>else</code>.</p>
 <p><strong>What value should <code>y</code> have?</strong></p>
