@@ -103,7 +103,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script>
+}</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 </head>
 <body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
@@ -541,10 +566,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </div>
 </div>
-<!-- checkin about how many of each function (if, else if, else) you would have for a given number of options -->
-<!-- NEED TO ADD CHECKINS! -->
-<!-- ::: {.callout-check-in} -->
-<!-- ::: -->
 <p>Control flow refers to statements in a computer program that that determines when, how, and how many times code is evaluated. In this reading you will learn about the two main types of control flow structures—<code>if</code> statements and <code>for()</code> loops.</p>
 <section id="conditionals-in-everyday-life" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="conditionals-in-everyday-life">
 <span class="header-section-number">4.1</span> Conditionals in Everyday Life</h2>
@@ -604,16 +625,79 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Each of these principles of code style come from the <a href="https://style.tidyverse.org/syntax.html">Syntax section of the tidyverse style guide</a>. We will use this style guide throughout the course!</p>
 </div>
 </div>
+<div class="callout callout-style-default callout-check-in callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Check-in</span>Check In
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Which of the following is the correct way to format a conditional statement?</li>
+</ol>
+<ol type="a">
+<li>
+</li></ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (num <span class="sc">&lt;</span> <span class="dv">100</span>){</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(num)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span> {</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"banana"</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol start="2" type="a">
+<li>
+</li></ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="va">num</span> <span class="op">&lt;</span> <span class="fl">100</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">num</span><span class="op">)</span></span>
+<span><span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"banana"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol start="3" type="a">
+<li>
+</li></ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="va">num</span> <span class="op">&lt;</span> <span class="fl">100</span><span class="op">)</span><span class="op">{</span> <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">num</span><span class="op">)</span> <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span> <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"banana"</span><span class="op">)</span> <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol start="4" type="a">
+<li>
+</li></ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="va">num</span> <span class="op">&lt;</span> <span class="fl">100</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">num</span><span class="op">)</span> <span class="kw">else</span> <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"banana"</span><span class="op">)</span> </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
 </section><section id="conditional-statements-as-diagrams" class="level3" data-number="4.2.2"><h3 data-number="4.2.2" class="anchored" data-anchor-id="conditional-statements-as-diagrams">
 <span class="header-section-number">4.2.2</span> Conditional Statements as Diagrams</h3>
-<p>We find it quite useful to represent conditional statements as diagrams! By drawing out the diagram (even if it is simple), you can more clearly anticipate what the result of the process will be.</p>
+<p>We find it quite useful to represent conditional statements as diagrams. By drawing out the diagram (even if it is simple), you can more clearly anticipate what the result of the process will be.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="images/03-simple-conditional-diagram.png" class="img-fluid figure-img" style="width:60.0%" alt="A simple diagram of what comprises an if/else conditional. At the top there is a green diamond and the inside of the diamond reads 'Condition to Check'. There are two arrows exiting the diamond, one pointing to the right that reads 'TRUE' and one pointing down that reads 'FALSE'. These represent the outcome of the conditional check. At the end of the 'TRUE' arrow there is a rectangle that reads 'Thing to do' representing what is done if the condition is met (TRUE). As the end of the 'FALSE' arrow there is a circle that reads 'Other thing to do' representing what is done if the condition is not met (FALSE)."></p>
 <figcaption>Diagram of a simple conditional (if/else) statement</figcaption></figure>
 </div>
+<div class="callout callout-style-default callout-check-in callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Check-in</span>Check In
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol start="2" type="1">
+<li>With <code>if</code> + <code>else</code> you have ____ condition(s) to check and ____ possible outcome(s).</li>
+</ol>
+</div>
+</div>
 </section></section><section id="chaining-conditional-statements" class="level2" data-number="4.3"><h2 data-number="4.3" class="anchored" data-anchor-id="chaining-conditional-statements">
 <span class="header-section-number">4.3</span> Chaining Conditional Statements</h2>
-<p>In our previous conditional statement we only used <code>if</code> and <code>else</code>, but that only works if you have <strong>two</strong> groups or <strong>one</strong> condition you need to check. In many cases we have more than one condition to check, so we will need to modify our conditional statement.</p>
+<p>In our previous conditional statement we only used <code>if</code> and <code>else</code>, but that only works if you have <strong>two</strong> possible outcomes or <strong>one</strong> condition you need to check. In many cases we have more than one condition to check, so we will need to modify our conditional statement.</p>
 <p>When we have more than one condition to check, we can use an <code>else if ()</code> statement. <code>else if ()</code> works similar to an <code>if ()</code> statement, where you specify a condition to check in the parentheses. This looks something like:</p>
 <pre><code>if (condition 1) {
   stuff to do 
@@ -663,7 +747,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </table>
 <p><strong>Step 1:</strong> Draw out the diagram for the conditional statements. What conditions are being checked at each stage? If a condition is true what is the outcome? If a condition is false, what happens?</p>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -672,7 +756,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><img src="images/03-taxes-flowchart.png" class="img-fluid" alt="A flowchart for figuring out what tax bracket someone should pay. The chart starts with an orange circle indicating the income (a numeric value) is being input into the flowchart. From there, there are a series of green diamonds each with a check for the income (e.g., income < $11,925). At each diamond there is an arrow pointing down with a value of TRUE next to the arrow, indicating that the condition checked was found to be TRUE. There is a second arrow pointing to the right with a value of FALSE next to the arrow, indicating that the contition checked was found to be false. Beneath each condition that found to be TRUE there is a blue rectangle with a tax percentage indicating the tax rate for that income bracket."></p>
 </div>
@@ -680,7 +764,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p><strong>Step 2:</strong> Translate your diagram into R code!</p>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -689,23 +773,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="va">income</span> <span class="op">&lt;</span> <span class="fl">11925</span><span class="op">)</span> <span class="op">{</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="va">income</span> <span class="op">&lt;</span> <span class="fl">11925</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">tax</span> <span class="op">&lt;-</span> <span class="fl">0.10</span></span>
 <span>  <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">income</span> <span class="op">&lt;=</span> <span class="fl">48475</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">tax</span> <span class="op">&lt;-</span> <span class="fl">0.12</span></span>
+<span>    <span class="fl">0.12</span></span>
 <span>  <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">income</span> <span class="op">&lt;=</span> <span class="fl">103350</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">tax</span> <span class="op">&lt;-</span> <span class="fl">0.22</span></span>
+<span>    <span class="fl">0.22</span></span>
 <span>  <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">income</span> <span class="op">&lt;=</span> <span class="fl">197300</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">tax</span> <span class="op">&lt;-</span> <span class="fl">0.24</span></span>
+<span>    <span class="fl">0.24</span></span>
 <span>  <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">income</span> <span class="op">&lt;=</span> <span class="fl">250525</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">tax</span> <span class="op">&lt;-</span> <span class="fl">0.32</span></span>
+<span>    <span class="fl">0.32</span></span>
 <span>  <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">income</span> <span class="op">&lt;</span> <span class="fl">626350</span><span class="op">)</span><span class="op">{</span></span>
-<span>    <span class="va">tax</span> <span class="op">&lt;-</span> <span class="fl">0.35</span></span>
+<span>    <span class="fl">0.35</span></span>
 <span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
-<span>    <span class="va">tax</span> <span class="op">&lt;-</span> <span class="fl">0.37</span></span>
+<span>    <span class="fl">0.37</span></span>
 <span>  <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
@@ -714,7 +798,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Okay, let’s try it out! A “typical” Assistant Professor in the College of Science and Math at Cal Poly makes $95,000. Based on your diagram, how much would a professor pay in taxes?</p>
 <p>Let’s check! Setting <code>income</code> to <code>95000</code>, our conditional statements tell us that the professor will pay <code>0.22</code> or 22% in taxes.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">income</span> <span class="op">&lt;-</span> <span class="fl">95000</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">income</span> <span class="op">&lt;-</span> <span class="fl">95000</span></span>
 <span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="va">income</span> <span class="op">&lt;</span> <span class="fl">11925</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fl">0.10</span></span>
@@ -735,10 +819,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>[1] 0.22</code></pre>
 </div>
 </div>
+<div class="callout callout-style-default callout-check-in callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Check-in</span>Check In
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol start="3" type="1">
+<li><p>In the IRS tax brackets we had [one / two / three / four] possible outcomes and [one / two / three / four] conditions that needed to be checked.</p></li>
+<li><p>In general, if you have <span class="math inline">\(n\)</span> possible outcomes, you will <strong>always</strong> have [<span class="math inline">\(n\)</span> / <span class="math inline">\(n + 1\)</span> / <span class="math inline">\(n - 1\)</span> / <span class="math inline">\(n * 2\)</span>] conditions to check.</p></li>
+</ol>
+</div>
+</div>
 <p>What if we tried salaries for a variety of CSU employees? Jeffrey Armstrong, Cal Poly’s President is paid $611,203 <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, Midred Garcia, the CSU Chancellor is paid $795,000 <a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, and a full-time janitor at Cal Poly can expect to make somewhere around $45,000.</p>
 <p>Let’s put these three salaries through our conditional statements to figure out how much each employee will pay in taxes.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">income</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">611203</span>, <span class="fl">795000</span>, <span class="fl">45000</span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">income</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">611203</span>, <span class="fl">795000</span>, <span class="fl">45000</span><span class="op">)</span></span>
 <span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="va">income</span> <span class="op">&lt;</span> <span class="fl">11925</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">tax</span> <span class="op">&lt;-</span> <span class="fl">0.10</span></span>
@@ -768,7 +868,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>So, what do we do if we want to use conditional statements for a vector of values? Well, we need to switch from using <code>if ()</code>, <code>else if ()</code>, and <code>else</code> to using functions that accept vectors of values.</p>
 <p>Luckily for us, vectorized operations are very common in R! Take for example finding the square root of a given number. The <code><a href="https://rdrr.io/r/base/MathFun.html">sqrt()</a></code> function accepts a <strong>vector</strong> of values an outputs the square root of each value.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nums</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">9</span>, <span class="fl">12</span>, <span class="fl">16</span>, <span class="fl">20</span>, <span class="fl">25</span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nums</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">9</span>, <span class="fl">12</span>, <span class="fl">16</span>, <span class="fl">20</span>, <span class="fl">25</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">nums</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.732051 2.000000 3.000000 3.464102 4.000000 4.472136 5.000000</code></pre>
@@ -779,7 +879,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>For our problem, we need to find a similar function that can accept a vector of salaries and match each salary with a tax rate. The <code><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">case_when()</a></code> function from the <strong>dplyr</strong> package does just that.</p>
 <p>The syntax for this function looks like this:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">case_when</a></span><span class="op">(</span><span class="va">income</span> <span class="op">&lt;</span> <span class="fl">11925</span> <span class="op">~</span> <span class="fl">0.10</span>, </span>
 <span>          <span class="va">income</span> <span class="op">&lt;=</span> <span class="fl">48475</span> <span class="op">~</span> <span class="fl">0.12</span>, </span>
@@ -796,7 +896,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The last, somewhat odd looking syntax is the <code>.default</code> at the end. This is similar to the <code>else {}</code> at the end of our conditional statements, where both are used as a “catch all” for cases that were not specified.</p>
 <p>But, does it work? Can <code><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">case_when()</a></code> provide a vector of tax brackets?</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">income</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">611203</span>, <span class="fl">795000</span>, <span class="fl">45000</span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">income</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">611203</span>, <span class="fl">795000</span>, <span class="fl">45000</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">case_when</a></span><span class="op">(</span><span class="va">income</span> <span class="op">&lt;</span> <span class="fl">11925</span> <span class="op">~</span> <span class="fl">0.10</span>, </span>
 <span>          <span class="va">income</span> <span class="op">&lt;=</span> <span class="fl">48475</span> <span class="op">~</span> <span class="fl">0.12</span>, </span>
@@ -811,6 +911,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Yes!!!</p>
+<div class="callout callout-style-default callout-check-in callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Check-in</span>Check In
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol start="5" type="1">
+<li>A function is “vectorized” if it accepts a [vector / matrix / dataframe / list] with length [equal to / greater than / less than] 1 as an input.</li>
+</ol>
+</div>
+</div>
 </section></section><section id="help-tab" class="level2" data-number="4.5"><h2 data-number="4.5" class="anchored" data-anchor-id="help-tab">
 <span class="header-section-number">4.5</span> Help tab</h2>
 <p>You might be wondering, how would I have figured out the syntax for <code><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">case_when()</a></code> on my own? Well, let’s introduce you to the Help tab—your friend for getting help with how to use an R function.</p>
@@ -826,7 +941,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>In the arguments for <code><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">case_when()</a></code> the documentation says “A sequence of two-sided formulas. The left hand side (LHS) determines which values match this case. The right hand side (RHS) provides the replacement value.” This <strong>is not</strong> intuitive for someone who’s never used this function. This is why we recommend looking over the examples first!</p>
 <p>The documentation makes a bit more sense looking at the first example. We can more clearly see the LHS (<code>x %% 35 == 0</code>), which determines which values match this case. We see the right hand side <code>"fizz buzz"</code> which provides the replacement value.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">70</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">70</span></span>
 <span></span>
 <span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">case_when</a></span><span class="op">(</span></span>
 <span>  <span class="va">x</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html">%%</a></span> <span class="fl">35</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"fizz buzz"</span>,</span>
@@ -875,11 +990,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Instead of wasting your time figuring out whether AI is giving you reasonable advice, why not go straight to the source? Read the R help files!</p>
 </div>
 </div>
+<div class="callout callout-style-default callout-check-in callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Check-in</span>Check In
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol start="6" type="1">
+<li>Which of the following options would open the help file for the <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> function? Select all that apply!</li>
+</ol>
+<ol type="a">
+<li>Type <code>mean</code> in the Console</li>
+<li>Type <code><a href="https://rdrr.io/r/base/mean.html">?mean</a></code> in the Console</li>
+<li>Search for mean in the search bar of the Packages tab</li>
+<li>Search for mean in the search bar of the Help tab</li>
+</ol>
+</div>
+</div>
 <section id="finding-new-fun-arguments" class="level3" data-number="4.5.1"><h3 data-number="4.5.1" class="anchored" data-anchor-id="finding-new-fun-arguments">
 <span class="header-section-number">4.5.1</span> Finding New (Fun) Arguments</h3>
 <p>Through this help page, we can learn about new arguments we didn’t even know about. Take for example you can set <code>.unmatched = "error"</code>. This allows you to see if the cases you’ve provide are actually exhaustive or if there are observations falling outside the possibilities you’ve defined.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">num</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">10</span><span class="op">:</span><span class="fl">10</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">num</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">10</span><span class="op">:</span><span class="fl">10</span></span>
 <span></span>
 <span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">case_when</a></span><span class="op">(</span><span class="va">num</span> <span class="op">&lt;</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"negative"</span>, </span>
 <span>          <span class="va">num</span> <span class="op">&gt;</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"positive"</span>, </span>
@@ -895,7 +1031,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="column" style="width:48%;">
 <p><strong>Keeping the <code>.unmatched</code> argument:</strong></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">case_when</a></span><span class="op">(</span><span class="va">num</span> <span class="op">&lt;</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"negative"</span>, </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">case_when</a></span><span class="op">(</span><span class="va">num</span> <span class="op">&lt;</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"negative"</span>, </span>
 <span>          <span class="va">num</span> <span class="op">&gt;</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"positive"</span>,</span>
 <span>          <span class="va">num</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"zero"</span>,</span>
 <span>          .unmatched <span class="op">=</span>  <span class="st">"error"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -911,7 +1047,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div><div class="column" style="width:48%;">
 <p><strong>Setting the <code>.default</code> (removing the <code>.unmatched</code> argument):</strong></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">case_when</a></span><span class="op">(</span><span class="va">num</span> <span class="op">&lt;</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"negative"</span>, </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">case_when</a></span><span class="op">(</span><span class="va">num</span> <span class="op">&lt;</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"negative"</span>, </span>
 <span>          <span class="va">num</span> <span class="op">&gt;</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"positive"</span>,</span>
 <span>          .default <span class="op">=</span> <span class="st">"zero"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -923,12 +1059,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+<div class="callout callout-style-default callout-check-in callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Check-in</span>Check In
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol start="7" type="1">
+<li><p>What does the <code>.unmatched</code> argument of <code><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">case_when()</a></code> do?</p></li>
+<li><p>What does the <code>.default</code> argument of <code><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">case_when()</a></code> do?</p></li>
+<li><p>Can you use <strong>both</strong> the <code>.unmatched</code> and <code>.default</code> arguments? Meaning would it work to set <code>.unmatched =  "error"</code> and set <code>.default = "zero"</code>?</p></li>
+</ol>
+</div>
+</div>
 </section></section><section id="loops" class="level2" data-number="4.6"><h2 data-number="4.6" class="anchored" data-anchor-id="loops">
 <span class="header-section-number">4.6</span> Loops</h2>
 <p>Looping is another form of control flow. Where conditionals largely determine <em>when</em> and <em>how</em> code is evaluated, looping decides <strong>how many times</strong> code is run. With looping, the same set of instructions can be repeated many times.</p>
 <p>Take for example the classic problem of updating a variable based on its current value. This would be a series of statements like <code>x &lt;- x + 1</code>. To accomplish this we first need to initialize a value for <code>x</code>, so we know where to start counting.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">0</span> </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">0</span> </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Once <code>x</code> is initialized, we need to know when we should stop adding values. This question (“When should the loop stop?”) is what separates between the two types of loops—<code>while()</code> loops and <code>for()</code> loops.</p>
 <section id="while-loops" class="level3" data-number="4.6.1"><h3 data-number="4.6.1" class="anchored" data-anchor-id="while-loops">
@@ -947,7 +1100,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">while</span> <span class="op">(</span><span class="va">x</span> <span class="op">&lt;</span> <span class="fl">10</span><span class="op">)</span><span class="op">{</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">while</span> <span class="op">(</span><span class="va">x</span> <span class="op">&lt;</span> <span class="fl">10</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">+</span> <span class="fl">1</span></span>
 <span><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -956,7 +1109,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p><strong>What do you think the value of <code>x</code> is?</strong></p>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -965,10 +1118,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 10</code></pre>
 </div>
@@ -978,10 +1131,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>A common addition to loops is using the <code><a href="https://rdrr.io/r/base/print.html">print()</a></code> function to output the current value of <code>x</code>. This seems somewhat benign now, but a <code><a href="https://rdrr.io/r/base/print.html">print()</a></code> is an incredibly helpful tool in debugging! Adding a <code><a href="https://rdrr.io/r/base/print.html">print()</a></code> statement to your loop gives you a snapshot of each iteration, and can tell you where your loop is breaking.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">while</span> <span class="op">(</span><span class="va">x</span> <span class="op">&lt;</span> <span class="fl">10</span><span class="op">)</span><span class="op">{</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">while</span> <span class="op">(</span><span class="va">x</span> <span class="op">&lt;</span> <span class="fl">10</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">+</span> <span class="fl">1</span></span>
 <span><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1012,7 +1165,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>In the above graphic <code>monster</code> is used as the counter (index) of the <code>parade</code> vector. This might seem a bit confusing at first because the elements of <code>parade</code> don’t have the name “monster.” Rather, the elements of <code>parade</code> are associated with an <strong>index</strong> (e.g., <code>parade[1]</code>). However, a <code>for ()</code> loop allows us to index the values we are looping over in a variety of ways.</p>
 <p>Let’s explore different indexing methods with the <code>month.name</code> vector that comes built-in to R:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">month.name</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">month.name</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "January"   "February"  "March"     "April"     "May"       "June"     
  [7] "July"      "August"    "September" "October"   "November"  "December" </code></pre>
@@ -1023,7 +1176,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="columns">
 <div class="column" style="width:48%;">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">for</span> <span class="op">(</span><span class="va">month</span> <span class="kw">in</span> <span class="va">month.name</span><span class="op">)</span><span class="op">{</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">for</span> <span class="op">(</span><span class="va">month</span> <span class="kw">in</span> <span class="va">month.name</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">month</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -1045,7 +1198,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </div><div class="column" style="width:48%;">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="va">month.name</span><span class="op">)</span><span class="op">{</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="va">month.name</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">i</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -1067,7 +1220,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Another option that you might see is specifying the exact number of times the loop should be done using numeric values. Take for example this loop:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span><span class="op">{</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">month.name</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -1106,6 +1259,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>month.name</code></li>
 </ul>
 <p>So, it is up to you to figure out what method makes the most sense to you!</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-check-in callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Check-in</span>Check In
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol start="10" type="1">
+<li>Match the loop to its correct setting.</li>
+</ol>
+<div class="columns">
+<div class="column" style="width:48%;">
+<p><code>for()</code> Loop</p>
+<p></p>
+<p><code>while()</code> Loop</p>
+</div><div class="column" style="width:4%;">
+
+</div><div class="column" style="width:48%;">
+<p>Runs until a condition is not met (<code>FALSE</code>)</p>
+<p>Runs a set number of times</p>
+</div>
+</div>
+<ol start="11" type="1">
+<li>Every <code>for()</code> loop has some derivation of <code>for (i in 1:10)</code>. The <code>i</code> represents the [counter / value / object], and the <code>1:10</code> represents the [list / dataframe / vector] of values to loop over.</li>
+</ol>
 </div>
 </div>
 

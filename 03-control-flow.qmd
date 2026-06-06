@@ -13,18 +13,12 @@
 - Understand how to index a loop
 :::
 
-<!-- checkin about how many of each function (if, else if, else) you would have for a given number of options -->
-
 ```{r}
 #| label: package-for-case-when
 #| echo: false
 
 library(dplyr)
 ```
-
-<!-- NEED TO ADD CHECKINS! -->
-<!-- ::: {.callout-check-in} -->
-<!-- ::: -->
 
 Control flow refers to statements in a computer program that that determines 
 when, how, and how many times code is evaluated. In this reading you will learn
@@ -125,20 +119,71 @@ Each of these principles of code style come from the
 We will use this style guide throughout the course!
 :::
 
+::: {.callout-check-in}
+1. Which of the following is the correct way to format a conditional statement?
+
+(a)
+```{r}
+#| label: question-1-a
+#| eval: false
+
+if (num < 100){
+  print(num)
+}
+else {
+  print("banana")
+}
+```
+
+(b)
+```{r}
+#| label: question-1-b
+#| eval: false
+
+if (num < 100){
+  print(num)
+} else {
+  print("banana")
+}
+```
+
+(c)
+```{r}
+#| label: question-1-c
+#| eval: false
+
+if (num < 100){ print(num) } else { print("banana") }
+```
+
+(d)
+```{r}
+#| label: question-1-d
+#| eval: false
+
+if (num < 100) print(num) else print("banana") 
+```
+
+:::
+
 ### Conditional Statements as Diagrams
 
-We find it quite useful to represent conditional statements as diagrams! By
+We find it quite useful to represent conditional statements as diagrams. By
 drawing out the diagram (even if it is simple), you can more clearly anticipate
 what the result of the process will be.
 
 ![Diagram of a simple conditional (if/else) statement](images/03-simple-conditional-diagram.png){fig-alt="A simple diagram of what comprises an if/else conditional. At the top there is a green diamond and the inside of the diamond reads 'Condition to Check'. There are two arrows exiting the diamond, one pointing to the right that reads 'TRUE' and one pointing down that reads 'FALSE'. These represent the outcome of the conditional check. At the end of the 'TRUE' arrow there is a rectangle that reads 'Thing to do' representing what is done if the condition is met (TRUE). As the end of the 'FALSE' arrow there is a circle that reads 'Other thing to do' representing what is done if the condition is not met (FALSE)." width="60%"}
 
+::: {.callout-check-in}
+2. With `if` + `else` you have ____ condition(s) to check and ____ possible 
+outcome(s).
+:::
+
 ## Chaining Conditional Statements
 
 In our previous conditional statement we only used `if` and `else`, but that
-only works if you have **two** groups or **one** condition you need to check. 
-In many cases we have more than one condition to check, so we will need to
-modify our conditional statement.
+only works if you have **two** possible outcomes or **one** condition you need
+to check. In many cases we have more than one condition to check, so we will
+need to modify our conditional statement.
 
 When we have more than one condition to check, we can use an `else if ()`
 statement. `else if ()` works similar to an `if ()` statement, where you specify
@@ -197,17 +242,17 @@ a condition is false, what happens?
 if (income < 11925) {
   tax <- 0.10
   } else if (income <= 48475) {
-    tax <- 0.12
+    0.12
   } else if (income <= 103350) {
-    tax <- 0.22
+    0.22
   } else if (income <= 197300) {
-    tax <- 0.24
+    0.24
   } else if (income <= 250525) {
-    tax <- 0.32
+    0.32
   } else if (income < 626350){
-    tax <- 0.35
+    0.35
   } else {
-    tax <- 0.37
+    0.37
   }
 ```
 :::
@@ -240,6 +285,14 @@ if (income < 11925) {
     0.37
     }
 ```
+
+::: {.callout-check-in}
+3. In the IRS tax brackets we had [one / two / three / four] possible outcomes
+and [one / two / three / four] conditions that needed to be checked. 
+
+4. In general, if you have $n$ possible outcomes, you will **always** have
+[$n$ / $n + 1$ / $n - 1$ / $n * 2$] conditions to check. 
+:::
 
 What if we tried salaries for a variety of CSU employees? Jeffrey Armstrong,
 Cal Poly's President is paid $611,203 [^03-control-flow-2], Midred Garcia, 
@@ -361,6 +414,13 @@ case_when(income < 11925 ~ 0.10,
 
 Yes!!!
 
+::: {.callout-check-in}
+5. A function is "vectorized" if it accepts a 
+[vector / matrix / dataframe / list] with length 
+[equal to / greater than / less than] 1 as an input. 
+
+:::
+
 ## Help tab
 
 You might be wondering, how would I have figured out the syntax for `case_when()`
@@ -435,6 +495,17 @@ Instead of wasting your time figuring out whether AI is giving you reasonable
 advice, why not go straight to the source? Read the R help files!
 :::
 
+::: {.callout-check-in}
+
+6. Which of the following options would open the help file for the `mean()`
+function? Select all that apply!
+
+(a) Type `mean` in the Console
+(b) Type `?mean` in the Console
+(c) Search for mean in the search bar of the Packages tab
+(d) Search for mean in the search bar of the Help tab
+:::
+
 ### Finding New (Fun) Arguments
 
 Through this help page, we can learn about new arguments we didn't even know
@@ -483,6 +554,16 @@ case_when(num < 0 ~ "negative",
           .default = "zero")
 ```
 :::
+:::
+
+::: {.callout-check-in}
+7. What does the `.unmatched` argument of `case_when()` do?
+
+8. What does the `.default` argument of `case_when()` do?
+
+9. Can you use **both** the `.unmatched` and `.default` arguments? Meaning
+would it work to set `.unmatched =  "error"` and set `.default = "zero"`?
+
 :::
 
 ## Loops
@@ -681,6 +762,37 @@ can be used to index the loop:
 - `month.name`
 
 So, it is up to you to figure out what method makes the most sense to you! 
+:::
+
+::: {.callout-check-in}
+10. Match the loop to its correct setting. 
+
+::: columns
+::: {.column width="48%"}
+
+`for()` Loop
+
+</br>
+
+`while()` Loop
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+
+Runs until a condition is not met (`FALSE`)
+
+Runs a set number of times
+:::
+:::
+
+11. Every `for()` loop has some derivation of `for (i in 1:10)`. The `i`
+represents the [counter / value / object], and the `1:10` represents the
+[list / dataframe / vector] of values to loop over.
+
+
 :::
 
 [^03-control-flow-4]: Yes, we know this is silly. We just printed all the names
