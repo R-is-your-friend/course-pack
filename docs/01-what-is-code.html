@@ -536,8 +536,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Locate different panes of RStudio</li>
 <li>Use the Console to run code</li>
-<li>Use Environment tab to identify what objects have been created <!-- -   Explaining how code works --> <!-- -   Create, edit, and save an R script -->
-</li>
+<li>Understand what the <code>&lt;-</code> operator does</li>
+<li>Use the <code>&lt;-</code> operator to create simple objects</li>
+<li>Use Environment tab to identify what objects have been created</li>
+<li>Use the History tab to see all the code that has been run</li>
+<li>Create an R Script</li>
+<li>How to save an R Script in a specific folder</li>
+<li>Understand what makes a code comment</li>
+<li>Explain why code comments are useful</li>
 </ul>
 </div>
 </div>
@@ -547,7 +553,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section><section id="rstudio-layout" class="level2" data-number="2.2"><h2 data-number="2.2" class="anchored" data-anchor-id="rstudio-layout">
 <span class="header-section-number">2.2</span> RStudio Layout</h2>
 <p>When you open RStudio on your computer, you should get something that looks like the image below. You should see <strong>three</strong> panes, two on the right hand side and one on the left. Let’s learn what these do!</p>
-<!-- Need to update to not have the editor pane (since they won't have that open yet) -->
 <div id="fig-rstudio-three-pane" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A screenshot of an RStudio window highlighting the three different panes that open by default. The first pane (on the left hand side) is called the 'Console Pane.' This is the pane where the code you run shows up! In the upper right hand corner, there is the 'Environment and History Pane,' which is comprised of four tabs---Environment, History, Connections, and Tutorial. The Environment tab displays the objects that have been created in your code and the History tab displays a history of the code you've run. In the lower right corner there is the 'Files, Packages, and Help Pane,' which has six different tabs---Files, Plots, Packages, Help, Viewer, and Presentations. The file tab is displayed in the image, showing that (by default), the files will show you your current working directory. For this computer, that current working directory is the Macbook Hard Drive (similar to a PC's C drive).">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-rstudio-three-pane-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/01-rstudio-three-pane-annotated.png" class="img-fluid figure-img" alt="A screenshot of an RStudio window highlighting the three different panes that open by default. The first pane (on the left hand side) is called the 'Console Pane.' This is the pane where the code you run shows up! In the upper right hand corner, there is the 'Environment and History Pane,' which is comprised of four tabs---Environment, History, Connections, and Tutorial. The Environment tab displays the objects that have been created in your code and the History tab displays a history of the code you've run. In the lower right corner there is the 'Files, Packages, and Help Pane,' which has six different tabs---Files, Plots, Packages, Help, Viewer, and Presentations. The file tab is displayed in the image, showing that (by default), the files will show you your current working directory. For this computer, that current working directory is the Macbook Hard Drive (similar to a PC's C drive).">
@@ -773,8 +778,8 @@ fname &lt;- "Jane"
 lname &lt;- "Hollander"</code></pre>
 <p>Now that we have code in the script we can see that line numbers are provided on the left. This is a handy way to see where in the code the errors occur. There are a few ways to run code:</p>
 <ol type="1">
-<li><p>place your cursor on the line you want to run and click the <a href="images/01-rstudio-run-code.png" data-fig-alt="A screenshot of the run button shown on the top right of the R script. The icon has a white box with a green arrow pointing to the right with the text saying 'Run' on the right.">run button</a></p></li>
-<li><p>place your cursor on the line you want to run and hit Command + Enter (or Control + Enter)</p></li>
+<li><p>place your cursor on the line you want to run and click on the <img src="images/01-rstudio-run-code.png" class="img-fluid" style="width:20.0%" alt="A screenshot of the run button shown on the top right of the R script. The icon has a white box with a green arrow pointing to the right with the text saying 'Run' on the right."> button in the top right of the R script</p></li>
+<li><p>place your cursor on the line you want to run and hit Command + Return (or Control + Enter)</p></li>
 </ol>
 <p>Either of these options will run the line of code that your cursor is on and then hop to the next line (if there is one).</p>
 <div class="callout callout-style-default callout-practice-exercise callout-titled">

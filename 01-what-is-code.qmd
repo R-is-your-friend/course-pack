@@ -5,9 +5,14 @@
 
 -   Locate different panes of RStudio
 -   Use the Console to run code
+-   Understand what the `<-` operator does
+-   Use the `<-` operator to create simple objects
 -   Use Environment tab to identify what objects have been created
-<!-- -   Explaining how code works -->
-<!-- -   Create, edit, and save an R script -->
+-   Use the History tab to see all the code that has been run
+-   Create an R Script
+-   How to save an R Script in a specific folder
+-   Understand what makes a code comment
+-   Explain why code comments are useful
 :::
 
 ## Welcome to RStudio!
@@ -22,8 +27,6 @@ are going to focus on the most important aspects!
 When you open RStudio on your computer, you should get something that
 looks like the image below. You should see **three** panes, two on the
 right hand side and one on the left. Let's learn what these do!
-
-<!-- Need to update to not have the editor pane (since they won't have that open yet) -->
 
 ![Important locations and buttons in
 RStudio.](images/01-rstudio-three-pane-annotated.png){#fig-rstudio-three-pane
@@ -91,7 +94,6 @@ successfully detected on your computer, and (2) the version of R with
 which you are working.
 
 <!-- We will need to update this to the current version of R in August! -->
-
 ```         
 R version 4.5.2 (2025-10-31) -- "[Not] Part in a Rumble"
 Copyright (C) 2025 The R Foundation for Statistical Computing
@@ -282,9 +284,10 @@ Now that we have code in the script we can see that line numbers are provided on
 the left. This is a handy way to see where in the code the errors occur. There
 are a few ways to run code:
 
-1. place your cursor on the line you want to run and click the [run button](images/01-rstudio-run-code.png){fig-alt="A screenshot of the run button shown on the top right of the R script. The icon has a white box with a green arrow pointing to the right with the text saying 'Run' on the right."}
+1. place your cursor on the line you want to run and click on the  ![](images/01-rstudio-run-code.png){fig-alt="A screenshot of the run button shown on the top right of the R script. The icon has a white box with a green arrow pointing to the right with the text saying 'Run' on the right." width=20%} button in the top right
+of the R script
 
-2. place your cursor on the line you want to run and hit Command + Enter (or
+2. place your cursor on the line you want to run and hit Command + Return (or
 Control + Enter)
 
 Either of these options will run the line of code that your cursor is on and
