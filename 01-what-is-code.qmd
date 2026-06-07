@@ -465,3 +465,10 @@ you've changed these options, click "OK" and the popup window should close.
 :::
 
 Now, it is safe to exit RStudio!
+
+::: {.callout-check-in}
+Submit the `week1.R` script you created during the reading!
+:::
+ 
+
+
