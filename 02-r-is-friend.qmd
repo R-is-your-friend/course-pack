@@ -1,3 +1,8 @@
+---
+filters:
+ - flourish
+---
+
 # R is Friend
 
 ::: callout
@@ -143,7 +148,7 @@ surrounding the values.
 #| eval: true
 #| label: example-character-integer
 
-first_name <- "lilly"
+first_name <- "lily"
 typeof(first_name)
 ```
 
@@ -956,7 +961,7 @@ you can also extract components using the notation we learned for matrices.
 ```{r}
 shows_releases[1, ]
 ```
-
+This outputs a smaller dataframe with one row and three columns.
 :::
 
 ::: {.column width="4%"}
@@ -968,6 +973,7 @@ shows_releases[1, ]
 shows_releases[, 2]
 ```
 
+This outputs a vector with contents of the second column.
 :::
 :::
 
@@ -983,7 +989,7 @@ fruit_trees
 
 17. Grab the second column (`trees`).
 
-18. Grab the third and forth columns (`trees`, `harvest_window`).
+18. Grab the second and third columns (`trees`, `harvest_window`).
 
 19. Grab the second row of all three columns.
 :::
@@ -1001,6 +1007,7 @@ nums <- c(47, 13, 49, 46, 47, 4, 7, 0, 44, 24, 13, 1)
 nums_matrix <- matrix(nums, ncol = 4)
 nums_matrix
 ```
+
 We could multiply **every** value of `nums_matrix` by `-1` with this simple
 code:
 
@@ -1059,6 +1066,26 @@ assign (`<-`) the values we changed back into their original position
 nums_matrix[1:2, 3] <- nums_matrix[1:2, 3] - 30
 nums_matrix
 ```
+
+
+::: {.callout-check-in}
+20. What will be the output of the following operation?
+
+```{r}
+#| eval: false
+#| label: add-two-vectors-exercise
+
+vec1 <- c(1, 2, 3, 4)
+vec2 <- c(5, 6, 7, 8)
+
+vec1 + vec2
+```
+
+(a) `1 2 3 4 5 6 7 8`
+(b) `6 8 10 12`
+(c) this code will have an error
+
+:::
 
 ### Operations with Logical Values
 
@@ -1210,6 +1237,31 @@ follows:
 - `%%` (modulus arithmetic) 
   * `3 %% 2` = `r 3 %% 2`
 :::
-
 :::
+:::
+
+
+::: {.callout-check-in}
+21. When you add a vector of logical values (i.e., `TRUE`, `FALSE`), you get 
+the number of ___ values in the vector.
+
+22. Fill in the code to find the number of elements of `nums_vector` that 
+are not equal to 13. 
+
+```{r}
+#| eval: false
+#| flourish:
+#| - target: 
+#|     - "sum"
+#|     - mask: true
+#|     - style: "text-decoration: underline;"
+#| - target: 
+#|     - "!="
+#|     - mask: true
+#|     - style: "text-decoration: underline;"
+
+sum(nums_vector != 13)
+```
+
+
 :::
