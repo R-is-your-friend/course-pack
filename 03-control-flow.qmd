@@ -1,3 +1,17 @@
+---
+filters:
+ - flourish
+---
+
+
+<!-- ```{r} -->
+<!-- #| flourish: -->
+<!-- #| - target:  -->
+<!-- #|     - "is.numeric" -->
+<!-- #|     - mask: true -->
+<!-- #|     - style: "text-decoration: underline;" -->
+<!-- ``` -->
+
 # Control Flow
 
 ::: callout
@@ -287,11 +301,10 @@ if (income < 11925) {
 ```
 
 ::: {.callout-check-in}
-3. In the IRS tax brackets we had [one / two / three / four] possible outcomes
-and [one / two / three / four] conditions that needed to be checked. 
+3. In the IRS tax brackets we had ____ possible outcomes and ____ conditions that needed to be checked. 
 
 4. In general, if you have $n$ possible outcomes, you will **always** have
-[$n$ / $n + 1$ / $n - 1$ / $n * 2$] conditions to check. 
+____ conditions to check. 
 :::
 
 What if we tried salaries for a variety of CSU employees? Jeffrey Armstrong,
@@ -557,12 +570,14 @@ case_when(num < 0 ~ "negative",
 :::
 
 ::: {.callout-check-in}
-7. What does the `.unmatched` argument of `case_when()` do?
+7. The `.unmatched` argument of `case_when()` throws an error when ____. 
 
-8. What does the `.default` argument of `case_when()` do?
+8. The `.default` argument of `case_when()` sets a default value for inputs that
+____. 
 
-9. Can you use **both** the `.unmatched` and `.default` arguments? Meaning
-would it work to set `.unmatched =  "error"` and set `.default = "zero"`?
+9. True or false, you can use **both** the `.unmatched` and `.default`
+arguments. Meaning you can set `.unmatched =  "error"` **and** 
+`.default = "zero"`?
 
 :::
 
