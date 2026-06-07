@@ -378,6 +378,37 @@ Clicking the button will begin installing RStudio. Once the download has
 completed, you will need to open the application file (on a Mac this is a `.dmg`
 file, on Windows this is an `exe` file). 
 
+::: {.callout-check-in}
+2. Open RStudio. In the lower left corner, you should see some messages about
+RStudio loading up R. Something like:
+
+```
+R version 4.5.2 (2025-10-31) -- "[Not] Part in a Rumble"
+Copyright (C) 2025 The R Foundation for Statistical Computing
+Platform: aarch64-apple-darwin20
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+```
+
+**Take a screenshot of this message.**
+
+
+
+:::
+
+
 ## Let's start working in `R`! 🥳
 
 ![](images/00-typing-R.gif){fig-alt="A video of Hadley Wickham (author of many R packages) pretending to type and saying 'just typing R code'."}
