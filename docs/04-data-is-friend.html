@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.37">
-
+<meta name="generator" content="quarto-1.8.26">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
 <title>5&nbsp; Data is Friend – R is Your Friend</title>
 <style>
 /* Default styles provided by pandoc.
@@ -60,7 +57,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
-
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -72,19 +68,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="./03-control-flow.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d0ae9245876894da5ac7e18953ecc5cc.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-2e143f8b817ec5e7a44930ddac25d3c7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-9adb41b64cfd063ebab98e13503fc908.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-2e143f8b817ec5e7a44930ddac25d3c7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-9de65633f6d0f5eeb0068d939eb6178f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-c56aa83846d244a7ab5588d901c86329.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-9de65633f6d0f5eeb0068d939eb6178f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -111,10 +107,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-
-
 </head>
-
 <body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
@@ -280,9 +273,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -293,13 +284,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">R is Your Friend</a> 
         <div class="sidebar-tools-main tools-wide">
@@ -307,7 +294,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div class="dropdown">
       <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
-          <li>
+<li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
               <i class="bi bi-twitter pe-1"></i>
             Twitter
@@ -326,7 +313,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             </a>
           </li>
       </ul>
-    </div>
+</div>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
     </div>
@@ -338,7 +325,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
@@ -352,8 +339,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./00-setup.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Computer is Friend</span></span></a>
@@ -384,7 +371,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
@@ -393,8 +380,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-data-visualizations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Visualizations</span></span></a>
@@ -437,7 +424,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
@@ -446,11 +433,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./12-writing-functions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Writing Functions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Functions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -466,32 +453,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-  </li>
+</li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#rectangular-data" id="toc-rectangular-data" class="nav-link active" data-scroll-target="#rectangular-data"><span class="header-section-number">5.1</span> Rectangular Data</a>
+<li>
+<a href="#rectangular-data" id="toc-rectangular-data" class="nav-link active" data-scroll-target="#rectangular-data"><span class="header-section-number">5.1</span> Rectangular Data</a>
   <ul>
-  <li><a href="#data-frames-in-r" id="toc-data-frames-in-r" class="nav-link" data-scroll-target="#data-frames-in-r"><span class="header-section-number">5.1.1</span> Data Frames in R</a></li>
-  </ul></li>
-  <li><a href="#file-paths" id="toc-file-paths" class="nav-link" data-scroll-target="#file-paths"><span class="header-section-number">5.2</span> File Paths</a></li>
+<li><a href="#data-frames-in-r" id="toc-data-frames-in-r" class="nav-link" data-scroll-target="#data-frames-in-r"><span class="header-section-number">5.1.1</span> Data Frames in R</a></li>
   </ul>
-</nav>
+</li>
+  <li>
+<a href="#reading-in-data" id="toc-reading-in-data" class="nav-link" data-scroll-target="#reading-in-data"><span class="header-section-number">5.2</span> Reading in Data</a>
+  <ul>
+<li><a href="#file-paths" id="toc-file-paths" class="nav-link" data-scroll-target="#file-paths"><span class="header-section-number">5.2.1</span> File Paths</a></li>
+  <li><a href="#types-of-data-files" id="toc-types-of-data-files" class="nav-link" data-scroll-target="#types-of-data-files"><span class="header-section-number">5.2.2</span> Types of Data Files</a></li>
+  <li><a href="#reading-in-data-with-readr-and-readxl" id="toc-reading-in-data-with-readr-and-readxl" class="nav-link" data-scroll-target="#reading-in-data-with-readr-and-readxl"><span class="header-section-number">5.2.3</span> Reading in Data with <code>readr</code> and <code>readxl</code></a></li>
+  </ul>
+</li>
+  </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-setup.html">Fundamentals of Coding</a></li><li class="breadcrumb-item"><a href="./04-data-is-friend.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data is Friend</span></a></li></ol></nav>
-<div class="quarto-title">
-<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data is Friend</span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-setup.html">Fundamentals of Coding</a></li><li class="breadcrumb-item"><a href="./04-data-is-friend.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data is Friend</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title">
+<span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data is Friend</span>
+</h1>
 </div>
 
 
@@ -505,37 +496,63 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
 
 
-</header>
-
-
-<section id="rectangular-data" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="rectangular-data"><span class="header-section-number">5.1</span> Rectangular Data</h2>
-<p>There are a lot of different ways that we can look at data in the world and store it on our computer. In this class, we will primarily focus on working with what we call <em>rectangular data</em> meaning that the data is two-dimentional with rows and columns. With rectangular data, each <em>row</em> represents one observation (or observational unit) and each <em>column</em> represents a <em>variable</em>.</p>
-<p>There are also multiple ways that rectangular data can be stored in R! We will primarily work with <code>data.frame()</code> and <code>tibble()</code> ojects. It is important to know the type and format of the data you’re working with! It is much easier to create data visualizations or conduct statistical analyses if the data you use is in the right shape.</p>
-<p>In a perfect world, all data would come in the right format for our needs, but this is often not the case. We will spend the next few weeks learning about how to use R to read in data and reformat our data so that it can be used in a specific analysis.</p>
-<section id="data-frames-in-r" class="level3" data-number="5.1.1">
-<h3 data-number="5.1.1" class="anchored" data-anchor-id="data-frames-in-r"><span class="header-section-number">5.1.1</span> Data Frames in R</h3>
-<p>Data frames are a specific object type in R, <code>data.frame()</code>, and can be indexed the same as matrices. It may be useful to actually look at your data before beginning to work with it to see the format of the data. The following functions in R help us learn information about our data sets:</p>
+</header><div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Learning Objectives
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <ul>
-<li><code>class()</code>: outputs the object type</li>
-<li><code>names()</code>: outputs the variable (column) names</li>
-<li><code>head()</code>: outputs the first 6 rows of a dataframe</li>
-<li><code>glimpse()</code> or <code>str()</code>: output a transpose of dataframe or matrix; shows the data types</li>
-<li><code>summary()</code> outputs 6-number summaries or frequencies for all variables in the data set depending on the variables data type</li>
-<li><code>data$variable</code>: extracts a specific variable (column) from the data set</li>
+<li>Define the observational unit (rows) and variables (columns) of rectangular data</li>
+<li>Identify variable types given rectangular data</li>
+<li>Explore rectangular data quickly in R (with code and with RStudio visually)</li>
+<li>Read rectangular data with various delimiters into R using an appropriate <code>readr</code> or <code>readxl</code> function</li>
+<li>Define relative versus absolute file paths</li>
+</ul>
+</div>
+</div>
+<!-- https://r4ds.hadley.nz/data-import.html
+https://r4ds.hadley.nz/spreadsheets.html#excel
+https://r4ds.had.co.nz/workflow-projects.html
+https://r4ds.hadley.nz/quarto.html  -->
+<section id="rectangular-data" class="level2" data-number="5.1"><h2 data-number="5.1" class="anchored" data-anchor-id="rectangular-data">
+<span class="header-section-number">5.1</span> Rectangular Data</h2>
+<p>There are a lot of different ways that we can look at data in the world and store it on our computer. In this class, we will primarily focus on working with what we call <em>rectangular data</em> meaning that the data is two-dimentional with rows and columns. With rectangular data, each <em>row</em> represents one observation (or observational unit) and each <em>column</em> represents a <em>variable</em>.</p>
+<p>There are also multiple ways that rectangular data can be stored in R! We will primarily work with <code><a href="https://rdrr.io/r/base/data.frame.html">data.frame()</a></code> and <code>tibble()</code> ojects. It is important to know the type and format of the data you’re working with! It is much easier to create data visualizations or conduct statistical analyses if the data you use is in the right shape.</p>
+<p>In a perfect world, all data would come in the right format for our needs, but this is often not the case. We will spend the next few weeks learning about how to use R to read in data and reformat our data so that it can be used in a specific analysis.</p>
+<section id="data-frames-in-r" class="level3" data-number="5.1.1"><h3 data-number="5.1.1" class="anchored" data-anchor-id="data-frames-in-r">
+<span class="header-section-number">5.1.1</span> Data Frames in R</h3>
+<p>Data frames are a specific object type in R, <code><a href="https://rdrr.io/r/base/data.frame.html">data.frame()</a></code>, and can be indexed the same as matrices. It may be useful to actually look at your data before beginning to work with it to see the format of the data. The following functions in R help us learn information about our data sets:</p>
+<ul>
+<li>
+<code><a href="https://rdrr.io/r/base/class.html">class()</a></code>: outputs the object type</li>
+<li>
+<code><a href="https://rdrr.io/r/base/names.html">names()</a></code>: outputs the variable (column) names</li>
+<li>
+<code><a href="https://rdrr.io/r/utils/head.html">head()</a></code>: outputs the first 6 rows of a dataframe</li>
+<li>
+<code>glimpse()</code> or <code><a href="https://rdrr.io/r/utils/str.html">str()</a></code>: output a transpose of dataframe or matrix; shows the data types</li>
+<li>
+<code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> outputs 6-number summaries or frequencies for all variables in the data set depending on the variables data type</li>
+<li>
+<code>data$variable</code>: extracts a specific variable (column) from the data set</li>
 </ul>
 <p>You may also choose to click on the data set name in your Environment window pane in R and the data set will pop up in a new tab in the script pane.</p>
 <p>Let’s start with looking at a dataset that is included in a <em>package</em> in R.</p>
-<p>The <code>cereal</code> dataset is included in the <code>liver</code> package. To open this dataset, we nead to load the package <code>liver</code> first, and then we can use the <code>data()</code> function to look at the <code>cereal</code> data.</p>
+<p>The <code>cereal</code> dataset is included in the <code>liver</code> package. To open this dataset, we nead to load the package <code>liver</code> first, and then we can use the <code><a href="https://rdrr.io/r/utils/data.html">data()</a></code> function to look at the <code>cereal</code> data.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load liver package</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(liver)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># load cereal data which is included in the package</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(cereal)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># look at the first couple of rows</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(cereal)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># load liver package</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://book-data-science-r.netlify.app">liver</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># load cereal data which is included in the package</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">cereal</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># look at the first couple of rows</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">cereal</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                       name manuf type calories protein fat sodium fiber carbo
 1                 100% Bran     N cold       70       4   1    130  10.0   5.0
@@ -552,8 +569,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 5      8     -1       25     3      1 0.75 34.38484
 6     10     70       25     1      1 0.75 29.50954</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get a summary of the data</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(cereal)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># get a summary of the data</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">cereal</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>'data.frame':   77 obs. of  16 variables:
  $ name    : Factor w/ 77 levels "100% Bran","100% Natural Bran",..: 1 2 3 4 5 6 7 8 9 10 ...
@@ -594,7 +611,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Just looking at a data frame in R, we can’t tell how the variables are measured and what they all mean! We will always want to look at a <strong>data dictionary</strong> to understand what the columns really mean. Any good data provider should provide a data dictionary along with the data!</p>
 <p>In this case, we can find the data dictionary in the help file for the data in R by running:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>?cereal</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">?</span><span class="va">cereal</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="callout callout-style-default callout-check-in callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -613,14 +630,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 </div>
 </div>
-</section>
-</section>
-<section id="file-paths" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="file-paths"><span class="header-section-number">5.2</span> File Paths</h2>
+</section></section><section id="reading-in-data" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="reading-in-data">
+<span class="header-section-number">5.2</span> Reading in Data</h2>
+<p>In order to use statistical software to do anything interesting, we need to be able to get data into the program so that we can work with it effectively.</p>
+<section id="file-paths" class="level3" data-number="5.2.1"><h3 data-number="5.2.1" class="anchored" data-anchor-id="file-paths">
+<span class="header-section-number">5.2.1</span> File Paths</h3>
 <p>Before we can read in data, we need to tell R where to look for the data file!</p>
 <p>A <strong>file path</strong> describes where a certain file or directory lives on your computer. Any time that you are working in R, there is a <em>working directory</em>, which is the baseline directory that R is then looking for other files from. You can find your current working directory with:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "/Users/czmann/Documents/r-revamp/course-pack"</code></pre>
 </div>
@@ -631,7 +649,114 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><strong>relative file path</strong>: path based on the relationship with a current <em>working directory</em> in terms of a hierarchichy of directories</p></li>
 </ul>
 <p>Let’s look at an example of relative versus absolute file paths. In the example below the “labs” directory is the working directory. The directories that “labs” are in are called it’s <em>parent</em> directories, which are referenced with <code>"../"</code> in the relative file paths.</p>
-<p><img src="images/04-relative-absolute.png" class="img-fluid"> <!-- ### RStudio Projects --></p>
+<p><img src="images/04-relative-absolute.png" class="img-fluid"></p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Since absolute file paths <strong>only</strong> work on <strong>your computer</strong>, we will <strong>always use relative file paths</strong> in this course.</p>
+</div>
+</div>
+</section><section id="types-of-data-files" class="level3" data-number="5.2.2"><h3 data-number="5.2.2" class="anchored" data-anchor-id="types-of-data-files">
+<span class="header-section-number">5.2.2</span> Types of Data Files</h3>
+<p>We will also need to tell R what kind of data it an expect. In this class, are focusing on rectangular data, with rows indicating observations and columns that show variables. This type of data can be stored on the computer in multiple ways which indicate rows and columns in different ways:</p>
+<ul>
+<li>
+<strong>as raw text</strong>, usually in a file that ends with <code>.txt</code>, <code>.tsv</code>, <code>.csv</code>, <code>.dat</code>, or sometimes, there will be no file extension at all.
+<ul>
+<li>
+<code>.csv</code> “Comma-separated”</li>
+<li>
+<code>.txt</code> plain text
+<ul>
+<li>rows will always be separated in new lines</li>
+<li>columns can be separated with different <em>delimiters</em> including tabs, spaces, commas, or other delimeters</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<strong>in a spreadsheet</strong>. Spreadsheets, such as those created by MS Excel, Google Sheets use a special type of markup that is specific to the filetype and the program it’s designed to work with. Therefore, special functionality is required for working with them in R.
+<ul>
+<li><code>.xls</code></li>
+<li><code>.xlsx</code></li>
+</ul>
+</li>
+</ul>
+<p>To work with data in R, it’s important to know how to read in text files (CSV, tab-delimited, etc.). It can be helpful to also know how to read in XLSX files.</p>
+<p>Let’s practice recognizing different kinds of data files.</p>
+<div class="callout callout-style-default callout-check-in callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Check-in</span>Check In
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>What kind of data file are each of the following? Note what kind of <em>delimeter</em> is used to separate columns.</p>
+</div>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="" aria-current="page">File A</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">File B</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">File C</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false" href="">Sources</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p><img src="images/04-csv-file.png" class="img-fluid"></p>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p><img src="images/04-tsv-file.png" class="img-fluid"></p>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<p><img src="images/04-pipe-file.png" class="img-fluid"></p>
+</div>
+<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
+<ul>
+<li><a href="https://people.sc.fsu.edu/~jburkardt/data/csv/csv.html">File A</a></li>
+<li><a href="https://github.com/ccusa/Disaster_Vulnerability_Map/blob/master/sample-data.tsv">File B</a></li>
+<li><a href="https://chadbaldwin.net/2021/03/24/quick-parse-csv-file.html">File C</a></li>
+</ul>
+</div>
+</div>
+</div>
+<p>Note: there are a lot of other ways to store data that we just won’t talk about in this class!</p>
+</section><section id="reading-in-data-with-readr-and-readxl" class="level3" data-number="5.2.3"><h3 data-number="5.2.3" class="anchored" data-anchor-id="reading-in-data-with-readr-and-readxl">
+<span class="header-section-number">5.2.3</span> Reading in Data with <code>readr</code> and <code>readxl</code>
+</h3>
+<ul>
+<li>
+<code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code> is for reading in .csv files</li>
+<li>
+<code>read_txv()</code> is for tab-separated data</li>
+<li>
+<code><a href="https://readr.tidyverse.org/reference/read_table.html">read_table()</a></code> is for any data with “columns” (white space separating)</li>
+<li>
+<code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_delim()</a></code> is for special “delimiters” separating data</li>
+<li>
+<code>read_xlsx()</code> is specifically for dealing with Excel files</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># load the readr package (or alternatively the tidyverse package)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org">readr</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># here we are using a URL</span></span>
+<span><span class="va">surveys</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/earobinson95/stat331-calpoly/master/lab-assignments/Lab2-graphics/surveys.csv"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># here is an example of a relative file path to an actual data file!</span></span>
+<span><span class="va">surveys</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">"../data/surveys.csv"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<!-- ### RStudio Projects -->
 <!-- When you work on a project that may need to exist on some other machine, it's important to use **local** file paths -- the global path will likely not be the same, but you can usually set the local project-specific structure up to be the same across machines.  -->
 <!-- In fact, there's a very common shortcut that programmers take -- they set up a project-specific folder that is self contained.  -->
 <!-- That is, all of the data and code necessary for that project is provided within the folder.  -->
@@ -644,10 +769,7 @@ introduce packages in this lesson. -->
 <!-- ![You can get important information from the packages tab, like what packages are loaded, easy access to documentation for each package, and what version of the package is installed.](../images/tools/Rstudio-packages-tab.png){fig-alt="Packages tab of RStudio. Checkboxes in the far left column show whether packages are loaded. Links to the package name can be clicked to access package documentation. The 3rd column is the package version, which should be verified and updated if you're having issues with the package's functions."} -->
 
 
-</section>
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1059,9 +1181,7 @@ introduce packages in this lesson. -->
       }
     }
   });
-  </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./03-control-flow.html" class="pagination-link" aria-label="Control Flow">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Control Flow</span></span>
       </a>          
@@ -1073,7 +1193,6 @@ introduce packages in this lesson. -->
   </div>
 </nav>
 </div> <!-- /content -->
-
 
 
 

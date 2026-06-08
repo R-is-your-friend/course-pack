@@ -1,3 +1,8 @@
+---
+filters:
+ - flourish
+---
+
 # R is Friend
 
 ::: callout
@@ -9,6 +14,7 @@
 + Use functions to calculate summary statistics
 + Use logical values and indexing to calculate summary statistics
 :::
+
 
 ## Data Types
 
@@ -65,8 +71,8 @@ Defaults to `double`:
 #| eval: true
 #| label: example-make-integer-double
 
-room <- 1221
-typeof(room)
+code <- 1919
+typeof(code)
 ```
 
 :::
@@ -82,8 +88,8 @@ Adding an `L` to the end creates an `integer`:
 #| eval: true
 #| label: example-make-integer-1
 
-room <- 1221L
-typeof(room)
+code <- 1919L
+typeof(code)
 ```
 :::
 :::
@@ -113,9 +119,9 @@ integer values. The `as.integer()` function can help us do just that!
 #| eval: true
 #| label: example-make-integer-2
 
-room <- 1410
-room <- as.integer(room)
-typeof(room)
+code <- 1919
+code <- as.integer(code)
+typeof(code)
 ```
 :::
 
@@ -126,8 +132,8 @@ typeof(room)
 <!-- the object. Think of it as asking: "What role does this object play?"  -->
 
 <!-- Imagine a chef's knife: -->
-<!-- typeof() → "It's made of stainless steel" (the raw material) -->
-<!-- class() → "It's a kitchen tool" (the role it plays) -->
+<!-- typeof() "It's made of stainless steel" (the raw material) -->
+<!-- class() "It's a kitchen tool" (the role it plays) -->
 
 ### Character Values
 
@@ -142,7 +148,7 @@ surrounding the values.
 #| eval: true
 #| label: example-character-integer
 
-first_name <- "lilly"
+first_name <- "lily"
 typeof(first_name)
 ```
 
@@ -217,19 +223,10 @@ type is used to store complex numbers (e.g., `4 + 3i`). The raw data type is
 possibly the least used data type, whose purpose is to store data at the byte
 level.
 
-In STAT 1810 and 3820 we will **only** work with real, integer, character, and
-logical data types!
+**In STAT 1810 and 3820 we will only work with real, integer, character, and
+logical data types!**
 
 ## Object Types
-<!-- Intro to vectors, lists, matrices, dataframes, tibbles.  -->
-<!-- Building up objects -->
-<!-- Small object (from last week) is a scalar value -->
-<!-- Bigger object is a vector (multiple values) -->
-<!-- What if we have multiple vectors? -->
-<!-- To store them in a matrix, they all need to be the same data type. -->
-<!-- If they are different data types, then we need a list.  -->
-<!-- What if the vectors are all the same length? -->
-<!-- Then we can use a data frame (or a tibble)! -->
 
 Now that we've learned about the different types of data values, let's learn
 about the different ways data could be stored. 
@@ -243,7 +240,7 @@ You encountered a vector in your last lab assignment! Vectors are created using
 the `c()` function (which stands for concatenate). Vectors have a few important
 qualities:
 
-- They have **one** dimension, their length. 
+- They have **one** dimension--their length. 
 - Their entries must all have the **same** data type. 
 
 ```{r}
@@ -255,9 +252,9 @@ length(names)
 ```
 
 In the last lab, you added a character to a vector of numbers. Even though the
-objects had different data types, R didn't output an error message. Indeed, it
-concatenated the objects together into one vector. But what data type was the
-resulting vector?
+objects had different data types, R didn't output an error message! Instead, 
+it did exactly what you asked, it concatenated the objects together into one
+vector. But what data type was the resulting vector?
 
 ```{r}
 #| echo: true
@@ -291,8 +288,8 @@ the key question is whether the vectors all have the **same** data type or
 
 Vectors that all have the **same** data type can be made into a matrix. A matrix
 has **two** dimensions---rows and columns. We can create a matrix of values from
-a vector by specifying the number of rows (`nrow`) or the number of columns 
-(`ncol`). 
+a vector by specifying the number of rows (`nrow`) and / or the number of
+columns (`ncol`). 
 
 ```{r}
 #| echo: true
@@ -344,10 +341,11 @@ new_names <- c("Jim", "Weun", "Pat", "Pran", "Phupha", "Black", "Sean")
 matrix(new_names, ncol = 3)
 
 ```
+
 First, R gives a warning message telling us that the length of the vector 
 (`r length(new_names)`) is not a multiple of the number of rows we input (`3`). 
-Then, it **recycles** the first value of the vector (`r new_names[1]`) to fill
-the spot where there wasn't a value. 
+Then, it **recycles** the first two values of the vector (`r new_names[1:2]`) to
+fill the spots where there wasn't a value. 
 
 This can produce misleading data, so we should **always** make sure the length
 of our vector is a multiple of the dimension of the matrix (e.g., rows, columns)
@@ -399,8 +397,8 @@ shows <- c("Tale of a Thousand Stars", "Bad Buddy",
 
 ```
 
-But, to us, these make it harder to see the length of the vector. So, that is 
-why we chose to use a new line for every element of the vector. 
+But, to us, these make it harder to easily see the length of the vector. So,
+that is why we chose to use a new line for every element of the vector. 
 
 ```{r}
 #| eval: true
@@ -424,8 +422,6 @@ A **list** is an object that allows entries to be different data types. Suppose
 for each show we have its release date. The name of the show is a `character` 
 and the release date of the show is `numeric`. We can use a list to combine 
 these two vectors into one object (`top_bl`). 
-
-
 
 ```{r}
 #| label: create-list
@@ -453,7 +449,8 @@ a name.
 ```{r}
 #| label: create-list-2
 
-top_bl <- list(show_name = shows, release_year = release_years)
+top_bl <- list(show_name = shows, 
+               release_year = release_years)
 top_bl
 ```
 
@@ -463,7 +460,6 @@ component. We technically call this a *named list* since every component has a
 name.
 
 ![A `list` analogy with a cubby bin. Similar to before, each cubby has different types of items (e.g., puzzles, dolls, legos) but within a cubby the items are all the same. However, now the cubbies all have names identifying the contents of the cubby.](images/02-lists-labeled-cubbies.png){fig-alt="Another picture of a cubby bin with nine different cubby slots. The difference with this cubby bin is that each bin has a label indicating its contents (legos, dolls, trucks, balls, art supplies)." width=50%}
-
 
 #### Are the vectors all the same length?
 <!-- dataframes or tibbles! -->
@@ -496,7 +492,7 @@ shows_releases
 
 While a dataframe is a list, the output looks **very** different. Each variable
 (`show_name`, `release_year`) is slotted into a column. The numbers on the side
-(`1`, `2`, `3`, `4`) represent the element number.
+(`1`, `2`, `3`, `4`) represent the observation (row) number.
 
 ::: {.callout-check-in}
 ```{r}
@@ -520,7 +516,8 @@ trees <- c("Malus domestica",
 harvest_window <- c(3, 5, 12, 12, 5, 3)
 ```
 
-Using the output below, identify what type of object you believe was created.
+Using the output below, identify what type of object you believe was created
+(e.g., vector, matrix, list, dataframe).
 
 5. What type of object is this?
 
@@ -580,12 +577,6 @@ from the larger object.
 Let's see how subsetting works on each of the objects we learned about
 previously.
 
-
-<!-- Indexing and subsetting -->
-<!-- Accessing elements via []. -->
-<!-- Accessing columns in a dataframe / tibble via $. -->
-<!-- Accessing elements via T / F. -->
-
 ### Vectors
 
 We extract components of a vector using bracketing (`[]`). The value(s) inside 
@@ -596,7 +587,7 @@ indexing what values should be kept---numbers and logical values.
 
 Every element of a vector is assigned a number representing its position 
 (location) in the vector. R starts counting at `1`^[Other languages, like Python, 
-start counting at `0`.]. So, a vector with have indices starting at `1` and 
+start counting at `0`.]. So, a vector will have indices starting at `1` and 
 ending at its last element. 
 
 The vector of `shows` below has `r length(shows)` elements, so it will have 
@@ -634,6 +625,7 @@ If we wanted the second and forth elements, we could write something like:
 shows[c(2, 4)]
 ```
 
+
 ::: {.callout-tip}
 # Vector Shortcut
 
@@ -642,9 +634,30 @@ you don't have to type out `c(1, 2, 3, 4, 5)`. There is a shortcut!
 
 The `:` operator can generate a sequences of numbers. For example, `1:5` would 
 generate a sequence of numbers from `1` to `5` (`r 1:5`). So, if you wanted the
-first three elements of `shows` you could instead write `shows[1:3]`. 
+first three elements of `shows` you could instead write `shows[1:3]`. Much
+faster!
+:::
 
-Much faster!
+::: {.callout-note}
+# More Specific Vectors
+
+Another option for creating a sequence of numbers is the `seq()` function. This
+function gives you more control over the elements of your vector. This function
+has three arguments (inputs):
+
+- where the sequence should start (`from`)
+- where the sequence should end (`to`)
+- what the spacing of the numbers should be (`by`)
+
+If we wanted a sequence of even numbers from 2 to 20 we could use this code:
+
+```{r}
+#| label: seq-function
+
+seq(from = 2, to = 20, by = 2)
+```
+
+This is way less typing than making the vector by hand (`c(2, 4, 6, 8,...)`)!
 :::
 
 #### Indexing with Logicals
@@ -677,7 +690,6 @@ fruits <- c("apple",
             "lime", 
             "mango", 
             "peach")
-fruits
 ```
 
 10. Grab the first three elements.
@@ -819,7 +831,7 @@ component of the list:
 ```{r}
 #| label: grab-list-entry-brackets-index
 
-top_bl[[2]]
+top_bl[[3]]
 ```
 
 Alternatively, we could have used a `$` to isolate this component because it has 
@@ -828,7 +840,7 @@ a name:
 ```{r}
 #| label: grab-list-entry-name
 
-top_bl$release_year
+top_bl$characters
 ```
 
 Notice that each of these are once again a vector! If we wanted to grab an 
@@ -837,20 +849,39 @@ previously (bracketing).
 
 <!-- I haven't talked about the third option: [["release_year"]] -->
 
+::: columns
+::: {.column width="48%"}
 ```{r}
-#| label: grab-list-entry-brackets-index-element
+#| label: grab-list-entry-brackets-index-element-bracket
 
-top_bl[[2]][3]
+top_bl[[3]][3]
+
 ```
+
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+```{r}
+#| label: grab-list-entry-brackets-index-element-name
+
+top_bl$characters[3]
+
+```
+
+:::
+:::
 
 You could probably see how this might get confusing! The `[[]]` and the `[]`
 next to each other makes this code a bit difficult to understand. You can,
 however, read code like a book---going from left to right. Starting on the left, 
 we know the `top_bl[[3]]` grabs the third component from the list `top_bl`. 
 We've also learned that this element is a vector. So, when we see the `[3]` we
-know that this is extracting the third element of the vector. 
+know that this is extracting the third element of the vector.
 
-This might take a bit of practice, but you'll get there!
+This hopefully motivates why it is nice to give the elements of your list names!
 
 ::: {.callout-check-in}
 
@@ -912,7 +943,7 @@ shows_releases[["show_name"]]
 
 The `$` operator is also what we can use to add new columns to a dataframe! 
 Suppose I want to add a column of the rating information for each show to the
-`shows_years` dataframe:
+`shows_releases` dataframe:
 
 ```{r}
 shows_releases$rating <- c(9.5, 9.6, 9.1, 9.4)
@@ -930,7 +961,7 @@ you can also extract components using the notation we learned for matrices.
 ```{r}
 shows_releases[1, ]
 ```
-
+This outputs a smaller dataframe with one row and three columns.
 :::
 
 ::: {.column width="4%"}
@@ -942,6 +973,7 @@ shows_releases[1, ]
 shows_releases[, 2]
 ```
 
+This outputs a vector with contents of the second column.
 :::
 :::
 
@@ -957,7 +989,7 @@ fruit_trees
 
 17. Grab the second column (`trees`).
 
-18. Grab the third and forth columns (`trees`, `harvest_window`).
+18. Grab the second and third columns (`trees`, `harvest_window`).
 
 19. Grab the second row of all three columns.
 :::
@@ -975,6 +1007,7 @@ nums <- c(47, 13, 49, 46, 47, 4, 7, 0, 44, 24, 13, 1)
 nums_matrix <- matrix(nums, ncol = 4)
 nums_matrix
 ```
+
 We could multiply **every** value of `nums_matrix` by `-1` with this simple
 code:
 
@@ -987,7 +1020,8 @@ specific value of `nums_matrix` by `-1`? That is the magic of **vectorized**
 operations---actions that can be done to an entire vector (or matrix)!
 
 Similar to mathematical operations, there are functions that also operate on 
-vectors of values. Take the square root function (`sqrt()`):
+vectors of values. We can use the square root function (`sqrt()`) to take the 
+square root of every value in `nums_matrix`:
 
 ```{r}
 sqrt(nums_matrix)
@@ -1004,14 +1038,27 @@ To do this, we have three steps we need to follow:
 
 Let's see how this might look in the context of `nums_matrix`. Suppose we want
 to subtract 30 from all numbers in the first and second rows of the third
-column. The first two steps are fairly simple, we extract the first and second rows
-with `nums_matrix[1:2, 3]`, and we can do subtraction easily with just a `- 30`. 
+column. The first two steps are fairly simple, 
+
+1. Extract the first and second rows 
 
 ```{r}
+#| eval: false
+#| label: step-1-extract
+
+nums_matrix[1:2, 3]
+```
+
+2. Do subtraction with `- 30`. 
+
+```{r}
+#| eval: false
+#| label: step-1-math
+
 nums_matrix[1:2, 3] - 30
 ```
 
-The saving back into the original position is the tricky part! We need to 
+Step 3, saving back into the original position, is the tricky part! We need to 
 assign (`<-`) the values we changed back into their original position
 (`nums_matrix[1:2, 3]`). So, our code should look like this:
 
@@ -1019,6 +1066,26 @@ assign (`<-`) the values we changed back into their original position
 nums_matrix[1:2, 3] <- nums_matrix[1:2, 3] - 30
 nums_matrix
 ```
+
+
+::: {.callout-check-in}
+20. What will be the output of the following operation?
+
+```{r}
+#| eval: false
+#| label: add-two-vectors-exercise
+
+vec1 <- c(1, 2, 3, 4)
+vec2 <- c(5, 6, 7, 8)
+
+vec1 + vec2
+```
+
+(a) `1 2 3 4 5 6 7 8`
+(b) `6 8 10 12`
+(c) this code will have an error
+
+:::
 
 ### Operations with Logical Values
 
@@ -1032,7 +1099,7 @@ specific value (e.g., `40`).
 #### Relational Statements
 
 Let's explore these ideas with a vector of values. We can transform our
-`nums_matrix` into a vector using the `c()` function:
+`nums_matrix` back into a vector using the `c()` function:
 
 ```{r}
 #| label: make-matrix-into-vector
@@ -1059,6 +1126,44 @@ Notice that checking *equality* requires **two** `=` signs (`==`). This is
 because a single `=` sign assigns a value into an object (similar to `<-`). 
 :::
 
+#### More Complex Relational Statements
+
+I could level up by relational statement by adding a mathematical calculation
+*before* the relational comparison. Suppose we wanted to know how many even 
+numbers there were in `nums_vector`. This would take a couple more steps, but 
+is still a relational comparison!
+
+First, we check which indices are divisible by 2. The `%%` operator is the 
+"modulus" operator and returns the **remainder** of each number when divided by
+`2`:
+
+```{r}
+#| label: modulus-operator
+
+nums_vector %% 2
+```
+
+If a number is even, then the remainder when divided by `2` should be `0`:
+
+```{r}
+#| label: check-remainder
+
+nums_vector %% 2 == 0
+```
+
+I can then use these logical values to extract the entries of `nums_vector`:
+
+```{r}
+#| label: extract-entries-modulus-remainder
+
+nums_vector[nums_vector %% 2 == 0]
+```
+
+We can imagine that if you would have seen this line of code at the beginning of
+the lesson you would have said "What the hell is that?". But, hopefully now you 
+can look at it, break apart the pieces, and make a guess about how the output
+might look.
+
 #### Mathematical Operations with Logical Values
 
 Because logical values have equivalent numerical values (`TRUE` = `1`, 
@@ -1084,12 +1189,20 @@ possible instances is the number of indices in the vector, or the `length()` of
 the vector!
 
 Let's find the proportion of numbers in `nums_vector` that are greater than or
-equal to 40. 
+equal to 20:
 
 ```{r}
-#| label: logical-proportion
+#| label: logical-proportion-1
 
-sum(nums_vector >= 40) / length(nums_vector)
+sum(nums_vector >= 20) / length(nums_vector)
+```
+
+Or the proportion of even numbers in `nums_vector`: 
+
+```{r}
+#| label: logical-proportion-2
+
+sum(nums_vector %% 2 == 0) / length(nums_vector)
 ```
 
 ::: columns
@@ -1121,8 +1234,34 @@ follows:
 - `max()`
 - `median()`
 - `+`, `-`, `/`, `*`
-- `%%` (modulus arithmetic) (e.g., `3 %% 2` = `r 3 %% 2`)
+- `%%` (modulus arithmetic) 
+  * `3 %% 2` = `r 3 %% 2`
+:::
+:::
 :::
 
-:::
+
+::: {.callout-check-in}
+21. When you add a vector of logical values (i.e., `TRUE`, `FALSE`), you get 
+the number of ___ values in the vector.
+
+22. Fill in the code to find the number of elements of `nums_vector` that 
+are not equal to 13. 
+
+```{r}
+#| eval: false
+#| flourish:
+#| - target: 
+#|     - "sum"
+#|     - mask: true
+#|     - style: "text-decoration: underline;"
+#| - target: 
+#|     - "!="
+#|     - mask: true
+#|     - style: "text-decoration: underline;"
+
+sum(nums_vector != 13)
+```
+
+
 :::
