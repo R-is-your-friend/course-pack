@@ -1,21 +1,5 @@
 # Data is Friend
 
-::: callout
-## Learning Objectives
-+ Define the observational unit (rows) and variables (columns) of rectangular data
-+ Identify variable types given rectangular data
-+ Explore rectangular data quickly in R (with code and with RStudio visually)
-+ Read rectangular data with various delimiters into R using an appropriate `readr` or `readxl` function
-+ Define relative versus absolute file paths
-:::
-
-<!-- https://r4ds.hadley.nz/data-import.html
-https://r4ds.hadley.nz/spreadsheets.html#excel
-https://r4ds.had.co.nz/workflow-projects.html
-https://r4ds.hadley.nz/quarto.html  -->
-
-
-
 ## Rectangular Data
 
 There are a lot of different ways that we can look at data in the world and store it on our computer. In this class, we will primarily focus on working with what we call *rectangular data* meaning that the data is two-dimentional with rows and columns. With rectangular data, each *row* represents one observation (or observational unit) and each *column* represents a *variable*.
@@ -65,7 +49,7 @@ str(cereal)
 3. What questions do you have about the variables after just looking at the data?
 :::
 
-Just looking at a data frame in R, we can't tell how the variables are measures and what they all mean! We will always want to look at a **data dictionary** to understand what the columns really mean. Any good data provider should provide a data dictionary along with the data!
+Just looking at a data frame in R, we can't tell how the variables are measured and what they all mean! We will always want to look at a **data dictionary** to understand what the columns really mean. Any good data provider should provide a data dictionary along with the data!
 
 In this case, we can find the data dictionary in the help file for the data in R by running:
 
@@ -83,13 +67,8 @@ In this case, we can find the data dictionary in the help file for the data in R
 :::
 
 
-## Reading in Data
 
-In order to use statistical software to do anything interesting, we need to be able to get data into the program so that we can work with it effectively. 
-
-
-
-### File Paths
+## File Paths
 
 Before we can read in data, we need to tell R where to look for the data file!
 
@@ -108,84 +87,6 @@ There are two different kinds of file paths that you can define to indicate the 
 Let's look at an example of relative versus absolute file paths. In the example below the "labs" directory is the working directory. The directories that "labs" are in are called it's *parent* directories, which are referenced with `"../"` in the relative file paths.
 
 ![](images/04-relative-absolute.png)
-
-
-:::callout-important
-Since absolute file paths **only** work on **your computer**, we will **always use relative file paths** in this course.
-:::
-
-### Types of Data Files
-
-We will also need to tell R what kind of data it an expect. In this class, are focusing on rectangular data, with rows indicating observations and columns that show variables.  This type of data can be stored on the computer in multiple ways which indicate rows and columns in different ways:
-
-- **as raw text**, usually in a file that ends with `.txt`, `.tsv`, `.csv`, `.dat`, or sometimes, there will be no file extension at all. 
-  + `.csv` "Comma-separated"
-  + `.txt` plain text
-    + rows will always be separated in new lines
-    + columns can be separated with different *delimiters* including tabs, spaces, commas, or other delimeters
-
-- **in a spreadsheet**. Spreadsheets, such as those created by MS Excel, Google Sheets use a special type of markup that is specific to the filetype and the program it's designed to work with. Therefore, special functionality is required for working with them in R.
-  + `.xls`
-  + `.xlsx`
-
-To work with data in R, it's important to know how to read in text files (CSV, tab-delimited, etc.). It can be helpful to also know how to read in XLSX files. 
-
-Let's practice recognizing different kinds of data files.
-
-:::{.callout-check-in .icon}
-What kind of data file are each of the following? Note what kind of *delimeter* is used to separate columns.
-:::
-
-
-::: panel-tabset
-### File A
-
-![](images/04-csv-file.png)
-
-
-### File B
-
-![](images/04-tsv-file.png)
-
-### File C
-
-![](images/04-pipe-file.png)
-
-### Sources
-
--   [File A](https://people.sc.fsu.edu/~jburkardt/data/csv/csv.html)
--   [File B](https://github.com/ccusa/Disaster_Vulnerability_Map/blob/master/sample-data.tsv)
--   [File C](https://chadbaldwin.net/2021/03/24/quick-parse-csv-file.html)
-:::
-
-
-
-
-
-Note: there are a lot of other ways to store data that we just won't talk about in this class!
-
-
-### Reading in Data with `readr` and `readxl`
-
-+ `read_csv()` is for reading in .csv files
-+ `read_txv()` is for tab-separated data
-+ `read_table()` is for any data with "columns" (white space separating)
-+ `read_delim()` is for special "delimiters" separating data
-+ `read_xlsx()` is specifically for dealing with Excel files
-
-```{r}
-#| eval: false
-
-# load the readr package (or alternatively the tidyverse package)
-library(readr)
-
-# here we are using a URL
-surveys <- read_csv(file = "https://raw.githubusercontent.com/earobinson95/stat331-calpoly/master/lab-assignments/Lab2-graphics/surveys.csv")
-
-# here is an example of a relative file path to an actual data file!
-surveys <- read_csv(file = "../data/surveys.csv")
-```
-
 <!-- ### RStudio Projects -->
 
 <!-- When you work on a project that may need to exist on some other machine, it's important to use **local** file paths -- the global path will likely not be the same, but you can usually set the local project-specific structure up to be the same across machines.  -->
