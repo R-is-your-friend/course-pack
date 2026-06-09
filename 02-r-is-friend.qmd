@@ -692,9 +692,9 @@ fruits <- c("apple",
             "peach")
 ```
 
-10. Grab the first three elements.
+10. Grab the first three elements of the vector named `fruits`.
 
-11. Grab the first, third, and fifth element.
+11. Grab the first, third, and fifth element of the vector named `fruits`.
 :::
 
 
@@ -799,11 +799,12 @@ tree_matrix <- matrix(trees, ncol = 2)
 tree_matrix
 ```
 
-12. Grab the tree in the second row, second column.
+12. Grab the tree in the second row, second column of the matrix named 
+`tree_matrix`.
 
-13. Grab the trees in the first two rows. 
+13. Grab the trees in the first two rows of the matrix named `tree_matrix`. 
 
-14. Grab the trees in the second column. 
+14. Grab the trees in the second column of the matrix named `tree_matrix`. 
 :::
 
 
@@ -897,9 +898,10 @@ fruit_tree_harvest <- list(fruit = fruits,
 fruit_tree_harvest
 ```
 
-15. Grab the first component (`fruit`).  
+15. Grab the first component (`fruit`) of the list named  `fruit_tree_harvest`.
 
-16. Grab the third tree from the `tree` component.
+16. Grab the third tree from the `tree` component of the list named 
+`fruit_tree_harvest`.
 :::
 
 ### Dataframes
@@ -987,11 +989,12 @@ fruit_trees <- data.frame(fruits, trees, harvest_window)
 fruit_trees
 ```
 
-17. Grab the second column (`trees`).
+17. Grab the second column (`trees`) of the `fruit_trees` dataframe.
 
-18. Grab the second and third columns (`trees`, `harvest_window`).
+18. Grab the second and third columns (`trees`, `harvest_window`) of the
+`fruit_trees` dataframe.
 
-19. Grab the second row of all three columns.
+19. Grab the second row of all three columns of the `fruit_trees` dataframe.
 :::
 
 ## Mathematical Operations
