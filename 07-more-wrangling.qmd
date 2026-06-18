@@ -180,33 +180,66 @@ cereal |>
 2. What is the general syntax of `case_when()`?
 
 
-3. How do you provide a value for the "rest" of the rows that do not meet the criterias you already included in `case_when()`?
+3. How do you provide a value for the "rest" of the rows that do not meet the criteria you already included in `case_when()`?
 
 4. How are missing values treated in `case_when()`?
 :::
 
 
-### `across()` 
-
-
-
-:::{.callout-check-in .icon}
-1. How do functions need to be input into the `across()` function?
-
-2. What does the `.x` inside the function represent?
-
-3. What does `across()` do by default to column names?
-
-4. What arguments to `across()` help you control the resulting column names?
-:::
-
 ### `pull()`
+
+At this point you should hopefully be noticing that the output of all of the dplyr functions discussed so far are a dataframe or tibble. This is great, and by design, but for some tasks, this might not be ideal.
+
+For example, say I want to calculate the average potassium level for cereals with more than 3 grams of protein. Sounds like I want to first *filter* the observations and then *summarize* the data.
+
+```{r}
+cereal |> 
+  filter(protein > 3) |> 
+  summarize(mean_potass = mean(potass, na.rm = T))
+```
+This gets me the answer, but the output is a dataframe. What if I just wanted to get a numeric output? 
+
+```{r}
+cereal |> 
+  filter(protein > 3) |> 
+  select(potass) |> 
+  mean(na.rm = T)
+```
+
+Darn, this doesn't work because the output of `select(potass)` is a **dataframe** with one column. The `mean()` function is expecting a **vector** as an input. What I really want to do is *pull* out the `potass` data variable as a vector! If I wasn't in the middle of a pipeline, I could use `cereal$potass` to index the `potass` column. `pull()` extracts a column from a data frame as a vector, which is very useful within pipelines. 
+
+Now we can fix our faulty code from before:
+
+```{r}
+cereal |> 
+  filter(protein > 3) |> 
+  pull(potass) |> 
+  mean(na.rm = T)
+```
 
 :::{.callout-check-in .icon}
 1. What does the function `pull()` return?
 
 2. When/why would you use `pull()` rather than `$`?
 :::
+
+
+
+### `across()` 
+
+[[TO DO]]
+
+:::{.callout-check-in .icon}
+1. How do functions need to be input into the `across()` function?
+
+2. What does `across()` do by default to column names?
+
+3. What arguments to `across()` help you control the resulting column names?
+:::
+
+
+
+
 
 ## What Data Do We Need?
 
