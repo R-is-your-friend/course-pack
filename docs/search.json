@@ -474,7 +474,7 @@
     "href": "07-more-wrangling.html",
     "title": "\n9  More Wrangling\n",
     "section": "",
-    "text": "9.1 Extending dplyr verbs\nIn Chapter XX, we learned many key tools and skills to wrangle data in R. This week, we will fill out those skills with a couple of additional functions that work assist wtih the primary dplyr verbs. We will also consider how to tidy data so that we have the best rows and columns avaiable to complete a desired analysis.",
+    "text": "9.1 Extending dplyr verbs\nLast week, we learned many key tools and skills to wrangle data in R. This week, we will fill out those skills with a couple of additional functions that work assist wtih the primary dplyr verbs. We will also consider how to tidy data so that we have the best rows and columns avaiable to complete a desired analysis.",
     "crumbs": [
       "Data Wrangling and Visualization",
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>More Wrangling</span>"

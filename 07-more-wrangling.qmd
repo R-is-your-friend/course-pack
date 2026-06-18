@@ -3,6 +3,7 @@
 
 ```{r}
 #| label: setup
+#| echo: false
 
 library(tidyverse)
 ```
@@ -17,7 +18,7 @@ library(tidyverse)
 :::
 
 
-In Chapter XX, we learned many key tools and skills to wrangle data in R. This week, we will fill out those skills with a couple of additional functions that work assist wtih the primary `dplyr` verbs. We will also consider how to tidy data so that we have the best rows and columns avaiable to complete a desired analysis.
+Last week, we learned many key tools and skills to wrangle data in R. This week, we will fill out those skills with a couple of additional functions that work assist wtih the primary `dplyr` verbs. We will also consider how to tidy data so that we have the best rows and columns avaiable to complete a desired analysis.
 
 
 ## Extending `dplyr` verbs
@@ -298,7 +299,7 @@ fact that spreadsheets don't always handle dates the way you'd hope they would.
 :::
 
 
-## Data Formats
+<!--## Data Formats
 
 It's fairly common for data to come in forms which are convenient for either
 human viewing or data entry. Unfortunately, these forms aren't necessarily the 
@@ -495,3 +496,4 @@ The `separate_xxx()` is actually a family of [experimental](https://lifecycle.r-
 :::{.callout-required-reading .icon}
 To review what we covered this week, refer to R4DS [**Chapter 5: Data Tidying**](https://r4ds.hadley.nz/data-tidy.html) and [**Chapter 19: Joins**](https://r4ds.hadley.nz/joins.html).
 :::
+-->

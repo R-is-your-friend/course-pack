@@ -2,10 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.9.37">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>9&nbsp; More Wrangling – R is Your Friend</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -65,19 +68,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="./06-data-wrangling.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d0ae9245876894da5ac7e18953ecc5cc.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-9de65633f6d0f5eeb0068d939eb6178f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-c56aa83846d244a7ab5588d901c86329.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-9de65633f6d0f5eeb0068d939eb6178f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-2e143f8b817ec5e7a44930ddac25d3c7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-9adb41b64cfd063ebab98e13503fc908.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-2e143f8b817ec5e7a44930ddac25d3c7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -105,7 +107,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script><script src="site_libs/kePrint-0.0.1/kePrint.js"></script><link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 </head>
-<body class="nav-sidebar floating slimcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -364,7 +366,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03b-writing-functions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Functions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Writing Simple Functions in R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -440,7 +442,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./12-more-functions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">12-more-functions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Writing More Complex Functions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -474,18 +476,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul>
 </li>
   <li><a href="#what-data-do-we-need" id="toc-what-data-do-we-need" class="nav-link" data-scroll-target="#what-data-do-we-need"><span class="header-section-number">9.2</span> What Data Do We Need?</a></li>
-  <li>
-<a href="#data-formats" id="toc-data-formats" class="nav-link" data-scroll-target="#data-formats"><span class="header-section-number">9.3</span> Data Formats</a>
-  <ul>
-<li><a href="#longer" id="toc-longer" class="nav-link" data-scroll-target="#longer"><span class="header-section-number">9.3.1</span> Longer</a></li>
-  <li><a href="#wider" id="toc-wider" class="nav-link" data-scroll-target="#wider"><span class="header-section-number">9.3.2</span> Wider</a></li>
-  </ul>
-</li>
-  <li><a href="#separating-and-uniting-variables" id="toc-separating-and-uniting-variables" class="nav-link" data-scroll-target="#separating-and-uniting-variables"><span class="header-section-number">9.4</span> Separating and Uniting Variables</a></li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-data-visualizations.html">Data Wrangling and Visualization</a></li><li class="breadcrumb-item"><a href="./07-more-wrangling.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">More Wrangling</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-data-visualizations.html">Data Wrangling and Visualization</a></li><li class="breadcrumb-item"><a href="./07-more-wrangling.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">More Wrangling</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title">
 <span class="chapter-number">9</span>&nbsp; <span class="chapter-title">More Wrangling</span>
 </h1>
@@ -523,7 +517,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </div>
 </div>
-<p>In Chapter XX, we learned many key tools and skills to wrangle data in R. This week, we will fill out those skills with a couple of additional functions that work assist wtih the primary <code>dplyr</code> verbs. We will also consider how to tidy data so that we have the best rows and columns avaiable to complete a desired analysis.</p>
+<p>Last week, we learned many key tools and skills to wrangle data in R. This week, we will fill out those skills with a couple of additional functions that work assist wtih the primary <code>dplyr</code> verbs. We will also consider how to tidy data so that we have the best rows and columns avaiable to complete a desired analysis.</p>
 <section id="extending-dplyr-verbs" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="extending-dplyr-verbs">
 <span class="header-section-number">9.1</span> Extending <code>dplyr</code> verbs</h2>
 <section id="if_else-and-case_when" class="level3" data-number="9.1.1"><h3 data-number="9.1.1" class="anchored" data-anchor-id="if_else-and-case_when">
@@ -6938,146 +6932,196 @@ Need to copy over the images or replace them
 </div>
 </div>
 </div>
-</section><section id="data-formats" class="level2 page-columns page-full" data-number="9.3"><h2 data-number="9.3" class="anchored" data-anchor-id="data-formats">
-<span class="header-section-number">9.3</span> Data Formats</h2>
-<p>It’s fairly common for data to come in forms which are convenient for either human viewing or data entry. Unfortunately, these forms aren’t necessarily the most friendly for analysis. There are two main “layouts” a dataset can have:</p>
-<ol type="1">
-<li>“wide” format</li>
-<li>“long” format</li>
-</ol>
-<p>The image below shows the same dataset presented in each layout.</p>
-<p><img src="https://github.com/gadenbuie/tidyexplain/raw/main/images/static/png/original-dfs-tidy.png" class="img-fluid" alt="A diagram showing two table representations side by side, labeled 'wide' on the left and 'long' on the right. On the 'wide' side: a table with columns labeled id, x, y, z. Beneath id are red 1 and blue 2; beneath x are a and b; beneath y are c and d; beneath z are e and f. On the 'long' side: three columns labeled id, key, val. The id column alternates 1 (red) and 2 (blue) across six rows; key cycles through x (green), y (purple), z (orange); val shows corresponding values a, b, c, d, e, f. The visual illustrates how the same data can be represented in wide format (fewer rows, more columns) versus long (more rows, fewer variable columns) — a core idea in tidy data transformations such as pivoting."></p>
-<p>Sometimes we will be given data that is in one layout and we will need to transform it into a different layout. This animation illustrates the process of going from a wide data layout to a long data layout, and how to go from a long data layout back to a wide data layout. Here, we are using the <code><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider()</a></code> and <code><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer()</a></code> functions from the <code>tidyr</code> package in R.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="https://github.com/gadenbuie/tidyexplain/raw/main/images/tidyr-pivoting.gif" class="img-fluid figure-img"></p>
-<figcaption><a href="https://kelseygonzalez.github.io/">© Kelsey Gonzales</a></figcaption></figure>
-</div>
-<p>Let’s explore each of these formats in more depth</p>
-<section id="longer" class="level3 page-columns page-full" data-number="9.3.1"><h3 data-number="9.3.1" class="anchored" data-anchor-id="longer">
-<span class="header-section-number">9.3.1</span> Longer</h3>
-<p>In many cases, the data come in what we might call “wide” form - some of the column names are not names of variables (e.g., <code>year</code>), but instead, are themselves values of another variable (e.g., <code>1991</code>, <code>1992</code>).</p>
-<div class="tabset-margin-container page-columns page-full"><div class="no-row-height column-margin column-container"><div class="callout callout-style-default callout-tip callout-titled tabset-margin-content tabset-2-2-tab-margin-content collapse">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Notice that I’m surrounding <code>1999</code> in back ticks (` `). I need to do this because a number is not a syntactically correct variable name, so using <code>cols = 1999:2000</code> would not work!</p>
-</div>
-</div></div></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Picture the Operation</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href=""><code>pivot_longer()</code></a></li>
-</ul>
-<div class="tab-content">
-<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
-<p>Tables 4a and 4b (from above) are good examples of data which is in “wide” form and should be transformed into a long(er) form. The values of <code>year</code> are spread across multiple columns.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">table4a</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 3
+<!--## Data Formats
+
+It's fairly common for data to come in forms which are convenient for either
+human viewing or data entry. Unfortunately, these forms aren't necessarily the 
+most friendly for analysis. There are two main "layouts" a dataset can have:
+
+1. "wide" format
+2. "long" format
+
+The image below shows the same dataset presented in each layout. 
+
+![](https://github.com/gadenbuie/tidyexplain/raw/main/images/static/png/original-dfs-tidy.png){fig-alt="A diagram showing two table representations side by side, labeled 'wide' on the left and 'long' on the right. On the 'wide' side: a table with columns labeled id, x, y, z. Beneath id are red 1 and blue 2; beneath x are a and b; beneath y are c and d; beneath z are e and f. On the 'long' side: three columns labeled id, key, val. The id column alternates 1 (red) and 2 (blue) across six rows; key cycles through x (green), y (purple), z (orange); val shows corresponding values a, b, c, d, e, f. The visual illustrates how the same data can be represented in wide format (fewer rows, more columns) versus long (more rows, fewer variable columns) — a core idea in tidy data transformations such as pivoting."}
+
+
+Sometimes we will be given data that is in one layout and we will need to 
+transform it into a different layout. This animation illustrates the process of
+going from a wide data layout to a long data layout, and how to go from a long
+data layout back to a wide data layout. Here, we are using the `pivot_wider()`
+and `pivot_longer()` functions from the `tidyr` package in R. 
+
+![[© Kelsey Gonzales](https://kelseygonzalez.github.io/)](https://github.com/gadenbuie/tidyexplain/raw/main/images/tidyr-pivoting.gif)
+
+Let's explore each of these formats in more depth
+
+
+
+
+### Longer
+
+
+In many cases, the data come in what we might call "wide" form - some of the 
+column names are not names of variables (e.g., `year`), but instead, are
+themselves values of another variable (e.g., `1991`, `1992`).
+
+::: panel-tabset
+#### Picture the Operation
+
+Tables 4a and 4b (from above) are good examples of data which is in "wide" form
+and should be transformed into a long(er) form. The values of `year` are spread
+across multiple columns. 
+
+
+::: {.cell}
+
+```{.r .cell-code}
+table4a
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+# A tibble: 3 × 3
   country     `1999` `2000`
-  &lt;chr&gt;        &lt;dbl&gt;  &lt;dbl&gt;
+  <chr>        <dbl>  <dbl>
 1 Afghanistan    745   2666
 2 Brazil       37737  80488
-3 China       212258 213766</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">table4b</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 3
+3 China       212258 213766
+```
+
+
+:::
+
+```{.r .cell-code}
+table4b
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+# A tibble: 3 × 3
   country         `1999`     `2000`
-  &lt;chr&gt;            &lt;dbl&gt;      &lt;dbl&gt;
+  <chr>            <dbl>      <dbl>
 1 Afghanistan   19987071   20595360
 2 Brazil       172006362  174504898
-3 China       1272915272 1280428583</code></pre>
-</div>
-</div>
-<p>The solution to this is to rearrange the data into “long form”: to take the columns which contain values and “stack” them, adding a variable to indicate which column each value came from. To do this, we have to duplicate the values in any column which isn’t being stacked (e.g.&nbsp;country, in both the example above and the image below).</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="images/week-4/tidyr_pivot_longer.png" class="img-fluid figure-img" alt="A wide-to-long transformation operation, where the values of the id variables are repeated for each column which is used as a key; the values in each column are moved into a value column. There is a row of data in the transformed data frame for each combination of id variables and key variables."></p>
-<figcaption>A visual representation of what the pivot_longer operation looks like in practice.</figcaption></figure>
-</div>
-<p>Once our data are in long form, we can (if necessary) separate values that once served as column labels into actual variables, and we’ll have tidy(er) data.</p>
-</div>
-<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+3 China       1272915272 1280428583
+```
 
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">table4a</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="va">`1999`</span><span class="op">:</span><span class="va">`2000`</span>, </span>
-<span>               names_to <span class="op">=</span> <span class="st">"year"</span>, </span>
-<span>               values_to <span class="op">=</span> <span class="st">"cases"</span></span>
-<span>               <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 3
+
+:::
+:::
+
+
+The solution to this is to rearrange the data into "long form": to take the columns which contain values and "stack" them, adding a variable to indicate which column each value came from. To do this, we have to duplicate the values in any column which isn't being stacked (e.g. country, in both the example above and the image below).
+
+![A visual representation of what the pivot_longer operation looks like in practice.](images/week-4/tidyr_pivot_longer.png){fig-alt="A wide-to-long transformation operation, where the values of the id variables are repeated for each column which is used as a key; the values in each column are moved into a value column. There is a row of data in the transformed data frame for each combination of id variables and key variables."}
+
+Once our data are in long form, we can (if necessary) separate values that once served as column labels into actual variables, and we'll have tidy(er) data.
+
+#### `pivot_longer()`
+
+::: {.callout-tip .column-margin}
+Notice that I'm surrounding ``1999`` in back ticks (\`  \`). I need to do this because 
+a number is not a syntactically correct variable name, so using `
+cols = 1999:2000` would not work!
+:::
+
+
+::: {.cell}
+
+```{.r .cell-code}
+table4a |> 
+  pivot_longer(cols = `1999`:`2000`, 
+               names_to = "year", 
+               values_to = "cases"
+               )
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+# A tibble: 6 × 3
   country     year   cases
-  &lt;chr&gt;       &lt;chr&gt;  &lt;dbl&gt;
+  <chr>       <chr>  <dbl>
 1 Afghanistan 1999     745
 2 Afghanistan 2000    2666
 3 Brazil      1999   37737
 4 Brazil      2000   80488
 5 China       1999  212258
-6 China       2000  213766</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">table4b</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="op">-</span><span class="va">country</span>, </span>
-<span>               names_to <span class="op">=</span> <span class="st">"year"</span>, </span>
-<span>               values_to <span class="op">=</span> <span class="st">"population"</span></span>
-<span>               <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 3
+6 China       2000  213766
+```
+
+
+:::
+
+```{.r .cell-code}
+table4b |> 
+  pivot_longer(cols = -country, 
+               names_to = "year", 
+               values_to = "population"
+               )
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+# A tibble: 6 × 3
   country     year  population
-  &lt;chr&gt;       &lt;chr&gt;      &lt;dbl&gt;
+  <chr>       <chr>      <dbl>
 1 Afghanistan 1999    19987071
 2 Afghanistan 2000    20595360
 3 Brazil      1999   172006362
 4 Brazil      2000   174504898
 5 China       1999  1272915272
-6 China       2000  1280428583</code></pre>
-</div>
-</div>
-<p>The columns are moved to a variable with the name passed to the argument <code>names_to</code> (hopefully, that is easy to remember), and the values are moved to a variable with the name passed to the argument <code>values_to</code> (again, hopefully easy to remember).</p>
-<p>We identify ID variables (variables which we don’t want to pivot) by not including them in the pivot statement. We can do this in one of two ways:</p>
-<ul>
-<li>select only variables (columns) we want to pivot (e.g., <code>cols = `1999`:`2000`</code>)</li>
-<li>select variables (columns) we don’t want to pivot, using <code>-</code> to remove them (e.g., <code>cols = -country</code>).</li>
-</ul>
-<p>Which option is easier depends how many things you’re pivoting (and how the columns are structured).</p>
-</div>
-</div>
-</div>
-</section><section id="wider" class="level3 page-columns page-full" data-number="9.3.2"><h3 data-number="9.3.2" class="anchored" data-anchor-id="wider">
-<span class="header-section-number">9.3.2</span> Wider</h3>
-<p>While it’s very common to need to transform data into a longer format, it’s not that uncommon to need to do the reverse operation. When an observation is scattered across multiple rows, your data is too long and needs to be made wider again.</p>
-<div class="tabset-margin-container page-columns page-full"><div class="no-row-height column-margin column-container"><div class="callout callout-style-default callout-tip callout-titled tabset-margin-content tabset-3-2-tab-margin-content collapse">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Notice that I’m not using a <code>cols</code> argument for <code><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider()</a></code>! This is because <code><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider()</a></code> only modifies the columns specified in the <code>names_from</code> and <code>values_from</code> arguments.</p>
-</div>
-</div></div></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">Picture the Operation</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href=""><code>pivot_wider()</code></a></li>
-</ul>
-<div class="tab-content">
-<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
-<p>Table 2 (from above) is an example of a table that is in long format but needs to be converted to a wider layout to be “tidy” - there are separate rows for cases and population, which means that a single observation (one year, one country) has two rows.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">table2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 12 × 4
+6 China       2000  1280428583
+```
+
+
+:::
+:::
+
+
+The columns are moved to a variable with the name passed to the argument 
+`names_to` (hopefully, that is easy to remember), and the values are moved to a
+variable with the name passed to the argument `values_to` (again, hopefully easy
+to remember).
+
+We identify ID variables (variables which we don't want to pivot) by not
+including them in the pivot statement. We can do this in one of two ways:
+
+-   select only variables (columns) we want to pivot 
+(e.g., ```` cols = `1999`:`2000` ````)
+-   select variables (columns) we don't want to pivot, using `-` to remove them 
+(e.g., `cols = -country`). 
+
+Which option is easier depends how many things you're pivoting (and how the columns are structured).
+:::
+
+### Wider
+
+
+While it's very common to need to transform data into a longer format, it's not that uncommon to need to do the reverse operation. When an observation is scattered across multiple rows, your data is too long and needs to be made wider again.
+
+::: panel-tabset
+#### Picture the Operation
+
+Table 2 (from above) is an example of a table that is in long format but needs to be converted to a wider layout to be "tidy" - there are separate rows for cases and population, which means that a single observation (one year, one country) has two rows.
+
+
+::: {.cell}
+
+```{.r .cell-code}
+table2
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+# A tibble: 12 × 4
    country      year type            count
-   &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;
+   <chr>       <dbl> <chr>           <dbl>
  1 Afghanistan  1999 cases             745
  2 Afghanistan  1999 population   19987071
  3 Afghanistan  2000 cases            2666
@@ -7089,130 +7133,186 @@ Tip
  9 China        1999 cases          212258
 10 China        1999 population 1272915272
 11 China        2000 cases          213766
-12 China        2000 population 1280428583</code></pre>
-</div>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="images/week-4/tidyr_pivot_wider.png" class="img-fluid figure-img" alt="An illustration of the transition from long data to wide data. In the long data frame, there are alternating rows of cases and populations, with corresponding counts. In the wide data frame, for each combination of id variables country and year, there are two columns: cases, and pop, each with corresponding values. That is, the key variables (cases, pop) in the long data frame become columns in the wide data frame."></p>
-<figcaption>A visual representation of what the pivot_wider operation looks like in practice.</figcaption></figure>
-</div>
-</div>
-<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+12 China        2000 population 1280428583
+```
 
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">table2</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span>names_from  <span class="op">=</span> <span class="va">type</span>, </span>
-<span>              values_from <span class="op">=</span> <span class="va">count</span></span>
-<span>              <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 4
+
+:::
+:::
+
+
+![A visual representation of what the pivot_wider operation looks like in practice.](images/week-4/tidyr_pivot_wider.png){fig-alt="An illustration of the transition from long data to wide data. In the long data frame, there are alternating rows of cases and populations, with corresponding counts. In the wide data frame, for each combination of id variables country and year, there are two columns: cases, and pop, each with corresponding values. That is, the key variables (cases, pop) in the long data frame become columns in the wide data frame."}
+
+#### `pivot_wider()`
+
+::: {.callout-tip .column-margin}
+Notice that I'm not using a `cols` argument for `pivot_wider()`! This is
+because `pivot_wider()` only modifies the columns specified in the `names_from`
+and `values_from` arguments. 
+:::
+
+
+::: {.cell}
+
+```{.r .cell-code}
+table2 |>
+  pivot_wider(names_from  = type, 
+              values_from = count
+              )
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+# A tibble: 6 × 4
   country      year  cases population
-  &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;
+  <chr>       <dbl>  <dbl>      <dbl>
 1 Afghanistan  1999    745   19987071
 2 Afghanistan  2000   2666   20595360
 3 Brazil       1999  37737  172006362
 4 Brazil       2000  80488  174504898
 5 China        1999 212258 1272915272
-6 China        2000 213766 1280428583</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section></section><section id="separating-and-uniting-variables" class="level2" data-number="9.4"><h2 data-number="9.4" class="anchored" data-anchor-id="separating-and-uniting-variables">
-<span class="header-section-number">9.4</span> Separating and Uniting Variables</h2>
-<p>We will talk about strings and regular expressions later in the course, but there’s a task that is fairly commonly encountered with functions that belong to the <code>tidyr</code> package: separating variables into two different columns <code><a href="https://tidyr.tidyverse.org/reference/separate.html">separate()</a></code> and it’s complement, <code><a href="https://tidyr.tidyverse.org/reference/unite.html">unite()</a></code>, which is useful for combining two variables into one column.</p>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href=""><code>separate_wider_delim()</code> and <code>separate_wider_position()</code></a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false" href=""><code>unite()</code></a></li>
-</ul>
-<div class="tab-content">
-<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
-<p>Table 3 from before is a great example of when you would want to separate the values of a column into different columns. In this dataset, the variable <code>rate</code> is recorded as <code>745/19987071</code>, where the first number is the amount of cases and the second number is the population.</p>
-<div class="cell">
-<div class="cell-output cell-output-error">
-<pre><code>Error in `knitr::include_graphics()`:
-! Cannot find the file(s): "images/week-4/tidyr_separate.png"</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">table3</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/separate_wider_delim.html">separate_wider_delim</a></span><span class="op">(</span>cols        <span class="op">=</span> <span class="va">rate</span>,</span>
-<span>                       names       <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"cases"</span>, <span class="st">"population"</span><span class="op">)</span>,</span>
-<span>                       delim       <span class="op">=</span> <span class="st">"/"</span>,</span>
-<span>                       cols_remove <span class="op">=</span> <span class="cn">FALSE</span></span>
-<span>           <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 5
+6 China        2000 213766 1280428583
+```
+
+
+:::
+:::
+
+
+:::
+
+## Separating and Uniting Variables
+
+We will talk about strings and regular expressions later in the course, but
+there's a task that is fairly commonly encountered with functions that belong to
+the `tidyr` package: separating variables into two different columns 
+`separate()` and it's complement, `unite()`, which is useful for combining two
+variables into one column.
+
+::: panel-tabset
+
+### `separate_wider_delim()` and `separate_wider_position()`
+
+Table 3 from before is a great example of when you would want to separate 
+the values of a column into different columns. In this dataset, the variable
+`rate` is recorded as `745/19987071`, where the first number is the amount of
+cases and the second number is the population. 
+
+
+
+::: {.cell}
+::: {.cell-output .cell-output-error}
+
+```
+Error in `knitr::include_graphics()`:
+! Cannot find the file(s): "images/week-4/tidyr_separate.png"
+```
+
+
+:::
+:::
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
+table3 |>
+  separate_wider_delim(cols        = rate,
+                       names       = c("cases", "population"),
+                       delim       = "/",
+                       cols_remove = FALSE
+           )
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+# A tibble: 6 × 5
   country      year cases  population rate             
-  &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt;            
+  <chr>       <dbl> <chr>  <chr>      <chr>            
 1 Afghanistan  1999 745    19987071   745/19987071     
 2 Afghanistan  2000 2666   20595360   2666/20595360    
 3 Brazil       1999 37737  172006362  37737/172006362  
 4 Brazil       2000 80488  174504898  80488/174504898  
 5 China        1999 212258 1272915272 212258/1272915272
-6 China        2000 213766 1280428583 213766/1280428583</code></pre>
-</div>
-</div>
-<p>I’ve left the <code>rate</code> column in the original data frame (<code>cols_remove = FALSE</code>) just to make it easy to compare and verify that yes, it worked.</p>
-</div>
-<div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
-<p>And, of course, there is a complementary operation, which is when it’s necessary to join two columns to get a useable data value.</p>
-<div class="cell">
-<div class="cell-output cell-output-error">
-<pre><code>Error in `knitr::include_graphics()`:
-! Cannot find the file(s): "images/week-4/tidyr_unite.png"</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">table5</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unite.html">unite</a></span><span class="op">(</span>col <span class="op">=</span> <span class="st">"year"</span>,</span>
-<span>        <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">century</span>, <span class="va">year</span><span class="op">)</span>,</span>
-<span>        sep <span class="op">=</span> <span class="st">''</span></span>
-<span>        <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 3
+6 China        2000 213766 1280428583 213766/1280428583
+```
+
+
+:::
+:::
+
+
+I've left the `rate` column in the original data frame (`cols_remove = FALSE`)
+just to make it easy to compare and verify that yes, it worked.
+
+### `unite()`
+
+And, of course, there is a complementary operation, which is when it's necessary to join two columns to get a useable data value.
+
+
+::: {.cell}
+::: {.cell-output .cell-output-error}
+
+```
+Error in `knitr::include_graphics()`:
+! Cannot find the file(s): "images/week-4/tidyr_unite.png"
+```
+
+
+:::
+:::
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
+table5 |>
+  unite(col = "year",
+        c(century, year),
+        sep = ''
+        )
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+# A tibble: 6 × 3
   country     year  rate             
-  &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;            
+  <chr>       <chr> <chr>            
 1 Afghanistan 1999  745/19987071     
 2 Afghanistan 2000  2666/20595360    
 3 Brazil      1999  37737/172006362  
 4 Brazil      2000  80488/174504898  
 5 China       1999  212258/1272915272
-6 China       2000  213766/1280428583</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<p><br></p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Learn More in R4DS
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The <code>separate_xxx()</code> is actually a family of <a href="https://lifecycle.r-lib.org/articles/stages.html#experimental">experimental</a> functions stemming from the <a href="https://lifecycle.r-lib.org/articles/stages.html#superseded-stages">superseeded</a> <code><a href="https://tidyr.tidyverse.org/reference/separate.html">separate()</a></code> function. You can read more about <code>separate_xxx()</code> and <code><a href="https://tidyr.tidyverse.org/reference/unite.html">unite()</a></code> in <a href="https://r4ds.hadley.nz/strings.html#extracting-data-from-strings">r4ds</a> and <a href="https://r4ds.had.co.nz/tidy-data.html#separating-and-uniting">r4ds</a>.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-required-reading callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Required-reading</span>Required Reading
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>To review what we covered this week, refer to R4DS <a href="https://r4ds.hadley.nz/data-tidy.html"><strong>Chapter 5: Data Tidying</strong></a> and <a href="https://r4ds.hadley.nz/joins.html"><strong>Chapter 19: Joins</strong></a>.</p>
-</div>
-</div>
+6 China       2000  213766/1280428583
+```
+
+
+:::
+:::
+
+:::
+
+<br>
+
+::: {.callout-note}
+### Learn More in R4DS
+
+The `separate_xxx()` is actually a family of [experimental](https://lifecycle.r-lib.org/articles/stages.html#experimental) functions stemming from the [superseeded](https://lifecycle.r-lib.org/articles/stages.html#superseded-stages) `separate()` function. You can read more about `separate_xxx()` and `unite()` in [r4ds](https://r4ds.hadley.nz/strings.html#extracting-data-from-strings) and [r4ds](https://r4ds.had.co.nz/tidy-data.html#separating-and-uniting).
+:::
+
+
+
+
+
+:::{.callout-required-reading .icon}
+To review what we covered this week, refer to R4DS [**Chapter 5: Data Tidying**](https://r4ds.hadley.nz/data-tidy.html) and [**Chapter 19: Joins**](https://r4ds.hadley.nz/joins.html).
+:::
+-->
 
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
