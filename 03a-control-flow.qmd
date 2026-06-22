@@ -99,7 +99,7 @@ the `if()` statement. If the condition is `FALSE`, then R will execute the
 
 **What value should `y` have?**
 
-<!-- this would be a good spot for an interactive code blurb -->
+<!-- [WEBR?] -->
 
 ::: callout-important
 # Code Style
@@ -254,7 +254,7 @@ a condition is false, what happens?
 #| label: multiple-conditions
 
 if (income < 11925) {
-  tax <- 0.10
+  0.10
   } else if (income <= 48475) {
     0.12
   } else if (income <= 103350) {
@@ -277,6 +277,8 @@ would a professor pay in taxes?
 
 Let's check! Setting `income` to `95000`, our conditional statements tell us
 that the professor will pay `0.22` or 22% in taxes.
+
+<!-- [WEBR?] -->
 
 ```{r}
 #| label: income-conditionals
@@ -347,9 +349,20 @@ The error message we got (`"the condition has length > 1"`) may seem strange at
 first, but it is actually **incredibly** informative. 
 
 What the error is telling us is that `if (income < 11925)` could not be
-evaluated because `income` has a length that is greater than 1. Meaning, our
-conditional statements can only work for scalar vectors (i.e., vectors with a
-single value).
+evaluated because `income` has a length that is greater than 1.
+If we examine `income < 11925`, we notice that it returns a vector of three 
+`TRUE/FALSE` results; one for each of the three incomes.
+
+```{r}
+#| label: conditional-with-vector-2
+income < 11925
+```
+
+Therefore, our code was equivalent to `if(c(FALSE, FALSE, TRUE))`.  An `if()`
+statement needs a single "yes/no" to determine if the code inside gets run or
+not, so these statements can only work for scalar vectors (i.e., vectors with a
+single value)
+
 
 ## Vectorized Operations
 
