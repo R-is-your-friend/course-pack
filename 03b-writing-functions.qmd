@@ -502,6 +502,49 @@ for the following scenarios.
 4. `rescale(nums, na.rm = TRUE)`
 :::
 
+
+### Function Arguments
+
+So far, we've been modeling how we believe functions should be used. 
+Specifically, we've been using **named arguments** when calling the function
+(e.g., `rescale(nums, na.rm = TRUE, method = "normalize")`). Technically, 
+using the name of the argument (`na.rm = TRUE`) is not required. In fact, this
+code will still run:
+
+```{r}
+rescale(nums, TRUE, "normalize")
+```
+
+However, someone reading the code would have **no clue** that the `TRUE` 
+argument was associated with deciding whether the NA values should be removed!
+So, while the names of the arguments are not required, using named arguments 
+can prevent 
+
+Let's explore 
+
+
+What if we changed the order of the arguments?
+
+```{r}
+rescale(nums, method = "min-max", na.rm = FALSE)
+```
+
+The code still works! The code works because R is relying on the **names** of 
+the arguments and not the **order** of the arguments. 
+
+
+But what if we didn't use the names of the arguments?
+
+```{r}
+rescale(x, FALSE,  "min-max")
+```
+
+Okay, so that still works. But what if we change the order of the arguments?
+
+
+we believe they make 
+your code **substantially** easier to understand. 
+
 ### Explicit Returns
 
 Now that we've explored different options for function inputs, let's talk more
@@ -880,7 +923,6 @@ rescale(10:20, na.rm = TRUE, method = 2)
 
 ```
 
-
 ### Checking Object Size
 
 Another common input check is to verify that the object(s) being input are the 
@@ -934,8 +976,6 @@ x <- 5
 rescale(x, method = "min-max")
 ```
 
-
-<!-- checkin about verifying the length of x is greater than 1 -->
 ::: callout-check-in
 
 We've incorporated a input check for the size of `x`, but not for the size of
@@ -980,6 +1020,148 @@ We've incorporated a input check for the size of `x`, but not for the size of
 
 ## Environment, Scope, Name Masking & Dynamic Lookup
 
-<!-- give examples and ask them to identify where the values are pulled from? -->
+Now that we know how functions behave it's time to learn some of the hidden 
+details. Let's start with the concept of a function's environment. 
 
-<!-- argument order versus names -->
+### Environment
+
+A function has its own environment, a universe that gets opened when you 
+run the function. A function's environment is separate from the 
+*global environment*, which is where all the objects you've created live (i.e., 
+all the objects that would appear in the Environment tab). We need to first 
+understand how these environments differ before we learn how they can relate
+to each other. 
+
+Let's explore this with a simple function:
+
+```{r}
+#| echo: true
+#| label: simple-function
+
+my_function <- function(){
+  num = 67
+  return(num)
+}
+```
+
+Hopefully you've noticed something strange about this function---it has no
+arguments. We've written the function this way so we can explore the difference
+between a *function environment* and the *global environment*. 
+
+What would you expect this code to return?
+
+```{r}
+#| eval: false
+
+my_function()
+```
+
+If you guessed ``r my_function()`` you are correct! When we call `my_function()` 
+it first creates an object called `num` that has the value `67` attached to it, 
+and then returns the value of `num` (67). 
+
+You might think that since `my_function()` creates an object `num` that you 
+could use this object outside the function...
+
+```{r}
+#| error: true
+
+num
+```
+
+but this object doesn't exist in the *global environment*, it only exists in
+the *function environment*. 
+
+![](images/03-global-function-environment.png){fig-alt="An image with two boxes, one blue and one orange. The orange box is labeled global enviroment with 'my_function()' displayed below. This represents the function (object) that has been globally defined and is accessible to the user. The blue box is labeled function enviornment with 'num = 67' displayed below. This represents the object that has been created by the function (my_function) that IS NOT available to the global environment." width=70% fig-align="center"}
+
+### Name Masking
+
+But what if there was an object in the *global environment* that had the same
+name as the object in the *function environment*?
+
+```{r}
+num = 65
+```
+
+![](images/03-name-masking-environmets.png){fig-alt="The previous image with the global and function environments has been altered slightly. In this image there is one additional object included in the global environment (orange box). The object says 'num = 65'. The object (num) has the same name in the function environment and the global environment, but the value of the object differs." width=70% fig-align="center"}
+
+What do you expect this code will return?
+
+```{r}
+#| eval: false
+
+my_function()
+```
+
+If you guessed ``r my_function()`` you are correct! This is an example of what
+is called **name masking**, where names (objects) defined inside of a function
+mask names (objects) defined outside of a function. In this example, `num` has
+the value of 65 outside the function, but inside the function `num` has a value
+of 67. Functions operate as a closed system where they rely only on the objects
+within the *function environment*, which is why `my_function()` returns 67 and
+not 65. 
+
+### Dynamic Lookup
+
+We just said "functions operate as a closed system," but that is not **always**
+true. Functions [try]{.underline} to operate as a closed system, but sometimes
+they need to ask for a little help. If we make a small modification to 
+`my_function()`, you will see what we mean!
+
+```{r}
+#| echo: true
+#| label: simple-function-bad-scope
+
+my_function <- function(){
+  return(num)
+}
+```
+
+Notice, we've eliminated the line of the function where `num` was created 
+(`num = 67`). However, the function still returns the value of num. So, here's
+our new system:
+
+![](images/03-dynamic-lookup.png){fig-alt="The previous image with the global and function environments has been altered slightly. In this image the 'num = 67' object has been removed from the function enviornment. So, the fuction environment box (in blue) is empty. However, the 'num = 65' object remains in the global environment. Since the num object doesn't exist in the function environment, when the function is called it will need to rely on objects in the global environment." width=70% fig-align="center"}
+
+Now what do you expect this code will return?
+
+```{r}
+#| eval: false
+
+my_function()
+```
+
+If you guessed ``r my_function()`` you are correct! When an object doesn't exist
+in the function's environment then it searches for that object in the global 
+environment. If it can't find an object in the global environment, the function 
+will error out. 
+
+It is also important to note that because `my_function()` is relying on objects 
+in the global environment, it is possible that the output can change. If we 
+change the value of `num` in the global environment, then the output of 
+`my_function()` will also change:
+
+```{r}
+num = 13
+
+my_function()
+```
+
+### So what does this all mean?
+
+This is a lot of technical details, so you might be wondering what the big
+picture is. Here are the three things you should know:
+
+1. Objects created in a function **cannot** be accessed in the global
+environment
+
+2. If an function can't find an object it is supposed to use within its 
+environment (the function environment), then it will search for that object 
+in the global environment. 
+
+In general, we would recommend **not** using the same name for an object in
+a function and an object in your global environment. For example, you shouldn't 
+name your dataset `data` and then use a parameter `data` in your function.
+
+
+<!-- give examples and ask them to identify where the values are pulled from? -->

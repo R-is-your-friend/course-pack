@@ -510,7 +510,8 @@ window.Quarto = {
   <li><a href="#choosing-a-rescale-method" id="toc-choosing-a-rescale-method" class="nav-link" data-scroll-target="#choosing-a-rescale-method"><span class="header-section-number">5.2.2.2</span> Choosing a Rescale Method</a></li>
   </ul>
 </li>
-  <li><a href="#explicit-returns" id="toc-explicit-returns" class="nav-link" data-scroll-target="#explicit-returns"><span class="header-section-number">5.2.3</span> Explicit Returns</a></li>
+  <li><a href="#function-arguments" id="toc-function-arguments" class="nav-link" data-scroll-target="#function-arguments"><span class="header-section-number">5.2.3</span> Function Arguments</a></li>
+  <li><a href="#explicit-returns" id="toc-explicit-returns" class="nav-link" data-scroll-target="#explicit-returns"><span class="header-section-number">5.2.4</span> Explicit Returns</a></li>
   </ul>
 </li>
   <li>
@@ -528,7 +529,15 @@ window.Quarto = {
   <li><a href="#checking-object-size" id="toc-checking-object-size" class="nav-link" data-scroll-target="#checking-object-size"><span class="header-section-number">5.4.3</span> Checking Object Size</a></li>
   </ul>
 </li>
-  <li><a href="#environment-scope-name-masking-dynamic-lookup" id="toc-environment-scope-name-masking-dynamic-lookup" class="nav-link" data-scroll-target="#environment-scope-name-masking-dynamic-lookup"><span class="header-section-number">5.5</span> Environment, Scope, Name Masking &amp; Dynamic Lookup</a></li>
+  <li>
+<a href="#environment-scope-name-masking-dynamic-lookup" id="toc-environment-scope-name-masking-dynamic-lookup" class="nav-link" data-scroll-target="#environment-scope-name-masking-dynamic-lookup"><span class="header-section-number">5.5</span> Environment, Scope, Name Masking &amp; Dynamic Lookup</a>
+  <ul>
+<li><a href="#environment" id="toc-environment" class="nav-link" data-scroll-target="#environment"><span class="header-section-number">5.5.1</span> Environment</a></li>
+  <li><a href="#name-masking" id="toc-name-masking" class="nav-link" data-scroll-target="#name-masking"><span class="header-section-number">5.5.2</span> Name Masking</a></li>
+  <li><a href="#dynamic-lookup" id="toc-dynamic-lookup" class="nav-link" data-scroll-target="#dynamic-lookup"><span class="header-section-number">5.5.3</span> Dynamic Lookup</a></li>
+  <li><a href="#so-what-does-this-all-mean" id="toc-so-what-does-this-all-mean" class="nav-link" data-scroll-target="#so-what-does-this-all-mean"><span class="header-section-number">5.5.4</span> So what does this all mean?</a></li>
+  </ul>
+</li>
   </ul></nav>
     </div>
 <!-- main -->
@@ -912,13 +921,43 @@ window.Quarto = {
 </ol>
 </div>
 </div>
-</section></section><section id="explicit-returns" class="level3" data-number="5.2.3"><h3 data-number="5.2.3" class="anchored" data-anchor-id="explicit-returns">
-<span class="header-section-number">5.2.3</span> Explicit Returns</h3>
+</section></section><section id="function-arguments" class="level3" data-number="5.2.3"><h3 data-number="5.2.3" class="anchored" data-anchor-id="function-arguments">
+<span class="header-section-number">5.2.3</span> Function Arguments</h3>
+<p>So far, we’ve been modeling how we believe functions should be used. Specifically, we’ve been using <strong>named arguments</strong> when calling the function (e.g., <code>rescale(nums, na.rm = TRUE, method = "normalize")</code>). Technically, using the name of the argument (<code>na.rm = TRUE</code>) is not required. In fact, this code will still run:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">rescale</span><span class="op">(</span><span class="va">nums</span>, <span class="cn">TRUE</span>, <span class="st">"normalize"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] -1.1797035 -1.0853272 -0.9909510 -0.8965747 -0.8021984 -0.7078221
+ [7]         NA  0.7078221  0.8021984  0.8965747  0.9909510  1.0853272
+[13]  1.1797035         NA</code></pre>
+</div>
+</div>
+<p>However, someone reading the code would have <strong>no clue</strong> that the <code>TRUE</code> argument was associated with deciding whether the NA values should be removed! So, while the names of the arguments are not required, using named arguments can prevent</p>
+<p>Let’s explore</p>
+<p>What if we changed the order of the arguments?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">rescale</span><span class="op">(</span><span class="va">nums</span>, method <span class="op">=</span> <span class="st">"min-max"</span>, na.rm <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] NA NA NA NA NA NA NA NA NA NA NA NA NA NA</code></pre>
+</div>
+</div>
+<p>The code still works! The code works because R is relying on the <strong>names</strong> of the arguments and not the <strong>order</strong> of the arguments.</p>
+<p>But what if we didn’t use the names of the arguments?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">rescale</span><span class="op">(</span><span class="va">x</span>, <span class="cn">FALSE</span>,  <span class="st">"min-max"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NaN</code></pre>
+</div>
+</div>
+<p>Okay, so that still works. But what if we change the order of the arguments?</p>
+<p>we believe they make your code <strong>substantially</strong> easier to understand.</p>
+</section><section id="explicit-returns" class="level3" data-number="5.2.4"><h3 data-number="5.2.4" class="anchored" data-anchor-id="explicit-returns">
+<span class="header-section-number">5.2.4</span> Explicit Returns</h3>
 <p>Now that we’ve explored different options for function inputs, let’s talk more about function outputs. A function output is often called a “return” because of its tie to a <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> statement. You might wonder why you haven’t seen a <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> statement in a function yet and the answer is that <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> statements are a somewhat contentious topic among R programmers. We say “contentious” because many programmers have staunch views of using a <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> statement, either for or against. We think you should be aware of these views so you can decide which option you prefer.</p>
 <p><strong>Option 1</strong>: Using an explicit return</p>
 <p>When we say “explicit return” we mean that there is a <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> statement built in to the body of the function. This would look something like this:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rescale</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rescale</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="va">x_scaled</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
 <span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">x_scaled</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -947,7 +986,7 @@ window.Quarto = {
 <p><strong>Option 2</strong>: Not using an explicit return / Using last value calculated</p>
 <p>This option effectively removes the <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> statement from the function. Instead of using a <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> statement, the function relies on R’s behavior to return the last expression that was run.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rescale</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rescale</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -972,7 +1011,7 @@ window.Quarto = {
 <p>As an R programmer, you will need to decide for yourself which of these two options you prefer. It might be hard to know without trying what option you would prefer, so we encourage you to play around and try both!</p>
 <p>The key is that you must be mindful to not mix and match methods between the two. Take for example a classic function writing mistake:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rescale</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rescale</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="va">x_scaled</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -997,7 +1036,7 @@ window.Quarto = {
 <span class="header-section-number">5.3.1</span> <code>print()</code> Statements</h3>
 <p>Suppose our function wasn’t working as intended.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">10</span><span class="op">:</span><span class="fl">20</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">10</span><span class="op">:</span><span class="fl">20</span></span>
 <span><span class="fu">rescale</span><span class="op">(</span><span class="va">x</span>, method <span class="op">=</span> <span class="st">"min-max"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] -1.5075567 -1.2060454 -0.9045340 -0.6030227 -0.3015113  0.0000000
@@ -1008,7 +1047,7 @@ window.Quarto = {
 <p>One method for debugging is to add a <code><a href="https://rdrr.io/r/base/print.html">print()</a></code> statement into the body of the function. A <code><a href="https://rdrr.io/r/base/print.html">print()</a></code> statement does exactly what it sounds like, it prints the value of an object. For example, <code>print(nums)</code> would output <code>15, 16, 17, 18, 19, 20, NA, 35, 36, 37, 38, 39, 40, NA</code>. Let’s see how this might look.</p>
 <p>Here is the code for the broken function:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rescale</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">na.rm</span> <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">method</span><span class="op">)</span><span class="op">{</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rescale</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">na.rm</span> <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">method</span><span class="op">)</span><span class="op">{</span></span>
 <span>  </span>
 <span>  <span class="kw">if</span> <span class="op">(</span><span class="va">method</span> <span class="op">==</span> <span class="st">"min-max"</span> <span class="op">&amp;</span> <span class="va">na.rm</span> <span class="op">==</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">{</span></span>
 <span>    <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
@@ -1023,7 +1062,7 @@ window.Quarto = {
 </div>
 <p>You might have already spotted our error, but let’s suppose it was less obvious. Since it seems like the incorrect method is being used, we could add a <code><a href="https://rdrr.io/r/base/print.html">print()</a></code> statement at the beginning of the function to print out the value of <code>method</code> being input into the control flow.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rescale</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">na.rm</span> <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">method</span><span class="op">)</span><span class="op">{</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rescale</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">na.rm</span> <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">method</span><span class="op">)</span><span class="op">{</span></span>
 <span>  </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">method</span><span class="op">)</span></span>
 <span>  </span>
@@ -1039,7 +1078,7 @@ window.Quarto = {
 <span><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">rescale</span><span class="op">(</span><span class="va">x</span>, method <span class="op">=</span> <span class="st">"min-max"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">rescale</span><span class="op">(</span><span class="va">x</span>, method <span class="op">=</span> <span class="st">"min-max"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "min-max"</code></pre>
 </div>
@@ -1053,13 +1092,13 @@ window.Quarto = {
 <span class="header-section-number">5.3.2</span> Running the Function Body</h3>
 <p>Another method for finding the bug in a function is to run the <strong>function body</strong> line by line. To do this, you first need to create objects that correspond to the function’s arguments. The <code>rescale()</code> function has three arguments (<code>x</code>, <code>na.rm</code>, and <code>method</code>), so we will need to create three objects with values that should be used.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">10</span><span class="op">:</span><span class="fl">20</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">10</span><span class="op">:</span><span class="fl">20</span></span>
 <span><span class="va">method</span> <span class="op">&lt;-</span> <span class="st">"min-max"</span></span>
 <span><span class="va">na.rm</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Now that we have objects for each of the function arguments, we can run the <strong>inside</strong> of the function. Specifically, we run this code:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="kw">if</span> <span class="op">(</span><span class="va">method</span> <span class="op">==</span> <span class="st">"min-max"</span> <span class="op">&amp;</span> <span class="va">na.rm</span> <span class="op">==</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">{</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="kw">if</span> <span class="op">(</span><span class="va">method</span> <span class="op">==</span> <span class="st">"min-max"</span> <span class="op">&amp;</span> <span class="va">na.rm</span> <span class="op">==</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">{</span></span>
 <span>    <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
 <span>  <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">method</span> <span class="op">==</span> <span class="st">"min-max"</span> <span class="op">&amp;</span> <span class="va">na.rm</span> <span class="op">==</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">values</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">values</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">values</span><span class="op">)</span><span class="op">)</span></span>
@@ -1081,7 +1120,7 @@ window.Quarto = {
 <span class="header-section-number">5.4.1</span> Checking a Single Data Type</h3>
 <p>It might be obvious to us that the <code>rescale()</code> function should only be used with numeric values, but that might not be clear to someone else. We can prevent someone from giving our function a non-numeric input by adding a simple check at the beginning of the function:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rescale</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">na.rm</span> <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">method</span><span class="op">)</span><span class="op">{</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rescale</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">na.rm</span> <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">method</span><span class="op">)</span><span class="op">{</span></span>
 <span>  </span>
 <span>  <span class="co"># check if x is a numeric vector</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">is.numeric</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
@@ -1099,7 +1138,7 @@ window.Quarto = {
 </div>
 <p>The <code><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot()</a></code> function takes one input, the condition you want to check. Here, we are checking if <code>x</code> is a numeric vector. The <code><a href="https://rdrr.io/r/base/numeric.html">is.numeric()</a></code> function will output two possible values, <code>TRUE</code> and <code>FLASE</code>. If the output is <code>FALSE</code>, then <code><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot()</a></code> will terminate the function.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">letters</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"d"</span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb51"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">letters</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"d"</span><span class="op">)</span></span>
 <span><span class="fu">rescale</span><span class="op">(</span><span class="va">letters</span>, method <span class="op">=</span> <span class="st">"min-max"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error in `rescale()`:
@@ -1115,7 +1154,7 @@ window.Quarto = {
 <span class="header-section-number">5.4.2</span> Checking Multiple Data Types</h3>
 <p>In a similar vein, we could check <strong>multiple</strong> data types still using the <code><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot()</a></code> function. We also know the <code>na.rm</code> argument should be a logical value, and the <code>method</code> argument should be a character value. Let’s add these checks into the function!</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rescale</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">na.rm</span> <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">method</span><span class="op">)</span><span class="op">{</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb53"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rescale</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">na.rm</span> <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">method</span><span class="op">)</span><span class="op">{</span></span>
 <span>  </span>
 <span>  <span class="co"># check if all inputs are correct data type</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">is.numeric</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, </span>
@@ -1136,24 +1175,24 @@ window.Quarto = {
 </div>
 <p>You might wonder why we don’t have three <code><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot()</a></code>s, one for each condition:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">is.numeric</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb54"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">is.numeric</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> </span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/logical.html">is.logical</a></span><span class="op">(</span><span class="va">na.rm</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">is.character</a></span><span class="op">(</span><span class="va">method</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>That is a great question! When you give <code><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot()</a></code> multiple inputs (e.g., <code>stopifnot(is.numeric(x), is.logical(na.rm)</code>), <strong>every</strong> input must be <code>TRUE</code> simultaneously for the function to run. If <em>any</em> of the inputs are <code>FALSE</code> the function will stop.</p>
 <p>This is the same as joining these statements with an <code>&amp;</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">is.numeric</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">&amp;</span> <span class="fu"><a href="https://rdrr.io/r/base/logical.html">is.logical</a></span><span class="op">(</span><span class="va">na.rm</span><span class="op">)</span> <span class="op">&amp;</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">is.character</a></span><span class="op">(</span><span class="va">method</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb55"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">is.numeric</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">&amp;</span> <span class="fu"><a href="https://rdrr.io/r/base/logical.html">is.logical</a></span><span class="op">(</span><span class="va">na.rm</span><span class="op">)</span> <span class="op">&amp;</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">is.character</a></span><span class="op">(</span><span class="va">method</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>So, we use the three inputs (separated by commas) because (1) it requires the least amount of typing (instead of three <code><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot()</a></code>s), and (2) it is easier to read (instead of using <code>&amp;</code>s).</p>
 <p>Let’s see if it works! Here are a few unexpected, but reasonable inputs:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">rescale</span><span class="op">(</span><span class="fl">10</span><span class="op">:</span><span class="fl">20</span>, na.rm <span class="op">=</span> <span class="st">"true"</span>, method <span class="op">=</span> <span class="st">"min-max"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb56"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">rescale</span><span class="op">(</span><span class="fl">10</span><span class="op">:</span><span class="fl">20</span>, na.rm <span class="op">=</span> <span class="st">"true"</span>, method <span class="op">=</span> <span class="st">"min-max"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error in `rescale()`:
 ! is.logical(na.rm) is not TRUE</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb52"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">rescale</span><span class="op">(</span><span class="fl">10</span><span class="op">:</span><span class="fl">20</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span>, method <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb58"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">rescale</span><span class="op">(</span><span class="fl">10</span><span class="op">:</span><span class="fl">20</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span>, method <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error in `rescale()`:
 ! is.character(method) is not TRUE</code></pre>
@@ -1163,7 +1202,7 @@ window.Quarto = {
 <span class="header-section-number">5.4.3</span> Checking Object Size</h3>
 <p>Another common input check is to verify that the object(s) being input are the correct size. For example, our <code>rescale()</code> function expects <code>x</code> to be a vector with at least two values. Why? When calculating the standard deviation of <code>x</code>, if the vector has only one value the standard deviation is an <code>NA</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb54"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">5</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb60"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">5</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] NA</code></pre>
@@ -1171,7 +1210,7 @@ window.Quarto = {
 </div>
 <p>To prevent this from happening, we can incorporate one additional check into our <code>rescale()</code> function. Specifically, we can check the <code><a href="https://rdrr.io/r/base/length.html">length()</a></code> of <code>x</code> and verify that it has more than 1 element:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb56"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rescale</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">na.rm</span> <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">method</span><span class="op">)</span><span class="op">{</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb62"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rescale</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">na.rm</span> <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">method</span><span class="op">)</span><span class="op">{</span></span>
 <span>  </span>
 <span>  <span class="co"># check if all inputs are correct data type</span></span>
 <span>  <span class="co"># and x has at least two elements</span></span>
@@ -1194,14 +1233,13 @@ window.Quarto = {
 </div>
 <p>Let’s see if it works!</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb57"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">5</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb63"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">5</span></span>
 <span><span class="fu">rescale</span><span class="op">(</span><span class="va">x</span>, method <span class="op">=</span> <span class="st">"min-max"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error in `rescale()`:
 ! length(x) &gt; 1 is not TRUE</code></pre>
 </div>
 </div>
-<!-- checkin about verifying the length of x is greater than 1 -->
 <div class="callout callout-style-default callout-check-in callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1219,7 +1257,7 @@ window.Quarto = {
 <li><p>What should the final set of input checks be?</p></li>
 </ol>
 <div class="cell" data-flourish="[{&quot;target&quot;:[&quot;is.numeric&quot;,{&quot;mask&quot;:true},{&quot;style&quot;:&quot;text-decoration: underline;&quot;}]},{&quot;target&quot;:[&quot;is.logical&quot;,{&quot;mask&quot;:true},{&quot;style&quot;:&quot;text-decoration: underline;&quot;}]},{&quot;target&quot;:[&quot;is.character&quot;,{&quot;mask&quot;:true},{&quot;style&quot;:&quot;text-decoration: underline;&quot;}]},{&quot;target&quot;:[&quot;blah&quot;,{&quot;mask&quot;:true},{&quot;style&quot;:&quot;text-decoration: underline;&quot;}]}]">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb59"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">is.numeric</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb65"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">is.numeric</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, </span>
 <span>            <span class="fu"><a href="https://rdrr.io/r/base/logical.html">is.logical</a></span><span class="op">(</span><span class="va">na.rm</span><span class="op">)</span>, </span>
 <span>            <span class="fu"><a href="https://rdrr.io/r/base/character.html">is.character</a></span><span class="op">(</span><span class="va">method</span><span class="op">)</span>, </span>
 <span>            <span class="va">blahblahblah</span> <span class="op">&gt;</span> <span class="fl">1</span>, </span>
@@ -1231,11 +1269,90 @@ window.Quarto = {
 </div>
 </section></section><section id="environment-scope-name-masking-dynamic-lookup" class="level2" data-number="5.5"><h2 data-number="5.5" class="anchored" data-anchor-id="environment-scope-name-masking-dynamic-lookup">
 <span class="header-section-number">5.5</span> Environment, Scope, Name Masking &amp; Dynamic Lookup</h2>
+<p>Now that we know how functions behave it’s time to learn some of the hidden details. Let’s start with the concept of a function’s environment.</p>
+<section id="environment" class="level3" data-number="5.5.1"><h3 data-number="5.5.1" class="anchored" data-anchor-id="environment">
+<span class="header-section-number">5.5.1</span> Environment</h3>
+<p>A function has its own environment, a universe that gets opened when you run the function. A function’s environment is separate from the <em>global environment</em>, which is where all the objects you’ve created live (i.e., all the objects that would appear in the Environment tab). We need to first understand how these environments differ before we learn how they can relate to each other.</p>
+<p>Let’s explore this with a simple function:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb66"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">my_function</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="va">num</span> <span class="op">=</span> <span class="fl">67</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">num</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Hopefully you’ve noticed something strange about this function—it has no arguments. We’ve written the function this way so we can explore the difference between a <em>function environment</em> and the <em>global environment</em>.</p>
+<p>What would you expect this code to return?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb67"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">my_function</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>If you guessed <code>67</code> you are correct! When we call <code>my_function()</code> it first creates an object called <code>num</code> that has the value <code>67</code> attached to it, and then returns the value of <code>num</code> (67).</p>
+<p>You might think that since <code>my_function()</code> creates an object <code>num</code> that you could use this object outside the function…</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb68"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">num</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error:
+! object 'num' not found</code></pre>
+</div>
+</div>
+<p>but this object doesn’t exist in the <em>global environment</em>, it only exists in the <em>function environment</em>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/03-global-function-environment.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%" alt="An image with two boxes, one blue and one orange. The orange box is labeled global enviroment with 'my_function()' displayed below. This represents the function (object) that has been globally defined and is accessible to the user. The blue box is labeled function enviornment with 'num = 67' displayed below. This represents the object that has been created by the function (my_function) that IS NOT available to the global environment."></p>
+</figure>
+</div>
+</section><section id="name-masking" class="level3" data-number="5.5.2"><h3 data-number="5.5.2" class="anchored" data-anchor-id="name-masking">
+<span class="header-section-number">5.5.2</span> Name Masking</h3>
+<p>But what if there was an object in the <em>global environment</em> that had the same name as the object in the <em>function environment</em>?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb70"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">num</span> <span class="op">=</span> <span class="fl">65</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/03-name-masking-environmets.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%" alt="The previous image with the global and function environments has been altered slightly. In this image there is one additional object included in the global environment (orange box). The object says 'num = 65'. The object (num) has the same name in the function environment and the global environment, but the value of the object differs."></p>
+</figure>
+</div>
+<p>What do you expect this code will return?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb71"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">my_function</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>If you guessed <code>67</code> you are correct! This is an example of what is called <strong>name masking</strong>, where names (objects) defined inside of a function mask names (objects) defined outside of a function. In this example, <code>num</code> has the value of 65 outside the function, but inside the function <code>num</code> has a value of 67. Functions operate as a closed system where they rely only on the objects within the <em>function environment</em>, which is why <code>my_function()</code> returns 67 and not 65.</p>
+</section><section id="dynamic-lookup" class="level3" data-number="5.5.3"><h3 data-number="5.5.3" class="anchored" data-anchor-id="dynamic-lookup">
+<span class="header-section-number">5.5.3</span> Dynamic Lookup</h3>
+<p>We just said “functions operate as a closed system,” but that is not <strong>always</strong> true. Functions <u>try</u> to operate as a closed system, but sometimes they need to ask for a little help. If we make a small modification to <code>my_function()</code>, you will see what we mean!</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb72"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">my_function</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">num</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Notice, we’ve eliminated the line of the function where <code>num</code> was created (<code>num = 67</code>). However, the function still returns the value of num. So, here’s our new system:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/03-dynamic-lookup.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%" alt="The previous image with the global and function environments has been altered slightly. In this image the 'num = 67' object has been removed from the function enviornment. So, the fuction environment box (in blue) is empty. However, the 'num = 65' object remains in the global environment. Since the num object doesn't exist in the function environment, when the function is called it will need to rely on objects in the global environment."></p>
+</figure>
+</div>
+<p>Now what do you expect this code will return?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb73"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">my_function</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>If you guessed <code>65</code> you are correct! When an object doesn’t exist in the function’s environment then it searches for that object in the global environment. If it can’t find an object in the global environment, the function will error out.</p>
+<p>It is also important to note that because <code>my_function()</code> is relying on objects in the global environment, it is possible that the output can change. If we change the value of <code>num</code> in the global environment, then the output of <code>my_function()</code> will also change:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb74"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">num</span> <span class="op">=</span> <span class="fl">13</span></span>
+<span></span>
+<span><span class="fu">my_function</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 13</code></pre>
+</div>
+</div>
+</section><section id="so-what-does-this-all-mean" class="level3" data-number="5.5.4"><h3 data-number="5.5.4" class="anchored" data-anchor-id="so-what-does-this-all-mean">
+<span class="header-section-number">5.5.4</span> So what does this all mean?</h3>
+<p>This is a lot of technical details, so you might be wondering what the big picture is. Here are the three things you should know:</p>
+<ol type="1">
+<li><p>Objects created in a function <strong>cannot</strong> be accessed in the global environment</p></li>
+<li><p>If an function can’t find an object it is supposed to use within its environment (the function environment), then it will search for that object in the global environment.</p></li>
+</ol>
+<p>In general, we would recommend <strong>not</strong> using the same name for an object in a function and an object in your global environment. For example, you shouldn’t name your dataset <code>data</code> and then use a parameter <code>data</code> in your function.</p>
 <!-- give examples and ask them to identify where the values are pulled from? -->
-<!-- argument order versus names -->
 
 
-</section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+</section></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
 <ol>
 <li id="fn1"><p><a href="https://www.bls.gov/cpi/questions-and-answers.htm">The Bureau of Labor Statistics (BLS)</a> has a database of over 80,000 prices which they sample monthly for more than 200 categories of products and services to determine the CPI and inflation rate. The BLS uses a huge basket because its goal is to get an accurate measure of price changes for consumer goods and services across the U.S. economy.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>If we have vectors that are the <strong>same</strong> length, then each vector can be a column of a dataframe. If they were <em>different</em> lengths we would need to use a list to store them all together!<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
