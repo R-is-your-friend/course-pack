@@ -3,6 +3,8 @@ filters:
  - flourish
 ---
 
+<!-- checkin for scope -->
+
 # Writing Simple Functions in R
 
 ::: callout
@@ -13,34 +15,22 @@ filters:
 - Contrast arguments with and without default values
 - Illustrate how control flow can be used inside the body of a function
 - Explain the differences between explicit and implicit function returns
+- Explain why using named arguments are "defensive" programming
 :::
 
 <!-- Functions they've seen so far: -->
-
 <!-- typeof() -->
-
 <!-- as.character() -->
-
-<!-- as.numeric -->
-
+<!-- as.numeric() -->
 <!-- c() -->
-
-<!-- matrix -->
-
-<!-- list  -->
-
-<!-- data.frame -->
-
+<!-- matrix() -->
+<!-- list()  -->
+<!-- data.frame() -->
 <!-- seq() -->
-
 <!-- sqrt() -->
-
 <!-- length() -->
-
 <!-- sum() -->
-
 <!-- case_when() -->
-
 <!-- print() -->
 
 At this point, you've encountered almost 20 functions either built-in to R 
@@ -250,12 +240,19 @@ general, we advocate to [use verbs as function names](https://style.tidyverse.or
 describes what the function does.
 
 **Function Arguments:** Inside the `()` after `function` is where the
-*arguments* (inputs) of the function are defined. Here we have one argument
+*arguments* (inputs) of the function are defined. All inputs you pass into 
+a function are called arguments. Here we have one argument
 (`x`), but we will learn how to incorporate more than one argument.
 
 **Function Body:** After the `function(x)` there is a `{` which starts the 
 *body* of the function. The body of the function is everything contained between
 the opening `{` and the closing `}`.
+
+**Function Parameter:** A *parameter* is the name of an object once is is 
+inside the function. This might sound a bit confusing, `x` is both an *argument*
+(input) to the function but also a *parameter* inside the function. We won't 
+be upset if you get the two names swapped, but think you should know the
+language people typically use when referring to these objects. 
 
 <!-- [^2: This type of function is not the only type in R: they are called closures (a name with origins in LISP) A closure has three components, its formals (its argument list), its body (expr in the ‘Usage’ section) and its environment which provides the enclosure of the evaluation frame when the closure is used.] -->
 
@@ -274,7 +271,7 @@ rescale <- function(x){ (x - min(x)) / (max(x) - min(x)) }
 ```
 
 ::: callout-check-in
-1.  Now that we have created the `rescale()` function, let's check our intuition
+Now that we have created the `rescale()` function, let's check our intuition
 for what the function should output (return) for different inputs.
 
 ```{r}
@@ -283,16 +280,14 @@ y <- 10:20
 z <- c(1, 4, 5, 6, "dog")
 ```
 
-a.  What would you expect `rescale()` to output when `x` is input?
-b.  What would you expect `rescale()` to output when `y` is input?
-c.  What would you expect `rescale()` to output when `z` is input?
+1.  What would you expect `rescale()` to output when `x` is input?
+2.  What would you expect `rescale()` to output when `y` is input?
+3.  What would you expect `rescale()` to output when `z` is input?
 
-<!-- question about rescale being vectorized -->
+4. True or False: `rescale()` is a *vectorized* function.
 :::
 
-### Arguments & Parameters
-
-<!-- add discussion of difference between argument and parameter -->
+### Adding Additional Arguments (Parameters)
 
 Currently, the `rescale()` function has only one argument (`x`), but what if it
 had more? What are other arguments that we might want the function to use?
@@ -495,14 +490,12 @@ rescale(nums,
 ::: callout-check-in
 
 We know `rescale()` works, so let's test our intuition for what would happen
-for the following scenarios. What do you think will be returned for each of the 
-following pieces of code?
+for the following scenarios. 
 
-2. `rescale(nums, method = "normalize")`
-3. `rescale(nums, method = "min-max")`
-4. `rescale(nums, na.rm = TRUE)`
+5. `rescale(nums, method = "normalize")`
+6. `rescale(nums, method = "min-max")`
+7. `rescale(nums, na.rm = TRUE)`
 :::
-
 
 ### Function Arguments
 
@@ -519,41 +512,37 @@ rescale(nums, TRUE, "normalize")
 However, someone reading the code would have **no clue** that the `TRUE` 
 argument was associated with deciding whether the NA values should be removed!
 So, while the names of the arguments are not required, using named arguments 
-can prevent 
+makes your code more readable / understandable.
 
-Let's explore 
-
-
-What if we changed the order of the arguments?
+Let's explore what happens when we rearrange the order of the arguments. 
+What if we specified `method` first?
 
 ```{r}
-rescale(nums, method = "min-max", na.rm = FALSE)
+rescale(nums, method = "min-max", na.rm = TRUE)
 ```
 
 The code still works! The code works because R is relying on the **names** of 
-the arguments and not the **order** of the arguments. 
-
-
-But what if we didn't use the names of the arguments?
-
-```{r}
-rescale(x, FALSE,  "min-max")
-```
-
-Okay, so that still works. But what if we change the order of the arguments?
+the arguments and not the **order** of the arguments. But what if we didn't use
+the names of the arguments?
 
 ```{r}
 #| error: true
-rescale(x, "min-max", FALSE)
+
+rescale(nums, "min-max", TRUE)
 ```
 
-Now the function hits an error, because it assumes the second argument value, 
-"min-max" is being assigned to the argument `na.rm`, which expected a `TRUE`
-or `FALSE` and not a string.
+Uh oh! Why did we get all `NA`s when we got numbers before? Well, `rescale()` 
+is assuming the second argument is associated with `na.rm` and the third 
+argument is associated with `method`. So, R thinks `na.rm = "min-max"` and 
+`method = TRUE`. Based on the control flow we specified, the first three
+conditions are false. So, we fall into the `else{}` condition which says to 
+perform the following operation: `(x - mean(x)) / sd(x)`. But `x` has `NA`
+values! This is why we end up with a vector of `NA`s. 
 
-We recommend always using **named** arguments for the optional arguments when you 
-call functions, because we believe they make your code **substantially** easier 
-to understand, and they protect you against out-of-order argument issues. 
+![](images/03-incorrect-argument-control-flow.png){fig-alt="An annotated version of the rescale() function created previously. The function body is identical but there are red lines and a red 'FALSE' next to the conditions that would be found to be FALSE. This graphic indicates that all three conditions specified by if() and else if() would be FALSE, so the function would use the else{} condition for these inputs."}
+
+So, what's the takeaway? Always use named arguments, then you don't need to 
+memorize what order the arguments should be specified! 
 
 ### Explicit Returns
 
@@ -774,34 +763,6 @@ this value is being used. Doing this, we should notice that in the first
 (`else`) because `na.rm` was `FALSE` and the `method` didn't match any of the 
 values included in the control flow!
 
-
-#### `print` vs `return` 
-
-Note that using `print()` in a function is not the same as 
-**returning** a value!  They may appear similar, because when a function is
-called, it will automatically print out the *returned* value on the screen.
-
-```{r}
-add_two <- function(x) {
-  print(x + 2)
-}
-
-add_two(3)
-```
-
-However, a `print()` statement *only* prints the value; it does not retain that
-value as an object.  We are not able to save the result of a `print()`  by 
-*assigning* the function output to a variable.
-
-
-```{r}
-result <- add_two(3)
-result
-```
-
-For this reason, we **only** use `print()` for debugging purposes.  A final
-version of a function should **never** include a `print()` call.
-
 ### Running the Function Body
 
 Another method for finding the bug in a function is to run the **function body**
@@ -1019,28 +980,10 @@ rescale(x, method = "min-max")
 We've incorporated a input check for the size of `x`, but not for the size of
 `na.rm` or `method`. 
 
-5. What `length()` should we expect `na.rm` to have?
-
-6. What `length()` should we expect `method` to have?
-
-7. What should the final set of input checks be?
-
 ```{r}
 #| label: all-input-checks
 #| eval: false
 #| flourish:
-#| - target: 
-#|     - "is.numeric"
-#|     - mask: true
-#|     - style: "text-decoration: underline;"
-#| - target: 
-#|     - "is.logical"
-#|     - mask: true
-#|     - style: "text-decoration: underline;"
-#| - target: 
-#|     - "is.character"
-#|     - mask: true
-#|     - style: "text-decoration: underline;"
 #| - target: 
 #|     - "blah"
 #|     - mask: true
@@ -1049,11 +992,21 @@ We've incorporated a input check for the size of `x`, but not for the size of
   stopifnot(is.numeric(x), 
             is.logical(na.rm), 
             is.character(method), 
-            blahblahblah > 1, 
+            length(x) > 1, 
             blahblahblah == 1, 
             blahblahblah == 1
             )
 ```
+
+8. What `length()` should we expect `na.rm` to have? What `length()` should we
+expect `method` to have?
+
+9. What additional input check should the function have?
+
+- Check if the numbers are all positive.
+- Check if the value specified for na.rm is either TRUE or FALSE.
+- Check if the value specified for method is either `"min-max"` or `"normalize"`.
+- Check if the minimum or maximum are infinite.
 :::
 
 ## Environment, Scope, Name Masking & Dynamic Lookup
@@ -1118,7 +1071,7 @@ But what if there was an object in the *global environment* that had the same
 name as the object in the *function environment*?
 
 ```{r}
-num <- 65
+num = 65
 ```
 
 ![](images/03-name-masking-environmets.png){fig-alt="The previous image with the global and function environments has been altered slightly. In this image there is one additional object included in the global environment (orange box). The object says 'num = 65'. The object (num) has the same name in the function environment and the global environment, but the value of the object differs." width=70% fig-align="center"}
@@ -1180,7 +1133,7 @@ change the value of `num` in the global environment, then the output of
 `my_function()` will also change:
 
 ```{r}
-num <- 13
+num = 13
 
 my_function()
 ```
@@ -1201,5 +1154,39 @@ In general, we would recommend **not** using the same name for an object in
 a function and an object in your global environment. For example, you shouldn't 
 name your dataset `data` and then use a parameter `data` in your function.
 
+::: callout-check-in
+::: columns
+::: {.column width="48%"}
+Suppose we've created the following function:
 
-<!-- give examples and ask them to identify where the values are pulled from? -->
+```{r}
+
+friend_or_foe <- function(){
+  if_else(pet == "cat", 
+          "friend", 
+          "foe")
+}
+```
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+And we have the following value in our global environment:
+
+```{r}
+pet <- "cat"
+```
+
+:::
+:::
+
+10. What would `friend_or_foe()` output?
+
+11. What if we ran the following code `pet <- "parrot"`? What would 
+`friend_or_foe()` output?
+
+12. What if there was no object named `pet` in the global environment? What 
+would `friend_or_foe()` output?
+:::

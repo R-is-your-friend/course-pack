@@ -504,7 +504,7 @@ window.Quarto = {
   <ul>
 <li><a href="#syntax" id="toc-syntax" class="nav-link" data-scroll-target="#syntax"><span class="header-section-number">5.2.1</span> Syntax</a></li>
   <li>
-<a href="#arguments-parameters" id="toc-arguments-parameters" class="nav-link" data-scroll-target="#arguments-parameters"><span class="header-section-number">5.2.2</span> Arguments &amp; Parameters</a>
+<a href="#adding-additional-arguments-parameters" id="toc-adding-additional-arguments-parameters" class="nav-link" data-scroll-target="#adding-additional-arguments-parameters"><span class="header-section-number">5.2.2</span> Adding Additional Arguments (Parameters)</a>
   <ul class="collapse">
 <li><a href="#removing-missing-values" id="toc-removing-missing-values" class="nav-link" data-scroll-target="#removing-missing-values"><span class="header-section-number">5.2.2.1</span> Removing Missing Values</a></li>
   <li><a href="#choosing-a-rescale-method" id="toc-choosing-a-rescale-method" class="nav-link" data-scroll-target="#choosing-a-rescale-method"><span class="header-section-number">5.2.2.2</span> Choosing a Rescale Method</a></li>
@@ -558,7 +558,7 @@ window.Quarto = {
   
 
 
-</header><div class="callout callout-style-simple callout-none no-icon callout-titled">
+</header><!-- checkin for scope --><div class="callout callout-style-simple callout-none no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
@@ -574,17 +574,18 @@ window.Quarto = {
 <li>Contrast arguments with and without default values</li>
 <li>Illustrate how control flow can be used inside the body of a function</li>
 <li>Explain the differences between explicit and implicit function returns</li>
+<li>Explain why using named arguments are “defensive” programming</li>
 </ul>
 </div>
 </div>
 <!-- Functions they've seen so far: -->
 <!-- typeof() -->
 <!-- as.character() -->
-<!-- as.numeric -->
+<!-- as.numeric() -->
 <!-- c() -->
-<!-- matrix -->
-<!-- list  -->
-<!-- data.frame -->
+<!-- matrix() -->
+<!-- list()  -->
+<!-- data.frame() -->
 <!-- seq() -->
 <!-- sqrt() -->
 <!-- length() -->
@@ -704,8 +705,9 @@ window.Quarto = {
 <p>Let’s break this down into pieces:</p>
 <p><img src="images/03-function-syntax.png" class="img-fluid" alt="Basic syntax of a function in R. The function 'rescale' is assigned using '<-' to 'function(x)'. The function has one argument, x, which is dilineated with a red arrow and an annotation stating 'function argument (input)'. The body of the function is enclosed in curly brackets which are circled with dashed black lines. Inside the brackets, there is a single line of code '(x - min(x)) / (max(x) - min(x))' which is higlighted in orange with an annotation stating that this code represents the 'function body'."></p>
 <p><strong>Function Name:</strong> When you are reading the code above, the first thing you see is the <strong>name</strong> of the function (<code>rescale</code>). This name is chosen by the user, so we could have equally chosen to name the function <code>bananna</code>. However, that seems like a bad name since it doesn’t indicate what the goal of the function is. In general, we advocate to <a href="https://style.tidyverse.org/functions.html#naming">use verbs as function names</a> where the verb describes what the function does.</p>
-<p><strong>Function Arguments:</strong> Inside the <code>()</code> after <code>function</code> is where the <em>arguments</em> (inputs) of the function are defined. Here we have one argument (<code>x</code>), but we will learn how to incorporate more than one argument.</p>
+<p><strong>Function Arguments:</strong> Inside the <code>()</code> after <code>function</code> is where the <em>arguments</em> (inputs) of the function are defined. All inputs you pass into a function are called arguments. Here we have one argument (<code>x</code>), but we will learn how to incorporate more than one argument.</p>
 <p><strong>Function Body:</strong> After the <code>function(x)</code> there is a <code>{</code> which starts the <em>body</em> of the function. The body of the function is everything contained between the opening <code>{</code> and the closing <code>}</code>.</p>
+<p><strong>Function Parameter:</strong> A <em>parameter</em> is the name of an object once is is inside the function. This might sound a bit confusing, <code>x</code> is both an <em>argument</em> (input) to the function but also a <em>parameter</em> inside the function. We won’t be upset if you get the two names swapped, but think you should know the language people typically use when referring to these objects.</p>
 <!-- [^2: This type of function is not the only type in R: they are called closures (a name with origins in LISP) A closure has three components, its formals (its argument list), its body (expr in the ‘Usage’ section) and its environment which provides the enclosure of the evaluation frame when the closure is used.] -->
 <p><strong>Beginning &amp; Ending the Function:</strong> Similar to other code styling principles we’ve learned, the guideline is for the opening <code>{</code> to be the <em>last</em> character on the line and for the closing <code>}</code> to be placed on its own line. These guidelines are to make your code easier to read / understand. The code below accomplishes the same task as above but is harder to read / understand what is happening:</p>
 <div class="cell">
@@ -721,25 +723,22 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<ol type="1">
-<li>Now that we have created the <code>rescale()</code> function, let’s check our intuition for what the function should output (return) for different inputs.</li>
-</ol>
+<p>Now that we have created the <code>rescale()</code> function, let’s check our intuition for what the function should output (return) for different inputs.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">3</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fl">10</span><span class="op">:</span><span class="fl">20</span></span>
 <span><span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span>, <span class="st">"dog"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<ol type="a">
-<li>What would you expect <code>rescale()</code> to output when <code>x</code> is input?</li>
-<li>What would you expect <code>rescale()</code> to output when <code>y</code> is input?</li>
-<li>What would you expect <code>rescale()</code> to output when <code>z</code> is input?</li>
+<ol type="1">
+<li><p>What would you expect <code>rescale()</code> to output when <code>x</code> is input?</p></li>
+<li><p>What would you expect <code>rescale()</code> to output when <code>y</code> is input?</p></li>
+<li><p>What would you expect <code>rescale()</code> to output when <code>z</code> is input?</p></li>
+<li><p>True or False: <code>rescale()</code> is a <em>vectorized</em> function.</p></li>
 </ol>
-<!-- question about rescale being vectorized -->
 </div>
 </div>
-</section><section id="arguments-parameters" class="level3" data-number="5.2.2"><h3 data-number="5.2.2" class="anchored" data-anchor-id="arguments-parameters">
-<span class="header-section-number">5.2.2</span> Arguments &amp; Parameters</h3>
-<!-- add discussion of difference between argument and parameter -->
+</section><section id="adding-additional-arguments-parameters" class="level3" data-number="5.2.2"><h3 data-number="5.2.2" class="anchored" data-anchor-id="adding-additional-arguments-parameters">
+<span class="header-section-number">5.2.2</span> Adding Additional Arguments (Parameters)</h3>
 <p>Currently, the <code>rescale()</code> function has only one argument (<code>x</code>), but what if it had more? What are other arguments that we might want the function to use?</p>
 <p>Well, suppose we had a vector with some missing values (<code>NA</code>s):</p>
 <div class="cell">
@@ -914,7 +913,7 @@ window.Quarto = {
 </div>
 <div class="callout-body-container callout-body">
 <p>We know <code>rescale()</code> works, so let’s test our intuition for what would happen for the following scenarios.</p>
-<ol start="2" type="1">
+<ol start="5" type="1">
 <li><code>rescale(nums, method = "normalize")</code></li>
 <li><code>rescale(nums, method = "min-max")</code></li>
 <li><code>rescale(nums, na.rm = TRUE)</code></li>
@@ -932,25 +931,24 @@ window.Quarto = {
 [13]  1.1797035         NA</code></pre>
 </div>
 </div>
-<p>However, someone reading the code would have <strong>no clue</strong> that the <code>TRUE</code> argument was associated with deciding whether the NA values should be removed! So, while the names of the arguments are not required, using named arguments can prevent</p>
-<p>Let’s explore</p>
-<p>What if we changed the order of the arguments?</p>
+<p>However, someone reading the code would have <strong>no clue</strong> that the <code>TRUE</code> argument was associated with deciding whether the NA values should be removed! So, while the names of the arguments are not required, using named arguments makes your code more readable / understandable.</p>
+<p>Let’s explore what happens when we rearrange the order of the arguments. What if we specified <code>method</code> first?</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">rescale</span><span class="op">(</span><span class="va">nums</span>, method <span class="op">=</span> <span class="st">"min-max"</span>, na.rm <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">rescale</span><span class="op">(</span><span class="va">nums</span>, method <span class="op">=</span> <span class="st">"min-max"</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 0.00 0.04 0.08 0.12 0.16 0.20   NA 0.80 0.84 0.88 0.92 0.96 1.00   NA</code></pre>
+</div>
+</div>
+<p>The code still works! The code works because R is relying on the <strong>names</strong> of the arguments and not the <strong>order</strong> of the arguments. But what if we didn’t use the names of the arguments?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">rescale</span><span class="op">(</span><span class="va">nums</span>, <span class="st">"min-max"</span>, <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] NA NA NA NA NA NA NA NA NA NA NA NA NA NA</code></pre>
 </div>
 </div>
-<p>The code still works! The code works because R is relying on the <strong>names</strong> of the arguments and not the <strong>order</strong> of the arguments.</p>
-<p>But what if we didn’t use the names of the arguments?</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">rescale</span><span class="op">(</span><span class="va">x</span>, <span class="cn">FALSE</span>,  <span class="st">"min-max"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] NaN</code></pre>
-</div>
-</div>
-<p>Okay, so that still works. But what if we change the order of the arguments?</p>
-<p>we believe they make your code <strong>substantially</strong> easier to understand.</p>
+<p>Uh oh! Why did we get all <code>NA</code>s when we got numbers before? Well, <code>rescale()</code> is assuming the second argument is associated with <code>na.rm</code> and the third argument is associated with <code>method</code>. So, R thinks <code>na.rm = "min-max"</code> and <code>method = TRUE</code>. Based on the control flow we specified, the first three conditions are false. So, we fall into the <code>else{}</code> condition which says to perform the following operation: <code>(x - mean(x)) / sd(x)</code>. But <code>x</code> has <code>NA</code> values! This is why we end up with a vector of <code>NA</code>s.</p>
+<p><img src="images/03-incorrect-argument-control-flow.png" class="img-fluid" alt="An annotated version of the rescale() function created previously. The function body is identical but there are red lines and a red 'FALSE' next to the conditions that would be found to be FALSE. This graphic indicates that all three conditions specified by if() and else if() would be FALSE, so the function would use the else{} condition for these inputs."></p>
+<p>So, what’s the takeaway? Always use named arguments, then you don’t need to memorize what order the arguments should be specified!</p>
 </section><section id="explicit-returns" class="level3" data-number="5.2.4"><h3 data-number="5.2.4" class="anchored" data-anchor-id="explicit-returns">
 <span class="header-section-number">5.2.4</span> Explicit Returns</h3>
 <p>Now that we’ve explored different options for function inputs, let’s talk more about function outputs. A function output is often called a “return” because of its tie to a <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> statement. You might wonder why you haven’t seen a <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> statement in a function yet and the answer is that <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> statements are a somewhat contentious topic among R programmers. We say “contentious” because many programmers have staunch views of using a <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> statement, either for or against. We think you should be aware of these views so you can decide which option you prefer.</p>
@@ -1251,20 +1249,25 @@ window.Quarto = {
 </div>
 <div class="callout-body-container callout-body">
 <p>We’ve incorporated a input check for the size of <code>x</code>, but not for the size of <code>na.rm</code> or <code>method</code>.</p>
-<ol start="5" type="1">
-<li><p>What <code><a href="https://rdrr.io/r/base/length.html">length()</a></code> should we expect <code>na.rm</code> to have?</p></li>
-<li><p>What <code><a href="https://rdrr.io/r/base/length.html">length()</a></code> should we expect <code>method</code> to have?</p></li>
-<li><p>What should the final set of input checks be?</p></li>
-</ol>
-<div class="cell" data-flourish="[{&quot;target&quot;:[&quot;is.numeric&quot;,{&quot;mask&quot;:true},{&quot;style&quot;:&quot;text-decoration: underline;&quot;}]},{&quot;target&quot;:[&quot;is.logical&quot;,{&quot;mask&quot;:true},{&quot;style&quot;:&quot;text-decoration: underline;&quot;}]},{&quot;target&quot;:[&quot;is.character&quot;,{&quot;mask&quot;:true},{&quot;style&quot;:&quot;text-decoration: underline;&quot;}]},{&quot;target&quot;:[&quot;blah&quot;,{&quot;mask&quot;:true},{&quot;style&quot;:&quot;text-decoration: underline;&quot;}]}]">
+<div class="cell" data-flourish="[{&quot;target&quot;:[&quot;blah&quot;,{&quot;mask&quot;:true},{&quot;style&quot;:&quot;text-decoration: underline;&quot;}]}]">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb65"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">is.numeric</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, </span>
 <span>            <span class="fu"><a href="https://rdrr.io/r/base/logical.html">is.logical</a></span><span class="op">(</span><span class="va">na.rm</span><span class="op">)</span>, </span>
 <span>            <span class="fu"><a href="https://rdrr.io/r/base/character.html">is.character</a></span><span class="op">(</span><span class="va">method</span><span class="op">)</span>, </span>
-<span>            <span class="va">blahblahblah</span> <span class="op">&gt;</span> <span class="fl">1</span>, </span>
+<span>            <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">1</span>, </span>
 <span>            <span class="va">blahblahblah</span> <span class="op">==</span> <span class="fl">1</span>, </span>
 <span>            <span class="va">blahblahblah</span> <span class="op">==</span> <span class="fl">1</span></span>
 <span>            <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<ol start="8" type="1">
+<li><p>What <code><a href="https://rdrr.io/r/base/length.html">length()</a></code> should we expect <code>na.rm</code> to have? What <code><a href="https://rdrr.io/r/base/length.html">length()</a></code> should we expect <code>method</code> to have?</p></li>
+<li><p>What additional input check should the function have?</p></li>
+</ol>
+<ul>
+<li>Check if the numbers are all positive.</li>
+<li>Check if the value specified for na.rm is either TRUE or FALSE.</li>
+<li>Check if the value specified for method is either <code>"min-max"</code> or <code>"normalize"</code>.</li>
+<li>Check if the minimum or maximum are infinite.</li>
+</ul>
 </div>
 </div>
 </section></section><section id="environment-scope-name-masking-dynamic-lookup" class="level2" data-number="5.5"><h2 data-number="5.5" class="anchored" data-anchor-id="environment-scope-name-masking-dynamic-lookup">
@@ -1349,7 +1352,42 @@ window.Quarto = {
 <li><p>If an function can’t find an object it is supposed to use within its environment (the function environment), then it will search for that object in the global environment.</p></li>
 </ol>
 <p>In general, we would recommend <strong>not</strong> using the same name for an object in a function and an object in your global environment. For example, you shouldn’t name your dataset <code>data</code> and then use a parameter <code>data</code> in your function.</p>
-<!-- give examples and ask them to identify where the values are pulled from? -->
+<div class="callout callout-style-default callout-check-in callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Check-in</span>Check In
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="columns">
+<div class="column" style="width:48%;">
+<p>Suppose we’ve created the following function:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb76"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">friend_or_foe</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="fu">if_else</span><span class="op">(</span><span class="va">pet</span> <span class="op">==</span> <span class="st">"cat"</span>, </span>
+<span>          <span class="st">"friend"</span>, </span>
+<span>          <span class="st">"foe"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div><div class="column" style="width:4%;">
+
+</div><div class="column" style="width:48%;">
+<p>And we have the following value in our global environment:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb77"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">pet</span> <span class="op">&lt;-</span> <span class="st">"cat"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<ol start="10" type="1">
+<li><p>What would <code>friend_or_foe()</code> output?</p></li>
+<li><p>What if we ran the following code <code>pet &lt;- "parrot"</code>? What would <code>friend_or_foe()</code> output?</p></li>
+<li><p>What if there was no object named <code>pet</code> in the global environment? What would <code>friend_or_foe()</code> output?</p></li>
+</ol>
+</div>
+</div>
 
 
 </section></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
