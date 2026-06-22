@@ -69,6 +69,8 @@ But what if I want more than two categories? Say I want to label each cereal as 
 
 `case_when()` implements a **series** `if-else` statements one after another, so we can create these categories:
 
+<!-- perhaps link back to the case-when content in ch 03a? -->
+
 ```{r}
 #| echo: true
 #| eval: false
@@ -179,6 +181,7 @@ cereal |>
 
 2. What is the general syntax of `case_when()`?
 
+<!-- what kind of answer are you looking for here? -->
 
 3. How do you provide a value for the "rest" of the rows that do not meet the criterias you already included in `case_when()`?
 
