@@ -495,7 +495,8 @@ rescale(nums,
 ::: callout-check-in
 
 We know `rescale()` works, so let's test our intuition for what would happen
-for the following scenarios. 
+for the following scenarios. What do you think will be returned for each of the 
+following pieces of code?
 
 2. `rescale(nums, method = "normalize")`
 3. `rescale(nums, method = "min-max")`
@@ -541,9 +542,18 @@ rescale(x, FALSE,  "min-max")
 
 Okay, so that still works. But what if we change the order of the arguments?
 
+```{r}
+#| error: true
+rescale(x, "min-max", FALSE)
+```
 
-we believe they make 
-your code **substantially** easier to understand. 
+Now the function hits an error, because it assumes the second argument value, 
+"min-max" is being assigned to the argument `na.rm`, which expected a `TRUE`
+or `FALSE` and not a string.
+
+We recommend always using **named** arguments for the optional arguments when you 
+call functions, because we believe they make your code **substantially** easier 
+to understand, and they protect you against out-of-order argument issues. 
 
 ### Explicit Returns
 
@@ -763,6 +773,34 @@ this value is being used. Doing this, we should notice that in the first
 `rescale(x, method = "min-max")` was being thrown into the last condition 
 (`else`) because `na.rm` was `FALSE` and the `method` didn't match any of the 
 values included in the control flow!
+
+
+#### `print` vs `return` 
+
+Note that using `print()` in a function is not the same as 
+**returning** a value!  They may appear similar, because when a function is
+called, it will automatically print out the *returned* value on the screen.
+
+```{r}
+add_two <- function(x) {
+  print(x + 2)
+}
+
+add_two(3)
+```
+
+However, a `print()` statement *only* prints the value; it does not retain that
+value as an object.  We are not able to save the result of a `print()`  by 
+*assigning* the function output to a variable.
+
+
+```{r}
+result <- add_two(3)
+result
+```
+
+For this reason, we **only** use `print()` for debugging purposes.  A final
+version of a function should **never** include a `print()` call.
 
 ### Running the Function Body
 
@@ -1080,7 +1118,7 @@ But what if there was an object in the *global environment* that had the same
 name as the object in the *function environment*?
 
 ```{r}
-num = 65
+num <- 65
 ```
 
 ![](images/03-name-masking-environmets.png){fig-alt="The previous image with the global and function environments has been altered slightly. In this image there is one additional object included in the global environment (orange box). The object says 'num = 65'. The object (num) has the same name in the function environment and the global environment, but the value of the object differs." width=70% fig-align="center"}
@@ -1142,7 +1180,7 @@ change the value of `num` in the global environment, then the output of
 `my_function()` will also change:
 
 ```{r}
-num = 13
+num <- 13
 
 my_function()
 ```
