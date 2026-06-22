@@ -223,7 +223,7 @@ type is used to store complex numbers (e.g., `4 + 3i`). The raw data type is
 possibly the least used data type, whose purpose is to store data at the byte
 level.
 
-**In STAT 1810 and 3820 we will only work with real, integer, character, and
+**In this class, we will only work with real, integer, character, and
 logical data types!**
 
 ## Object Types
@@ -233,6 +233,7 @@ about the different ways data could be stored.
 
 <!-- Give basic info / examples. -->
 <!-- How to create each type of structure. -->
+<!-- [WEBR?] -->
 
 ### Vectors
 
@@ -270,7 +271,7 @@ all the same data type.
 ::: {.callout-check-in}
 
 For each of the examples below, identify what data type do you believe the
-vector will have.
+vector will have.  Try to answer this first *without* running the code.
 
 1. `c(67, 13, 1989, TRUE)`
 2. `c("hello", "goodbye", TRUE)`
@@ -677,10 +678,14 @@ vector of logicals must be the **same** length as the original vector, since
 each logical value  refers to whether that specific element of the vector should
 be kept!
 
+<!-- not technically true since R recycles, which can be confusing... -->
+
 ::: {.callout-check-in}
 
 Given this vector, write code to perform the following operations. *Can you find
 __multiple__ methods?*
+
+<!-- [WEBR?] -->
 
 ```{r}
 #| label: vector-check-in
@@ -694,7 +699,11 @@ fruits <- c("apple",
 
 10. Grab the first three elements of the vector named `fruits`.
 
+<!-- [WEBR?] -->
+
 11. Grab the first, third, and fifth element of the vector named `fruits`.
+
+<!-- [WEBR?] -->
 :::
 
 
@@ -787,6 +796,8 @@ name_matrix[, 2:3]
 Given this matrix, write code to perform the following operations. *Can you find
 __multiple__ methods?*
 
+<!-- [WEBR?] -->
+
 ```{r}
 trees <- c("Malus domestica", 
            "Citrus sinensis", 
@@ -802,9 +813,15 @@ tree_matrix
 12. Grab the tree in the second row, second column of the matrix named 
 `tree_matrix`.
 
+<!-- [WEBR?] -->
+
 13. Grab the trees in the first two rows of the matrix named `tree_matrix`. 
 
+<!-- [WEBR?] -->
+
 14. Grab the trees in the second column of the matrix named `tree_matrix`. 
+
+<!-- [WEBR?] -->
 :::
 
 
@@ -849,6 +866,8 @@ element from either of these vectors, we can use the method we learned
 previously (bracketing). 
 
 <!-- I haven't talked about the third option: [["release_year"]] -->
+<!-- I do think we should mention this option, it becomes relevant in function
+writing... - KB -->
 
 ::: columns
 ::: {.column width="48%"}
@@ -889,6 +908,8 @@ This hopefully motivates why it is nice to give the elements of your list names!
 Given this list, write code to perform the following operations. *Can you find
 __multiple__ methods?*
 
+<!-- [WEBR?] -->
+
 ```{r}
 harvest_window <- c(3, 5, 12, 12, 5, 3)
 
@@ -900,8 +921,12 @@ fruit_tree_harvest
 
 15. Grab the first component (`fruit`) of the list named  `fruit_tree_harvest`.
 
+<!-- [WEBR?] -->
+
 16. Grab the third tree from the `tree` component of the list named 
 `fruit_tree_harvest`.
+
+<!-- [WEBR?] -->
 :::
 
 ### Dataframes
@@ -983,6 +1008,7 @@ This outputs a vector with contents of the second column.
 
 Given this dataframe, write code to perform the following operations. *Can you find
 __multiple__ methods?*
+<!-- [WEBR?] -->
 
 ```{r}
 fruit_trees <- data.frame(fruits, trees, harvest_window)
@@ -991,10 +1017,16 @@ fruit_trees
 
 17. Grab the second column (`trees`) of the `fruit_trees` dataframe.
 
+<!-- [WEBR?] -->
+
 18. Grab the second and third columns (`trees`, `harvest_window`) of the
 `fruit_trees` dataframe.
 
+<!-- [WEBR?] -->
+
 19. Grab the second row of all three columns of the `fruit_trees` dataframe.
+
+<!-- [WEBR?] -->
 :::
 
 ## Mathematical Operations
@@ -1029,6 +1061,7 @@ square root of every value in `nums_matrix`:
 ```{r}
 sqrt(nums_matrix)
 ```
+
 ### Operations on Columns & Rows
 
 It is possible that we might want to perform an operation on a row (or column) 
@@ -1072,7 +1105,8 @@ nums_matrix
 
 
 ::: {.callout-check-in}
-20. What will be the output of the following operation?
+20. What will be the output of the following operation?  Try to answer the question
+first *without* running the code.
 
 ```{r}
 #| eval: false
@@ -1250,6 +1284,8 @@ the number of ___ values in the vector.
 
 22. Fill in the code to find the number of elements of `nums_vector` that 
 are not equal to 13. 
+
+<!-- [WEBR?] -->
 
 ```{r}
 #| eval: false
