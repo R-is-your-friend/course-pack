@@ -366,7 +366,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03b-writing-functions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Functions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Writing Simple Functions in R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -442,7 +442,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./12-more-functions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">12-more-functions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Writing More Complex Functions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -739,12 +739,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section><section id="other-data-types" class="level3" data-number="3.1.4"><h3 data-number="3.1.4" class="anchored" data-anchor-id="other-data-types">
 <span class="header-section-number">3.1.4</span> Other Data Types</h3>
 <p>So far, we’ve covered real (double), integer, character, and logical data types. These form all but two of the atomic data types. The only two that remain are <strong>complex</strong> and <strong>raw</strong>. As you might expect from its name, the complex data type is used to store complex numbers (e.g., <code>4 + 3i</code>). The raw data type is possibly the least used data type, whose purpose is to store data at the byte level.</p>
-<p><strong>In STAT 1810 and 3820 we will only work with real, integer, character, and logical data types!</strong></p>
+<p><strong>In this class, we will only work with real, integer, character, and logical data types!</strong></p>
 </section></section><section id="object-types" class="level2" data-number="3.2"><h2 data-number="3.2" class="anchored" data-anchor-id="object-types">
 <span class="header-section-number">3.2</span> Object Types</h2>
 <p>Now that we’ve learned about the different types of data values, let’s learn about the different ways data could be stored.</p>
-<!-- Give basic info / examples. -->
-<!-- How to create each type of structure. -->
 <section id="vectors" class="level3" data-number="3.2.1"><h3 data-number="3.2.1" class="anchored" data-anchor-id="vectors">
 <span class="header-section-number">3.2.1</span> Vectors</h3>
 <p>You encountered a vector in your last lab assignment! Vectors are created using the <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> function (which stands for concatenate). Vectors have a few important qualities:</p>
@@ -777,12 +775,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>For each of the examples below, identify what data type do you believe the vector will have.</p>
+<p>For each of the examples below, identify what data type do you believe the vector will have. Try to answer this first <em>without</em> running the code.</p>
 <ol type="1">
 <li><code>c(67, 13, 1989, TRUE)</code></li>
 <li><code>c("hello", "goodbye", TRUE)</code></li>
 <li><code>c("TRUE", FALSE, TRUE, "FALSE")</code></li>
 </ol>
+<!-- [WEBR?] --><!-- Add a code chunk where they can do this and check their answer. --><!-- Give a hint to use the typeof() function to discover the datatype. -->
 </div>
 </div>
 </section><section id="multiple-vectors" class="level3" data-number="3.2.2"><h3 data-number="3.2.2" class="anchored" data-anchor-id="multiple-vectors">
@@ -938,7 +937,6 @@ $release_year
 </div>
 </section><section id="are-the-vectors-all-the-same-length" class="level4" data-number="3.2.2.3"><h4 data-number="3.2.2.3" class="anchored" data-anchor-id="are-the-vectors-all-the-same-length">
 <span class="header-section-number">3.2.2.3</span> Are the vectors all the same length?</h4>
-<!-- dataframes or tibbles! -->
 <p>Technically, a list can have <strong>both</strong> entries with different data types <strong>and</strong> entries with different lengths. Both <code>show_name</code> and <code>release_year</code> have 4 items. However, there is more than one character in each show. We can add these characters to a list in the same way as before:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">characters</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Jim"</span>, <span class="st">"Weun"</span>, <span class="st">"Pat"</span>, <span class="st">"Pran"</span>, <span class="st">"Phupha"</span>, <span class="st">"Black"</span>, <span class="st">"Sean"</span><span class="op">)</span></span>
@@ -1129,6 +1127,9 @@ $harvest_window
 </div>
 </div>
 <p>Notice this vector is longer than the previous method (<code>shows[c(2, 4)]</code>)! The vector of logicals must be the <strong>same</strong> length as the original vector, since each logical value refers to whether that specific element of the vector should be kept!</p>
+<!-- From ????: not technically true since R recycles, which can be confusing... -->
+<!-- Allison: Yes, there can be recycling but we want to avoid that. So telling a slight lie -->
+<!-- that the length needs to be the same seems like a good way to avoid this issue. -->
 <div class="callout callout-style-default callout-check-in callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1140,6 +1141,9 @@ $harvest_window
 </div>
 <div class="callout-body-container callout-body">
 <p>Given this vector, write code to perform the following operations. <em>Can you find <strong>multiple</strong> methods?</em></p>
+<!-- [WEBR?] -->
+<!-- There should be a code chunk where this vector is defined and the student can -->
+<!-- try out methods for extracting specific components. -->
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb57"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fruits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"apple"</span>,</span>
 <span>            <span class="st">"orange"</span>, </span>
@@ -1243,6 +1247,9 @@ $harvest_window
 </div>
 <div class="callout-body-container callout-body">
 <p>Given this matrix, write code to perform the following operations. <em>Can you find <strong>multiple</strong> methods?</em></p>
+<!-- [WEBR?] -->
+<!-- There should be a code chunk where this matrix is defined and the student
+can try out methods for extracting specific components. -->
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb72"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">trees</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Malus domestica"</span>, </span>
 <span>           <span class="st">"Citrus sinensis"</span>, </span>
@@ -1304,7 +1311,6 @@ $characters
 </div>
 </div>
 <p>Notice that each of these are once again a vector! If we wanted to grab an element from either of these vectors, we can use the method we learned previously (bracketing).</p>
-<!-- I haven't talked about the third option: [["release_year"]] -->
 <div class="columns">
 <div class="column" style="width:48%;">
 <div class="cell">
@@ -1337,6 +1343,9 @@ $characters
 </div>
 <div class="callout-body-container callout-body">
 <p>Given this list, write code to perform the following operations. <em>Can you find <strong>multiple</strong> methods?</em></p>
+<!-- [WEBR?] -->
+<!-- There should be a code chunk where this list is defined and the student
+can try out methods for extracting specific components. -->
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb84"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">harvest_window</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">5</span>, <span class="fl">12</span>, <span class="fl">12</span>, <span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span></span>
 <span></span>
@@ -1380,6 +1389,7 @@ $harvest_window
 <p>To grab a column from a dataframe you can use <code>[[]]</code> or you can use a <code>$</code>. We prefer using a <code>$</code>, since the components (columns) of a dataframe are <strong>required</strong> to have names.</p>
 <div class="columns">
 <div class="column" style="width:48%;">
+<p>Using <code>$</code> and the column name:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb88"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">shows_releases</span><span class="op">$</span><span class="va">show_name</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -1390,9 +1400,17 @@ $harvest_window
 </div><div class="column" style="width:4%;">
 
 </div><div class="column" style="width:48%;">
-<!-- I technically never covered this option, so it might be confusing? -->
+<p>Using <code>[[]]</code> and the column name:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb90"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">shows_releases</span><span class="op">[[</span><span class="st">"show_name"</span><span class="op">]</span><span class="op">]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Tale of a Thousand Stars" "Bad Buddy"               
+[3] "Moonlight Chicken"        "Not Me"                  </code></pre>
+</div>
+</div>
+<p>Using <code>[[]]</code> and the column number:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb92"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">shows_releases</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Tale of a Thousand Stars" "Bad Buddy"               
 [3] "Moonlight Chicken"        "Not Me"                  </code></pre>
@@ -1412,7 +1430,7 @@ $harvest_window
 <div class="callout-body-container callout-body">
 <p>The <code>$</code> operator is also what we can use to add new columns to a dataframe! Suppose I want to add a column of the rating information for each show to the <code>shows_releases</code> dataframe:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb92"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">shows_releases</span><span class="op">$</span><span class="va">rating</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">9.5</span>, <span class="fl">9.6</span>, <span class="fl">9.1</span>, <span class="fl">9.4</span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb94"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">shows_releases</span><span class="op">$</span><span class="va">rating</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">9.5</span>, <span class="fl">9.6</span>, <span class="fl">9.1</span>, <span class="fl">9.4</span><span class="op">)</span></span>
 <span><span class="va">shows_releases</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                 show_name release_year rating
@@ -1429,7 +1447,7 @@ $harvest_window
 <div class="column" style="width:48%;">
 <p><strong>Grab the First Row</strong></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb94"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">shows_releases</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb96"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">shows_releases</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                 show_name release_year rating
 1 Tale of a Thousand Stars         2021    9.5</code></pre>
@@ -1441,7 +1459,7 @@ $harvest_window
 </div><div class="column" style="width:48%;">
 <p><strong>Grab the Second Column</strong></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb96"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">shows_releases</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb98"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">shows_releases</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2021 2021 2023 2022</code></pre>
 </div>
@@ -1460,8 +1478,11 @@ $harvest_window
 </div>
 <div class="callout-body-container callout-body">
 <p>Given this dataframe, write code to perform the following operations. <em>Can you find <strong>multiple</strong> methods?</em></p>
+<!-- [WEBR?] -->
+<!-- There should be a code chunk where this dataframe is defined and the student
+can try out methods for extracting specific components. -->
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb98"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fruit_trees</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">fruits</span>, <span class="va">trees</span>, <span class="va">harvest_window</span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb100"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fruit_trees</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">fruits</span>, <span class="va">trees</span>, <span class="va">harvest_window</span><span class="op">)</span></span>
 <span><span class="va">fruit_trees</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  fruits               trees harvest_window
@@ -1485,7 +1506,7 @@ $harvest_window
 <p>Now that we know how to extract elements from each of these objects, let’s learn how to perform mathematical operations!</p>
 <p>Suppose we have a matrix of numerical values:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb100"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nums</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">47</span>, <span class="fl">13</span>, <span class="fl">49</span>, <span class="fl">46</span>, <span class="fl">47</span>, <span class="fl">4</span>, <span class="fl">7</span>, <span class="fl">0</span>, <span class="fl">44</span>, <span class="fl">24</span>, <span class="fl">13</span>, <span class="fl">1</span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb102"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nums</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">47</span>, <span class="fl">13</span>, <span class="fl">49</span>, <span class="fl">46</span>, <span class="fl">47</span>, <span class="fl">4</span>, <span class="fl">7</span>, <span class="fl">0</span>, <span class="fl">44</span>, <span class="fl">24</span>, <span class="fl">13</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">nums_matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="va">nums</span>, ncol <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
 <span><span class="va">nums_matrix</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1498,7 +1519,7 @@ $harvest_window
 </div>
 <p>We could multiply <strong>every</strong> value of <code>nums_matrix</code> by <code>-1</code> with this simple code:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb102"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nums_matrix</span> <span class="op">*</span> <span class="op">-</span><span class="fl">1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb104"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nums_matrix</span> <span class="op">*</span> <span class="op">-</span><span class="fl">1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     [,1] [,2] [,3] [,4]
 [1,]  -47  -46   -7  -24
@@ -1509,7 +1530,7 @@ $harvest_window
 <p>Notice how we didn’t need to give R specific instructions to multiply each specific value of <code>nums_matrix</code> by <code>-1</code>? That is the magic of <strong>vectorized</strong> operations—actions that can be done to an entire vector (or matrix)!</p>
 <p>Similar to mathematical operations, there are functions that also operate on vectors of values. We can use the square root function (<code><a href="https://rdrr.io/r/base/MathFun.html">sqrt()</a></code>) to take the square root of every value in <code>nums_matrix</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb104"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">nums_matrix</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb106"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">nums_matrix</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         [,1]     [,2]     [,3]     [,4]
 [1,] 6.855655 6.782330 2.645751 4.898979
@@ -1530,17 +1551,17 @@ $harvest_window
 <li>Extract the first and second rows</li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb106"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nums_matrix</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb108"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nums_matrix</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ol start="2" type="1">
 <li>Do subtraction with <code>- 30</code>.</li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb107"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nums_matrix</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">]</span> <span class="op">-</span> <span class="fl">30</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb109"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nums_matrix</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">]</span> <span class="op">-</span> <span class="fl">30</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Step 3, saving back into the original position, is the tricky part! We need to assign (<code>&lt;-</code>) the values we changed back into their original position (<code>nums_matrix[1:2, 3]</code>). So, our code should look like this:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb108"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nums_matrix</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">nums_matrix</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">]</span> <span class="op">-</span> <span class="fl">30</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb110"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nums_matrix</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">nums_matrix</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">]</span> <span class="op">-</span> <span class="fl">30</span></span>
 <span><span class="va">nums_matrix</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     [,1] [,2] [,3] [,4]
@@ -1560,10 +1581,10 @@ $harvest_window
 </div>
 <div class="callout-body-container callout-body">
 <ol start="20" type="1">
-<li>What will be the output of the following operation?</li>
+<li>What will be the output of the following operation? Try to answer the question first <em>without</em> running the code.</li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb110"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">vec1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb112"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">vec1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span></span>
 <span><span class="va">vec2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">6</span>, <span class="fl">7</span>, <span class="fl">8</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">vec1</span> <span class="op">+</span> <span class="va">vec2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1582,7 +1603,7 @@ $harvest_window
 <span class="header-section-number">3.4.2.1</span> Relational Statements</h4>
 <p>Let’s explore these ideas with a vector of values. We can transform our <code>nums_matrix</code> back into a vector using the <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> function:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb111"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nums_vector</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">nums_matrix</span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb113"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nums_vector</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">nums_matrix</span><span class="op">)</span></span>
 <span><span class="va">nums_vector</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1]  47  13  49  46  47   4 -23 -30  44  24  13   1</code></pre>
@@ -1590,7 +1611,7 @@ $harvest_window
 </div>
 <p>Suppose I wanted to know what indices of <code>nums_vector</code> were equal to <code>13</code>. I could write this as a relational statement: <code>nums_vector == 13</code>. The output of this statement is a vector of logical values indicating whether the value of a particular index satisfied the condition being checked (<code>== 13</code>):</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb113"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nums_vector</span> <span class="op">==</span> <span class="fl">13</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb115"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nums_vector</span> <span class="op">==</span> <span class="fl">13</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE</code></pre>
 </div>
@@ -1613,21 +1634,21 @@ $harvest_window
 <p>I could level up by relational statement by adding a mathematical calculation <em>before</em> the relational comparison. Suppose we wanted to know how many even numbers there were in <code>nums_vector</code>. This would take a couple more steps, but is still a relational comparison!</p>
 <p>First, we check which indices are divisible by 2. The <code>%%</code> operator is the “modulus” operator and returns the <strong>remainder</strong> of each number when divided by <code>2</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb115"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nums_vector</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html">%%</a></span> <span class="fl">2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb117"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nums_vector</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html">%%</a></span> <span class="fl">2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] 1 1 1 0 1 0 1 0 0 0 1 1</code></pre>
 </div>
 </div>
 <p>If a number is even, then the remainder when divided by <code>2</code> should be <code>0</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb117"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nums_vector</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html">%%</a></span> <span class="fl">2</span> <span class="op">==</span> <span class="fl">0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb119"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nums_vector</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html">%%</a></span> <span class="fl">2</span> <span class="op">==</span> <span class="fl">0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] FALSE FALSE FALSE  TRUE FALSE  TRUE FALSE  TRUE  TRUE  TRUE FALSE FALSE</code></pre>
 </div>
 </div>
 <p>I can then use these logical values to extract the entries of <code>nums_vector</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb119"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nums_vector</span><span class="op">[</span><span class="va">nums_vector</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html">%%</a></span> <span class="fl">2</span> <span class="op">==</span> <span class="fl">0</span><span class="op">]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb121"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nums_vector</span><span class="op">[</span><span class="va">nums_vector</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html">%%</a></span> <span class="fl">2</span> <span class="op">==</span> <span class="fl">0</span><span class="op">]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  46   4 -30  44  24</code></pre>
 </div>
@@ -1637,7 +1658,7 @@ $harvest_window
 <span class="header-section-number">3.4.2.3</span> Mathematical Operations with Logical Values</h4>
 <p>Because logical values have equivalent numerical values (<code>TRUE</code> = <code>1</code>, <code>FALSE</code> = <code>0</code>), we can perform mathematical operations with these vectors! If I wanted to know <strong>how many</strong> values in <code>nums_vector</code> were equal to (<code>== 13</code>), then I could <strong>sum</strong> the resulting vector of logicals:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb121"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">nums_vector</span> <span class="op">==</span> <span class="fl">13</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb123"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">nums_vector</span> <span class="op">==</span> <span class="fl">13</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2</code></pre>
 </div>
@@ -1646,14 +1667,14 @@ $harvest_window
 <p>We can also use the sums we calculated from these logical values to calculate <strong>proportions</strong>. Recall that a proportion is the number of instances of an event (e.g., <code>== 13</code>) out of the total number of possible instances. The total possible instances is the number of indices in the vector, or the <code><a href="https://rdrr.io/r/base/length.html">length()</a></code> of the vector!</p>
 <p>Let’s find the proportion of numbers in <code>nums_vector</code> that are greater than or equal to 20:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb123"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">nums_vector</span> <span class="op">&gt;=</span> <span class="fl">20</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">nums_vector</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb125"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">nums_vector</span> <span class="op">&gt;=</span> <span class="fl">20</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">nums_vector</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.5</code></pre>
 </div>
 </div>
 <p>Or the proportion of even numbers in <code>nums_vector</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb125"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">nums_vector</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html">%%</a></span> <span class="fl">2</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">nums_vector</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb127"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">nums_vector</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html">%%</a></span> <span class="fl">2</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">nums_vector</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.4166667</code></pre>
 </div>
@@ -1731,8 +1752,8 @@ $harvest_window
 <li><p>When you add a vector of logical values (i.e., <code>TRUE</code>, <code>FALSE</code>), you get the number of ___ values in the vector.</p></li>
 <li><p>Fill in the code to find the number of elements of <code>nums_vector</code> that are not equal to 13.</p></li>
 </ol>
-<div class="cell" data-flourish="[{&quot;target&quot;:[&quot;sum&quot;,{&quot;mask&quot;:true},{&quot;style&quot;:&quot;text-decoration: underline;&quot;}]},{&quot;target&quot;:[&quot;!=&quot;,{&quot;mask&quot;:true},{&quot;style&quot;:&quot;text-decoration: underline;&quot;}]}]">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb127"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">nums_vector</span> <span class="op">!=</span> <span class="fl">13</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<!-- [WEBR?] --><div class="cell" data-flourish="[{&quot;target&quot;:[&quot;sum&quot;,{&quot;mask&quot;:true},{&quot;style&quot;:&quot;text-decoration: underline;&quot;}]},{&quot;target&quot;:[&quot;!=&quot;,{&quot;mask&quot;:true},{&quot;style&quot;:&quot;text-decoration: underline;&quot;}]}]">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb129"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">nums_vector</span> <span class="op">!=</span> <span class="fl">13</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
