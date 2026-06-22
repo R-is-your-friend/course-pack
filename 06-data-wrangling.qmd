@@ -69,6 +69,7 @@ Let's start exploring the data. Maybe I want to look at the distribution of fibe
 
 Recreate the plot below trying not to look at the code!
 
+<!-- [WEBR?] -->
 
 ```{r}
 #| echo: false
@@ -215,6 +216,8 @@ In `filter()` and `filter_out()`, if the logical condition returns a missing val
 
 Create a new dataset with only Kellogg's and General Mills cereals. 
 
+<!-- [WEBR?] -->
+
 
 ### solution
 
@@ -323,6 +326,7 @@ cereal |>
 ```
 
 Again, this is so much better to read rather than
+
 ```{r}
 #| eval: false
 
@@ -393,6 +397,8 @@ Efficiency note: It is more efficient (and less prone to user-error!) to use `sl
 
 #### Try it
 
+<!-- [WEBR?] -->
+
 1. Find the cereal with the largest amount of fiber. Output just the row for that cereal.
 
 2. Sort the cereals by manufacturer and from the largest to the smallest amount of fiber (within each manufacturer).
@@ -435,6 +441,7 @@ cereal |>
   select(name, manuf, type) |> 
   slice_head()
 ```
+
 However, there is some helpful syntax that let us more flexibly select groups of columns together. This syntax mirrors the base R syntax you learned for using indices, but works with bare column names (you don't have to put quotes around the column names when you use them).
 
 -   `var3:var5`: `select(df, var3:var5)` will give you a data frame with columns var3, anything between var3 and var 5, and var5
@@ -497,6 +504,8 @@ cereal |>
 :::panel-tabset
 
 #### Try it
+
+<!-- [WEBR?] -->
 
 1. Create a new cereal dataset that only has the name of the cereal and any numeric columns.
 
@@ -717,7 +726,7 @@ The real power of `summarize()`, though, is in combination with `group_by()`. We
 
 [[INTRO]]
 
-In order to conduct operations on subsets of a datset separately, we need to first **group** the data with `group_by()` to separate the data into different groups/subsets based on a **categrical** variable.
+In order to conduct operations on subsets of a datset separately, we need to first **group** the data with `group_by()` to separate the data into different groups/subsets based on a **categorical** variable.
 
 Let's look at some elements of the cereal data, grouped by the manufacturer.
 
@@ -829,7 +838,7 @@ On the other hand `mutate()` just edits or creates new columns, so `group_by() +
 :::{.callout-check-in .icon}
 1.  What happens when you group by **two** variables?
 
-2. How many rows and columns will this data frame have? (Try to figure this out before running  code)
+2. How many rows and columns will this data frame have? (Try to figure this out before running code)
 
 ```{r}
 #| eval: false
@@ -839,7 +848,7 @@ cereal |>
   mutate(fiber_carb_rat = mean(fiber / carbo))
 ```
 
-3. How many rows and columns will this data frame have? (Try to figure this out before running  code)
+3. How many rows and columns will this data frame have? (Try to figure this out before running code)
 
 ```{r}
 #| eval: false
@@ -857,6 +866,7 @@ cereal |>
 ### Putting it Together
 
 The power of `dplyr` with the pipe operator is that we can combine verbs in one "pipeline" to wrangle data. 
+<!-- [WEBR?] -->
 
 :::{.callout-check-in .icon}
 **In groups** match the `dplyr` verbs to your suggested steps:
