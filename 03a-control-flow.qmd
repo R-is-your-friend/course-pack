@@ -244,19 +244,19 @@ a condition is false, what happens?
 
 if (income < 11925) {
   0.10
-  } else if (income <= 48475) {
-    0.12
-  } else if (income <= 103350) {
-    0.22
-  } else if (income <= 197300) {
-    0.24
-  } else if (income <= 250525) {
-    0.32
-  } else if (income < 626350){
-    0.35
-  } else {
-    0.37
-  }
+} else if (income <= 48475) {
+  0.12
+} else if (income <= 103350) {
+  0.22
+} else if (income <= 197300) {
+  0.24
+} else if (income <= 250525) {
+  0.32
+} else if (income < 626350){
+  0.35
+} else {
+  0.37
+}
 ```
 :::
 
@@ -278,19 +278,19 @@ income <- 95000
 
 if (income < 11925) {
   0.10
-  } else if (income <= 48475) {
-    0.12
-  } else if (income <= 103350) {
-    0.22
-  } else if (income <= 197300) {
-    0.24
-  } else if (income <= 250525) {
-    0.32
-  } else if (income < 626350){
-    0.35
-  } else {
-    0.37
-    }
+} else if (income <= 48475) {
+  0.12
+} else if (income <= 103350) {
+  0.22
+} else if (income <= 197300) {
+  0.24
+} else if (income <= 250525) {
+  0.32
+} else if (income < 626350){
+  0.35
+} else {
+  0.37
+}
 ```
 
 ::: {.callout-check-in}
@@ -319,20 +319,20 @@ how much each employee will pay in taxes.
 income <- c(611203, 795000, 45000)
 
 if (income < 11925) {
-  tax <- 0.10
-  } else if (income <= 48475) {
-    0.12
-  } else if (income <= 103350) {
-    0.22
-  } else if (income <= 197300) {
-    0.24
-  } else if (income <= 250525) {
-    0.32
-  } else if (income < 626350){
-    0.35
-  } else {
-    0.37
-  }
+  0.10
+} else if (income <= 48475) {
+  0.12
+} else if (income <= 103350) {
+  0.22
+} else if (income <= 197300) {
+  0.24
+} else if (income <= 250525) {
+  0.32
+} else if (income < 626350){
+  0.35
+} else {
+  0.37
+}
 ```
 
 Oh no! Our conditionals didn't work. What happened? 
@@ -358,13 +358,14 @@ single value)
 
 ## Vectorized Operations
 
-So, what do we do if we want to use conditional statements for a vector of
-values? Well, we need to switch from using `if ()`, `else if ()`, and `else` to
-using functions that accept vectors of values. 
+So, what do we do if we want to apply a process using conditional statements 
+to *all* the elements in a vector of values? Well, we need to switch from using 
+`if ()`, `else if ()`, and `else` to using functions that accept vectors of values. 
 
 Luckily for us, vectorized operations are very common in R! Take for example
 finding the square root of a given number. The `sqrt()` function accepts a 
-**vector** of values an outputs the square root of each value. 
+**vector** of values, applies the square root calculation to *each value*, and
+outputs a vector of the results. 
 
 ```{r}
 #| label: vectorize-sqrt
