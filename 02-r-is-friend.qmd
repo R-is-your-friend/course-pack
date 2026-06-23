@@ -231,10 +231,6 @@ logical data types!**
 Now that we've learned about the different types of data values, let's learn
 about the different ways data could be stored. 
 
-<!-- Give basic info / examples. -->
-<!-- How to create each type of structure. -->
-<!-- [WEBR?] -->
-
 ### Vectors
 
 You encountered a vector in your last lab assignment! Vectors are created using
@@ -276,6 +272,11 @@ vector will have.  Try to answer this first *without* running the code.
 1. `c(67, 13, 1989, TRUE)`
 2. `c("hello", "goodbye", TRUE)`
 3. `c("TRUE", FALSE, TRUE, "FALSE")`
+
+
+<!-- [WEBR?] -->
+<!-- Add a code chunk where they can do this and check their answer. -->
+<!-- Give a hint to use the typeof() function to discover the datatype. -->
 :::
 
 ### Multiple Vectors
@@ -410,7 +411,6 @@ shows <- c("Tale of a Thousand Stars",
            "Moonlight Chicken", 
            "Not Me")
 ```
-
 :::
 
 #### Do the vectors have different data types?
@@ -463,7 +463,6 @@ name.
 ![A `list` analogy with a cubby bin. Similar to before, each cubby has different types of items (e.g., puzzles, dolls, legos) but within a cubby the items are all the same. However, now the cubbies all have names identifying the contents of the cubby.](images/02-lists-labeled-cubbies.png){fig-alt="Another picture of a cubby bin with nine different cubby slots. The difference with this cubby bin is that each bin has a label indicating its contents (legos, dolls, trucks, balls, art supplies)." width=50%}
 
 #### Are the vectors all the same length?
-<!-- dataframes or tibbles! -->
 
 Technically, a list can have **both** entries with different data types
 **and** entries with different lengths. Both `show_name` and `release_year` 
@@ -678,7 +677,10 @@ vector of logicals must be the **same** length as the original vector, since
 each logical value  refers to whether that specific element of the vector should
 be kept!
 
-<!-- not technically true since R recycles, which can be confusing... -->
+<!-- From ????: not technically true since R recycles, which can be confusing... -->
+<!-- Allison: Yes, there can be recycling but we want to avoid that. So telling a slight lie -->
+<!-- that the length needs to be the same seems like a good way to avoid this issue. -->
+
 
 ::: {.callout-check-in}
 
@@ -686,6 +688,8 @@ Given this vector, write code to perform the following operations. *Can you find
 __multiple__ methods?*
 
 <!-- [WEBR?] -->
+<!-- There should be a code chunk where this vector is defined and the student can -->
+<!-- try out methods for extracting specific components. -->
 
 ```{r}
 #| label: vector-check-in
@@ -699,11 +703,7 @@ fruits <- c("apple",
 
 10. Grab the first three elements of the vector named `fruits`.
 
-<!-- [WEBR?] -->
-
 11. Grab the first, third, and fifth element of the vector named `fruits`.
-
-<!-- [WEBR?] -->
 :::
 
 
@@ -797,6 +797,8 @@ Given this matrix, write code to perform the following operations. *Can you find
 __multiple__ methods?*
 
 <!-- [WEBR?] -->
+<!-- There should be a code chunk where this matrix is defined and the student
+can try out methods for extracting specific components. -->
 
 ```{r}
 trees <- c("Malus domestica", 
@@ -813,15 +815,9 @@ tree_matrix
 12. Grab the tree in the second row, second column of the matrix named 
 `tree_matrix`.
 
-<!-- [WEBR?] -->
-
 13. Grab the trees in the first two rows of the matrix named `tree_matrix`. 
 
-<!-- [WEBR?] -->
-
 14. Grab the trees in the second column of the matrix named `tree_matrix`. 
-
-<!-- [WEBR?] -->
 :::
 
 
@@ -865,10 +861,6 @@ Notice that each of these are once again a vector! If we wanted to grab an
 element from either of these vectors, we can use the method we learned 
 previously (bracketing). 
 
-<!-- I haven't talked about the third option: [["release_year"]] -->
-<!-- I do think we should mention this option, it becomes relevant in function
-writing... - KB -->
-
 ::: columns
 ::: {.column width="48%"}
 ```{r}
@@ -909,6 +901,8 @@ Given this list, write code to perform the following operations. *Can you find
 __multiple__ methods?*
 
 <!-- [WEBR?] -->
+<!-- There should be a code chunk where this list is defined and the student
+can try out methods for extracting specific components. -->
 
 ```{r}
 harvest_window <- c(3, 5, 12, 12, 5, 3)
@@ -921,12 +915,8 @@ fruit_tree_harvest
 
 15. Grab the first component (`fruit`) of the list named  `fruit_tree_harvest`.
 
-<!-- [WEBR?] -->
-
 16. Grab the third tree from the `tree` component of the list named 
 `fruit_tree_harvest`.
-
-<!-- [WEBR?] -->
 :::
 
 ### Dataframes
@@ -947,6 +937,8 @@ prefer using a `$`, since the components (columns) of a dataframe are
 
 ::: columns
 ::: {.column width="48%"}
+Using `$` and the column name:
+
 ```{r}
 shows_releases$show_name
 ```
@@ -958,11 +950,17 @@ shows_releases$show_name
 
 ::: {.column width="48%"}
 
-<!-- I technically never covered this option, so it might be confusing? -->
+Using `[[]]` and the column name:
 ```{r}
 shows_releases[["show_name"]]
 ```
+
+Using `[[]]` and the column number:
+```{r}
+shows_releases[[1]]
+```
 :::
+
 :::
 
 ::: {.callout-note}
@@ -976,7 +974,6 @@ Suppose I want to add a column of the rating information for each show to the
 shows_releases$rating <- c(9.5, 9.6, 9.1, 9.4)
 shows_releases
 ```
-
 :::
 
 Interestingly, since a dataframe is made up of vectors with the same length, 
@@ -1008,7 +1005,10 @@ This outputs a vector with contents of the second column.
 
 Given this dataframe, write code to perform the following operations. *Can you find
 __multiple__ methods?*
+
 <!-- [WEBR?] -->
+<!-- There should be a code chunk where this dataframe is defined and the student
+can try out methods for extracting specific components. -->
 
 ```{r}
 fruit_trees <- data.frame(fruits, trees, harvest_window)
@@ -1017,16 +1017,10 @@ fruit_trees
 
 17. Grab the second column (`trees`) of the `fruit_trees` dataframe.
 
-<!-- [WEBR?] -->
-
 18. Grab the second and third columns (`trees`, `harvest_window`) of the
 `fruit_trees` dataframe.
 
-<!-- [WEBR?] -->
-
 19. Grab the second row of all three columns of the `fruit_trees` dataframe.
-
-<!-- [WEBR?] -->
 :::
 
 ## Mathematical Operations
@@ -1301,6 +1295,4 @@ are not equal to 13.
 
 sum(nums_vector != 13)
 ```
-
-
 :::
