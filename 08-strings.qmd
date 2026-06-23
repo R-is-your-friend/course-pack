@@ -7,6 +7,9 @@
 + Construct basic regular expressions to match a pattern
 :::
 
+<!-- "basic" regex = lets stick with specific character options like [Aa] or [A-Z] -->
+
+<!-- It would be great to have another custom function example in this chap. -->
 
 <!-- https://r4ds.hadley.nz/strings.html
 https://r4ds.hadley.nz/regexps.html  -->
