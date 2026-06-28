@@ -13,6 +13,7 @@ library(tidyverse)
 ## Learning Objectives
 + Determine what data format is necessary to generate a desired plot or statistical model.
 + Use helper functions like `across()` and `case_when()` with dplyr verbs.
++ Create small vector functions for use in wrangling.
 + Describe the differences between “wide” and “long” format data and how to transition between the two structures.
 + Design and implement more advanced plots
 :::
@@ -191,6 +192,7 @@ cereal |>
 
 ### `across()` 
 
+<!-- maybe a good moment here to use a custom vector function -->
 
 
 :::{.callout-check-in .icon}
