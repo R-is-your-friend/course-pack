@@ -364,7 +364,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03b-writing-functions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Functions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Writing Simple Functions in R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -440,7 +440,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./12-more-functions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">12-more-functions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Writing More Complex Functions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -627,6 +627,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="tab-content">
 <div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
 <p>Recreate the plot below trying not to look at the code!</p>
+<!-- [WEBR?] -->
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -787,6 +788,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="tab-content">
 <div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
 <p>Create a new dataset with only Kellogg’s and General Mills cereals.</p>
+<!-- [WEBR?] -->
 </div>
 <div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
 <p>More elegant solution using <code>%in%</code>:</p>
@@ -1055,6 +1057,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <div class="tab-content">
 <div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
+<!-- [WEBR?] -->
 <ol type="1">
 <li><p>Find the cereal with the largest amount of fiber. Output just the row for that cereal.</p></li>
 <li><p>Sort the cereals by manufacturer and from the largest to the smallest amount of fiber (within each manufacturer).</p></li>
@@ -1184,6 +1187,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <div class="tab-content">
 <div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
+<!-- [WEBR?] -->
 <ol type="1">
 <li><p>Create a new cereal dataset that only has the name of the cereal and any numeric columns.</p></li>
 <li><p>Create a new cereal dataset that has the name of the cereal and columns that start with the letter “c”.</p></li>
@@ -7228,7 +7232,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="header-section-number">8.3.7</span> <code>group_by()</code>
 </h3>
 <p>[[INTRO]]</p>
-<p>In order to conduct operations on subsets of a datset separately, we need to first <strong>group</strong> the data with <code>group_by()</code> to separate the data into different groups/subsets based on a <strong>categrical</strong> variable.</p>
+<p>In order to conduct operations on subsets of a datset separately, we need to first <strong>group</strong> the data with <code>group_by()</code> to separate the data into different groups/subsets based on a <strong>categorical</strong> variable.</p>
 <p>Let’s look at some elements of the cereal data, grouped by the manufacturer.</p>
 <p>When <code>group_by()</code> is used on it’s own, it looks like nothing happens! However, <code>group_by()</code> has added a special grouping attribute to the dataframe, which other <code>dplyr</code> verbs will regonize.</p>
 <div class="cell">
@@ -7939,7 +7943,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section></section><section id="putting-it-together" class="level3" data-number="8.3.8"><h3 data-number="8.3.8" class="anchored" data-anchor-id="putting-it-together">
 <span class="header-section-number">8.3.8</span> Putting it Together</h3>
-<p>The power of <code>dplyr</code> with the pipe operator is that we can combine verbs in one “pipeline” to wrangle data.</p>
+<p>The power of <code>dplyr</code> with the pipe operator is that we can combine verbs in one “pipeline” to wrangle data. <!-- [WEBR?] --></p>
 <div class="callout callout-style-default callout-check-in callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">

@@ -2,13 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.37">
+<meta name="generator" content="quarto-1.8.26">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>9&nbsp; More Wrangling – R is Your Friend</title>
 <style>
-/* Default styles provided by pandoc.
-** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
-*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -68,18 +65,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="./06-data-wrangling.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d0ae9245876894da5ac7e18953ecc5cc.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-2e143f8b817ec5e7a44930ddac25d3c7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-9adb41b64cfd063ebab98e13503fc908.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-2e143f8b817ec5e7a44930ddac25d3c7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-9de65633f6d0f5eeb0068d939eb6178f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-c56aa83846d244a7ab5588d901c86329.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-9de65633f6d0f5eeb0068d939eb6178f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -496,10 +494,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
 
 
-</header><div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div class="callout callout-style-simple callout-none no-icon callout-titled">
+</header><div class="callout callout-style-simple callout-none no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
@@ -511,7 +506,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="callout-body-container callout-body">
 <ul>
 <li>Determine what data format is necessary to generate a desired plot or statistical model.</li>
-<li>Use helper functions like <code><a href="https://dplyr.tidyverse.org/reference/across.html">across()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">case_when()</a></code> with dplyr verbs.</li>
+<li>Use helper functions like <code>across()</code> and <code>case_when()</code> with dplyr verbs.</li>
+<li>Create small vector functions for use in wrangling.</li>
 <li>Describe the differences between “wide” and “long” format data and how to transition between the two structures.</li>
 <li>Design and implement more advanced plots</li>
 </ul>
@@ -523,14 +519,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="if_else-and-case_when" class="level3" data-number="9.1.1"><h3 data-number="9.1.1" class="anchored" data-anchor-id="if_else-and-case_when">
 <span class="header-section-number">9.1.1</span> <code>if_else()</code> and <code>case_when()</code>
 </h3>
-<p>We briefly mentioned that <code><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">case_when()</a></code> are useful helper functions with <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code>, but what do they do?? <code><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">case_when()</a></code> create new categorical (character) variables from an existing numeric or character variable.</p>
-<p><code><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else()</a></code> implements one <code>if-else</code> statement with the format:</p>
+<p>We briefly mentioned that <code>if_else()</code> and <code>case_when()</code> are useful helper functions with <code>mutate()</code>, but what do they do?? <code>if_else()</code> and <code>case_when()</code> create new categorical (character) variables from an existing numeric or character variable.</p>
+<p><code>if_else()</code> implements one <code>if-else</code> statement with the format:</p>
 <p><code>if_else(&lt;CONDITION&gt;, &lt;TRUE OUTPUT&gt;, &lt;FALSE OUTPUT&gt;)</code></p>
-<p>If the logical condition provided is met, then the <code>&lt;TRUE OUTPUT&gt;</code> is returned, otherwise, the <code>&lt;FALSE OUTPUT&gt;</code> is returned. Note that <code><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else()</a></code> does not have a <code>.data =</code> argument – it must be used within <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code>!</p>
+<p>If the logical condition provided is met, then the <code>&lt;TRUE OUTPUT&gt;</code> is returned, otherwise, the <code>&lt;FALSE OUTPUT&gt;</code> is returned. Note that <code>if_else()</code> does not have a <code>.data =</code> argument – it must be used within <code>mutate()</code>!</p>
 <p>For example, let’s say I want to label each cereal as either low or high potassium:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cereal</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>po_category <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">potass</span> <span class="op">&lt;=</span> <span class="fl">100</span>, <span class="st">"low"</span>, <span class="st">"high"</span><span class="op">)</span>,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cereal</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>po_category <span class="op">=</span> <span class="fu">if_else</span><span class="op">(</span><span class="va">potass</span> <span class="op">&lt;=</span> <span class="fl">100</span>, <span class="st">"low"</span>, <span class="st">"high"</span><span class="op">)</span>,</span>
 <span>         .after <span class="op">=</span> <span class="va">potass</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
@@ -2026,10 +2022,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>But what if I want more than two categories? Say I want to label each cereal as “low”, “medium”, “high”, or “very high” potassium.</p>
-<p><code><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">case_when()</a></code> implements a <strong>series</strong> <code>if-else</code> statements one after another, so we can create these categories:</p>
+<p><code>case_when()</code> implements a <strong>series</strong> <code>if-else</code> statements one after another, so we can create these categories:</p>
+<!-- perhaps link back to the case-when content in ch 03a? -->
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cereal</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>po_category <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">case_when</a></span><span class="op">(</span><span class="va">potass</span> <span class="op">==</span> <span class="op">-</span><span class="fl">1</span> <span class="op">~</span> <span class="cn">NA_character_</span>,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cereal</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>po_category <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span><span class="va">potass</span> <span class="op">==</span> <span class="op">-</span><span class="fl">1</span> <span class="op">~</span> <span class="cn">NA_character_</span>,</span>
 <span>                                 <span class="va">potass</span> <span class="op">&lt;=</span> <span class="fl">50</span> <span class="op">~</span> <span class="st">"low"</span>, </span>
 <span>                                 <span class="va">potass</span> <span class="op">&lt;=</span> <span class="fl">75</span> <span class="op">~</span> <span class="st">"medium"</span>,</span>
 <span>                                 <span class="va">potass</span> <span class="op">&lt;=</span> <span class="fl">100</span> <span class="op">~</span> <span class="st">"high"</span>,</span>
@@ -3547,10 +3544,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>Say the logical statements we provided don’t actually capture every row in the data. <code><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">case_when()</a></code> will return a missing value for those rows that weren’t captured:</p>
+<p>Say the logical statements we provided don’t actually capture every row in the data. <code>case_when()</code> will return a missing value for those rows that weren’t captured:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cereal</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>po_category <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">case_when</a></span><span class="op">(</span><span class="va">potass</span> <span class="op">==</span> <span class="op">-</span><span class="fl">1</span> <span class="op">~</span> <span class="cn">NA_character_</span>,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cereal</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>po_category <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span><span class="va">potass</span> <span class="op">==</span> <span class="op">-</span><span class="fl">1</span> <span class="op">~</span> <span class="cn">NA_character_</span>,</span>
 <span>                                 <span class="va">potass</span> <span class="op">&lt;=</span> <span class="fl">50</span> <span class="op">~</span> <span class="st">"low"</span>, </span>
 <span>                                 <span class="va">potass</span> <span class="op">&lt;=</span> <span class="fl">75</span> <span class="op">~</span> <span class="st">"medium"</span>,</span>
 <span>                                 <span class="va">potass</span> <span class="op">&lt;=</span> <span class="fl">100</span> <span class="op">~</span> <span class="st">"high"</span>,</span>
@@ -5052,8 +5049,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>This is a helpful feature to catch if you are missing cases that you wanted to include!</p>
 <p>However, you can also override this for checks (or to save you some typing if you are certain in your conditional statements) by setting a <code>.default</code> value to be returned if none of the previous conditions were met.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cereal</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>po_category <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">case_when</a></span><span class="op">(</span><span class="va">potass</span> <span class="op">==</span> <span class="op">-</span><span class="fl">1</span> <span class="op">~</span> <span class="cn">NA_character_</span>,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cereal</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>po_category <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span><span class="va">potass</span> <span class="op">==</span> <span class="op">-</span><span class="fl">1</span> <span class="op">~</span> <span class="cn">NA_character_</span>,</span>
 <span>                                 <span class="va">potass</span> <span class="op">&lt;=</span> <span class="fl">50</span> <span class="op">~</span> <span class="st">"low"</span>, </span>
 <span>                                 <span class="va">potass</span> <span class="op">&lt;=</span> <span class="fl">75</span> <span class="op">~</span> <span class="st">"medium"</span>,</span>
 <span>                                 <span class="va">potass</span> <span class="op">&lt;=</span> <span class="fl">100</span> <span class="op">~</span> <span class="st">"high"</span>,</span>
@@ -6564,16 +6561,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li><p>Which of <code><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else()</a></code> or <code><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">case_when()</a></code> creates a binary categorical variable? Which can create a categorical variable with more than two levels?</p></li>
-<li><p>What is the general syntax of <code><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">case_when()</a></code>?</p></li>
-<li><p>How do you provide a value for the “rest” of the rows that do not meet the criterias you already included in <code><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">case_when()</a></code>?</p></li>
-<li><p>How are missing values treated in <code><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">case_when()</a></code>?</p></li>
+<li><p>Which of <code>if_else()</code> or <code>case_when()</code> creates a binary categorical variable? Which can create a categorical variable with more than two levels?</p></li>
+<li><p>What is the general syntax of <code>case_when()</code>?</p></li>
+</ol>
+<!-- what kind of answer are you looking for here? --><ol start="3" type="1">
+<li><p>How do you provide a value for the “rest” of the rows that do not meet the criterias you already included in <code>case_when()</code>?</p></li>
+<li><p>How are missing values treated in <code>case_when()</code>?</p></li>
 </ol>
 </div>
 </div>
 </section><section id="across" class="level3" data-number="9.1.2"><h3 data-number="9.1.2" class="anchored" data-anchor-id="across">
 <span class="header-section-number">9.1.2</span> <code>across()</code>
 </h3>
+<!-- maybe a good moment here to use a custom vector function -->
 <div class="callout callout-style-default callout-check-in callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -6585,10 +6585,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li><p>How do functions need to be input into the <code><a href="https://dplyr.tidyverse.org/reference/across.html">across()</a></code> function?</p></li>
+<li><p>How do functions need to be input into the <code>across()</code> function?</p></li>
 <li><p>What does the <code>.x</code> inside the function represent?</p></li>
-<li><p>What does <code><a href="https://dplyr.tidyverse.org/reference/across.html">across()</a></code> do by default to column names?</p></li>
-<li><p>What arguments to <code><a href="https://dplyr.tidyverse.org/reference/across.html">across()</a></code> help you control the resulting column names?</p></li>
+<li><p>What does <code>across()</code> do by default to column names?</p></li>
+<li><p>What arguments to <code>across()</code> help you control the resulting column names?</p></li>
 </ol>
 </div>
 </div>
@@ -6606,8 +6606,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li><p>What does the function <code><a href="https://dplyr.tidyverse.org/reference/pull.html">pull()</a></code> return?</p></li>
-<li><p>When/why would you use <code><a href="https://dplyr.tidyverse.org/reference/pull.html">pull()</a></code> rather than <code>$</code>?</p></li>
+<li><p>What does the function <code>pull()</code> return?</p></li>
+<li><p>When/why would you use <code>pull()</code> rather than <code>$</code>?</p></li>
 </ol>
 </div>
 </div>
