@@ -61,7 +61,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./04-data-is-friend.html" rel="next">
-<link href="./03-control-flow.html" rel="prev">
+<link href="./03a-control-flow.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -217,7 +217,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03-control-flow.html" class="sidebar-item-text sidebar-link">
+  <a href="./03a-control-flow.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Control Flow</span></span></a>
   </div>
 </li>
@@ -411,7 +411,7 @@ Learning Objectives
 <!-- sum() -->
 <!-- case_when() -->
 <!-- print() -->
-<p>At this point, you’ve encountered almost 20 functions either built-in to R (e.g., <code><a href="https://rdrr.io/r/base/MathFun.html">sqrt()</a></code>) or that live in specific packages (e.g., <code>case_when()</code>). For each function, we’ve learned how we can use it to get the results we were after, but we haven’t dug into what makes a function a function. That’s what this reading is about!</p>
+<p>At this point, you’ve encountered almost 20 functions either built-in to R (e.g., <code><a href="https://rdrr.io/r/base/MathFun.html">sqrt()</a></code>) or that live in specific packages (e.g., <code><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when()</a></code>). For each function, we’ve learned how we can use it to get the results we were after, but we haven’t dug into what makes a function a function. That’s what this reading is about!</p>
 <section id="motivation" class="level2" data-number="5.1"><h2 data-number="5.1" class="anchored" data-anchor-id="motivation">
 <span class="header-section-number">5.1</span> Motivation</h2>
 <p>It is common in statistics and data science to need to rescale a variable before including it in a model. Rescaling is quite helpful when variables are on very different scales. In fact, for some machine learning methods (e.g., K-nearest neighbors) it is critical that <strong>every</strong> variable be on the same scale for an analysis.</p>
@@ -695,9 +695,11 @@ Check In
 </div>
 <p>As before, the only way to make a <em>non-vectorized</em> function that takes a single input become <em>vectorized</em> is to take advantage of existing vectorized operations in R:</p>
 <div class="cell">
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tax_rate_vectorized</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">income</span><span class="op">)</span> <span class="op">{</span></span>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span> <span class="co"># needed to load case_when function</span></span>
+<span></span>
+<span><span class="va">tax_rate_vectorized</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">income</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  </span>
-<span>  <span class="fu">case_when</span><span class="op">(</span><span class="va">income</span> <span class="op">&lt;</span> <span class="fl">11925</span> <span class="op">~</span> <span class="fl">0.10</span>, </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span><span class="va">income</span> <span class="op">&lt;</span> <span class="fl">11925</span> <span class="op">~</span> <span class="fl">0.10</span>, </span>
 <span>          <span class="va">income</span> <span class="op">&lt;=</span> <span class="fl">48475</span> <span class="op">~</span> <span class="fl">0.12</span>, </span>
 <span>          <span class="va">income</span> <span class="op">&lt;=</span> <span class="fl">103350</span> <span class="op">~</span> <span class="fl">0.22</span>, </span>
 <span>          <span class="va">income</span> <span class="op">&lt;=</span> <span class="fl">197300</span> <span class="op">~</span> <span class="fl">0.24</span>, </span>
@@ -710,8 +712,8 @@ Check In
 <span></span>
 <span><span class="va">incomes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">611203</span>, <span class="fl">795000</span>, <span class="fl">45000</span><span class="op">)</span></span>
 <span><span class="fu">tax_rate_vectorized</span><span class="op">(</span><span class="va">incomes</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in case_when(income &lt; 11925 ~ 0.1, income &lt;= 48475 ~ 0.12, income &lt;= : could not find function "case_when"</code></pre>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.35 0.37 0.12</code></pre>
 </div>
 </div>
 <section id="loops-and-functions" class="level4" data-number="5.2.4.1"><h4 data-number="5.2.4.1" class="anchored" data-anchor-id="loops-and-functions">
@@ -834,7 +836,7 @@ Check In
 <p>Suppose we’ve created the following function:</p>
 <div class="cell">
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">friend_or_foe</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span><span class="op">{</span></span>
-<span>  <span class="fu">if_else</span><span class="op">(</span><span class="va">pet</span> <span class="op">==</span> <span class="st">"cat"</span>, </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">pet</span> <span class="op">==</span> <span class="st">"cat"</span>, </span>
 <span>          <span class="st">"friend"</span>, </span>
 <span>          <span class="st">"foe"</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1421,7 +1423,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./03-control-flow.html" class="pagination-link" aria-label="Control Flow">
+      <a href="./03a-control-flow.html" class="pagination-link" aria-label="Control Flow">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Control Flow</span></span>
       </a>          
   </div>
