@@ -507,6 +507,8 @@ in R:
 ```{r}
 #| label: tax-rate-vectorized
 
+library(dplyr) # needed to load case_when function
+
 tax_rate_vectorized <- function(income) {
   
   case_when(income < 11925 ~ 0.10, 
