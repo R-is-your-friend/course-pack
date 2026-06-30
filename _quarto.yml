@@ -14,7 +14,7 @@ book:
     - 01-what-is-code.qmd
     - 02-r-is-friend.qmd
     - 03a-control-flow.qmd
-    - 04-writing-functions.qmd
+    - 03b-writing-functions.qmd
     - 04-data-is-friend.qmd
   - part: "Data Wrangling and Visualization"
     chapters:
