@@ -13,11 +13,9 @@ filters:
 - Understand the components of a function
 - Outline how function arguments are used
 - Write simple functions with vector input and output
-- Contrast arguments with and without default values
-- Illustrate how control flow can be used inside the body of a function
-- Explain the differences between explicit and implicit function returns
-- Explain what it means for a function to be "vectorized"
-- Explain why using named arguments are "defensive" programming
+- Practice unit testing custom functions
+- Illustrate how `if()` statements can be used inside a function body
+- Illustrate how loops can be used to call a function many times
 :::
 
 <!-- Functions they've seen so far: -->
@@ -381,6 +379,11 @@ for what the function should output (return) for different inputs.
 :::
 
 
+## Control Flow and Functions
+
+Now that we have practiced creating simple functions, let's revisit how control
+flow can be used to create more nuanced code processes.
+
 ### `if()` statements in functions
 
 The DRY principle tells us we should avoid repeating similar code as much as
@@ -452,7 +455,14 @@ tax_rate(795000)
 tax_rate(45000)
 ```
 
-<!-- check in here -->
+::: callout-check-in
+Think about some ways that the `tax_rate` function 
+
+4.  What would you expect `tax_rate()` to output when a *character* object is input?  Why?
+5.  What would you expect `tax_rate()` to output when no arguments are provided?  Why?
+6.  What would you expect `tax_rate()` to output when a numeric vector is input? Why?
+:::
+
 
 
 ### Vectorized functions
@@ -468,8 +478,7 @@ applies the operation to *each element* of the vector and returns the results.
 
 Neither `rescale` nor `tax_rate` is a vectorized function!  
 
-`rescale` does take
-a vector as input, but it applies a process to *the whole vector at once*, not
+`rescale()` does take a vector as input, but it applies a process to *the whole vector at once*, not
 to one element at a time.  That is, we could not replace
 
 ```{r}
@@ -488,7 +497,7 @@ rescale(2)
 rescale(3)
 ```
 
-As for `tax_rate` we have already seen that we get the error message 
+As for `tax_rate` we have already seen in previous readings that we get the error message 
 `"the condition has length > 1"` when a vector is entered into an `if()`
 statement.  In function form, this same error is still triggered.
 
@@ -526,7 +535,7 @@ incomes <- c(611203, 795000, 45000)
 tax_rate_vectorized(incomes)
 ```
 
-#### Loops and functions
+### Loops and functions
 
 What to do if we truly cannot vectorize our function, but we need to run it
 on a long vector of values?  We can make use of *loops* to call the function 
@@ -549,9 +558,44 @@ for (income in incomes) {
 ```
 
 Here we have only printed out the seven tax rates, not stored them in a *vector*
-object.  This is a major disadvantage of unvectorized functions.  Although there
-are certainly ways to solve this problem, they are more complicated than we wish
-to tackle at this stage.  For now, we will stick with vectorized functions.
+object.  This is a major disadvantage of unvectorized functions - we can repeat
+the function over many values, but we don't get back a new object containing all
+our results.  Although there are certainly ways to solve this problem, they are 
+more complicated than we wish to tackle at this stage.  For now, we will stick 
+with using built-in vectorized functions whenever possible!
+
+::: callout-check-in
+7,8,9. Suppose we want to use a *loop* to rescale the vectors `cpi`, `ppe`, 
+and `pci`.  What should go in the blanks below?
+
+
+```{r}
+#| flourish:
+#| - target: 
+#|     - "1:3"
+#|     - mask: true
+#|     - style: "text-decoration: underline;"
+#| - target: 
+#|     - "rescale"
+#|     - mask: true
+#|     - style: "text-decoration: underline;"
+#| - target-rx: 
+#|     - "(?<=\\[)i"
+#|     - mask: true
+#|     - style: "text-decoration: underline;"
+
+
+economy_data <- list(cpi, ppi, pce)
+
+for(i in 1:3) {
+  
+  economy_data[[i]] <- rescale(economy_data[[i]])
+  
+}
+```
+
+:::
+
 
 
 ## Environment, Scope, Name Masking & Dynamic Lookup
