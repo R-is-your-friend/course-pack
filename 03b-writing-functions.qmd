@@ -378,6 +378,135 @@ for what the function should output (return) for different inputs.
 3.  What would you expect `rescale()` to output when `test_type` is input?
 :::
 
+### Explicit Returns
+
+A function output is often called a "return" because of 
+its tie to a `return()` statement. You might wonder why you haven't seen a 
+`return()` statement in a function yet and the answer is that `return()`
+statements are a somewhat contentious topic among R programmers. We say
+"contentious" because many programmers have staunch views of using a `return()`
+statement, either for or against. We think you should be aware of these views so
+you can decide which option you prefer.
+
+**Option 1**: Using an explicit return
+
+When we say "explicit return" we mean that there is a `return()` statement built 
+in to the body of the function. This would look something like this:
+
+```{r}
+#| label: explicit-return
+
+rescale <- function(x){
+  x_scaled <- (x - min(x)) / (max(x) - min(x))
+  return(x_scaled)
+}
+
+```
+
+Notice how the results of the rescaling are saved into an object (`x_scaled`) and 
+then the `return()` statement *explicitly* states that `x_scaled` should be returned 
+(output). Here are a few pros and cons of this method!
+
+:::::: columns
+::: {.column width="48%"}
+✅ Pros of Explicit `return()`
+
+- Clarity and explicit intent
+- Consistency with other languages
+
+<!-- - Using a `return()` mimics the behavior that other programming languages  -->
+<!-- require (e.g., Python).  -->
+<!-- - A `return()` statement is easy to see (it is printed as a different color in -->
+<!-- RStudio), so it makes it easier to notice if your function is outputting what -->
+<!-- you want it to.  -->
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+⚠️ Cons of Explicit `return()`
+
+- More typing / slightly less idiomatic use of R
+- Can be overused in simple functions
+- Can complicate control flow unnecessarily
+
+<!-- - The R programming language does not require an explicit return. Instead, R -->
+<!-- will return the last value that was calculated.  -->
+<!-- - This typically means you need to save a object that will then be returned,  -->
+<!-- which adds an additional step to the code. -->
+:::
+::::::
+
+**Option 2**: Not using an explicit return / Using last value calculated
+
+This option effectively removes the `return()` statement from the function. 
+Instead of using a `return()` statement, the function relies on R's behavior to 
+return the last expression that was run.
+
+```{r}
+#| label: no-explicit-return
+
+rescale <- function(x){
+  (x - min(x)) / (max(x) - min(x))
+}
+```
+
+:::::: columns
+::: {.column width="48%"}
+✅ Pros of Implicit Return (no `return()` statement)
+
+- Concise and idiomatic
+- Encourages "last expression" thinking
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+⚠️ Cons of Implicit Return
+
+- Less obvious for beginners
+- Harder to do early exits (i.e., your function ends early for certain inputs)
+:::
+::::::
+
+**Choosing an Option**
+
+As an R programmer, you will need to decide for yourself which of these two
+options you prefer. It might be hard to know without trying what option you 
+would prefer, so we encourage you to play around and try both!
+
+The key is that you must be mindful to not mix and match methods between the
+two. Take for example a classic function writing mistake:
+
+```{r}
+#| label: save-object-no-return
+#| eval: false
+
+rescale <- function(x){
+  x_scaled <- (x - min(x)) / (max(x) - min(x))
+}
+```
+
+If we were to try and use this function to rescale a vector (e.g., `rescale(y)`)
+nothing would be output. That is because the rescaled values are saved into an
+object (`x_scaled`) but never returned.[^1]
+
+[^1]: This is a bit of a lie; if a function does not have
+an explicit return or an output value, if defaults to *silently* returning the 
+last stored object.  However, functions like this are extremely unclear, since 
+nothing prints out when you call them - you should avoid creating functions that 
+rely on this behavior.
+
+::: callout-note
+# Consistency with code style guide
+
+Technically, the code style guide we've been using takes an anti explicit return
+stance. If you want to hear more about their thinking, you can look at 
+[these examples](https://style.tidyverse.org/functions.html#return).
+:::
+
 
 ## Control Flow and Functions
 
