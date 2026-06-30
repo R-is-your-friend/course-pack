@@ -436,7 +436,8 @@ Yes!!!
 ::: {.callout-check-in}
 5. A function is "vectorized" if it accepts a 
 [vector / matrix / dataframe / list] with length 
-[equal to / greater than / less than] 1 as an input. 
+[equal to / greater than / less than] 1 as an input and applies a process
+to every value. 
 
 :::
 
