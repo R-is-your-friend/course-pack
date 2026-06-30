@@ -115,7 +115,7 @@ For each of the *function calls* below, indicate if this would result in
 (b) No error, but an incorrect result
 (c) A correct result
 
-1.  `divide(17, 3, TRUE)`
+1. `divide(17, 3, TRUE)`
 2. `divide(round = TRUE, y = 3, x = 17)`
 3. `divide(17, 3, round = TRUE)`
 4. `divide(round = TRUE, 3, 17)`
@@ -124,6 +124,10 @@ For each of the *function calls* below, indicate if this would result in
 :::
 
 ## Custom Functions: Motivation
+
+Instead of using existing functions, what if we want to write our *own* special
+functions?  You might wonder why this would ever be necessary, since so many
+R functions already exist.  Consider the following setting for a data analysis:
 
 It is common in statistics and data science to need to rescale a variable before
 including it in a model. Rescaling is quite helpful when variables are on very
