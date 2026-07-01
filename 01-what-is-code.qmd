@@ -1,4 +1,4 @@
-# What is Code
+# What is Code {.unnumbered}
 
 ::: callout
 ## Learning Objectives

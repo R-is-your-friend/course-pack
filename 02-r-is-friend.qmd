@@ -3,7 +3,7 @@ filters:
  - flourish
 ---
 
-# R is Friend
+# R is Friend {.unnumbered}
 
 ::: callout
 ## Learning Objectives

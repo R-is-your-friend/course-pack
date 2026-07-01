@@ -1,4 +1,4 @@
-# Factors
+# Factors {.unnumbered}
 
 ::: callout
 ## Learning Objectives

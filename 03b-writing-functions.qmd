@@ -3,7 +3,7 @@ filters:
  - flourish
 ---
 
-# Writing Simple Functions in R
+# Writing Simple Functions in R {.unnumbered}
 
 ::: callout
 ## Learning Objectives

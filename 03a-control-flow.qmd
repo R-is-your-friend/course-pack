@@ -3,7 +3,7 @@ filters:
  - flourish
 ---
 
-# Control Flow
+# Control Flow {.unnumbered}
 
 ::: callout
 ## Learning Objectives

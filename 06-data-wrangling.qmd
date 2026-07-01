@@ -1,4 +1,4 @@
-# Data Wrangling
+# Data Wrangling {.unnumbered}
 
 ::: callout
 ## Learning Objectives
