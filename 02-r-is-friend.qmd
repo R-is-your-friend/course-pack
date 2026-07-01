@@ -3,7 +3,7 @@ filters:
  - flourish
 ---
 
-# R is Friend
+# R is Friend {.unnumbered}
 
 ::: callout
 ## Learning Objectives
@@ -223,16 +223,13 @@ type is used to store complex numbers (e.g., `4 + 3i`). The raw data type is
 possibly the least used data type, whose purpose is to store data at the byte
 level.
 
-**In STAT 1810 and 3820 we will only work with real, integer, character, and
+**In this class, we will only work with real, integer, character, and
 logical data types!**
 
 ## Object Types
 
 Now that we've learned about the different types of data values, let's learn
 about the different ways data could be stored. 
-
-<!-- Give basic info / examples. -->
-<!-- How to create each type of structure. -->
 
 ### Vectors
 
@@ -270,11 +267,16 @@ all the same data type.
 ::: {.callout-check-in}
 
 For each of the examples below, identify what data type do you believe the
-vector will have.
+vector will have.  Try to answer this first *without* running the code.
 
 1. `c(67, 13, 1989, TRUE)`
 2. `c("hello", "goodbye", TRUE)`
 3. `c("TRUE", FALSE, TRUE, "FALSE")`
+
+
+<!-- [WEBR?] -->
+<!-- Add a code chunk where they can do this and check their answer. -->
+<!-- Give a hint to use the typeof() function to discover the datatype. -->
 :::
 
 ### Multiple Vectors
@@ -409,7 +411,6 @@ shows <- c("Tale of a Thousand Stars",
            "Moonlight Chicken", 
            "Not Me")
 ```
-
 :::
 
 #### Do the vectors have different data types?
@@ -462,7 +463,6 @@ name.
 ![A `list` analogy with a cubby bin. Similar to before, each cubby has different types of items (e.g., puzzles, dolls, legos) but within a cubby the items are all the same. However, now the cubbies all have names identifying the contents of the cubby.](images/02-lists-labeled-cubbies.png){fig-alt="Another picture of a cubby bin with nine different cubby slots. The difference with this cubby bin is that each bin has a label indicating its contents (legos, dolls, trucks, balls, art supplies)." width=50%}
 
 #### Are the vectors all the same length?
-<!-- dataframes or tibbles! -->
 
 Technically, a list can have **both** entries with different data types
 **and** entries with different lengths. Both `show_name` and `release_year` 
@@ -677,10 +677,19 @@ vector of logicals must be the **same** length as the original vector, since
 each logical value  refers to whether that specific element of the vector should
 be kept!
 
+<!-- From ????: not technically true since R recycles, which can be confusing... -->
+<!-- Allison: Yes, there can be recycling but we want to avoid that. So telling a slight lie -->
+<!-- that the length needs to be the same seems like a good way to avoid this issue. -->
+
+
 ::: {.callout-check-in}
 
 Given this vector, write code to perform the following operations. *Can you find
 __multiple__ methods?*
+
+<!-- [WEBR?] -->
+<!-- There should be a code chunk where this vector is defined and the student can -->
+<!-- try out methods for extracting specific components. -->
 
 ```{r}
 #| label: vector-check-in
@@ -787,6 +796,10 @@ name_matrix[, 2:3]
 Given this matrix, write code to perform the following operations. *Can you find
 __multiple__ methods?*
 
+<!-- [WEBR?] -->
+<!-- There should be a code chunk where this matrix is defined and the student
+can try out methods for extracting specific components. -->
+
 ```{r}
 trees <- c("Malus domestica", 
            "Citrus sinensis", 
@@ -848,8 +861,6 @@ Notice that each of these are once again a vector! If we wanted to grab an
 element from either of these vectors, we can use the method we learned 
 previously (bracketing). 
 
-<!-- I haven't talked about the third option: [["release_year"]] -->
-
 ::: columns
 ::: {.column width="48%"}
 ```{r}
@@ -889,6 +900,10 @@ This hopefully motivates why it is nice to give the elements of your list names!
 Given this list, write code to perform the following operations. *Can you find
 __multiple__ methods?*
 
+<!-- [WEBR?] -->
+<!-- There should be a code chunk where this list is defined and the student
+can try out methods for extracting specific components. -->
+
 ```{r}
 harvest_window <- c(3, 5, 12, 12, 5, 3)
 
@@ -922,6 +937,8 @@ prefer using a `$`, since the components (columns) of a dataframe are
 
 ::: columns
 ::: {.column width="48%"}
+Using `$` and the column name:
+
 ```{r}
 shows_releases$show_name
 ```
@@ -933,11 +950,17 @@ shows_releases$show_name
 
 ::: {.column width="48%"}
 
-<!-- I technically never covered this option, so it might be confusing? -->
+Using `[[]]` and the column name:
 ```{r}
 shows_releases[["show_name"]]
 ```
+
+Using `[[]]` and the column number:
+```{r}
+shows_releases[[1]]
+```
 :::
+
 :::
 
 ::: {.callout-note}
@@ -951,7 +974,6 @@ Suppose I want to add a column of the rating information for each show to the
 shows_releases$rating <- c(9.5, 9.6, 9.1, 9.4)
 shows_releases
 ```
-
 :::
 
 Interestingly, since a dataframe is made up of vectors with the same length, 
@@ -983,6 +1005,10 @@ This outputs a vector with contents of the second column.
 
 Given this dataframe, write code to perform the following operations. *Can you find
 __multiple__ methods?*
+
+<!-- [WEBR?] -->
+<!-- There should be a code chunk where this dataframe is defined and the student
+can try out methods for extracting specific components. -->
 
 ```{r}
 fruit_trees <- data.frame(fruits, trees, harvest_window)
@@ -1029,6 +1055,7 @@ square root of every value in `nums_matrix`:
 ```{r}
 sqrt(nums_matrix)
 ```
+
 ### Operations on Columns & Rows
 
 It is possible that we might want to perform an operation on a row (or column) 
@@ -1072,7 +1099,8 @@ nums_matrix
 
 
 ::: {.callout-check-in}
-20. What will be the output of the following operation?
+20. What will be the output of the following operation?  Try to answer the question
+first *without* running the code.
 
 ```{r}
 #| eval: false
@@ -1251,6 +1279,8 @@ the number of ___ values in the vector.
 22. Fill in the code to find the number of elements of `nums_vector` that 
 are not equal to 13. 
 
+<!-- [WEBR?] -->
+
 ```{r}
 #| eval: false
 #| flourish:
@@ -1265,6 +1295,4 @@ are not equal to 13.
 
 sum(nums_vector != 13)
 ```
-
-
 :::

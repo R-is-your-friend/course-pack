@@ -8,28 +8,44 @@ book:
   date: last-modified
   chapters:
   - index.qmd
-  - part: "Fundamentals of Coding"
+  - part: "**Fundamentals of Coding**"
     chapters: 
-    - 00-setup.qmd
-    - 01-what-is-code.qmd
-    - 02-r-is-friend.qmd
-    - 03a-control-flow.qmd
-    - 03b-writing-functions.qmd
-    - 04-data-is-friend.qmd
-  - part: "Data Wrangling and Visualization"
+    - text: "Chapter 0: Setup"
+      href: 00-setup.qmd
+    - text: "Chapter 1: What is code?"
+      href: 01-what-is-code.qmd
+    - text: "Chapter 2: R is Friend"
+      href: 02-r-is-friend.qmd
+    - text: "Chapter 3a: Control Flow"
+      href: 03a-control-flow.qmd
+    - text: "Chapter 3b: Writing Simple Functions"
+      href: 03b-writing-functions.qmd
+    - text: "Chapter 4: Data is Friend"
+      href: 04-data-is-friend.qmd
+  - part: "**Data Wrangling and Visualization**"
     chapters:
-    - 05-data-visualizations.qmd
-    - 06-data-wrangling.qmd
-    - 07-more-wrangling.qmd
-    - 08-strings.qmd
-    - 09-dates.qmd
-    - 10-factors.qmd
-    - 11-communication.qmd
-  - part: "Modeling and Functions"
+    - text: "Chapter 5: Data Visualizations"
+      href: 05-data-visualizations.qmd
+    - text: "Chapter 6: Data Wrangling"
+      href: 06-data-wrangling.qmd
+    - text: "Chapter 7: More Wrangling"
+      href: 07-more-wrangling.qmd
+    - text: "Chapter 8: Strings"
+      href: 08-strings.qmd
+    - text: "Chapter 9: Dates"
+      href: 09-dates.qmd
+    - text: "Chapter 10: Factors"
+      href: 10-factors.qmd
+    - text: "Chapter 11: Communication"
+      href: 11-communication.qmd
+  - part: "**Modeling and Functions**"
     chapters:
-    - 12-more-functions.qmd
-    - 13-regression.qmd
-    - 14-simulation.qmd
+    - text: "Chapter 12: Writing More Complex Functions"
+      href: 12-more-functions.qmd
+    - text: "Chapter 13: Regression"
+      href: 13-regression.qmd
+    - text: "Chapter 14: Simulation"
+      href: 14-simulation.qmd
   site-url: https://r-is-your-friend.github.io/course-pack/
   repo-url: https://github.com/R-is-your-friend
   repo-branch: main

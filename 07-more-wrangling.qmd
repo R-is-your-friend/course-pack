@@ -1,4 +1,4 @@
-# More Wrangling
+# More Wrangling {.unnumbered}
 
 
 ```{r}
@@ -13,6 +13,7 @@ library(tidyverse)
 ## Learning Objectives
 + Determine what data format is necessary to generate a desired plot or statistical model.
 + Use helper functions like `across()` and `case_when()` with dplyr verbs.
++ Create small vector functions for use in wrangling.
 + Describe the differences between “wide” and “long” format data and how to transition between the two structures.
 + Design and implement more advanced plots
 :::
@@ -68,6 +69,8 @@ But what if I want more than two categories? Say I want to label each cereal as 
 
 
 `case_when()` implements a **series** `if-else` statements one after another, so we can create these categories:
+
+<!-- perhaps link back to the case-when content in ch 03a? -->
 
 ```{r}
 #| echo: true
@@ -179,12 +182,28 @@ cereal |>
 
 2. What is the general syntax of `case_when()`?
 
+<!-- what kind of answer are you looking for here? -->
 
 3. How do you provide a value for the "rest" of the rows that do not meet the criteria you already included in `case_when()`?
 
 4. How are missing values treated in `case_when()`?
 :::
 
+
+### `across()` 
+
+<!-- maybe a good moment here to use a custom vector function -->
+
+
+:::{.callout-check-in .icon}
+1. How do functions need to be input into the `across()` function?
+
+2. What does the `.x` inside the function represent?
+
+3. What does `across()` do by default to column names?
+
+4. What arguments to `across()` help you control the resulting column names?
+:::
 
 ### `pull()`
 

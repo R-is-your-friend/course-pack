@@ -3,16 +3,7 @@ filters:
  - flourish
 ---
 
-
-<!-- ```{r} -->
-<!-- #| flourish: -->
-<!-- #| - target:  -->
-<!-- #|     - "is.numeric" -->
-<!-- #|     - mask: true -->
-<!-- #|     - style: "text-decoration: underline;" -->
-<!-- ``` -->
-
-# Control Flow
+# Control Flow {.unnumbered}
 
 ::: callout
 ## Learning Objectives
@@ -98,8 +89,6 @@ the `if()` statement. If the condition is `FALSE`, then R will execute the
 "other stuff to do" contained in the `{}` after `else`.
 
 **What value should `y` have?**
-
-<!-- this would be a good spot for an interactive code blurb -->
 
 ::: callout-important
 # Code Style
@@ -254,20 +243,20 @@ a condition is false, what happens?
 #| label: multiple-conditions
 
 if (income < 11925) {
-  tax <- 0.10
-  } else if (income <= 48475) {
-    0.12
-  } else if (income <= 103350) {
-    0.22
-  } else if (income <= 197300) {
-    0.24
-  } else if (income <= 250525) {
-    0.32
-  } else if (income < 626350){
-    0.35
-  } else {
-    0.37
-  }
+  0.10
+} else if (income <= 48475) {
+  0.12
+} else if (income <= 103350) {
+  0.22
+} else if (income <= 197300) {
+  0.24
+} else if (income <= 250525) {
+  0.32
+} else if (income < 626350){
+  0.35
+} else {
+  0.37
+}
 ```
 :::
 
@@ -278,6 +267,10 @@ would a professor pay in taxes?
 Let's check! Setting `income` to `95000`, our conditional statements tell us
 that the professor will pay `0.22` or 22% in taxes.
 
+<!-- [WEBR?] -->
+<!-- The code below could just be included in a code chunk so the students can run -->
+<!-- it to prove to themselves that the output will be 0.22. -->
+
 ```{r}
 #| label: income-conditionals
 
@@ -285,23 +278,24 @@ income <- 95000
 
 if (income < 11925) {
   0.10
-  } else if (income <= 48475) {
-    0.12
-  } else if (income <= 103350) {
-    0.22
-  } else if (income <= 197300) {
-    0.24
-  } else if (income <= 250525) {
-    0.32
-  } else if (income < 626350){
-    0.35
-  } else {
-    0.37
-    }
+} else if (income <= 48475) {
+  0.12
+} else if (income <= 103350) {
+  0.22
+} else if (income <= 197300) {
+  0.24
+} else if (income <= 250525) {
+  0.32
+} else if (income < 626350){
+  0.35
+} else {
+  0.37
+}
 ```
 
 ::: {.callout-check-in}
-3. In the IRS tax brackets we had ____ possible outcomes and ____ conditions that needed to be checked. 
+3. In the IRS tax brackets we had ____ possible outcomes and ____ conditions
+that needed to be checked. 
 
 4. In general, if you have $n$ possible outcomes, you will **always** have
 ____ conditions to check. 
@@ -325,20 +319,20 @@ how much each employee will pay in taxes.
 income <- c(611203, 795000, 45000)
 
 if (income < 11925) {
-  tax <- 0.10
-  } else if (income <= 48475) {
-    0.12
-  } else if (income <= 103350) {
-    0.22
-  } else if (income <= 197300) {
-    0.24
-  } else if (income <= 250525) {
-    0.32
-  } else if (income < 626350){
-    0.35
-  } else {
-    0.37
-  }
+  0.10
+} else if (income <= 48475) {
+  0.12
+} else if (income <= 103350) {
+  0.22
+} else if (income <= 197300) {
+  0.24
+} else if (income <= 250525) {
+  0.32
+} else if (income < 626350){
+  0.35
+} else {
+  0.37
+}
 ```
 
 Oh no! Our conditionals didn't work. What happened? 
@@ -347,19 +341,31 @@ The error message we got (`"the condition has length > 1"`) may seem strange at
 first, but it is actually **incredibly** informative. 
 
 What the error is telling us is that `if (income < 11925)` could not be
-evaluated because `income` has a length that is greater than 1. Meaning, our
-conditional statements can only work for scalar vectors (i.e., vectors with a
-single value).
+evaluated because `income` has a length that is greater than 1.
+If we examine `income < 11925`, we notice that it returns a vector of three 
+`TRUE/FALSE` results; one for each of the three incomes.
+
+```{r}
+#| label: conditional-with-vector-2
+
+income < 11925
+```
+
+Therefore, our code was equivalent to `if(c(FALSE, FALSE, TRUE))`.  An `if()`
+statement needs a single "yes/no" to determine if the code inside gets run or
+not, so these statements can only work for scalar vectors (i.e., vectors with a
+single value)
 
 ## Vectorized Operations
 
-So, what do we do if we want to use conditional statements for a vector of
-values? Well, we need to switch from using `if ()`, `else if ()`, and `else` to
-using functions that accept vectors of values. 
+So, what do we do if we want to apply a process using conditional statements 
+to *all* the elements in a vector of values? Well, we need to switch from using 
+`if ()`, `else if ()`, and `else` to using functions that accept vectors of values. 
 
 Luckily for us, vectorized operations are very common in R! Take for example
 finding the square root of a given number. The `sqrt()` function accepts a 
-**vector** of values an outputs the square root of each value. 
+**vector** of values, applies the square root calculation to *each value*, and
+outputs a vector of the results. 
 
 ```{r}
 #| label: vectorize-sqrt
@@ -430,7 +436,8 @@ Yes!!!
 ::: {.callout-check-in}
 5. A function is "vectorized" if it accepts a 
 [vector / matrix / dataframe / list] with length 
-[equal to / greater than / less than] 1 as an input. 
+[equal to / greater than / less than] 1 as an input and applies a process
+to every value. 
 
 :::
 
@@ -806,7 +813,6 @@ Runs a set number of times
 11. Every `for()` loop has some derivation of `for (i in 1:10)`. The `i`
 represents the [counter / value / object], and the `1:10` represents the
 [list / dataframe / vector] of values to loop over.
-
 
 :::
 

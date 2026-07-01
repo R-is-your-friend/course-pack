@@ -1,4 +1,4 @@
-# Regression
+# Regression {.unnumbered}
 
 ::: callout
 ## Learning Objectives

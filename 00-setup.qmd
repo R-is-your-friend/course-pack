@@ -1,4 +1,4 @@
-# Computer is Friend
+# Computer is Friend {.unnumbered}
 
 The theme of this lesson is understanding the difference between hardware and 
 software, and where things are stored on your computer. In part two of the 

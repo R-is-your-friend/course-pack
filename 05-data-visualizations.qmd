@@ -1,4 +1,4 @@
-# Data Visualizations
+# Data Visualizations {.unnumbered}
 
 ::: callout
 ## Learning Objectives

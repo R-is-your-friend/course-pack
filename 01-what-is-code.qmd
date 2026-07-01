@@ -1,4 +1,4 @@
-# What is Code
+# What is Code {.unnumbered}
 
 ::: callout
 ## Learning Objectives
@@ -191,6 +191,8 @@ Currently, the values of `x` and `y` are `3` and `4` respectively, but
 we might need to update their values. If we want to change the values of
 `x` or `y`, we simply need to assign them new values.
 
+<!-- [WEBR?] -->
+
 ```{r}
 #| eval: false
 #| label: change-values
@@ -206,8 +208,9 @@ Code tracing is a great technique for understanding what happens to an
 object at each line of code. Use the table below to trace the values 
 of `x`, `y`, and `z` for each of the three lines of code above.
 
-<!-- Is there a way to make this interactive? -->
+<!-- [WEBR?] Is there a way to make this interactive? -->
 <!-- Maybe do multiple choice questions with webR? -->
+
 
 | Line   | `x`    | `y`     | `z`                   |
 |--------|:------:|:-------:|:---------------------:|

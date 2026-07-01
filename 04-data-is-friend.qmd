@@ -1,4 +1,4 @@
-# Data is Friend
+# Data is Friend {.unnumbered}
 
 ## Rectangular Data
 
