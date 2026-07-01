@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.8.26">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>5&nbsp; Writing Simple Functions in R – R is Your Friend</title>
+<title>Writing Simple Functions in R – R is Your Friend</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -301,7 +301,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-setup.html">Fundamentals of Coding</a></li><li class="breadcrumb-item"><a href="./03b-writing-functions.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Writing Simple Functions in R</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-setup.html"><strong>Fundamentals of Coding</strong></a></li><li class="breadcrumb-item"><a href="./03b-writing-functions.html">Chapter 3b: Writing Simple Functions</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -358,7 +358,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Fundamentals of Coding</span></a>
+ <span class="menu-text"><strong>Fundamentals of Coding</strong></span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -367,37 +367,37 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./00-setup.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Computer is Friend</span></span></a>
+ <span class="menu-text">Chapter 0: Setup</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-what-is-code.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">What is Code</span></span></a>
+ <span class="menu-text">Chapter 1: What is code?</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-r-is-friend.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">R is Friend</span></span></a>
+ <span class="menu-text">Chapter 2: R is Friend</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03a-control-flow.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Control Flow</span></span></a>
+ <span class="menu-text">Chapter 3a: Control Flow</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03b-writing-functions.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Writing Simple Functions in R</span></span></a>
+ <span class="menu-text">Chapter 3b: Writing Simple Functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04-data-is-friend.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data is Friend</span></span></a>
+ <span class="menu-text">Chapter 4: Data is Friend</span></a>
   </div>
 </li>
       </ul>
@@ -405,7 +405,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Data Wrangling and Visualization</span></a>
+ <span class="menu-text"><strong>Data Wrangling and Visualization</strong></span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -414,43 +414,43 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-data-visualizations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Visualizations</span></span></a>
+ <span class="menu-text">Chapter 5: Data Visualizations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06-data-wrangling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data Wrangling</span></span></a>
+ <span class="menu-text">Chapter 6: Data Wrangling</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07-more-wrangling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">More Wrangling</span></span></a>
+ <span class="menu-text">Chapter 7: More Wrangling</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08-strings.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Strings</span></span></a>
+ <span class="menu-text">Chapter 8: Strings</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09-dates.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Dates</span></span></a>
+ <span class="menu-text">Chapter 9: Dates</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10-factors.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Factors</span></span></a>
+ <span class="menu-text">Chapter 10: Factors</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./11-communication.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Communication</span></span></a>
+ <span class="menu-text">Chapter 11: Communication</span></a>
   </div>
 </li>
       </ul>
@@ -458,7 +458,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Modeling and Functions</span></a>
+ <span class="menu-text"><strong>Modeling and Functions</strong></span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -467,19 +467,19 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./12-more-functions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Writing More Complex Functions</span></span></a>
+ <span class="menu-text">Chapter 12: Writing More Complex Functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./13-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
+ <span class="menu-text">Chapter 13: Regression</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./14-simulation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Simulation</span></span></a>
+ <span class="menu-text">Chapter 14: Simulation</span></a>
   </div>
 </li>
       </ul>
@@ -492,46 +492,44 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#function-arguments" id="toc-function-arguments" class="nav-link active" data-scroll-target="#function-arguments"><span class="header-section-number">5.0.1</span> Function Arguments</a></li>
+<li><a href="#function-arguments" id="toc-function-arguments" class="nav-link active" data-scroll-target="#function-arguments">Function Arguments</a></li>
   <li>
-<a href="#custom-functions-motivation" id="toc-custom-functions-motivation" class="nav-link" data-scroll-target="#custom-functions-motivation"><span class="header-section-number">5.1</span> Custom Functions: Motivation</a>
+<a href="#custom-functions-motivation" id="toc-custom-functions-motivation" class="nav-link" data-scroll-target="#custom-functions-motivation">Custom Functions: Motivation</a>
   <ul>
-<li><a href="#min-max-scaling" id="toc-min-max-scaling" class="nav-link" data-scroll-target="#min-max-scaling"><span class="header-section-number">5.1.1</span> Min-Max Scaling</a></li>
-  <li><a href="#dont-repeat-yourself" id="toc-dont-repeat-yourself" class="nav-link" data-scroll-target="#dont-repeat-yourself"><span class="header-section-number">5.1.2</span> Don’t Repeat Yourself</a></li>
+<li><a href="#min-max-scaling" id="toc-min-max-scaling" class="nav-link" data-scroll-target="#min-max-scaling">Min-Max Scaling</a></li>
+  <li><a href="#dont-repeat-yourself" id="toc-dont-repeat-yourself" class="nav-link" data-scroll-target="#dont-repeat-yourself">Don’t Repeat Yourself</a></li>
   </ul>
 </li>
   <li>
-<a href="#functions" id="toc-functions" class="nav-link" data-scroll-target="#functions"><span class="header-section-number">5.2</span> Functions</a>
+<a href="#functions" id="toc-functions" class="nav-link" data-scroll-target="#functions">Functions</a>
   <ul>
-<li><a href="#syntax" id="toc-syntax" class="nav-link" data-scroll-target="#syntax"><span class="header-section-number">5.2.1</span> Syntax</a></li>
-  <li><a href="#designing-your-own-function" id="toc-designing-your-own-function" class="nav-link" data-scroll-target="#designing-your-own-function"><span class="header-section-number">5.2.2</span> Designing your own function</a></li>
-  <li><a href="#explicit-returns" id="toc-explicit-returns" class="nav-link" data-scroll-target="#explicit-returns"><span class="header-section-number">5.2.3</span> Explicit Returns</a></li>
+<li><a href="#syntax" id="toc-syntax" class="nav-link" data-scroll-target="#syntax">Syntax</a></li>
+  <li><a href="#designing-your-own-function" id="toc-designing-your-own-function" class="nav-link" data-scroll-target="#designing-your-own-function">Designing your own function</a></li>
+  <li><a href="#explicit-returns" id="toc-explicit-returns" class="nav-link" data-scroll-target="#explicit-returns">Explicit Returns</a></li>
   </ul>
 </li>
   <li>
-<a href="#control-flow-and-functions" id="toc-control-flow-and-functions" class="nav-link" data-scroll-target="#control-flow-and-functions"><span class="header-section-number">5.3</span> Control Flow and Functions</a>
+<a href="#control-flow-and-functions" id="toc-control-flow-and-functions" class="nav-link" data-scroll-target="#control-flow-and-functions">Control Flow and Functions</a>
   <ul>
-<li><a href="#if-statements-in-functions" id="toc-if-statements-in-functions" class="nav-link" data-scroll-target="#if-statements-in-functions"><span class="header-section-number">5.3.1</span> <code>if()</code> statements in functions</a></li>
-  <li><a href="#vectorized-functions" id="toc-vectorized-functions" class="nav-link" data-scroll-target="#vectorized-functions"><span class="header-section-number">5.3.2</span> Vectorized functions</a></li>
-  <li><a href="#loops-and-functions" id="toc-loops-and-functions" class="nav-link" data-scroll-target="#loops-and-functions"><span class="header-section-number">5.3.3</span> Loops and functions</a></li>
+<li><a href="#if-statements-in-functions" id="toc-if-statements-in-functions" class="nav-link" data-scroll-target="#if-statements-in-functions"><code>if()</code> statements in functions</a></li>
+  <li><a href="#vectorized-functions" id="toc-vectorized-functions" class="nav-link" data-scroll-target="#vectorized-functions">Vectorized functions</a></li>
+  <li><a href="#loops-and-functions" id="toc-loops-and-functions" class="nav-link" data-scroll-target="#loops-and-functions">Loops and functions</a></li>
   </ul>
 </li>
   <li>
-<a href="#environment-scope-name-masking-dynamic-lookup" id="toc-environment-scope-name-masking-dynamic-lookup" class="nav-link" data-scroll-target="#environment-scope-name-masking-dynamic-lookup"><span class="header-section-number">5.4</span> Environment, Scope, Name Masking &amp; Dynamic Lookup</a>
+<a href="#environment-scope-name-masking-dynamic-lookup" id="toc-environment-scope-name-masking-dynamic-lookup" class="nav-link" data-scroll-target="#environment-scope-name-masking-dynamic-lookup">Environment, Scope, Name Masking &amp; Dynamic Lookup</a>
   <ul>
-<li><a href="#environment" id="toc-environment" class="nav-link" data-scroll-target="#environment"><span class="header-section-number">5.4.1</span> Environment</a></li>
-  <li><a href="#name-masking" id="toc-name-masking" class="nav-link" data-scroll-target="#name-masking"><span class="header-section-number">5.4.2</span> Name Masking</a></li>
-  <li><a href="#dynamic-lookup" id="toc-dynamic-lookup" class="nav-link" data-scroll-target="#dynamic-lookup"><span class="header-section-number">5.4.3</span> Dynamic Lookup</a></li>
-  <li><a href="#so-what-does-this-all-mean" id="toc-so-what-does-this-all-mean" class="nav-link" data-scroll-target="#so-what-does-this-all-mean"><span class="header-section-number">5.4.4</span> So what does this all mean?</a></li>
+<li><a href="#environment" id="toc-environment" class="nav-link" data-scroll-target="#environment">Environment</a></li>
+  <li><a href="#name-masking" id="toc-name-masking" class="nav-link" data-scroll-target="#name-masking">Name Masking</a></li>
+  <li><a href="#dynamic-lookup" id="toc-dynamic-lookup" class="nav-link" data-scroll-target="#dynamic-lookup">Dynamic Lookup</a></li>
+  <li><a href="#so-what-does-this-all-mean" id="toc-so-what-does-this-all-mean" class="nav-link" data-scroll-target="#so-what-does-this-all-mean">So what does this all mean?</a></li>
   </ul>
 </li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-setup.html">Fundamentals of Coding</a></li><li class="breadcrumb-item"><a href="./03b-writing-functions.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Writing Simple Functions in R</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title">
-<span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Writing Simple Functions in R</span>
-</h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-setup.html"><strong>Fundamentals of Coding</strong></a></li><li class="breadcrumb-item"><a href="./03b-writing-functions.html">Chapter 3b: Writing Simple Functions</a></li></ol></nav><div class="quarto-title">
+<h1 class="title">Writing Simple Functions in R</h1>
 </div>
 
 
@@ -586,8 +584,7 @@ window.Quarto = {
 <li><p>What are the <strong>arguments</strong> of this function? That is, what information do you, the user, have to give to the function to make it calculate something for you? For example, <code>median(x = 1:10, na.rm = TRUE)</code> has two arguments: <code>x</code>, which supplies the <em>vector</em> we want the median value of, and <code>na.rm</code>, which tells the function how to handle missing data.</p></li>
 <li><p>What <strong>package</strong> does this function come from? You may have to load an external library, such as <code>dplyr</code> to be able to use the function.</p></li>
 </ol>
-<section id="function-arguments" class="level3" data-number="5.0.1"><h3 data-number="5.0.1" class="anchored" data-anchor-id="function-arguments">
-<span class="header-section-number">5.0.1</span> Function Arguments</h3>
+<section id="function-arguments" class="level3"><h3 class="anchored" data-anchor-id="function-arguments">Function Arguments</h3>
 <p>So far in this course, we’ve been modeling how we believe functions should be used. Specifically, we’ve been using <strong>named arguments</strong> when calling the function for every argument except the very first one (e.g., <code>median(1:10, na.rm = TRUE)</code>). Technically, using the name of the argument (<code>na.rm = TRUE</code>) is not required. In fact, this code will still run:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -648,8 +645,7 @@ window.Quarto = {
 </ol>
 </div>
 </div>
-</section><section id="custom-functions-motivation" class="level2" data-number="5.1"><h2 data-number="5.1" class="anchored" data-anchor-id="custom-functions-motivation">
-<span class="header-section-number">5.1</span> Custom Functions: Motivation</h2>
+</section><section id="custom-functions-motivation" class="level2"><h2 class="anchored" data-anchor-id="custom-functions-motivation">Custom Functions: Motivation</h2>
 <p>Instead of using existing functions, what if we want to write our <em>own</em> special functions? You might wonder why this would ever be necessary, since so many R functions already exist. Consider the following setting for a data analysis:</p>
 <p>It is common in statistics and data science to need to rescale a variable before including it in a model. Rescaling is quite helpful when variables are on very different scales. In fact, for some machine learning methods (e.g., k-nearest neighbors) it is critical that <strong>every</strong> variable be on the same scale for an analysis.</p>
 <p>Take for example, some common measures of the economy. The consumer price index (CPI) measures the yearly change in price for a representative basket of goods and services<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> and is recorded as a weighted average of prices (e.g., $250). Alternatively, the PPI (producer price index) measures the yearly change in prices paid to domestic producers of goods and services (e.g., $120). Finally, the PCE (Personal Consumption Expenditures) is a slightly broader measure than CPI in that it attempts to measure both how much households are spending (e.g., $14,000) and what they’re spending their money on.</p>
@@ -712,8 +708,7 @@ window.Quarto = {
 <!-- economy -->
 <!-- ``` -->
 <p>Notice how each of these variables are on different scales? Well, that’s exactly why we might want (need) to rescale them!</p>
-<section id="min-max-scaling" class="level3" data-number="5.1.1"><h3 data-number="5.1.1" class="anchored" data-anchor-id="min-max-scaling">
-<span class="header-section-number">5.1.1</span> Min-Max Scaling</h3>
+<section id="min-max-scaling" class="level3"><h3 class="anchored" data-anchor-id="min-max-scaling">Min-Max Scaling</h3>
 <p>One common method for rescaling is called “min-max scaling.” For any numeric vector, this method finds the maximum value and the minimum value and then uses these values to rescale each value of the vector. Mathematically, each <span class="math inline">\(i^{th}\)</span> value of a vector <span class="math inline">\(x\)</span> is scaled based on this calculation:</p>
 <p><span class="math display">\[\frac{x_i - min(x)}{max(x) - mix(x)}\]</span> For example, if we have a vector <code>x</code> with values <code>c(1, 2, 5, 7)</code>. Then the minimum of <code>x</code> is <code>1</code> and the maximum of <code>x</code> is <code>7</code>. We then use these values to rescale every value of <code>x</code>. This would look like the following code:</p>
 <div class="cell">
@@ -733,19 +728,16 @@ window.Quarto = {
 </div>
 <p>There are a couple of issues with this process. By repeating this same process multiple times, it is harder to understand what the code is doing <strong>and</strong> we’ve made our code more error prone. Did you notice the errors we made?</p>
 <p>A better method would be to write a function that allows us to implement this process anytime we want to rescale a numeric vector!</p>
-</section><section id="dont-repeat-yourself" class="level3" data-number="5.1.2"><h3 data-number="5.1.2" class="anchored" data-anchor-id="dont-repeat-yourself">
-<span class="header-section-number">5.1.2</span> Don’t Repeat Yourself</h3>
+</section><section id="dont-repeat-yourself" class="level3"><h3 class="anchored" data-anchor-id="dont-repeat-yourself">Don’t Repeat Yourself</h3>
 <p>The critical motivation behind writing your own functions is the “don’t repeat yourself” (DRY) principle. In general, “you should consider writing a function whenever copied and pasted your code <strong>more than twice</strong> (i.e.&nbsp;you now have three copies of the same code)” (<a href="https://r4ds.hadley.nz/functions.html#introduction">Wickham, Çetinkaya-Rundel &amp; Grolemund, 2020</a>).</p>
 <p>One of our favorite papers, <a href="https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1001745"><em>Best Practices for Scientific Computing</em></a>, summarizes this idea in a slightly different way:</p>
 <blockquote class="blockquote">
 <p>Anything that is repeated in two or more places is more difficult to maintain. Every time a change or correction is made, multiple locations must be updated, which increases the chance of errors and inconsistencies. To avoid this, programmers follow the DRY (Don’t Repeat Yourself) Principle.</p>
 </blockquote>
 <p>The DRY Principle advocates that you <em>modularize</em> your code—break it into smaller, independent, and reusable units. Modularizing your code helps you understand what your code is doing and makes your code more easily re-purposed for other projects.</p>
-</section></section><section id="functions" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="functions">
-<span class="header-section-number">5.2</span> Functions</h2>
+</section></section><section id="functions" class="level2"><h2 class="anchored" data-anchor-id="functions">Functions</h2>
 <p>We’ve been using functions for weeks now, but we haven’t dug deep into how they are built.</p>
-<section id="syntax" class="level3" data-number="5.2.1"><h3 data-number="5.2.1" class="anchored" data-anchor-id="syntax">
-<span class="header-section-number">5.2.1</span> Syntax</h3>
+<section id="syntax" class="level3"><h3 class="anchored" data-anchor-id="syntax">Syntax</h3>
 <p>The first hurdle to learning to write a function in a programming language is figuring out what syntax you should use. In R, a function is defined using <code>function()</code> and has the following syntax:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rescale</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
@@ -763,8 +755,7 @@ window.Quarto = {
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rescale</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span> <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</section><section id="designing-your-own-function" class="level3" data-number="5.2.2"><h3 data-number="5.2.2" class="anchored" data-anchor-id="designing-your-own-function">
-<span class="header-section-number">5.2.2</span> Designing your own function</h3>
+</section><section id="designing-your-own-function" class="level3"><h3 class="anchored" data-anchor-id="designing-your-own-function">Designing your own function</h3>
 <p>As you write more and more R code, you will get more used to recognizing moments where a custom function is valuable, and to designing those functions.</p>
 <p>For now, it may be helpful to break your function writing process down into a few steps.</p>
 <ol type="1">
@@ -844,8 +835,7 @@ window.Quarto = {
 </ol>
 </div>
 </div>
-</section><section id="explicit-returns" class="level3" data-number="5.2.3"><h3 data-number="5.2.3" class="anchored" data-anchor-id="explicit-returns">
-<span class="header-section-number">5.2.3</span> Explicit Returns</h3>
+</section><section id="explicit-returns" class="level3"><h3 class="anchored" data-anchor-id="explicit-returns">Explicit Returns</h3>
 <p>A function output is often called a “return” because of its tie to a <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> statement. You might wonder why you haven’t seen a <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> statement in a function yet and the answer is that <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> statements are a somewhat contentious topic among R programmers. We say “contentious” because many programmers have staunch views of using a <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> statement, either for or against. We think you should be aware of these views so you can decide which option you prefer.</p>
 <p><strong>Option 1</strong>: Using an explicit return</p>
 <p>When we say “explicit return” we mean that there is a <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> statement built in to the body of the function. This would look something like this:</p>
@@ -921,11 +911,10 @@ window.Quarto = {
 <p>Technically, the code style guide we’ve been using takes an anti explicit return stance. If you want to hear more about their thinking, you can look at <a href="https://style.tidyverse.org/functions.html#return">these examples</a>.</p>
 </div>
 </div>
-</section></section><section id="control-flow-and-functions" class="level2" data-number="5.3"><h2 data-number="5.3" class="anchored" data-anchor-id="control-flow-and-functions">
-<span class="header-section-number">5.3</span> Control Flow and Functions</h2>
+</section></section><section id="control-flow-and-functions" class="level2"><h2 class="anchored" data-anchor-id="control-flow-and-functions">Control Flow and Functions</h2>
 <p>Now that we have practiced creating simple functions, let’s revisit how control flow can be used to create more nuanced code processes.</p>
-<section id="if-statements-in-functions" class="level3" data-number="5.3.1"><h3 data-number="5.3.1" class="anchored" data-anchor-id="if-statements-in-functions">
-<span class="header-section-number">5.3.1</span> <code>if()</code> statements in functions</h3>
+<section id="if-statements-in-functions" class="level3"><h3 class="anchored" data-anchor-id="if-statements-in-functions">
+<code>if()</code> statements in functions</h3>
 <p>The DRY principle tells us we should avoid repeating similar code as much as possible. Another motivation for functions is to make our primary code more <em>readable</em>.</p>
 <p>Consider the example from the previous chapter, where we calculated income tax rates.</p>
 <div class="cell">
@@ -1000,8 +989,7 @@ window.Quarto = {
 </ol>
 </div>
 </div>
-</section><section id="vectorized-functions" class="level3" data-number="5.3.2"><h3 data-number="5.3.2" class="anchored" data-anchor-id="vectorized-functions">
-<span class="header-section-number">5.3.2</span> Vectorized functions</h3>
+</section><section id="vectorized-functions" class="level3"><h3 class="anchored" data-anchor-id="vectorized-functions">Vectorized functions</h3>
 <p>Thus far, we have seen two types of functions:</p>
 <ol type="1">
 <li><p><code>rescale()</code> applied a process to a <em>vector</em> of values.</p></li>
@@ -1079,8 +1067,7 @@ window.Quarto = {
 <pre><code>[1] 0.35 0.37 0.12</code></pre>
 </div>
 </div>
-</section><section id="loops-and-functions" class="level3" data-number="5.3.3"><h3 data-number="5.3.3" class="anchored" data-anchor-id="loops-and-functions">
-<span class="header-section-number">5.3.3</span> Loops and functions</h3>
+</section><section id="loops-and-functions" class="level3"><h3 class="anchored" data-anchor-id="loops-and-functions">Loops and functions</h3>
 <p>What to do if we truly cannot vectorize our function, but we need to run it on a long vector of values? We can make use of <em>loops</em> to call the function many times.</p>
 <p>For example, suppose we wanted to calculate the income tax rate for a long list of employee salaries. We can use a <code>for</code> loop to repeat our non-vectorized <code>find_tax_rate()</code> function many times.</p>
 <div class="cell">
@@ -1130,11 +1117,9 @@ window.Quarto = {
 </div>
 </div>
 </div>
-</section></section><section id="environment-scope-name-masking-dynamic-lookup" class="level2" data-number="5.4"><h2 data-number="5.4" class="anchored" data-anchor-id="environment-scope-name-masking-dynamic-lookup">
-<span class="header-section-number">5.4</span> Environment, Scope, Name Masking &amp; Dynamic Lookup</h2>
+</section></section><section id="environment-scope-name-masking-dynamic-lookup" class="level2"><h2 class="anchored" data-anchor-id="environment-scope-name-masking-dynamic-lookup">Environment, Scope, Name Masking &amp; Dynamic Lookup</h2>
 <p>Now that we know how functions behave it’s time to learn some of the hidden details. Let’s start with the concept of a function’s environment.</p>
-<section id="environment" class="level3" data-number="5.4.1"><h3 data-number="5.4.1" class="anchored" data-anchor-id="environment">
-<span class="header-section-number">5.4.1</span> Environment</h3>
+<section id="environment" class="level3"><h3 class="anchored" data-anchor-id="environment">Environment</h3>
 <p>A function has its own environment, a universe that gets opened when you run the function. A function’s environment is separate from the <em>global environment</em>, which is where all the objects you’ve created live (i.e., all the objects that would appear in the Environment tab). We need to first understand how these environments differ before we learn how they can relate to each other.</p>
 <p>Let’s explore this with a simple function:</p>
 <div class="cell">
@@ -1163,8 +1148,7 @@ window.Quarto = {
 <figure class="figure"><p><img src="images/03-global-function-environment.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%" alt="An image with two boxes, one blue and one orange. The orange box is labeled global enviroment with 'my_function()' displayed below. This represents the function (object) that has been globally defined and is accessible to the user. The blue box is labeled function enviornment with 'num = 67' displayed below. This represents the object that has been created by the function (my_function) that IS NOT available to the global environment."></p>
 </figure>
 </div>
-</section><section id="name-masking" class="level3" data-number="5.4.2"><h3 data-number="5.4.2" class="anchored" data-anchor-id="name-masking">
-<span class="header-section-number">5.4.2</span> Name Masking</h3>
+</section><section id="name-masking" class="level3"><h3 class="anchored" data-anchor-id="name-masking">Name Masking</h3>
 <p>But what if there was an object in the <em>global environment</em> that had the same name as the object in the <em>function environment</em>?</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb53"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">num</span> <span class="op">&lt;-</span> <span class="fl">65</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1178,8 +1162,7 @@ window.Quarto = {
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb54"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">my_function</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>If you guessed <code>67</code> you are correct! This is an example of what is called <strong>name masking</strong>, where names (objects) defined inside of a function mask names (objects) defined outside of a function. In this example, <code>num</code> has the value of 65 <em>outside</em> the function, but <em>inside</em> the function <code>num</code> has a value of 67. Functions operate as a closed system where they rely only on the objects within the <em>function environment</em>, which is why <code>my_function()</code> returns 67 and not 65.</p>
-</section><section id="dynamic-lookup" class="level3" data-number="5.4.3"><h3 data-number="5.4.3" class="anchored" data-anchor-id="dynamic-lookup">
-<span class="header-section-number">5.4.3</span> Dynamic Lookup</h3>
+</section><section id="dynamic-lookup" class="level3"><h3 class="anchored" data-anchor-id="dynamic-lookup">Dynamic Lookup</h3>
 <p>We just said “functions operate as a closed system,” but that is not <strong>always</strong> true. Functions <u>try</u> to operate as a closed system, but sometimes they need to ask for a little help. If we make a small modification to <code>my_function()</code>, you will see what we mean!</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb55"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">my_function</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span><span class="op">{</span></span>
@@ -1205,8 +1188,7 @@ window.Quarto = {
 <pre><code>[1] 13</code></pre>
 </div>
 </div>
-</section><section id="so-what-does-this-all-mean" class="level3" data-number="5.4.4"><h3 data-number="5.4.4" class="anchored" data-anchor-id="so-what-does-this-all-mean">
-<span class="header-section-number">5.4.4</span> So what does this all mean?</h3>
+</section><section id="so-what-does-this-all-mean" class="level3"><h3 class="anchored" data-anchor-id="so-what-does-this-all-mean">So what does this all mean?</h3>
 <p>This is a lot of technical details, so you might be wondering what the big picture is. Here are the three things you should know:</p>
 <ol type="1">
 <li><p>Objects created in a function <strong>cannot</strong> be accessed in the global environment.</p></li>
@@ -1668,13 +1650,13 @@ window.Quarto = {
     }
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./03a-control-flow.html" class="pagination-link" aria-label="Control Flow">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Control Flow</span></span>
+      <a href="./03a-control-flow.html" class="pagination-link" aria-label="Chapter 3a: Control Flow">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Chapter 3a: Control Flow</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./04-data-is-friend.html" class="pagination-link" aria-label="Data is Friend">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data is Friend</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./04-data-is-friend.html" class="pagination-link" aria-label="Chapter 4: Data is Friend">
+        <span class="nav-page-text">Chapter 4: Data is Friend</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
