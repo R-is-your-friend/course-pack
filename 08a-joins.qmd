@@ -1,0 +1,6 @@
+# Factors {.unnumbered}
+
+::: callout
+## Learning Objectives
++ Use data joins to assemble data from multiple relational tables into a single table.
+:::

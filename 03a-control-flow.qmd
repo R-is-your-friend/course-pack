@@ -356,7 +356,7 @@ statement needs a single "yes/no" to determine if the code inside gets run or
 not, so these statements can only work for scalar vectors (i.e., vectors with a
 single value)
 
-## Vectorized Operations
+## Vectorized Operations 
 
 So, what do we do if we want to apply a process using conditional statements 
 to *all* the elements in a vector of values? Well, we need to switch from using 
@@ -374,7 +374,7 @@ nums <- c(3, 4, 9, 12, 16, 20, 25)
 sqrt(nums)
 ```
 
-### Vectorized Conditional Statements
+### Vectorized Conditional Statements {#sec-3a-case-when}
 
 For our problem, we need to find a similar function that can accept a vector 
 of salaries and match each salary with a tax rate. The `case_when()` function

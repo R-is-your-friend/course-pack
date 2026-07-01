@@ -30,14 +30,16 @@ book:
       href: 06-data-wrangling.qmd
     - text: "Chapter 7: More Wrangling"
       href: 07-more-wrangling.qmd
-    - text: "Chapter 8: Strings"
-      href: 08-strings.qmd
-    - text: "Chapter 9: Dates"
-      href: 09-dates.qmd
-    - text: "Chapter 10: Factors"
-      href: 10-factors.qmd
-    - text: "Chapter 11: Communication"
-      href: 11-communication.qmd
+    - text: "Chapter 8a: Data Joins"
+      href: 08a-joins.qmd
+    - text: "Chapter 8b: Factors"
+      href: 08b-factors.qmd
+    - text: "Chapter 9a: Strings"
+      href: 09a-strings.qmd
+    - text: "Chapter 9b: Dates"
+      href: 09b-dates.qmd
+    - text: "Chapter 10: Communication"
+      href: 10-communication.qmd
   - part: "**Modeling and Functions**"
     chapters:
     - text: "Chapter 12: Writing More Complex Functions"

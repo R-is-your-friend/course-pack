@@ -1,0 +1,8 @@
+# Communication {.unnumbered}
+
+::: callout
+## Learning Objectives
++ Combine multiple techniques and/or packages from Unit 2 to get from one or multiple rectangles to a report-ready table or plot
+:::
+
+

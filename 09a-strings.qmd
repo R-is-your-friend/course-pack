@@ -3,9 +3,10 @@
 ::: callout
 ## Learning Objectives
 + Clean and extract information from character variables using `stringr` 
-+ Recognize what basic regular expressions will match
-+ Construct basic regular expressions to match a pattern
 :::
+
+<!--I was told that we are actually not wanting to work with regular expressions now, so I removed it from the material.
+-->
 
 <!-- "basic" regex = lets stick with specific character options like [Aa] or [A-Z] -->
 
