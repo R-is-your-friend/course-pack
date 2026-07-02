@@ -462,7 +462,8 @@ name.
 
 ![A `list` analogy with a cubby bin. Similar to before, each cubby has different types of items (e.g., puzzles, dolls, legos) but within a cubby the items are all the same. However, now the cubbies all have names identifying the contents of the cubby.](images/02-lists-labeled-cubbies.png){fig-alt="Another picture of a cubby bin with nine different cubby slots. The difference with this cubby bin is that each bin has a label indicating its contents (legos, dolls, trucks, balls, art supplies)." width=50%}
 
-#### Are the vectors all the same length?
+#### Are the vectors all the same length? {#sec-2-dataframes}
+
 
 Technically, a list can have **both** entries with different data types
 **and** entries with different lengths. Both `show_name` and `release_year` 
@@ -919,7 +920,7 @@ fruit_tree_harvest
 `fruit_tree_harvest`.
 :::
 
-### Dataframes
+### Dataframes {#sec-2-dataframe-index}
 
 Recall that a dataframe is a special type of list, where every component has the
 same length. So, the methods we learned for extracting components from a list

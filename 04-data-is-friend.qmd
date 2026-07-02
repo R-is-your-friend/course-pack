@@ -5,21 +5,25 @@
 
 Since R is open source, there are many different options for functions that can accomplish the same task. Over time, full sets of functions and packages have been developed with the purpose of working well together for data analysis and visualization. 
 
-In this class, we will use the `tidyverse` set of packages to visualize and wrangle data. This **decision** impacts the way that we will think about working with data (in a good way - in our opinion!). 
+In this class, we will use the *tidyverse* set of packages to visualize and wrangle data. This **decision** impacts the way that we will think about working with data (in a good way - in our opinion!). 
 
-In their own words, the `tidyverse` developers describe it as:
+In their own words, the *tidyverse* developers describe it as:
 
 >an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures.[^1]
 
-Most of the functionality you will need for an entire data analysis workflow will have the **cohesive grammar** of the tidyverse. Already, you have learned how to read in data with `readr` and visualize data with `ggplot2`.
+Most of the functionality you will need for an entire data analysis workflow will have the **cohesive grammar** of the tidyverse.
 
-![](images/06-data-science-workflow.png)
+![Data Science Workflow Adapted from R4DS](images/06-data-science-workflow.png){fig-alt="Flow chart illustrating data science workflow. Moving from left to right, Import, right arrow, Build / Clean, right arrow, to a clockwise roatation of arrows in a grey background box and words from Transform / Tidy to Visualize to Model. Finally there is a right arrow after the box to the word Communicate."}
 
 
 [^1]: https://www.tidyverse.org/
 
 
+This week, we will, learn how to read in data (the "Import" step in the data science workflow) with `readr`, and we will continue to use lots of tools from the tidyverse thorughout Unit 2!
 
+### The `tidyverse` package
+
+Another nifty part of the *tidyverse* is that there is a `tidyverse` package. When installed or loaded, the ["core" *tidyverse* packages](https://tidyverse.org/packages/) are also installed or loaded. This means, that you often **only** need to load the `tidyverse` package (`library(tidyverse)`) in a script!
 
 ## Getting Acquainted with our Data
 
@@ -47,11 +51,11 @@ There are also multiple ways that rectangular data can be stored in R! We will p
 
 In a perfect world, all data would come in the right format for our needs, but this is often not the case. We will spend the next few weeks learning about how to use R to read in data and reformat our data so that it can be used in a specific analysis.
 
-### Data Frames in R
+### Data in R
 
-<!--CHECK FOR OVERLAP IN THIS SECTION-->
+You were introduced briefly to dataframes and how to index them in @sec-2-dataframes and @sec-2-dataframe-index. Tibbles are just dataframes with some extra fancy features -- but you can treat them interchangeably for now!
 
-Data frames are a specific object type in R, `data.frame()`, and can be indexed the same as matrices. It may be useful to actually look at your data before beginning to work with it to see the format of the data. The following functions in R help us learn information about our data sets:
+It is always useful to actually **look at your data** before beginning to work with it to see the format of the data. The following functions in R help us learn information about our data sets:
 
 + `class()`: outputs the object type
 + `names()`: outputs the variable (column) names
@@ -60,11 +64,19 @@ Data frames are a specific object type in R, `data.frame()`, and can be indexed 
 + `summary()` outputs 6-number summaries or frequencies for all variables in the data set depending on the variables data type
 + `data$variable`: extracts a specific variable (column) from the data set
 
-You may also choose to click on the data set name in your Environment window pane in R and the data set will pop up in a new tab in the script pane.
+You can also double-click on the dataset name in your Environment window pane in R and the dataset will pop up in a new tab in the script pane.
+
+::: {.callout-opinion}
+
+When you have a dataset with many rows and columns, you can't get the full picture just opening the dataset from the Environment, but I often start there just to get a grasp on the data!
+
+:::
 
 Let's start with looking at a dataset that is included in a *package* in R. 
 
-- talk about `penguins` data in r
+The `penguins` data is included with the `palmerpenguins` package in R. This means that as long as the `palmerpenguins` package is loaded, we can also load the `penguins` dataset. 
+
+Let's start by just looking at the data.
 
 ```{r}
 # load palmerpenguins package
@@ -86,16 +98,33 @@ The following questions should be crossing your mind when you are first looking 
 
 2. What kinds of *variables* are available in the data? How many are there?
 
-3. What questions do you have about the variables after just looking at the data?
+3. What questions do you have about the variables after just looking at the data itself?
 
 
-Just looking at a data frame in R, we can't tell how the variables are measured and what they all mean! We will always want to look at a **data dictionary** to understand what the columns really mean. Any good data provider should provide a data dictionary along with the data!
+Just looking at a data frame in R, we can't tell how the variables are measured and what they all mean! We will always want to look at a **data dictionary** to understand what the data really means. Any good data provider should provide a data dictionary along with the data!
 
-In this case, we can find the data dictionary in the help file for the data in R by running:
+In this case, we can find the data dictionary in the help file for the data since it is a dataset built into an R package:
 
 ```{r}
+#| eval: false
+
 ?penguins
 ```
+
+A page that looks like this should appear in the Help tab:
+
+![](images/04-penguins-help.png)
+
+The description of the dataset in this dictionary is:
+
+> Size measurements for adult foraging penguins near Palmer Station, Antarctica
+
+> Includes measurements for penguin species, island in Palmer Archipelago, size (flipper length, body mass, bill dimensions), and sex. This is a subset of penguins_raw.
+
+This gives us a better idea about what we are working with. Each row in the data specifically represents an adult foraging penguin from near Palmer Station, Antarctica. 
+
+The data dictionary also helpfully tells us the variable type, a short descriptions, and the possible values or the units for each variable. It also includes sources so that we could investigate the original, raw data if needed! 
+
 
 
 

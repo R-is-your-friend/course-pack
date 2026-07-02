@@ -499,7 +499,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
 <li><a href="#do-all-of-the-vectors-have-the-same-data-type" id="toc-do-all-of-the-vectors-have-the-same-data-type" class="nav-link" data-scroll-target="#do-all-of-the-vectors-have-the-same-data-type">Do all of the vectors have the same data type?</a></li>
   <li><a href="#do-the-vectors-have-different-data-types" id="toc-do-the-vectors-have-different-data-types" class="nav-link" data-scroll-target="#do-the-vectors-have-different-data-types">Do the vectors have different data types?</a></li>
-  <li><a href="#are-the-vectors-all-the-same-length" id="toc-are-the-vectors-all-the-same-length" class="nav-link" data-scroll-target="#are-the-vectors-all-the-same-length">Are the vectors all the same length?</a></li>
+  <li><a href="#sec-2-dataframes" id="toc-sec-2-dataframes" class="nav-link" data-scroll-target="#sec-2-dataframes">Are the vectors all the same length?</a></li>
   </ul>
 </li>
   </ul>
@@ -516,7 +516,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
   <li><a href="#matrices" id="toc-matrices" class="nav-link" data-scroll-target="#matrices">Matrices</a></li>
   <li><a href="#lists" id="toc-lists" class="nav-link" data-scroll-target="#lists">Lists</a></li>
-  <li><a href="#dataframes" id="toc-dataframes" class="nav-link" data-scroll-target="#dataframes">Dataframes</a></li>
+  <li><a href="#sec-2-dataframe-index" id="toc-sec-2-dataframe-index" class="nav-link" data-scroll-target="#sec-2-dataframe-index">Dataframes</a></li>
   </ul>
 </li>
   <li>
@@ -929,7 +929,7 @@ $release_year
 <figure class="figure"><p><img src="images/02-lists-labeled-cubbies.png" class="img-fluid figure-img" style="width:50.0%" alt="Another picture of a cubby bin with nine different cubby slots. The difference with this cubby bin is that each bin has a label indicating its contents (legos, dolls, trucks, balls, art supplies)."></p>
 <figcaption>A <code>list</code> analogy with a cubby bin. Similar to before, each cubby has different types of items (e.g., puzzles, dolls, legos) but within a cubby the items are all the same. However, now the cubbies all have names identifying the contents of the cubby.</figcaption></figure>
 </div>
-</section><section id="are-the-vectors-all-the-same-length" class="level4"><h4 class="anchored" data-anchor-id="are-the-vectors-all-the-same-length">Are the vectors all the same length?</h4>
+</section><section id="sec-2-dataframes" class="level4"><h4 class="anchored" data-anchor-id="sec-2-dataframes">Are the vectors all the same length?</h4>
 <p>Technically, a list can have <strong>both</strong> entries with different data types <strong>and</strong> entries with different lengths. Both <code>show_name</code> and <code>release_year</code> have 4 items. However, there is more than one character in each show. We can add these characters to a list in the same way as before:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">characters</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Jim"</span>, <span class="st">"Weun"</span>, <span class="st">"Pat"</span>, <span class="st">"Pran"</span>, <span class="st">"Phupha"</span>, <span class="st">"Black"</span>, <span class="st">"Sean"</span><span class="op">)</span></span>
@@ -1358,7 +1358,7 @@ $harvest_window
 </ol>
 </div>
 </div>
-</section><section id="dataframes" class="level3"><h3 class="anchored" data-anchor-id="dataframes">Dataframes</h3>
+</section><section id="sec-2-dataframe-index" class="level3"><h3 class="anchored" data-anchor-id="sec-2-dataframe-index">Dataframes</h3>
 <p>Recall that a dataframe is a special type of list, where every component has the same length. So, the methods we learned for extracting components from a list will also work here.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb86"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">shows_releases</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>show_name <span class="op">=</span> <span class="va">shows</span>,</span>
