@@ -128,13 +128,24 @@ The data dictionary also helpfully tells us the variable type, a short descripti
 
 
 
-## Reading in External Data
+## Project and Data Management
+
+### RStudio Projects
+
+Now that we have added data and other possible inputs to the mix, it is extra important that all of our files and analyses are organized clearly. You also might be finding that you want to keep different project separate from each other and it is sort of annoying to have to navigate through the Files tab to find your scripts for a different project every time!
+
+Having each analysis well organized and separate from other analyses is such a fundamental part of good data science, that RStudio built a tool to help -- RStudio projects.
+
+You can create an RStudio project with a new directory or add a project to an already existing directory. When you convert a directory into a RStudio project, you will notice that a `.Rproj` file now exists in that directory. 
+
+If you are primarily writing code in R scripts (as you have done so far in this class), a major benefit of RStudio Projects is that they **set** the working directory as the main project directory. For example:
+
+
+However, if you are working in a Quarto file (.qmd), the working directory is the directory where the Quarto file lives! This can be tricky -- just remember that Quarto wins ☺️. 
 
 ### File Paths Refresher
 
 Before we can read in data, we need to tell R where to look for the data file!
-
-- need to edit this to align with other chapter / remove repetitive things
 
 A **file path** describes where a certain file or directory lives on your computer. Any time that you are working in R, there is a *working directory*, which is the baseline directory that R is then looking for other files from. You can find your current working directory with:
 
