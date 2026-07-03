@@ -15,7 +15,8 @@ programs these details will suddenly become very important.
 ## Learning Objectives
 
 + Explain the difference between hardware and software
-+ Define operating system terminology: hard drive, memory, file system, directory, system paths
++ Define operating system terminology: hard drive, memory, file system,
+directory, system paths
 + Describe how these concepts work together to keep your computer running
 + Explain where files live on your laptop
 + Create a class folder in your Documents
@@ -154,12 +155,12 @@ stored in a .csv file, for instance, or a picture. To reference a file, you have
 to tell the computer where to look. Meaning, you need to give the computer a
 **file path**. There are two types of file paths:
 
-- **global file path**: Starts at the root of the file system location (e.g., 
-`C:\` or `/home` or `/Users`) and describes how to navigate to the file from 
-the root.
+- **absolute (or full) file paths**: Start at the root of the file system
+location (e.g., `C:\` or `/home` or `/Users`) and describes how to navigate to
+the file from the root directory of the computer. 
 
-- **local file path**: Starts at the program's current location (e.g., 
-`Documents`, `Desktop`) and navigates to the file from that location. 
+- **relative file paths**: Start at the program's current location (e.g., 
+`Documents`, `Desktop`) and navigates to the file from that (relative) location. 
 
 The best practice for file storage is to create a folder that contains 
 everything you need to run your entire project. This folder can (and should!) 
