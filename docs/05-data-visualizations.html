@@ -23,6 +23,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -76,11 +111,42 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
-<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-sidebar floating slimcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -449,11 +515,40 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#grammar-of-graphics" id="toc-grammar-of-graphics" class="nav-link active" data-scroll-target="#grammar-of-graphics">Grammar of Graphics</a></li>
+  <li><a href="#thinking-critically-about-graphics" id="toc-thinking-critically-about-graphics" class="nav-link" data-scroll-target="#thinking-critically-about-graphics">Thinking Critically About Graphics</a>
+  <ul>
+  <li><a href="#load-and-examine-the-data" id="toc-load-and-examine-the-data" class="nav-link" data-scroll-target="#load-and-examine-the-data">Load (and examine) the data</a></li>
+  <li><a href="#initial-plots" id="toc-initial-plots" class="nav-link" data-scroll-target="#initial-plots">Initial plots</a></li>
+  <li><a href="#a-graphing-template" id="toc-a-graphing-template" class="nav-link" data-scroll-target="#a-graphing-template">A graphing template</a></li>
+  </ul></li>
+  <li><a href="#charts-graphics-and-the-grammar-of-graphics" id="toc-charts-graphics-and-the-grammar-of-graphics" class="nav-link" data-scroll-target="#charts-graphics-and-the-grammar-of-graphics">Charts, Graphics, and the Grammar of Graphics</a>
+  <ul>
+  <li><a href="#example-generations-of-pokemon" id="toc-example-generations-of-pokemon" class="nav-link" data-scroll-target="#example-generations-of-pokemon">Example: Generations of Pokemon</a></li>
+  </ul></li>
+  <li><a href="#exploratory-data-analysis-and-plot-customization" id="toc-exploratory-data-analysis-and-plot-customization" class="nav-link" data-scroll-target="#exploratory-data-analysis-and-plot-customization">Exploratory Data Analysis and Plot Customization</a>
+  <ul>
+  <li><a href="#texas-housing-data" id="toc-texas-housing-data" class="nav-link" data-scroll-target="#texas-housing-data">Texas Housing Data</a></li>
+  <li><a href="#starting-chart" id="toc-starting-chart" class="nav-link" data-scroll-target="#starting-chart">Starting Chart</a></li>
+  <li><a href="#exploring-trends" id="toc-exploring-trends" class="nav-link" data-scroll-target="#exploring-trends">Exploring Trends</a></li>
+  <li><a href="#adding-complexity-with-moderating-variables" id="toc-adding-complexity-with-moderating-variables" class="nav-link" data-scroll-target="#adding-complexity-with-moderating-variables">Adding Complexity with Moderating Variables</a></li>
+  <li><a href="#data-reduction-strategies" id="toc-data-reduction-strategies" class="nav-link" data-scroll-target="#data-reduction-strategies">Data Reduction Strategies</a></li>
+  <li><a href="#adding-additional-complexity" id="toc-adding-additional-complexity" class="nav-link" data-scroll-target="#adding-additional-complexity">Adding Additional Complexity</a></li>
+  <li><a href="#exploring-other-variables-and-relationships" id="toc-exploring-other-variables-and-relationships" class="nav-link" data-scroll-target="#exploring-other-variables-and-relationships">Exploring Other Variables and Relationships</a></li>
+  <li><a href="#adding-additional-moderating-variables" id="toc-adding-additional-moderating-variables" class="nav-link" data-scroll-target="#adding-additional-moderating-variables">Adding Additional Moderating Variables</a></li>
+  </ul></li>
+  <li><a href="#what-type-of-chart-to-use" id="toc-what-type-of-chart-to-use" class="nav-link" data-scroll-target="#what-type-of-chart-to-use">What type of chart to use?</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-data-visualizations.html"><strong>Data Wrangling and Visualization</strong></a></li><li class="breadcrumb-item"><a href="./05-data-visualizations.html">Chapter 5: Data Visualizations</a></li></ol></nav>
@@ -475,29 +570,625 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<!-- https://r4ds.hadley.nz/data-visualize.html -->
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">None</span>Learning Objectives
+Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
+<p>Under development. Removed python and simplified from Susan’s reading.</p>
+</div>
+</div>
+<section id="grammar-of-graphics" class="level2">
+<h2 class="anchored" data-anchor-id="grammar-of-graphics">Grammar of Graphics</h2>
+<p>Why do we create graphics?</p>
+<blockquote class="blockquote">
+<p>The greatest possibilities of visual display lie in vividness and inescapability of the intended message. A visual display can stop your mental flow in its tracks and make you think. A visual display can force you to notice what you never expected to see. (“Why, that scatter diagram has a hole in the middle!”) – John W. Tukey <span class="citation" data-cites="tukeyDataBasedGraphicsVisual1990">[@tukeyDataBasedGraphicsVisual1990]</span></p>
+</blockquote>
+<p>Fundamentally, charts are easier to understand than raw data.</p>
+<p>When you think about it, data is a pretty artificial thing. We exist in a world of tangible objects, but data are an abstraction - even when the data record information about the tangible world, the measurements are a way of removing the physical and transforming the “real world” into a virtual thing. As a result, it can be hard to wrap our heads around what our data contain. The solution to this is to transform our data back into something that is “tangible” in some way – if not physical and literally touch-able, at least something we can view and “wrap our heads around”.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Thought Experiment
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You have a simple data set - 2 variables, about 150 observations. You want to get a sense of how the variables relate to each other. You can do one of the following options:</p>
+<ol type="1">
+<li>Print out the data set</li>
+<li>Create some summary statistics of each variable and perhaps the covariance between the two variables</li>
+<li>Draw a scatter plot of the two variables</li>
+</ol>
+<p>Which one would you rather use? Why?</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="" aria-current="page">Dataset</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Summary statistics</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">Plot</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["x"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["y"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"55.3846","2":"97.1795"},{"1":"51.5385","2":"96.0256"},{"1":"46.1538","2":"94.4872"},{"1":"42.8205","2":"91.4103"},{"1":"40.7692","2":"88.3333"},{"1":"38.7179","2":"84.8718"},{"1":"35.6410","2":"79.8718"},{"1":"33.0769","2":"77.5641"},{"1":"28.9744","2":"74.4872"},{"1":"26.1538","2":"71.4103"},{"1":"23.0769","2":"66.4103"},{"1":"22.3077","2":"61.7949"},{"1":"22.3077","2":"57.1795"},{"1":"23.3333","2":"52.9487"},{"1":"25.8974","2":"51.0256"},{"1":"29.4872","2":"51.0256"},{"1":"32.8205","2":"51.0256"},{"1":"35.3846","2":"51.4103"},{"1":"40.2564","2":"51.4103"},{"1":"44.1026","2":"52.9487"},{"1":"46.6667","2":"54.1026"},{"1":"50.0000","2":"55.2564"},{"1":"53.0769","2":"55.6410"},{"1":"56.6667","2":"56.0256"},{"1":"59.2308","2":"57.9487"},{"1":"61.2821","2":"62.1795"},{"1":"61.5385","2":"66.4103"},{"1":"61.7949","2":"69.1026"},{"1":"57.4359","2":"55.2564"},{"1":"54.8718","2":"49.8718"},{"1":"52.5641","2":"46.0256"},{"1":"48.2051","2":"38.3333"},{"1":"49.4872","2":"42.1795"},{"1":"51.0256","2":"44.1026"},{"1":"45.3846","2":"36.4103"},{"1":"42.8205","2":"32.5641"},{"1":"38.7179","2":"31.4103"},{"1":"35.1282","2":"30.2564"},{"1":"32.5641","2":"32.1795"},{"1":"30.0000","2":"36.7949"},{"1":"33.5897","2":"41.4103"},{"1":"36.6667","2":"45.6410"},{"1":"38.2051","2":"49.1026"},{"1":"29.7436","2":"36.0256"},{"1":"29.7436","2":"32.1795"},{"1":"30.0000","2":"29.1026"},{"1":"32.0513","2":"26.7949"},{"1":"35.8974","2":"25.2564"},{"1":"41.0256","2":"25.2564"},{"1":"44.1026","2":"25.6410"},{"1":"47.1795","2":"28.7180"},{"1":"49.4872","2":"31.4103"},{"1":"51.5385","2":"34.8718"},{"1":"53.5897","2":"37.5641"},{"1":"55.1282","2":"40.6410"},{"1":"56.6667","2":"42.1795"},{"1":"59.2308","2":"44.4872"},{"1":"62.3077","2":"46.0256"},{"1":"64.8718","2":"46.7949"},{"1":"67.9487","2":"47.9487"},{"1":"70.5128","2":"53.7180"},{"1":"71.5385","2":"60.6410"},{"1":"71.5385","2":"64.4872"},{"1":"69.4872","2":"69.4872"},{"1":"46.9231","2":"79.8718"},{"1":"48.2051","2":"84.1026"},{"1":"50.0000","2":"85.2564"},{"1":"53.0769","2":"85.2564"},{"1":"55.3846","2":"86.0256"},{"1":"56.6667","2":"86.0256"},{"1":"56.1538","2":"82.9487"},{"1":"53.8462","2":"80.6410"},{"1":"51.2821","2":"78.7180"},{"1":"50.0000","2":"78.7180"},{"1":"47.9487","2":"77.5641"},{"1":"29.7436","2":"59.8718"},{"1":"29.7436","2":"62.1795"},{"1":"31.2821","2":"62.5641"},{"1":"57.9487","2":"99.4872"},{"1":"61.7949","2":"99.1026"},{"1":"64.8718","2":"97.5641"},{"1":"68.4615","2":"94.1026"},{"1":"70.7692","2":"91.0256"},{"1":"72.0513","2":"86.4103"},{"1":"73.8462","2":"83.3333"},{"1":"75.1282","2":"79.1026"},{"1":"76.6667","2":"75.2564"},{"1":"77.6923","2":"71.4103"},{"1":"79.7436","2":"66.7949"},{"1":"81.7949","2":"60.2564"},{"1":"83.3333","2":"55.2564"},{"1":"85.1282","2":"51.4103"},{"1":"86.4103","2":"47.5641"},{"1":"87.9487","2":"46.0256"},{"1":"89.4872","2":"42.5641"},{"1":"93.3333","2":"39.8718"},{"1":"95.3846","2":"36.7949"},{"1":"98.2051","2":"33.7180"},{"1":"56.6667","2":"40.6410"},{"1":"59.2308","2":"38.3333"},{"1":"60.7692","2":"33.7180"},{"1":"63.0769","2":"29.1026"},{"1":"64.1026","2":"25.2564"},{"1":"64.3590","2":"24.1026"},{"1":"74.3590","2":"22.9487"},{"1":"71.2821","2":"22.9487"},{"1":"67.9487","2":"22.1795"},{"1":"65.8974","2":"20.2564"},{"1":"63.0769","2":"19.1026"},{"1":"61.2821","2":"19.1026"},{"1":"58.7179","2":"18.3333"},{"1":"55.1282","2":"18.3333"},{"1":"52.3077","2":"18.3333"},{"1":"49.7436","2":"17.5641"},{"1":"47.4359","2":"16.0256"},{"1":"44.8718","2":"13.7180"},{"1":"48.7179","2":"14.8718"},{"1":"51.2821","2":"14.8718"},{"1":"54.1026","2":"14.8718"},{"1":"56.1538","2":"14.1026"},{"1":"52.0513","2":"12.5641"},{"1":"48.7179","2":"11.0256"},{"1":"47.1795","2":"9.8718"},{"1":"46.1538","2":"6.0256"},{"1":"50.5128","2":"9.4872"},{"1":"53.8462","2":"10.2564"},{"1":"57.4359","2":"10.2564"},{"1":"60.0000","2":"10.6410"},{"1":"64.1026","2":"10.6410"},{"1":"66.9231","2":"10.6410"},{"1":"71.2821","2":"10.6410"},{"1":"74.3590","2":"10.6410"},{"1":"78.2051","2":"10.6410"},{"1":"67.9487","2":"8.7180"},{"1":"68.4615","2":"5.2564"},{"1":"68.2051","2":"2.9487"},{"1":"37.6923","2":"25.7692"},{"1":"39.4872","2":"25.3846"},{"1":"91.2821","2":"41.5385"},{"1":"50.0000","2":"95.7692"},{"1":"47.9487","2":"95.0000"},{"1":"44.1026","2":"92.6923"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["Statistic"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Value"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"mean(X)","2":"54.26327324"},{"1":"mean(Y)","2":"47.83225282"},{"1":"sd(X)","2":"16.76514204"},{"1":"sd(Y)","2":"26.93540349"},{"1":"corr(X,Y)","2":"-0.06447185"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-data-visualizations_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" style="width:50.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Our brains are very good at processing large amounts of visual information quickly. Evolution is good at optimizing for survival, and it’s important to be able to survey a field and pick out the tiger that might eat you. When we present information visually, in a format that can leverage our visual processing abilities, we offload some of the work of understanding the data to a chart that organizes it for us. You could argue that printing out the data is a visual presentation, but it requires that you read that data in as text, which we’re not nearly as equipped to process quickly (and in parallel).</p>
+<p>In addition, it’s a lot easier to talk to non-experts about complicated statistics using visualizations. Moving the discussion from abstract concepts to concrete shapes and lines keeps people who are potentially already math or stat phobic from completely tuning out.</p>
+</section>
+<section id="thinking-critically-about-graphics" class="level2">
+<h2 class="anchored" data-anchor-id="thinking-critically-about-graphics">Thinking Critically About Graphics</h2>
+<p>When we create graphics, we want to enable people to think about <strong>relationships</strong> between the variables in our dataset.</p>
+<p>For this example, let’s consider the relationship between different physical measurements of penguins. We’ll use the <code>palmerpenguins</code> package in R.</p>
+<section id="load-and-examine-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="load-and-examine-the-data">Load (and examine) the data</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">## install.packages("palmerpenguins")</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(penguins)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 8
+  species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+  &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;
+1 Adelie  Torgersen           39.1          18.7               181        3750
+2 Adelie  Torgersen           39.5          17.4               186        3800
+3 Adelie  Torgersen           40.3          18                 195        3250
+4 Adelie  Torgersen           NA            NA                  NA          NA
+5 Adelie  Torgersen           36.7          19.3               193        3450
+6 Adelie  Torgersen           39.3          20.6               190        3650
+# ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
+</div>
+</div>
+<p>How do physical measurements (bill width, bill depth, flipper length, and body mass) relate to each other?</p>
+</section>
+<section id="initial-plots" class="level3">
+<h3 class="anchored" data-anchor-id="initial-plots">Initial plots</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, <span class="fu">aes</span>(<span class="at">x =</span> body_mass_g, <span class="at">y =</span> bill_length_mm)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-data-visualizations_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Here, we start with a basic plot of bill length (mm) against body mass (g). We can see that there is an overall positive relationship between the two - penguins with higher body mass tend to have longer bills as well. However, it is also clear that there is considerable variation that is not explained by this relationship: there is a group of penguins who seem to have lower body mass and longer bills in the top left quadrant of the plot.</p>
+<p>We can extend this process a bit by adding in additional information from the dataset and mapping that information to an additional variable - for instance, we can color the points by the species of penguin.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, <span class="fu">aes</span>(<span class="at">x =</span> body_mass_g, <span class="at">y =</span> bill_length_mm, <span class="at">color =</span> species)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-data-visualizations_files/figure-html/penguins-quiz-scatter-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Adding in this additional information allows us to see that chinstrap penguins are the cluster we noticed in the previous plot. Adelie and gentoo penguins have a similar relationship between body mass and bill length, but chinstrap penguins tend to have longer bills and lower body mass.</p>
+<p>Each variable in ggplot2 is <strong>mapped</strong> to a plot feature using the <code>aes()</code> (aesthetic) function. This function automatically constructs a scale that e.g.&nbsp;converts between body mass and the x axis of the plot, which is measured on a (0,1) scale for plotting. Similarly, when we add a categorical variable and color the points of the plot by that variable, the mapping function automatically decides that Adelie penguins will be plotted in red, Chinstrap in green, and Gentoo in blue.</p>
+<p>That is, ggplot2 allows the programmer to focus on the relationship between the data and the plot, without having to get into the specifics of how that mapping occurs. This allows the programmer to consider these relationships when constructing the plot, choosing the relationships which are most important for the audience and mapping those variables to important dimensions of the plot, such as the x and y axis.</p>
+</section>
+<section id="a-graphing-template" class="level3">
+<h3 class="anchored" data-anchor-id="a-graphing-template">A graphing template</h3>
+<p>It would be convenient if we could create a template for each of these libraries that would help us create many different types of plots. Unfortunately, that’s going to be a bit difficult, because there are a number of libraries covered here that are not built on the idea of a grammar of graphics - that is, a set of vocabulary that can define a bunch of different types of charts. In this section, I’ll show you basic templates for charts where such templates exist, and otherwise, I will try to give you a set of functions that may get you started.</p>
+<p>The <code>gg</code> in <code>ggplot2</code> stands for the grammar of graphics. In <code>ggplot2</code>, we can describe any plot using a template that looks like this:</p>
+<pre><code>ggplot(data = &lt;DATA&gt;) + 
+  &lt;GEOM&gt;(mapping = aes(&lt;MAPPINGS&gt;), 
+         position = &lt;POSITION&gt;, 
+         stat = &lt;STAT&gt;) + 
+  &lt;FACET&gt; + 
+  &lt;COORD&gt; + 
+  &lt;THEME&gt;</code></pre>
+<p>Geoms are geometric objects, like points (<code>geom_point</code>), lines (<code>geom_line</code>), and rectangles (<code>geom_rect</code>, <code>geom_bar</code>, <code>geom_column</code>). Mappings are relationships between plot characteristics and variables in the dataset - setting <code>x</code>, <code>y</code>, <code>color</code>, <code>fill</code>, <code>size</code>, <code>shape</code>, <code>linetype</code>, and more. Critically, when a visual characteristic, such as color, fill, shape, or size, is a constant, it is set outside of an <code>aes()</code> statement; when it is mapped to a variable, it must be provided inside the <code>aes()</code> statement. <a href="https://r4ds.had.co.nz/data-visualisation.html#aesthetic-mappings">Read more about aesthetics</a></p>
+<p>In <code>ggplot2</code>, <a href="https://r4ds.had.co.nz/data-visualisation.html#statistical-transformations">statistics</a> can be used within geoms to summarize data. Additional modifications of plots in <code>ggplot2</code> include changing the <a href="https://r4ds.had.co.nz/data-visualisation.html#coordinate-systems">coordinate system</a>, adjusting <a href="https://r4ds.had.co.nz/data-visualisation.html#position-adjustments">positions</a>, and adding subplots using <a href="https://r4ds.had.co.nz/data-visualisation.html#facets">facets</a>. <!-- Not all of these are fully implemented in `plotnine`, but most features are available in both systems. --></p>
+</section>
+</section>
+<section id="charts-graphics-and-the-grammar-of-graphics" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="charts-graphics-and-the-grammar-of-graphics">Charts, Graphics, and the Grammar of Graphics</h2>
+<p>There are two general approaches to generating statistical graphics computationally:</p>
+<ol type="1">
+<li><p>Manually specify the plot that you want, possibly doing the preprocessing and summarizing before you create the plot.</p></li>
+<li><p>Describe the relationship between the plot and the data, using sensible defaults that can be customized for common operations.</p></li>
+</ol>
+<p>In the introduction to the Grammar of Graphics <span class="citation" data-cites="wilkinsonGrammarGraphics1999">[@wilkinsonGrammarGraphics1999]</span>, Leland Wilkinson suggests that the first approach is what we would call “charts” - pie charts, line charts, bar charts - objects that are “instances of much more general objects”. His argument is that elegant graphical design means we have to think about an underlying theory of graphics, rather than how to create specific charts. The 2nd approach is called the “grammar of graphics”.</p>
+<p>Before we delve into the grammar of graphics, let’s motivate the philosophy using a simple task. Suppose we want to create a pie chart using some data. Pie charts are terrible, and we’ve known it for 100 years <span class="citation" data-cites="croxtonBarChartsCircle1927a">[@croxtonBarChartsCircle1927a]</span>, so in the interests of showing that we know that pie charts are awful, we’ll also create a stacked bar chart, which is the most commonly promoted alternative to a pie chart. We’ll talk about what makes pie charts terrible in a later section on communication and effective visualizations.</p>
+<section id="example-generations-of-pokemon" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="example-generations-of-pokemon">Example: Generations of Pokemon</h3>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://upload.wikimedia.org/wikipedia/commons/9/98/International_Pok%C3%A9mon_logo.svg%22"><img src="images/05-International_Pokemon_logo.png" class="img-fluid figure-img" alt="Pokemon logo"></a></p>
+<figcaption>Nintendo, Creatures, Game Freak, The Pokémon Company, Public domain, via Wikimedia Commons</figcaption>
+</figure>
+</div>
+</div></div><p>Suppose we want to explore Pokemon. There’s not just the original 150 (gotta catch ’em all!) - now there are over 1000!</p>
+<p>Let’s start out by looking at the proportion of Pokemon added in each of the 9 generations. We start by reading in the data.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Setup the data</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>poke <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/srvanderplas/datasets/main/clean/pokemon_gen_1-9.csv"</span>, <span class="at">na =</span> <span class="st">'.'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">generation =</span> <span class="fu">factor</span>(gen))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Once the data is read in, we can start plotting:</p>
+<p>In ggplot2, we start by specifying which variables we want to be mapped to which features of the data.</p>
+<p>In a pie or stacked bar chart, we don’t care about the x coordinate - the whole chart is centered at (0,0) or is contained in a single “stack”. So it’s easiest to specify our x variable as a constant, ““. We care about the fill of the slices, though - we want each generation to have a different fill color, so we specify generation as our fill variable.</p>
+<p>Then, we want to summarize our data by the number of objects in each category - this is basically a stacked bar chart. Any variables specified in the plot statement are used to implicitly calculate the statistical summary we want – that is, to count the rows (so if we had multiple x variables, the summary would be computed for both the x and fill variables). <code>ggplot</code> is smart enough to know that when we use <code>geom_bar</code>, we generally want the y variable to be the count, so we can get away with leaving that part out. We just have to specify that we want the bars to be stacked on top of one another (instead of next to each other, “dodge”).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> poke,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">""</span>, </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">fill =</span> generation</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>                     )</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">+</span> </span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"stack"</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-data-visualizations_files/figure-html/gg-bar-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>If we want a pie chart, we can get one very easily - we transform the coordinate plane from Cartesian coordinates to polar coordinates. We specify that we want angle to correspond to the “y” coordinate, and that we want to start at <span class="math inline">\(\theta = 0\)</span>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">fill =</span> generation), <span class="at">data =</span> poke) <span class="sc">+</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"stack"</span>) <span class="sc">+</span> </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_polar</span>(<span class="st">"y"</span>, <span class="at">start =</span> <span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-data-visualizations_files/figure-html/gg-pie-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Notice how the syntax and arguments to the functions didn’t change much between the bar chart and the pie chart? That’s because the <code>ggplot</code> package uses what’s called the <strong>grammar of graphics</strong>, which is a way to describe plots based on the underlying mathematical relationships between data and plotted objects. In ggplot2, the arguments are consistently named, and for plots which require similar transformations and summary observations, it’s very easy to switch between plot types by changing one word or adding one transformation.</p>
+<p>The grammar of graphics is an approach first introduced in Leland Wilkinson’s book <span class="citation" data-cites="wilkinsonGrammarGraphics1999">[@wilkinsonGrammarGraphics1999]</span>. Unlike other graphics classification schemes, the grammar of graphics makes an attempt to describe how the dataset itself relates to the components of the chart.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/05-ggplot2_masterpiece.png" class="img-fluid figure-img" alt="A fuzzy monster in a beret and scarf, critiquing their own column graph on a canvas in front of them while other assistant monsters (also in berets) carry over boxes full of elements that can be used to customize a graph (like themes and geometric shapes). In the background is a wall with framed data visualizations. Stylized text reads “ggplot2: build a data masterpiece.”"></p>
+<figcaption>Building a masterpiece, by Allison Horst</figcaption>
+</figure>
+</div>
+<p>This has a few advantages:</p>
+<ol type="1">
+<li>It’s relatively easy to represent the same dataset with different types of plots (and to find their strengths and weaknesses)</li>
+<li>Grammar leads to a concise description of the plot and its contents</li>
+<li>We can add layers to modify the graphics, each with their own basic grammar (just like we combine sentences and clauses to build a rich, descriptive paragraph)</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/05-grammar-pyramid.png" class="img-fluid figure-img"></p>
+<figcaption>A pyramid view of the major components of the grammar of graphics, with data as the base, aesthetics building on data, scales building on aesthetics, geometric objects, statistics, facets, and the coordinate system at the top of the pyramid. Source: <span class="citation" data-cites="sarkarComprehensiveGuideGrammar2018">[@sarkarComprehensiveGuideGrammar2018]</span></figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>I have turned off warnings for all of the code chunks in this chapter. When you run the code you may get warnings about e.g.&nbsp;missing points - this is normal, I just didn’t want to have to see them over and over again - I want you to focus on the changes in the code.</p>
+</div>
+</div>
+<p>When creating a grammar of graphics chart, we start with the data (this is consistent with the data-first tidyverse philosophy).</p>
+<ol type="1">
+<li><p>Identify the dimensions of your dataset you want to visualize.</p></li>
+<li><p>Decide what aesthetics you want to map to different variables. For instance, it may be natural to put time on the <span class="math inline">\(x\)</span> axis, or the experimental response variable on the <span class="math inline">\(y\)</span> axis. You may want to think about other aesthetics, such as color, size, shape, etc. at this step as well.</p>
+<ol type="a">
+<li>It may be that your preferred representation requires some summary <strong>statistics</strong> in order to work. At this stage, you would want to determine what variables you feed in to those statistics, and then how the statistics relate to the geoms that you’re envisioning. You may want to think in terms of layers - showing the raw data AND a summary geom.</li>
+</ol></li>
+<li><p>In most cases, <code>ggplot</code> will determine the scale for you, but sometimes you want finer control over the scale - for instance, there may be specific, meaningful bounds for a variable that you want to directly set.</p></li>
+<li><p>Coordinate system: Are you going to use a polar coordinate system? (Please say no, for reasons we’ll get into later!)</p></li>
+<li><p>Facets: Do you want to show subplots based on specific categorical variable values?</p></li>
+</ol>
+<p>(this list modified from <span class="citation" data-cites="sarkarComprehensiveGuideGrammar2018">@sarkarComprehensiveGuideGrammar2018</span>).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/05-grammar-graphics-dataset-mapping.png" class="img-fluid figure-img"></p>
+<figcaption>A Sketch of the mapping between a data frame and a scatterplot, showing the geoms, aesthetics, transformations, scales, coordinate systems, and statistics that are created by default.</figcaption>
+</figure>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(txhousing)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> txhousing, </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> date, </span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">y =</span> median)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">+</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-data-visualizations_files/figure-html/txhousing-ggplot-intro-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="exploratory-data-analysis-and-plot-customization" class="level2">
+<h2 class="anchored" data-anchor-id="exploratory-data-analysis-and-plot-customization">Exploratory Data Analysis and Plot Customization</h2>
+<p>When you first get a new dataset, it is critical that you, as the analyst, get a feel for the data. John Tukey, in his book <span class="citation" data-cites="eda">@eda</span>, likens exploratory data analysis to detective work, and says that in both cases the analyst needs two things: tools, and understanding. Tools, like fingerprint powder or types of charts, are essential to collect evidence; understanding helps the analyst to know where to apply the tools and what to look out for.</p>
+<p>Tukey claims that while tools are constantly evolving, and there may not be one set of “best” tools, understanding is a bit different. There are situational elements – you might need different base knowledge to solve a crime in a small village in the UK than you need to solve a crime in New York City or Buenos Aires. However, the broad strokes of what questions are asked during an investigation will be similar across different locations and types of crimes.</p>
+<p>The same thing is true in exploratory data analysis - while it is helpful to have a basic understanding of the dataset, and being intimately familiar with the type of data and data collection processes can give the analyst an advantage, the same basic detective skills will be useful across a wide variety of data sets.</p>
+<p>There is one other aspect of the analogy between EDA and detective work that is useful: the detective gathers evidence, but does not try the case or make decisions about what should happen to the accused. Similarly, the individual conducting an exploratory data analysis should not move too quickly to hypothesis testing and other confirmatory data analysis techniques. In exploratory data analysis, the goal is to lay the foundation, assess the evidence (data) for interesting clues, and to try to understand the whole story. Only once this process is complete should we move to any sort of confirmatory analysis.</p>
+<p>In this section, we’ll primarily use charts as a tool for exploratory data analysis. Pay close attention not only to the tools, but to the process of inquiry.</p>
+<section id="texas-housing-data" class="level3">
+<h3 class="anchored" data-anchor-id="texas-housing-data">Texas Housing Data</h3>
+<p>Let’s explore the <code>txhousing</code> data a bit more thoroughly by adding some complexity to our chart. This example will give me an opportunity to show you how an exploratory data analysis might work in practice, while also demonstrating some of the features of each plotting library.</p>
+</section>
+<section id="starting-chart" class="level3">
+<h3 class="anchored" data-anchor-id="starting-chart">Starting Chart</h3>
+<p>Before we start exploring, let’s start with a basic scatterplot, and add a title and label our axes, so that we’re creating good, informative charts.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/05-grammar-graphics-dataset-mapping.png" class="img-fluid figure-img"></p>
+<figcaption>A Sketch of the mapping between a data frame and a scatterplot, showing the geoms, aesthetics, transformations, scales, coordinate systems, and statistics that are created by default.</figcaption>
+</figure>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> txhousing, <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> median)) <span class="sc">+</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Date"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Median Home Price"</span>) <span class="sc">+</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Texas Housing Prices"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-data-visualizations_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="exploring-trends" class="level3">
+<h3 class="anchored" data-anchor-id="exploring-trends">Exploring Trends</h3>
+<p>First, we may want to show some sort of overall trend line. We can start with a linear regression, but it may be better to use a loess smooth (<a href="https://en.wikipedia.org/wiki/Local_regression">loess regression</a> is a fancy weighted average and can create curves without too much additional effort on your part).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/05-grammar-graphics-dataset-mapping-smooth.png" class="img-fluid figure-img"></p>
+<figcaption>A Sketch of the mapping between a data frame and a scatterplot, showing the geoms, aesthetics, transformations, scales, coordinate systems, and statistics that are created by default. In this modification of the original image, we’ve added a summary smooth line which provides a linear trend on top of the original points.</figcaption>
+</figure>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> txhousing, <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> median)) <span class="sc">+</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Date"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Median Home Price"</span>) <span class="sc">+</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Texas Housing Prices"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-data-visualizations_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We can also use a loess (locally weighted) smooth:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> txhousing, <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> median)) <span class="sc">+</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"loess"</span>) <span class="sc">+</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Date"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Median Home Price"</span>) <span class="sc">+</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Texas Housing Prices"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-data-visualizations_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="adding-complexity-with-moderating-variables" class="level3">
+<h3 class="anchored" data-anchor-id="adding-complexity-with-moderating-variables">Adding Complexity with Moderating Variables</h3>
+<p>Looking at the plots here, it’s clear that there are small sub-groupings (see, for instance, the almost continuous line of points at the very top of the group between 2000 and 2005). Let’s see if we can figure out what those additional variables are…</p>
+<p>As it happens, the best viable option is City.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/05-grammar-graphics-dataset-mapping-color.png" class="img-fluid figure-img"></p>
+<figcaption>A Sketch of the mapping between a data frame and a scatterplot, showing the geoms, aesthetics, transformations, scales, coordinate systems, and statistics that are created by default. In this modification of the original image, we’ve added a summary smooth line which provides a linear trend on top of the original points.</figcaption>
+</figure>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> txhousing, <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> median, <span class="at">color =</span> city)) <span class="sc">+</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"loess"</span>) <span class="sc">+</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Date"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Median Home Price"</span>) <span class="sc">+</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Texas Housing Prices"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-data-visualizations_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>That’s a really crowded graph! It’s slightly easier if we just take the points away and only show the statistics, but there are still way too many cities to be able to tell what shade matches which city.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> txhousing, <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> median, <span class="at">color =</span> city)) <span class="sc">+</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># geom_point() +</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"loess"</span>) <span class="sc">+</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Date"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Median Home Price"</span>) <span class="sc">+</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Texas Housing Prices"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-data-visualizations_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="data-reduction-strategies" class="level3">
+<h3 class="anchored" data-anchor-id="data-reduction-strategies">Data Reduction Strategies</h3>
+<p>In reality, though, you should not ever map color to something with more than about 7 categories if your goal is to allow people to trace the category back to the label. It just doesn’t work well perceptually.</p>
+<p>So let’s work with a smaller set of data: Houston, Dallas, Fort worth, Austin, and San Antonio (the major cities).</p>
+<p>Another way to show this data is to plot each city as its own subplot. In ggplot2 lingo, these subplots are called “facets”. In visualization terms, we call this type of plot “small multiples” - we have many small charts, each showing the trend for a subset of the data.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>citylist <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Houston"</span>, <span class="st">"Austin"</span>, <span class="st">"Dallas"</span>, <span class="st">"Fort Worth"</span>, <span class="st">"San Antonio"</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>housingsub <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(txhousing, city <span class="sc">%in%</span> citylist)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> housingsub, </span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> date, </span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">y =</span> median, </span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>                     <span class="at">color =</span> city)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">+</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"loess"</span>) <span class="sc">+</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Date"</span>,</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Median Home Price"</span>,</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Texas Housing Prices"</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>       )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-data-visualizations_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Here’s the facetted version of the chart:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> housingsub, </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> date,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">y =</span> median)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">+</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"loess"</span>) <span class="sc">+</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>city) <span class="sc">+</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Date"</span>,</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Median Home Price"</span>,</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Texas Housing Prices"</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>       )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-data-visualizations_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Notice I’ve removed the aesthetic mapping to color as it’s redundant now that each city is split out in its own plot.</p>
+</section>
+<section id="adding-additional-complexity" class="level3">
+<h3 class="anchored" data-anchor-id="adding-additional-complexity">Adding Additional Complexity</h3>
+<p>Now that we’ve simplified our charts a bit, we can explore a couple of the other quantitative variables by mapping them to additional aesthetics:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> housingsub, </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> date, </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">y =</span> median, </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">size =</span> sales)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">+</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">15</span>) <span class="sc">+</span> <span class="co"># Make points transparent</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"loess"</span>) <span class="sc">+</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>city) <span class="sc">+</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Remove extra information from the legend -</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># line and error bands aren't what we want to show</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Also add a title</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">size =</span> <span class="fu">guide_legend</span>(<span class="at">title =</span> <span class="st">'Number of Sales'</span>,</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>                             <span class="at">override.aes =</span> <span class="fu">list</span>(<span class="at">linetype =</span> <span class="cn">NA</span>,</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>                                                 <span class="at">fill =</span> <span class="st">'transparent'</span>))) <span class="sc">+</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Move legend to bottom right of plot</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>), <span class="at">legend.justification =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Date"</span>,</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Median Home Price"</span>,</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Texas Housing Prices"</span></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>       )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-data-visualizations_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Notice I’ve removed the aesthetic mapping to color as it’s redundant now that each city is split out in its own plot.</p>
+</section>
+<section id="exploring-other-variables-and-relationships" class="level3">
+<h3 class="anchored" data-anchor-id="exploring-other-variables-and-relationships">Exploring Other Variables and Relationships</h3>
+<p>Up to this point, we’ve used the same position information - date for the y axis, median sale price for the y axis. Let’s switch that up a bit so that we can play with some transformations on the x and y axis and add variable mappings to a continuous variable.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> housingsub, </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> listings, </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">y =</span> sales, </span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">color =</span> city)</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">+</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">15</span>) <span class="sc">+</span> <span class="co"># Make points transparent</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"loess"</span>) <span class="sc">+</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Number of Listings"</span>,</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Number of Sales"</span>,</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Texas Housing Prices"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-data-visualizations_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The points for Fort Worth are compressed pretty tightly relative to the points for Houston and Dallas. When we get this type of difference, it is sometimes common to use a log transformation<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Here, I have transformed both the x and y axis, since the number of sales seems to be proportional to the number of listings.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> housingsub, <span class="fu">aes</span>(<span class="at">x =</span> listings, <span class="at">y =</span> sales, <span class="at">color =</span> city)) <span class="sc">+</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">15</span>) <span class="sc">+</span> <span class="co"># Make points transparent</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"loess"</span>) <span class="sc">+</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">trans =</span> <span class="st">"log10"</span>) <span class="sc">+</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">trans =</span> <span class="st">"log10"</span>) <span class="sc">+</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Number of Listings"</span>,</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Number of Sales"</span>,</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Texas Housing Prices"</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>       )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-data-visualizations_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="adding-additional-moderating-variables" class="level3">
+<h3 class="anchored" data-anchor-id="adding-additional-moderating-variables">Adding Additional Moderating Variables</h3>
+<p>For the next demonstration, let’s look at just Houston’s data. We can examine the inventory’s relationship to the number of sales by looking at the inventory-date relationship in x and y, and mapping the size or color of the point to number of sales.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>houston <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(txhousing, city <span class="sc">==</span> <span class="st">"Houston"</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> houston, </span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> date, </span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">y =</span> inventory, </span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">size =</span> sales)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">+</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Date"</span>,</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Months of Inventory"</span>,</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Houston Housing Data"</span>) <span class="sc">+</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">size =</span> <span class="fu">guide_legend</span>(<span class="at">title =</span> <span class="st">"Number of Sales"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-data-visualizations_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> houston, </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> date, </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">y =</span> inventory, </span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">color =</span> sales)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">+</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Date"</span>,</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Months of Inventory"</span>,</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Houston Housing Data"</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">+</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">size =</span> <span class="fu">guide_colorbar</span>(<span class="at">title =</span> <span class="st">"Number of Sales"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-data-visualizations_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Which is easier to read?</p>
+<p>What happens if we move the variables around and map date to the point color?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> houston, </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> sales, </span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">y =</span> inventory, </span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">color =</span> date)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">+</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Number of Sales"</span>,</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Months of Inventory"</span>,</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Houston Housing Data"</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">+</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">size =</span> <span class="fu">guide_colorbar</span>(<span class="at">title =</span> <span class="st">"Date"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-data-visualizations_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Is that easier or harder to read?</p>
+</section>
+</section>
+<section id="what-type-of-chart-to-use" class="level2">
+<h2 class="anchored" data-anchor-id="what-type-of-chart-to-use">What type of chart to use?</h2>
+<p>It can be hard to know what type of chart to use for a particular type of data. I recommend figuring out what you want to show first, and then thinking about how to show that data with an appropriate plot type.</p>
+<p>Consider the following factors:</p>
 <ul>
-<li>Map rows and columns of rectangular data to elements of a graphic</li>
-<li>Describe and/or draw a desired plot based to answer a research question</li>
-<li>Describe charts using the grammar of graphics</li>
-<li>Create layered graphics that highlight multiple aspects of the data</li>
-<li>Evaluate existing charts and develop new versions that improve accessibility and readability</li>
-<li>Identify the appropriate kind of plot (geometries and aesthetics) given types of variables.</li>
+<li><p>What type of variable is x? Categorical? Continuous? Discrete?</p></li>
+<li><p>What type of variable is y?</p></li>
+<li><p>How many observations do I have for each x/y variable?</p></li>
+<li><p>Are there any important moderating variables?</p></li>
+<li><p>Do I have data that might be best shown in small multiples? E.g. a categorical moderating variable and a lot of data, where the categorical variable might be important for showing different features of the data?</p></li>
 </ul>
-</div>
-</div>
-<!-- https://r4ds.hadley.nz/data-visualize.html -->
+<p>In a later week, we will talk in more depth about considerations for creating <em>good</em> charts; these considerations may also inform your decisions.</p>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
 
 
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>This isn’t necessarily a good thing, but you should know how to do it. The jury is still very much out on whether log transformations make data easier to read and understand<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
