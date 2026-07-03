@@ -491,7 +491,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <a href="#project-and-data-management" id="toc-project-and-data-management" class="nav-link" data-scroll-target="#project-and-data-management">Project and Data Management</a>
   <ul>
 <li><a href="#rstudio-projects" id="toc-rstudio-projects" class="nav-link" data-scroll-target="#rstudio-projects">RStudio Projects</a></li>
-  <li><a href="#file-paths-refresher" id="toc-file-paths-refresher" class="nav-link" data-scroll-target="#file-paths-refresher">File Paths Refresher</a></li>
+  <li>
+<a href="#file-paths-refresher" id="toc-file-paths-refresher" class="nav-link" data-scroll-target="#file-paths-refresher">File Paths Refresher</a>
+  <ul class="collapse">
+<li><a href="#working-directory" id="toc-working-directory" class="nav-link" data-scroll-target="#working-directory">Working Directory</a></li>
+  <li><a href="#absolute-vs.-relative-file-paths-examples" id="toc-absolute-vs.-relative-file-paths-examples" class="nav-link" data-scroll-target="#absolute-vs.-relative-file-paths-examples">Absolute vs.&nbsp;Relative File Paths Examples</a></li>
+  </ul>
+</li>
   </ul>
 </li>
   </ul></nav>
@@ -521,7 +527,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </blockquote>
 <p>Most of the functionality you will need for an entire data analysis workflow will have the <strong>cohesive grammar</strong> of the tidyverse.</p>
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="images/06-data-science-workflow.png" class="img-fluid figure-img" alt="Flow chart illustrating data science workflow. Moving from left to right, Import, right arrow, Build / Clean, right arrow, to a clockwise roatation of arrows in a grey background box and words from Transform / Tidy to Visualize to Model. Finally there is a right arrow after the box to the word Communicate."></p>
+<figure class="figure"><p><img src="images/04-data-science-workflow.png" class="img-fluid figure-img" alt="Flow chart illustrating data science workflow. Moving from left to right, Import, right arrow, Build / Clean, right arrow, to a clockwise roatation of arrows in a grey background box and words from Transform / Tidy to Visualize to Model. Finally there is a right arrow after the box to the word Communicate."></p>
 <figcaption>Data Science Workflow Adapted from R4DS</figcaption></figure>
 </div>
 <p>This week, we will, learn how to read in data (the “Import” step in the data science workflow) with <code>readr</code>, and we will continue to use lots of tools from the tidyverse thorughout Unit 2!</p>
@@ -623,7 +629,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">?</span><span class="va">penguins</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>A page that looks like this should appear in the Help tab:</p>
-<p><img src="images/04-penguins-help.png" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/04-penguins-help.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
+</figure>
+</div>
 <p>The description of the dataset in this dictionary is:</p>
 <blockquote class="blockquote">
 <p>Size measurements for adult foraging penguins near Palmer Station, Antarctica</p>
@@ -636,39 +645,166 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section></section><section id="project-and-data-management" class="level2"><h2 class="anchored" data-anchor-id="project-and-data-management">Project and Data Management</h2>
 <section id="rstudio-projects" class="level3"><h3 class="anchored" data-anchor-id="rstudio-projects">RStudio Projects</h3>
 <p>Now that we have added data and other possible inputs to the mix, it is extra important that all of our files and analyses are organized clearly. You also might be finding that you want to keep different project separate from each other and it is sort of annoying to have to navigate through the Files tab to find your scripts for a different project every time!</p>
-<p>Having each analysis well organized and separate from other analyses is such a fundamental part of good data science, that RStudio built a tool to help – RStudio projects.</p>
-<p>You can create an RStudio project with a new directory or add a project to an already existing directory. When you convert a directory into a RStudio project, you will notice that a <code>.Rproj</code> file now exists in that directory.</p>
-<p>If you are primarily writing code in R scripts (as you have done so far in this class), a major benefit of RStudio Projects is that they <strong>set</strong> the working directory as the main project directory. For example:</p>
-<p>However, if you are working in a Quarto file (.qmd), the working directory is the directory where the Quarto file lives! This can be tricky – just remember that Quarto wins ☺️.</p>
+<p>Having each analysis well organized and separate from other analyses is such a fundamental part of good data science, that RStudio built a tool to help – RStudio <strong>projects</strong>.</p>
+<p>You can create an RStudio project with a new directory or add a project to an already existing directory.</p>
+<p><strong>Follow the steps that follow to create a <code>stat-1810</code> Rstudio project in your <code>stat-1810</code> directory.</strong></p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="" aria-current="page">Step 1</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Step 2</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">Step 3</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false" href="">You Made A Project!</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p>There are a couple of different ways to create a new RStudio project, but we will just walk through one.</p>
+<ul>
+<li>First, make sure you have an RStudio window open.</li>
+<li>Click on the project icon at the top right corner of the window.</li>
+<li>Select “New Project” from the drop-down options.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/04-newproj1.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<figcaption>Creating a new RStudio project – select New Project from dropdown</figcaption></figure>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p>The screen shown below should pop up.</p>
+<p>Since you already have a <code>stat-1810</code> directory, that we want to convert into a project, select the “Existing Directory” option.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/04-newproj2.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption>Create a project from an existing directory.</figcaption></figure>
+</div>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<ul>
+<li>
+<p>Click “Browse” and navigate to your <code>stat-1810</code> directory.</p>
+<ul>
+<li>In the example shown below, the <code>stat-1810</code> directory was within a <code>class</code> directory, within <code>Documents</code>.</li>
+</ul>
+</li>
+<li><p>Once you have given the path to you <code>stat-1810</code> directory, click “Create Project”</p></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/04-newproj3.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption>Navigate to directory you want to turn into an RStudio project.</figcaption></figure>
+</div>
+</div>
+<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
+<p>Your Rstudio window should look a little different now!</p>
+<ul>
+<li>The name of your new project (<code>stat-1810</code>) is now showing in the top right, project dropdown.</li>
+<li>The Files tab is now showing your project directory.</li>
+<li>There is a <code>stat-1810.Rproj</code> file in the directory.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/04-newproj.png" class="img-fluid figure-img"></p>
+<figcaption>Rstudio window with <code>stat-1810</code> project.</figcaption></figure>
+</div>
+</div>
+</div>
+</div>
+<p>When you convert a directory into a RStudio project, you will notice that a <code>.Rproj</code> file now exists in that directory. This is reflected both in your file manager (Finer on Mac and File Explorer on PC) and in the Files tab in RStudio:</p>
+<div class="quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/04-files-comp-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption>Project directory in file manager.</figcaption></figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/04-file-proj.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption>Project directory in RStudio.</figcaption></figure>
+</div>
+</div>
+</div>
+</div>
+<p>For the rest of the course, you should always be working with your <code>stat-1810</code> RStudio Project! To open your project, you can either:</p>
+<ol type="1">
+<li>Double click the <code>stat-1810.Rproj</code> file in your file manager on your computer, or</li>
+<li>Navigate to the project using the the drop-down in the top right corner of an open RStudio window.</li>
+</ol>
+<p>Practice closing your project and reopening it using one of the methods above. You should notice that when you re-open a project, you will end up exactly where you left off! Any files you had open the last time you worked in the project will be open and any previously run code is in the Console.</p>
+<p>Now we are all set up with an RStudio project that will include all of the data, scripts, and outputs from our analysis. A final step to having a good and reproducible analysis workflow is to think carefully about how all of these files reference each other!</p>
 </section><section id="file-paths-refresher" class="level3"><h3 class="anchored" data-anchor-id="file-paths-refresher">File Paths Refresher</h3>
-<p>Before we can read in data, we need to tell R where to look for the data file!</p>
-<p>A <strong>file path</strong> describes where a certain file or directory lives on your computer. Any time that you are working in R, there is a <em>working directory</em>, which is the baseline directory that R is then looking for other files from. You can find your current working directory with:</p>
+<p>As you learned in <a href="00-setup.html#sec-0-file-paths" class="quarto-xref"><span>File Paths</span></a>, a <strong>file path</strong> describes where a certain file or directory lives on your computer. There are two different kinds of file paths that you can define to indicate the location of a file or directory:</p>
+<ul>
+<li><p><strong>absolute file path</strong>: full path from the root directory on <em>your</em> computer. Note this will only work on your computer!</p></li>
+<li><p><strong>relative file path</strong>: path based on the relationship with a current <em>working directory</em> in terms of a hierarchichy of directories</p></li>
+</ul>
+<p>In order to create reproducible analysis (that could be run on someone else’s computer), we <strong>always use relative file paths</strong>. In order to write relative files paths, you need to know what your <em>working directory</em> is.</p>
+<section id="working-directory" class="level4"><h4 class="anchored" data-anchor-id="working-directory">Working Directory</h4>
+<p>Any time that you are working in R, there is a <em>working directory</em>, which is the baseline directory that R is then looking for other files from.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Find WD</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Go to WD</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<p>You can find your current working directory with:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "/Users/czmann/Documents/r-revamp/course-pack"</code></pre>
 </div>
 </div>
-<p>There are two different kinds of file paths that you can define to indicate the location of a file or directory:</p>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<p>Another thing you might want to do is navigate to your working directory in the Files tab in RStudio.</p>
 <ul>
-<li><p><strong>absolute file path</strong>: full path from the root directory on <em>your</em> computer. Note this will only work on your computer!</p></li>
-<li><p><strong>relative file path</strong>: path based on the relationship with a current <em>working directory</em> in terms of a hierarchichy of directories</p></li>
+<li>In the Files tab, select the blue settings gear</li>
+<li>Select “Go To Working Directory” from the drop-down.</li>
 </ul>
-<p>Let’s look at an example of relative versus absolute file paths. In the example below the “labs” directory is the working directory. The directories that “labs” are in are called it’s <em>parent</em> directories, which are referenced with <code>"../"</code> in the relative file paths.</p>
-<p><img src="images/04-relative-absolute.png" class="img-fluid"><!-- ### RStudio Projects --></p>
-<!-- When you work on a project that may need to exist on some other machine, it's important to use **local** file paths -- the global path will likely not be the same, but you can usually set the local project-specific structure up to be the same across machines.  -->
-<!-- In fact, there's a very common shortcut that programmers take -- they set up a project-specific folder that is self contained.  -->
-<!-- That is, all of the data and code necessary for that project is provided within the folder.  -->
-<!-- Then, the code within the folder can use local paths and will work when the project folder is copied to a new machine.  -->
-<!-- (Allison) I'm not quite sure where this should go, but we will need to 
-introduce packages in this lesson. -->
+<p><img src="images/04-go-to-wkdr.png" class="img-fluid" style="width:70.0%"></p>
+</div>
+</div>
+</div>
+<p>Both Quarto documents and RStudio projects help us manage the working directory automatically!</p>
+<p><strong>RStudio projects</strong> set the working directory as the main project directory (i.e.&nbsp;where the .Rproj file lives). That will thus be your working directory if you are writing and running code in:</p>
+<ul>
+<li>R scripts or</li>
+<li>the Console</li>
+</ul>
+<p><em>However</em>, the working directory in <strong>Quarto</strong> files (.qmd) is where the Quarto file lives! ⚠️ This overrides the working directory set by an RStudio Project. ⚠️ This can be tricky – just remember that Quarto wins ☺️.</p>
+<p>For example, the <code>stat-1810</code> RStudio project sets the working directory to be the <code>stat-1810</code> directory (as indicated with the stars in <a href="#fig-proj-wkdr" class="quarto-xref">Figure&nbsp;<span>1</span></a>) for code run in any R scripts like <code>lab-1.R</code> or if we run code in the Console. However, if we are working in <code>pa4.qmd</code>, the project is overridden and the working directory is <code>week-4</code> (<a href="#fig-quarto-wkdr" class="quarto-xref">Figure&nbsp;<span>2</span></a>).</p>
+<div class="columns">
+<div class="column">
+<div id="fig-proj-wkdr" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-proj-wkdr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/04-proj-wkdr.png" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-proj-wkdr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: If working in <code>lab-1.R</code>, or the Console, the <code>stat-1810</code> is the working directory due to <code>stat-1810.Rproj</code>.
+</figcaption></figure>
+</div>
+</div><div class="column">
+<div id="fig-quarto-wkdr" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-quarto-wkdr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/04-quarto-wkdr.png" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-quarto-wkdr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: If working in <code>pa4.qmd</code>, <code>week-4</code> is the working direcotry.
+</figcaption></figure>
+</div>
+</div>
+</div>
+</section><section id="absolute-vs.-relative-file-paths-examples" class="level4"><h4 class="anchored" data-anchor-id="absolute-vs.-relative-file-paths-examples">Absolute vs.&nbsp;Relative File Paths Examples</h4>
+<p>Let’s look at an example of relative versus absolute file paths. In the example below the <code>"labs"</code> directory is the working directory. The directories that <code>"labs"</code> are in are called it’s <em>parent</em> directories, which are referenced with <code>"../"</code> in the relative file paths.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/04-relative-absolute.png" class="img-fluid figure-img"></p>
+<figcaption>An example of relative versus absolute file paths, where <code>labs</code> is the working directory.</figcaption></figure>
+</div>
 <!-- ### Packages tab -->
 <!-- R and python both work off of packages - extensions to the default language that make it easier to accomplish certain tasks, like reading data from Excel files or drawing pretty charts.  -->
 <!-- This tab shows all of the R packages you have installed on your machine, and which ones are currently loaded. -->
 <!-- ![You can get important information from the packages tab, like what packages are loaded, easy access to documentation for each package, and what version of the package is installed.](../images/tools/Rstudio-packages-tab.png){fig-alt="Packages tab of RStudio. Checkboxes in the far left column show whether packages are loaded. Links to the package name can be clicked to access package documentation. The 3rd column is the package version, which should be verified and updated if you're having issues with the package's functions."} -->
 
 
-</section></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+</section></section></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
 <ol>
 <li id="fn1"><p>https://www.tidyverse.org/<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">

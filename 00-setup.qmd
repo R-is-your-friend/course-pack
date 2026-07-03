@@ -138,7 +138,7 @@ location of the data on your computer. For this class, we strongly prefer for
 files to be stored **locally** because working "in the cloud" can cause strange
 errors that are difficult to diagnose.
 
-### File Paths {#file-paths}
+### File Paths {#sec-0-file-paths}
 
 It's not enough to know about a computer's file system, we also need to know how
 computers remember the location of what is stored where. Specifically, we need
@@ -201,6 +201,8 @@ capitalization for all folders. `stat` is easier to type than `Stat` or `STAT`.
 
 2. Using spaces in file names (e.g., `stat 1810`) can sometimes cause issues. 
 So, we advocate for replacing spaces with a hyphen or an underscore. 
+
+<!--CM note -- since you are advocating for this (which I agree!), shouldn't they then be using "week-1" instead of "Week 1"?-->
 
 ::: {.column-margin}
 

@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>Computer is Friend – R is Your Friend</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -34,19 +37,18 @@ ul.task-list li input[type="checkbox"] {
 <link href="./index.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d0ae9245876894da5ac7e18953ecc5cc.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-9de65633f6d0f5eeb0068d939eb6178f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-c56aa83846d244a7ab5588d901c86329.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-9de65633f6d0f5eeb0068d939eb6178f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-2e143f8b817ec5e7a44930ddac25d3c7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-9adb41b64cfd063ebab98e13503fc908.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-2e143f8b817ec5e7a44930ddac25d3c7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/quarto-contrib/fontawesome6-6.7.2/all.min.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/fontawesome6-6.7.2/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -461,7 +463,7 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
   <li><a href="#local-network-file-systems" id="toc-local-network-file-systems" class="nav-link" data-scroll-target="#local-network-file-systems">Local &amp; Network File Systems</a></li>
   </ul></li>
-  <li><a href="#file-paths" id="toc-file-paths" class="nav-link" data-scroll-target="#file-paths">File Paths</a>
+  <li><a href="#sec-0-file-paths" id="toc-sec-0-file-paths" class="nav-link" data-scroll-target="#sec-0-file-paths">File Paths</a>
   <ul class="collapse">
   <li><a href="#making-good-file-names" id="toc-making-good-file-names" class="nav-link" data-scroll-target="#making-good-file-names">Making Good File Names</a></li>
   </ul></li>
@@ -650,8 +652,8 @@ ul.task-list li input[type="checkbox"] {
 <p>When programming, it is essential to know where your files are being stored. In Week 4 when we start reading in data, you will not be able to interactively search for where the data are stored. Instead, you will need to know the exact location of the data on your computer. For this class, we strongly prefer for files to be stored <strong>locally</strong> because working “in the cloud” can cause strange errors that are difficult to diagnose.</p>
 </section>
 </section>
-<section id="file-paths" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="file-paths">File Paths</h3>
+<section id="sec-0-file-paths" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="sec-0-file-paths">File Paths</h3>
 <p>It’s not enough to know about a computer’s file system, we also need to know how computers remember the location of what is stored where. Specifically, we need to understand <strong>file paths</strong>.</p>
 <div class="callout callout-style-default callout-required-video callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -697,6 +699,7 @@ ul.task-list li input[type="checkbox"] {
 <li><p>Some computers are case sensitive, so it is safer to use the same capitalization for all folders. <code>stat</code> is easier to type than <code>Stat</code> or <code>STAT</code>.</p></li>
 <li><p>Using spaces in file names (e.g., <code>stat 1810</code>) can sometimes cause issues. So, we advocate for replacing spaces with a hyphen or an underscore.</p></li>
 </ol>
+<!--CM note -- since you are advocating for this (which I agree!), shouldn't they then be using "week-1" instead of "Week 1"?-->
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p><img src="https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/dbb99049-2916-4bc8-824f-1816f5c4f06d_rw_3840.png?h=5c28a07483856cd07de35a50c772824d" class="img-fluid" alt="Cartoon representations of common cases in coding. A snake screams 'SCREAMING_SNAKE_CASE' into the face of a camel (wearing ear muffs) with 'camelCase' written along its back. Vegetables on a skewer spell out 'kebab-case' (words on a skewer). A mellow, happy looking snake has text 'snake_case' along it."></p>
