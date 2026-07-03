@@ -1,3 +1,8 @@
+---
+df-print: kable
+---
+
+
 # Data is Friend {.unnumbered}
 
 
