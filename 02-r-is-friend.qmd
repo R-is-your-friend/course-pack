@@ -3,6 +3,8 @@ filters:
  - flourish
 ---
 
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
 # R is Friend {.unnumbered}
 
 ::: callout
@@ -267,16 +269,48 @@ all the same data type.
 ::: {.callout-check-in}
 
 For each of the examples below, identify what data type do you believe the
-vector will have.  Try to answer this first *without* running the code.
+vector will have. Try to answer this first *without* running the code.
 
 1. `c(67, 13, 1989, TRUE)`
 2. `c("hello", "goodbye", TRUE)`
 3. `c("TRUE", FALSE, TRUE, "FALSE")`
 
+```{webr}
+#| exercise: vector-types
+c(
+  "______",
+  "______",
+  "______"
+)
+```
 
-<!-- [WEBR?] -->
-<!-- Add a code chunk where they can do this and check their answer. -->
-<!-- Give a hint to use the typeof() function to discover the datatype. -->
+```{webr}
+#| exercise: vector-types
+#| check: true
+answer <- tolower(.result)
+ok <- identical(answer, c("double", "character", "character")) ||
+  identical(answer, c("numeric", "character", "character"))
+
+list(
+  correct = ok,
+  message = if (ok) {
+    "Correct!"
+  } else if (any(answer == "string")) {
+    "Close, but not quite! Read the Data Types section again to see what strings are called in R."
+  } else {
+    "Try again."
+  }
+)
+```
+
+::: {.hint exercise="vector-types"}
+Use `typeof()`:
+
+```r
+typeof(c(67, 13, 1989, TRUE))
+```
+:::
+
 :::
 
 ### Multiple Vectors
