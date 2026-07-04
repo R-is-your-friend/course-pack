@@ -1040,23 +1040,86 @@ This hopefully motivates why it is nice to give the elements of your list names!
 Given this list, write code to perform the following operations. *Can you find
 __multiple__ methods?*
 
-<!-- [WEBR?] -->
-<!-- There should be a code chunk where this list is defined and the student
-can try out methods for extracting specific components. -->
+```{webr}
+#| setup: true
+#| exercise:
+#|   - list-fruit
+#|   - list-third-tree
+fruit_tree_harvest <- list(
+  fruit = c("apple", "orange", "lemon", "lime", "mango", "peach"),
+  tree = c(
+    "Malus domestica",
+    "Citrus sinensis",
+    "Citrus limon",
+    "Citrus aurantifolia",
+    "Mangifera indica",
+    "Prunus persica"
+  ),
+  harvest_window = c(3, 5, 12, 12, 5, 3)
+)
+```
 
-```{r}
-harvest_window <- c(3, 5, 12, 12, 5, 3)
-
-fruit_tree_harvest <- list(fruit = fruits, 
-                           tree = trees, 
-                           harvest_window = harvest_window)
+```{webr}
+#| autorun: true
+fruit_tree_harvest <- list(
+  fruit = c("apple", "orange", "lemon", "lime", "mango", "peach"),
+  tree = c(
+    "Malus domestica",
+    "Citrus sinensis",
+    "Citrus limon",
+    "Citrus aurantifolia",
+    "Mangifera indica",
+    "Prunus persica"
+  ),
+  harvest_window = c(3, 5, 12, 12, 5, 3)
+)
 fruit_tree_harvest
 ```
 
 15. Grab the first component (`fruit`) of the list named  `fruit_tree_harvest`.
 
+```{webr}
+#| exercise: list-fruit
+______
+```
+
+```{webr}
+#| exercise: list-fruit
+#| check: true
+ok <- identical(.result, fruit_tree_harvest$fruit)
+close <- is.list(.result) &&
+  identical(unlist(.result, use.names = FALSE), fruit_tree_harvest$fruit)
+
+list(
+  correct = ok,
+  message = if (ok) {
+    "Correct!"
+  } else if (close) {
+    "Close! Using `[]` on a list always gets a list back--here, we want a character vector. How can we get one?"
+  } else {
+    "Try again."
+  }
+)
+```
+
 16. Grab the third tree from the `tree` component of the list named 
 `fruit_tree_harvest`.
+
+```{webr}
+#| exercise: list-third-tree
+______
+```
+
+```{webr}
+#| exercise: list-third-tree
+#| check: true
+ok <- identical(.result, fruit_tree_harvest$tree[3])
+list(
+  correct = ok,
+  message = if (ok) "Correct!" else "Try again."
+)
+```
+
 :::
 
 ### Dataframes {#sec-2-dataframe-index}
