@@ -735,8 +735,8 @@ fruits <- c("apple",
             "peach")
 ```
 
-```{webr}
-#| autorun: true
+```{r}
+#| label: vector-check-in
 fruits <- c("apple",
             "orange", 
             "lemon", 
@@ -890,19 +890,17 @@ tree_matrix <- matrix(
 )
 ```
 
-```{webr}
-#| autorun: true
-tree_matrix <- matrix(
-  c(
-    "Malus domestica",
-    "Citrus sinensis",
-    "Citrus limon",
-    "Citrus aurantifolia",
-    "Mangifera indica",
-    "Prunus persica"
-  ),
-  ncol = 2
+```{r}
+#| label: matrix-check-in
+trees <- c(
+  "Malus domestica",
+  "Citrus sinensis",
+  "Citrus limon",
+  "Citrus aurantifolia",
+  "Mangifera indica",
+  "Prunus persica"
 )
+tree_matrix <- matrix(trees, ncol = 2)
 tree_matrix
 ```
 
@@ -1059,19 +1057,13 @@ fruit_tree_harvest <- list(
 )
 ```
 
-```{webr}
-#| autorun: true
+```{r}
+#| label: list-check-in
+harvest_window <- c(3, 5, 12, 12, 5, 3)
 fruit_tree_harvest <- list(
-  fruit = c("apple", "orange", "lemon", "lime", "mango", "peach"),
-  tree = c(
-    "Malus domestica",
-    "Citrus sinensis",
-    "Citrus limon",
-    "Citrus aurantifolia",
-    "Mangifera indica",
-    "Prunus persica"
-  ),
-  harvest_window = c(3, 5, 12, 12, 5, 3)
+  fruit = fruits,
+  tree = trees,
+  harvest_window = harvest_window
 )
 fruit_tree_harvest
 ```
@@ -1209,21 +1201,84 @@ This outputs a vector with contents of the second column.
 Given this dataframe, write code to perform the following operations. *Can you find
 __multiple__ methods?*
 
-<!-- [WEBR?] -->
-<!-- There should be a code chunk where this dataframe is defined and the student
-can try out methods for extracting specific components. -->
+```{r}
+#| setup: true
+#| exercise:
+#|   - df-trees-column
+#|   - df-trees-harvest-columns
+#|   - df-second-row
+fruit_trees <- data.frame(
+  fruits = c("apple", "orange", "lemon", "lime", "mango", "peach"),
+  trees = c(
+    "Malus domestica",
+    "Citrus sinensis",
+    "Citrus limon",
+    "Citrus aurantifolia",
+    "Mangifera indica",
+    "Prunus persica"
+  ),
+  harvest_window = c(3, 5, 12, 12, 5, 3)
+)
+```
 
 ```{r}
+#| label: data-frame-check-in
 fruit_trees <- data.frame(fruits, trees, harvest_window)
 fruit_trees
 ```
 
 17. Grab the second column (`trees`) of the `fruit_trees` dataframe.
 
+```{webr}
+#| exercise: df-trees-column
+______
+```
+
+```{webr}
+#| exercise: df-trees-column
+#| check: true
+ok <- identical(.result, fruit_trees$trees)
+list(
+  correct = ok,
+  message = if (ok) "Correct!" else "Try again."
+)
+```
+
 18. Grab the second and third columns (`trees`, `harvest_window`) of the
 `fruit_trees` dataframe.
 
+```{webr}
+#| exercise: df-trees-harvest-columns
+______
+```
+
+```{webr}
+#| exercise: df-trees-harvest-columns
+#| check: true
+ok <- identical(.result, fruit_trees[c("trees", "harvest_window")])
+list(
+  correct = ok,
+  message = if (ok) "Correct!" else "Try again."
+)
+```
+
 19. Grab the second row of all three columns of the `fruit_trees` dataframe.
+
+```{webr}
+#| exercise: df-second-row
+______
+```
+
+```{webr}
+#| exercise: df-second-row
+#| check: true
+ok <- identical(.result, fruit_trees[2, ])
+list(
+  correct = ok,
+  message = if (ok) "Correct!" else "Try again."
+)
+```
+
 :::
 
 ## Mathematical Operations
