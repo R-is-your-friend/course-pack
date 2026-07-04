@@ -58,7 +58,7 @@ book:
 from: markdown+emoji
 
 format:
-  html:
+  live-html:
     # theme: cosmo
     code-link: true
     theme:
@@ -69,6 +69,9 @@ format:
     toc-depth: 4
   # pdf:
   #   documentclass: scrreprt
+
+# specifying for live-html
+engine: knitr
 
 filters:
   - custom_callout.lua
