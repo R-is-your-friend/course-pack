@@ -1,3 +1,5 @@
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
 # What is Code {.unnumbered}
 
 ::: callout
@@ -191,12 +193,18 @@ Currently, the values of `x` and `y` are `3` and `4` respectively, but
 we might need to update their values. If we want to change the values of
 `x` or `y`, we simply need to assign them new values.
 
-<!-- [WEBR?] -->
+```{webr}
+#| setup: true
+#| exercise: 
+#|        - trace-values
+#|        - trace-values-example
+#| include: false
+x <- 3
+y <- 4
+```
 
-```{r}
-#| eval: false
-#| label: change-values
-
+```{webr}
+#| exercise: trace-values-example
 x <- 8
 z <- x + y
 y <- 5
@@ -208,15 +216,32 @@ Code tracing is a great technique for understanding what happens to an
 object at each line of code. Use the table below to trace the values 
 of `x`, `y`, and `z` for each of the three lines of code above.
 
-<!-- [WEBR?] Is there a way to make this interactive? -->
-<!-- Maybe do multiple choice questions with webR? -->
+```{webr}
+#| exercise: trace-values
+data.frame(
+  Line = c("Line 1", "Line 2", "Line 3"),
+  x = c(______, ______, ______),
+  y = c(4, ______, ______),
+  z = c("Does not exist", ______, ______)
+)
+```
 
+```{webr}
+#| exercise: trace-values
+#| check: true
+expected <- data.frame(
+  x = c("8", "8", "8"),
+  y = c("4", "4", "5"),
+  z = c("Does not exist", "12", "12")
+)
+submitted <- data.frame(lapply(.result[c("x", "y", "z")], as.character))
+ok <- identical(submitted, expected)
+list(
+  correct = ok,
+  message = if (ok) "Correct!" else "Trace the values after each line runs."
+)
+```
 
-| Line   | `x`    | `y`     | `z`                   |
-|--------|:------:|:-------:|:---------------------:|
-| Line 1 |        |  4      |   Does not exist      |
-| Line 2 |        |         |                       |
-| Line 3 |        |         |                       |
 :::
 
 ## Saving Your Code
