@@ -722,12 +722,11 @@ be kept!
 Given this vector, write code to perform the following operations. *Can you find
 __multiple__ methods?*
 
-<!-- [WEBR?] -->
-<!-- There should be a code chunk where this vector is defined and the student can -->
-<!-- try out methods for extracting specific components. -->
-
-```{r}
-#| label: vector-check-in
+```{webr}
+#| setup: true
+#| exercise:
+#|   - fruits-first-three
+#|   - fruits-odd
 fruits <- c("apple",
             "orange", 
             "lemon", 
@@ -736,11 +735,52 @@ fruits <- c("apple",
             "peach")
 ```
 
+```{webr}
+#| autorun: true
+fruits <- c("apple",
+            "orange", 
+            "lemon", 
+            "lime", 
+            "mango", 
+            "peach")
+fruits
+```
+
 10. Grab the first three elements of the vector named `fruits`.
 
-11. Grab the first, third, and fifth element of the vector named `fruits`.
-:::
+```{webr}
+#| exercise: fruits-first-three
+______
+```
 
+```{webr}
+#| exercise: fruits-first-three
+#| check: true
+ok <- identical(.result, fruits[1:3])
+list(
+  correct = ok,
+  message = if (ok) "Correct!" else "Try again."
+)
+```
+
+11. Grab the first, third, and fifth element of the vector named `fruits`.
+
+```{webr}
+#| exercise: fruits-odd
+______
+```
+
+```{webr}
+#| exercise: fruits-odd
+#| check: true
+ok <- identical(.result, fruits[c(1, 3, 5)])
+list(
+  correct = ok,
+  message = if (ok) "Correct!" else "Try again."
+)
+```
+
+:::
 
 ### Matrices
 
