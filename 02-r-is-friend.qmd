@@ -1355,7 +1355,7 @@ nums_matrix[1:2, 3] <- nums_matrix[1:2, 3] - 30
 nums_matrix
 ```
 
-
+<!-- TODO: (Visruth) surely there is a Quarto filter for quizzes? Could generate a minimal one. -->
 ::: {.callout-check-in}
 20. What will be the output of the following operation?  Try to answer the question
 first *without* running the code.
@@ -1534,23 +1534,28 @@ follows:
 21. When you add a vector of logical values (i.e., `TRUE`, `FALSE`), you get 
 the number of ___ values in the vector.
 
-22. Fill in the code to find the number of elements of `nums_vector` that 
-are not equal to 13. 
+22. Write code to find the number of elements of `nums_vector` that 
+are not equal to 13.
 
-<!-- [WEBR?] -->
-
-```{r}
-#| eval: false
-#| flourish:
-#| - target: 
-#|     - "sum"
-#|     - mask: true
-#|     - style: "text-decoration: underline;"
-#| - target: 
-#|     - "!="
-#|     - mask: true
-#|     - style: "text-decoration: underline;"
-
-sum(nums_vector != 13)
+```{webr}
+#| setup: true
+#| exercise: count-not-13
+nums_vector <- c(47, 13, 49, 46, 47, 4, 7, 0, 44, 24, 13, 1)
 ```
+
+```{webr}
+#| exercise: count-not-13
+______
+```
+
+```{webr}
+#| exercise: count-not-13
+#| check: true
+ok <- identical(.result, sum(nums_vector != 13))
+list(
+  correct = ok,
+  message = if (ok) "Correct!" else "Try again."
+)
+```
+
 :::
