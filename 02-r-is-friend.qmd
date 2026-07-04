@@ -871,28 +871,93 @@ name_matrix[, 2:3]
 Given this matrix, write code to perform the following operations. *Can you find
 __multiple__ methods?*
 
-<!-- [WEBR?] -->
-<!-- There should be a code chunk where this matrix is defined and the student
-can try out methods for extracting specific components. -->
+```{webr}
+#| setup: true
+#| exercise:
+#|   - tree-row-two-col-two
+#|   - tree-first-two-rows
+#|   - tree-second-column
+tree_matrix <- matrix(
+  c(
+    "Malus domestica",
+    "Citrus sinensis",
+    "Citrus limon",
+    "Citrus aurantifolia",
+    "Mangifera indica",
+    "Prunus persica"
+  ),
+  ncol = 2
+)
+```
 
-```{r}
-trees <- c("Malus domestica", 
-           "Citrus sinensis", 
-           "Citrus limon", 
-           "Citrus aurantifolia", 
-           "Mangifera indica", 
-           "Prunus persica")
-
-tree_matrix <- matrix(trees, ncol = 2)
+```{webr}
+#| autorun: true
+tree_matrix <- matrix(
+  c(
+    "Malus domestica",
+    "Citrus sinensis",
+    "Citrus limon",
+    "Citrus aurantifolia",
+    "Mangifera indica",
+    "Prunus persica"
+  ),
+  ncol = 2
+)
 tree_matrix
 ```
 
 12. Grab the tree in the second row, second column of the matrix named 
 `tree_matrix`.
 
+```{webr}
+#| exercise: tree-row-two-col-two
+______
+```
+
+```{webr}
+#| exercise: tree-row-two-col-two
+#| check: true
+ok <- identical(.result, tree_matrix[2, 2])
+list(
+  correct = ok,
+  message = if (ok) "Correct!" else "Try again."
+)
+```
+
 13. Grab the trees in the first two rows of the matrix named `tree_matrix`. 
 
+```{webr}
+#| exercise: tree-first-two-rows
+______
+```
+
+```{webr}
+#| exercise: tree-first-two-rows
+#| check: true
+ok <- identical(.result, tree_matrix[1:2, ])
+list(
+  correct = ok,
+  message = if (ok) "Correct!" else "Try again."
+)
+```
+
 14. Grab the trees in the second column of the matrix named `tree_matrix`. 
+
+```{webr}
+#| exercise: tree-second-column
+______
+```
+
+```{webr}
+#| exercise: tree-second-column
+#| check: true
+ok <- identical(.result, tree_matrix[, 2])
+list(
+  correct = ok,
+  message = if (ok) "Correct!" else "Try again."
+)
+```
+
 :::
 
 
