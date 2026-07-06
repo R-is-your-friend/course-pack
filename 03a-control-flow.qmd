@@ -441,11 +441,32 @@ to every value.
 
 :::
 
+## R Packages
+
+The `case_when()` function comes from the **dplyr** package which you will learn
+more about later on in the course. You might be wondering what we mean when we
+say "R package"? That's a great question!
+
+R as a programming language is comprised of packages. Each package contains 
+collections of code, data, documentation, and tests and is housed in a way that
+makes it easy to share with others. Since Day 1, we've been using the **base**
+package, which contains the basic functions which let R function as a language:
+arithmetic, input/output, basic programming support. The base package is loaded
+by default, so we would have never known that a package had been loaded! 
+
+R packages extend the capabilities of R by adding functionality to address 
+specific problems. The package-based system is what makes R so successful.
+Chances are someone else has already solved the problem you are working on and 
+you can benefit from the code they made to solve it! 
+
+Many R packages are hosted on the Comprehensive R Archive Network (CRAN). As of
+July 2026, the [CRAN has 24,216 packages](https://cran.r-project.org/web/packages/).
+
 ## Help tab
 
-You might be wondering, how would I have figured out the syntax for `case_when()`
-on my own? Well, let's introduce you to the Help tab---your friend for getting 
-help with how to use an R function.
+You might be wondering, how would I have figured out the syntax for
+`case_when()` on my own? No! Let's introduce you to the Help tab---your friend
+for getting help with how to use an R function.
 
 There are two ways to pull up the help file for a function. First, you can type
 a `?` before the function's name `?case_when` in your Console. Second, you 
