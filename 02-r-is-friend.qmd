@@ -367,6 +367,17 @@ shows <- c("Tale of a Thousand Stars",
 
 matrix(shows, ncol = 2)
 ```
+
+5. What do you expect this code will output? *Hint: What type of output has `typeof()` produced previously?*
+
+```{r}
+#| eval: false
+#| label: type-of-matrix
+
+show_matrix <- matrix(shows, ncol = 2)
+
+typeof(show_matrix)
+```
 :::
 
 ::: {.callout-opinion}
@@ -462,8 +473,25 @@ name.
 
 ![A `list` analogy with a cubby bin. Similar to before, each cubby has different types of items (e.g., puzzles, dolls, legos) but within a cubby the items are all the same. However, now the cubbies all have names identifying the contents of the cubby.](images/02-lists-labeled-cubbies.png){fig-alt="Another picture of a cubby bin with nine different cubby slots. The difference with this cubby bin is that each bin has a label indicating its contents (legos, dolls, trucks, balls, art supplies)." width=50%}
 
-#### Are the vectors all the same length? {#sec-2-dataframes}
+::: {.callout-tip}
+# A change in the output of `typeof()`
 
+Previously, the `typeof()` function has output the **data type** of the object
+we input (e.g., `"character"`, `"double"`). However, that was because **every**
+value in the vector or matrix had the **same** data type. In a list, each
+element can have a different data type. So, what will `typeof()` output?
+
+```{r}
+typeof(top_bl)
+```
+
+Now, the output of `typeof()` tells us the **structure** of the object `top_bl`.
+If I wanted to know the data type of the elements of `top_bl` I would need to
+extract them individually (which you will learn in @sec-indexing) and input them
+into `typeof()`.
+:::
+
+#### Are the vectors all the same length? {#sec-2-dataframes}
 
 Technically, a list can have **both** entries with different data types
 **and** entries with different lengths. Both `show_name` and `release_year` 
@@ -494,6 +522,44 @@ shows_releases
 While a dataframe is a list, the output looks **very** different. Each variable
 (`show_name`, `release_year`) is slotted into a column. The numbers on the side
 (`1`, `2`, `3`, `4`) represent the observation (row) number.
+
+::: {.callout-tip}
+# What about `typeof()` for a dataframe?
+
+You would reasonably expect that `typeof(shows_releases)` would output
+`"dataframe"`, but that is not the case!
+
+```{r}
+typeof(shows_releases)
+```
+
+It says `shows_releases` is a list! Well, technically it is. A dataframe is a
+special list, one where every element has the same number of elements. 
+
+There is another function we can use to check the data type of an object or the 
+storage of an object. The `class()` function **does** produce different output
+for dataframes and lists:
+
+::: columns
+::: {.column width="48%"}
+```{r}
+class(shows_releases)
+```
+
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+```{r}
+class(top_bl)
+```
+
+:::
+:::
+
+:::
 
 ::: {.callout-check-in}
 ```{r}
@@ -566,7 +632,7 @@ trees
 ```
 :::
 
-## Indexing Objects
+## Indexing Objects {#sec-indexing}
 
 We will often find ourselves in the position where we are interested in
 extracting a component / components of an object. Extracting components from
