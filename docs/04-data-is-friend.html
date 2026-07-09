@@ -535,17 +535,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Another nifty part of the <em>tidyverse</em> is that there is a <code>tidyverse</code> package. When installed or loaded, the <a href="https://tidyverse.org/packages/">“core” <em>tidyverse</em> packages</a> are also installed or loaded. This means, that you often <strong>only</strong> need to load the <code>tidyverse</code> package (<code><a href="https://tidyverse.tidyverse.org">library(tidyverse)</a></code>) in a script!</p>
 </section></section><section id="getting-acquainted-with-our-data" class="level2"><h2 class="anchored" data-anchor-id="getting-acquainted-with-our-data">Getting Acquainted with our Data</h2>
 <section id="data-context" class="level3"><h3 class="anchored" data-anchor-id="data-context">Data Context</h3>
-<p>[[TO-DO]]</p>
-<ul>
-<li>ethics discussion</li>
-<li>look at context of penguins data</li>
-</ul></section><section id="rectangular-data" class="level3"><h3 class="anchored" data-anchor-id="rectangular-data">Rectangular Data</h3>
+<p>It is very easy (and tempting) once presented with a dataset to just start right into analyzing it, treating the data as a static source of “truth.” However, all data is really an artifact of many decisions and influences, and you also probably are coming to data with some assumptions about it yourself, which are maybe different than someone else! This is why considering data context, including your relationship to the data, is a critical first step in working with any data.</p>
+<p>Let’s think about some seemingly simple data about penguins in Antarctica. The <strong>palmerpenguins</strong> data were collected and made available by Dr.&nbsp;Kristen Gorman and the Palmer Station, Antarctica LTER, and compiled nicely for use in R by Allison Horst and Alison Hill. They have <a href="https://allisonhorst.github.io/palmerpenguins/">great documentation</a> for the data. We will be using the <code>penguins</code> dataset that is a subset of this bigger dataset.</p>
+<p>Going to the <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0090081#ack">original research article</a> that used this data, we can get some information about <em>why</em> the data was gathered, <em>who</em> gathered it and funded the work, and <em>how</em> they gathered it.</p>
+<p>The original research is described as investigating “ecological sexual dimorphism” among specific species of Antarctic penguins, and how their environments may impact this dimorphism. We will just be looking at some body measurements of the penguins – but it turns out it is part of this much more complex work that also involved chemical analysis of the penguin’s blood!</p>
+<p>We might note that the three primary researchers are from universities in British Columbia, Canada and Sheridan, Montana, so the field work was conducted outside of their communities. There are only researchers on Antartica, however, so this research would not have impacted any local communities of humans. How might this research impact other animals in Antarctica? The research was funded by different grants from the National Science Foundation (NSF) in the US, with some logistical support by Raytheon Polar Services Company and Edison Chouest Offshore. The NSF does not typically apply an agenda to researchers, so it seems reasonable to assume that the research was conducted for academic purposes only, rather than to profit any companies.</p>
+<p>The study describes that nests on three islands – Biscoe, Torgersen, and Dream, which had two adult penguins were selected, but it does not specify how these nests were selected. Does this data represent all nests on this island, a random sample, or a convenience sample? Researchers captured the penguins to take measurements once one egg was laid in the nest.</p>
+<p>This <em>might</em> feel like TMI, but all of this information impacts how we interpret the data!</p>
+</section><section id="rectangular-data" class="level3"><h3 class="anchored" data-anchor-id="rectangular-data">Rectangular Data</h3>
 <p>There are a lot of different ways that we can look at data in the world and store it on our computer.</p>
-<ul>
-<li>THINK ABOUT HOW PENGUINS DATA MIGHT HAVE BEEN COLLECTED?? Was it a rectangle when they collected it?</li>
-</ul>
-<p>In this class, we will primarily focus on working with what we call <em>rectangular data</em> meaning that the data is two-dimensional with rows and columns. With rectangular data, each <em>row</em> represents one observation (or observational unit) and each <em>column</em> represents a <em>variable</em>.</p>
-<!--CHECK FOR OVERLAP IN THIS SECTION and reference previous chapters-->
+<p>Let’s keep thinking about the penguin data. First, the researchers had to mark, where all of their study nests were, maybe on a map! When the time came, they captured and took measurements from individual penguins, perhaps entering the information on a form on a clipboard or iPad. Measurements scribbled on a piece of paper <strong>is data</strong>. However, this is not in a great format for us to analyze on a computer. The measurements for all penguins were combined into a spreadsheet or <em>rectangle</em> of raw data. This data was cleaned up for our use in R!</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/04-penguins-data-creation.png" class="img-fluid figure-img"></p>
+<figcaption>Illustration of process for creating the <code>penguins</code> rectangular data. Map image is from the <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0090081#s2">original paper</a> with an imagined map of study nests added. Image of a penguins beak being measured is from <a href="https://i.imgur.com/rPYqNYh.jpeg">another project.</a>.</figcaption></figure>
+</div>
+<p>In this class, we will primarily focus on working with what we call <em>rectangular data</em> meaning that the data is two-dimensional with rows and columns. With rectangular data, each <em>row</em> represents one observation (or observational unit) and each <em>column</em> represents a data <em>variable</em>. Note that this is distinct from an <em>environmental variable</em> in R! Throughout this course, while talking about rectangular data, we may use “column” and “variable” interchangeably to discuss data variables.</p>
 <p>There are also multiple ways that rectangular data can be stored in R! We will primarily work with <code><a href="https://rdrr.io/r/base/data.frame.html">data.frame()</a></code> and <code>tibble()</code> objects. It is important to know the type and format of the data you’re working with! It is much easier to create data visualizations or conduct statistical analyses if the data you use is in the right shape.</p>
 <p>In a perfect world, all data would come in the right format for our needs, but this is often not the case. We will spend the next few weeks learning about how to use R to read in data and reformat our data so that it can be used in a specific analysis.</p>
 </section><section id="data-in-r" class="level3"><h3 class="anchored" data-anchor-id="data-in-r">Data in R</h3>
@@ -580,7 +584,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Let’s start with looking at a dataset that is included in a <em>package</em> in R.</p>
-<p>The <code>penguins</code> data is included with the <code>palmerpenguins</code> package in R. This means that as long as the <code>palmerpenguins</code> package is loaded, we can also load the <code>penguins</code> dataset.</p>
+<p>The <code>penguins</code> data is included with the <strong>palmerpenguins</strong> package in R. This means that as long as the <code>palmerpenguins</code> package is loaded, we can also load the <code>penguins</code> dataset.</p>
 <p>Let’s start by just looking at the data.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># load palmerpenguins package</span></span>
@@ -699,8 +703,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>What kinds of <em>variables</em> are available in the data? How many are there?</p></li>
 <li><p>What questions do you have about the variables after just looking at the data itself?</p></li>
 </ol>
-<p>Just looking at a data frame in R, we can’t tell how the variables are measured and what they all mean! We will always want to look at a <strong>data dictionary</strong> to understand what the data really means. Any good data provider should provide a data dictionary along with the data!</p>
-<p>In this case, we can find the data dictionary in the help file for the data since it is a dataset built into an R package:</p>
+<p>Just looking at a data frame in R, we can’t tell how the variables are measured and what they all mean! We will always want to look at a <strong>data dictionary</strong> to understand what the data really means and the context of the data, as we discussed above. Any good data provider should provide a data dictionary along with the data!</p>
+<p>In this case, in addition to the <a href="https://allisonhorst.github.io/palmerpenguins/">nice documentation</a> we already looked at online we can find the data dictionary in the help file for the data since it is a dataset built into an R package:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">?</span><span class="va">penguins</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -717,7 +721,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Includes measurements for penguin species, island in Palmer Archipelago, size (flipper length, body mass, bill dimensions), and sex. This is a subset of penguins_raw.</p>
 </blockquote>
 <p>This gives us a better idea about what we are working with. Each row in the data specifically represents an adult foraging penguin from near Palmer Station, Antarctica.</p>
-<p>The data dictionary also helpfully tells us the variable type, a short descriptions, and the possible values or the units for each variable. It also includes sources so that we could investigate the original, raw data if needed!</p>
+<p>The data dictionary also helpfully tells us the variable type, a short descriptions, and the possible values or the units for each variable. It also includes sources so that we could investigate the original, raw data if needed. We should use all of these resources to understand the full context of the data, as well as the individual variables and rows.</p>
 </section></section><section id="project-and-data-management" class="level2"><h2 class="anchored" data-anchor-id="project-and-data-management">Project and Data Management</h2>
 <section id="rstudio-projects" class="level3"><h3 class="anchored" data-anchor-id="rstudio-projects">RStudio Projects</h3>
 <p>Now that we have added data and other possible inputs to the mix, it is extra important that all of our files and analyses are organized clearly. You also might be finding that you want to keep different project separate from each other and it is sort of annoying to have to navigate through the Files tab to find your scripts for a different project every time!</p>
