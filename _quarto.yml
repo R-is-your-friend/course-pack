@@ -75,6 +75,9 @@ engine: knitr
 
 filters:
   - custom_callout.lua
+  - plotcat
+  - quarto-exercises
+  - code-blanks
     
 execute: 
   echo: true

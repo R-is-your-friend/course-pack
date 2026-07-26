@@ -1,0 +1,1576 @@
+local defaults = {
+  instant = false,
+  reveal = false,
+  lock = false,
+  reset = true,
+  shuffle = false,
+  ["reshuffle-on-reset"] = false,
+  explanation = "correct",
+  ["feedback-correct"] = "Correct!",
+  ["feedback-incorrect"] = "Not quite.",
+  ["ignore-case"] = false,
+  ["question-boxes"] = false,
+  ["check-page"] = false,
+  score = false,
+  points = 1
+}
+
+local options = {}
+for key, value in pairs(defaults) do
+  options[key] = value
+end
+
+local exercise_attrs = {
+  id = true,
+  class = true,
+  shuffle = true,
+  ["reshuffle-on-reset"] = true,
+  instant = true,
+  reveal = true,
+  lock = true,
+  reset = true,
+  explanation = true,
+  ["feedback-correct"] = true,
+  ["feedback-incorrect"] = true,
+  ["question-boxes"] = true,
+  ["option-columns"] = true,
+  points = true
+}
+
+local blank_attrs = {
+  id = true,
+  class = true,
+  answer = true,
+  answers = true,
+  match = true,
+  ["ignore-case"] = true,
+  trim = true,
+  ["collapse-space"] = true,
+  ["feedback-correct"] = true,
+  ["feedback-incorrect"] = true,
+  points = true
+}
+
+local choose_attrs = {
+  id = true,
+  class = true,
+  answer = true,
+  options = true,
+  ["ignore-case"] = true,
+  shuffle = true,
+  ["feedback-correct"] = true,
+  ["feedback-incorrect"] = true,
+  points = true
+}
+
+local bool_attrs = {
+  shuffle = true,
+  ["reshuffle-on-reset"] = true,
+  instant = true,
+  reveal = true,
+  lock = true,
+  reset = true,
+  correct = true,
+  ["ignore-case"] = true,
+  trim = true,
+  ["collapse-space"] = true,
+  ["question-boxes"] = true
+}
+
+-- Cryptographic primitives for answer obfuscation (SHA-256 and simple XOR cipher)
+local sha256 = {}
+local rrotate = function(x, n)
+  return ((x >> n) | (x << (32 - n))) & 0xffffffff
+end
+local rshift = function(x, n)
+  return (x >> n) & 0xffffffff
+end
+
+local h_init = {
+  0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a,
+  0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19
+}
+
+local k_constants = {
+  0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
+  0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174,
+  0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc, 0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da,
+  0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7, 0xc6e00bf3, 0xd5a79147, 0x06ca6351, 0x14292967,
+  0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13, 0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85,
+  0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3, 0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,
+  0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,
+  0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2
+}
+
+local function str_to_words(str)
+  local words = {}
+  for i = 1, #str, 4 do
+    local b1, b2, b3, b4 = string.byte(str, i, i + 3)
+    b2 = b2 or 0
+    b3 = b3 or 0
+    b4 = b4 or 0
+    words[#words + 1] = (b1 << 24) | (b2 << 16) | (b3 << 8) | b4
+  end
+  return words
+end
+
+local function words_to_str(words)
+  local bytes = {}
+  for _, w in ipairs(words) do
+    bytes[#bytes + 1] = string.char(
+      (w >> 24) & 0xff,
+      (w >> 16) & 0xff,
+      (w >> 8) & 0xff,
+      w & 0xff
+    )
+  end
+  return table.concat(bytes)
+end
+
+function sha256.sha256(msg)
+  local h = { table.unpack(h_init) }
+  local extra = #msg % 64
+  local padding_len = 64 - extra
+  if padding_len < 9 then
+    padding_len = padding_len + 64
+  end
+
+  local padding = string.char(0x80) .. string.rep(string.char(0), padding_len - 9)
+  local bit_len = #msg * 8
+  local len_str = string.char(
+    (bit_len >> 56) & 0xff,
+    (bit_len >> 48) & 0xff,
+    (bit_len >> 40) & 0xff,
+    (bit_len >> 32) & 0xff,
+    (bit_len >> 24) & 0xff,
+    (bit_len >> 16) & 0xff,
+    (bit_len >> 8) & 0xff,
+    bit_len & 0xff
+  )
+
+  local padded_msg = msg .. padding .. len_str
+  local words = str_to_words(padded_msg)
+
+  for chunk_start = 1, #words, 16 do
+    local w = {}
+    for i = 1, 16 do w[i] = words[chunk_start + i - 1] end
+    for i = 17, 64 do
+      local s0 = rrotate(w[i - 15], 7) ~ rrotate(w[i - 15], 18) ~ rshift(w[i - 15], 3)
+      local s1 = rrotate(w[i - 2], 17) ~ rrotate(w[i - 2], 19) ~ rshift(w[i - 2], 10)
+      w[i] = (w[i - 16] + s0 + w[i - 7] + s1) & 0xffffffff
+    end
+
+    local a, b, c, d, e, f, g, h_val = table.unpack(h)
+
+    for i = 1, 64 do
+      local S1 = rrotate(e, 6) ~ rrotate(e, 11) ~ rrotate(e, 25)
+      local ch = (e & f) ~ (~e & g)
+      local temp1 = (h_val + S1 + ch + k_constants[i] + w[i]) & 0xffffffff
+      local S0 = rrotate(a, 2) ~ rrotate(a, 13) ~ rrotate(a, 22)
+      local maj = (a & b) ~ (a & c) ~ (b & c)
+      local temp2 = (S0 + maj) & 0xffffffff
+
+      h_val = g
+      g = f
+      f = e
+      e = (d + temp1) & 0xffffffff
+      d = c
+      c = b
+      b = a
+      a = (temp1 + temp2) & 0xffffffff
+    end
+
+    h[1] = (h[1] + a) & 0xffffffff
+    h[2] = (h[2] + b) & 0xffffffff
+    h[3] = (h[3] + c) & 0xffffffff
+    h[4] = (h[4] + d) & 0xffffffff
+    h[5] = (h[5] + e) & 0xffffffff
+    h[6] = (h[6] + f) & 0xffffffff
+    h[7] = (h[7] + g) & 0xffffffff
+    h[8] = (h[8] + h_val) & 0xffffffff
+  end
+  return words_to_str(h)
+end
+
+local json_encode
+
+local doc_id = "default-doc"
+
+local opaque_counter = 0
+local function hex(bytes)
+  return (bytes:gsub('.', function(c) return string.format('%02x', string.byte(c)) end))
+end
+local function opaque(prefix)
+  opaque_counter = opaque_counter + 1
+  return prefix .. "_" .. hex(sha256.sha256(doc_id .. ":" .. tostring(opaque_counter) .. ":" .. tostring(os.time()) .. ":" .. tostring(math.random()))):sub(1, 24)
+end
+local function digest(salt, value)
+  return hex(sha256.sha256(salt .. "\0" .. value))
+end
+local function encode_pattern(salt, pattern)
+  local key = sha256.sha256(salt)
+  local bytes = {}
+  for i = 1, #pattern do
+    local encoded = string.byte(pattern, i) ~ string.byte(key, ((i - 1) % #key) + 1)
+    bytes[#bytes + 1] = string.format("%02x", encoded)
+  end
+  return table.concat(bytes)
+end
+
+local function validate_regex(pattern, id)
+  local function fail(reason)
+    local err_msg = "quarto-exercises error: exercise: #" .. tostring(id or "unknown") .. " invalid regular expression"
+    if reason and reason ~= "" then err_msg = err_msg .. " (" .. reason .. ")" end
+    io.stderr:write(err_msg .. "\n")
+    os.exit(1)
+  end
+
+  if not pattern or pattern == "" then
+    return
+  end
+
+
+  local len = #pattern
+  local i = 1
+  local depth = 0
+  local last_was_atom = false
+  local last_was_quantifier = false
+
+  local function char_at(pos)
+    return pattern:sub(pos, pos)
+  end
+
+  while i <= len do
+    local c = char_at(i)
+
+    if c == "\\" then
+      if i == len then
+        fail("dangling backslash")
+      end
+      local next_c = char_at(i + 1)
+      if next_c == "x" then
+        if i + 3 > len or not pattern:sub(i + 2, i + 3):match("^[0-9a-fA-F]+$") then
+          fail("invalid hex escape \\x")
+        end
+        i = i + 4
+      elseif next_c == "u" then
+        if i + 5 > len or not pattern:sub(i + 2, i + 5):match("^[0-9a-fA-F]+$") then
+          fail("invalid unicode escape \\u")
+        end
+        i = i + 6
+      else
+        i = i + 2
+      end
+      last_was_atom = true
+      last_was_quantifier = false
+
+    elseif c == "[" then
+      i = i + 1
+      if i <= len and char_at(i) == "^" then
+        i = i + 1
+      end
+
+      local class_start = i
+      local in_range = false
+      local prev_code = nil
+      local prev_is_class_escape = false
+
+      while i <= len do
+        local cc = char_at(i)
+        if cc == "\\" then
+          if i == len then
+            fail("dangling backslash in character class")
+          end
+          local ncc = char_at(i + 1)
+          local code = nil
+          local is_class_escape = false
+          if ncc:match("^[dDwWsS]$") then
+            is_class_escape = true
+            i = i + 2
+          elseif ncc == "n" then code = 10; i = i + 2
+          elseif ncc == "r" then code = 13; i = i + 2
+          elseif ncc == "t" then code = 9; i = i + 2
+          elseif ncc == "f" then code = 12; i = i + 2
+          elseif ncc == "v" then code = 11; i = i + 2
+          elseif ncc == "0" then code = 0; i = i + 2
+          elseif ncc == "x" then
+            if i + 3 <= len and pattern:sub(i + 2, i + 3):match("^[0-9a-fA-F]+$") then
+              code = tonumber(pattern:sub(i + 2, i + 3), 16)
+              i = i + 4
+            else
+              fail("invalid hex escape in character class")
+            end
+          elseif ncc == "u" then
+            if i + 5 <= len and pattern:sub(i + 2, i + 5):match("^[0-9a-fA-F]+$") then
+              code = tonumber(pattern:sub(i + 2, i + 5), 16)
+              i = i + 6
+            else
+              fail("invalid unicode escape in character class")
+            end
+          else
+            code = string.byte(ncc)
+            i = i + 2
+          end
+
+          if in_range then
+            if prev_is_class_escape or is_class_escape then
+              fail("invalid class range")
+            end
+            if prev_code and code and prev_code > code then
+              fail("range out of order in character class")
+            end
+            in_range = false
+            prev_code = nil
+            prev_is_class_escape = false
+          else
+            prev_code = code
+            prev_is_class_escape = is_class_escape
+          end
+
+        elseif cc == "]" and i > class_start then
+          break
+        elseif cc == "-" and not in_range and i > class_start and char_at(i + 1) ~= "]" then
+          if prev_is_class_escape then
+            fail("invalid class range")
+          end
+          in_range = true
+          i = i + 1
+        else
+          local code = string.byte(cc)
+          if in_range then
+            if prev_is_class_escape then
+              fail("invalid class range")
+            end
+            if prev_code and prev_code > code then
+              fail("range out of order in character class")
+            end
+            in_range = false
+            prev_code = nil
+            prev_is_class_escape = false
+          else
+            prev_code = code
+            prev_is_class_escape = false
+          end
+          i = i + 1
+        end
+      end
+
+      if i > len or char_at(i) ~= "]" then
+        fail("unclosed character class")
+      end
+      i = i + 1
+      last_was_atom = true
+      last_was_quantifier = false
+
+    elseif c == "(" then
+      depth = depth + 1
+      i = i + 1
+      last_was_atom = false
+      last_was_quantifier = false
+
+      if i <= len and char_at(i) == "?" then
+        i = i + 1
+        if i > len then
+          fail("invalid group structure")
+        end
+        local gc = char_at(i)
+        if gc == ":" or gc == "=" or gc == "!" then
+          i = i + 1
+        elseif gc == "<" then
+          i = i + 1
+          if i <= len and (char_at(i) == "=" or char_at(i) == "!") then
+            i = i + 1
+          else
+            local name_start = i
+            while i <= len and char_at(i) ~= ">" do
+              i = i + 1
+            end
+            if i > len or i == name_start then
+              fail("invalid group name")
+            end
+            i = i + 1
+          end
+        else
+          fail("invalid group syntax")
+        end
+      end
+
+    elseif c == ")" then
+      depth = depth - 1
+      if depth < 0 then
+        fail("unmatched closing parenthesis")
+      end
+      i = i + 1
+      last_was_atom = true
+      last_was_quantifier = false
+
+    elseif c == "|" then
+      i = i + 1
+      last_was_atom = false
+      last_was_quantifier = false
+
+    elseif c == "*" or c == "+" or c == "?" or c == "{" then
+      if c == "{" then
+        local sub = pattern:sub(i)
+        local n_str, comma, m_str, rest = sub:match("^{([0-9]+)(,?)([0-9]*)}()")
+        if n_str then
+          if not last_was_atom then
+            fail("nothing to repeat")
+          end
+          if last_was_quantifier then
+            fail("multiple quantifiers")
+          end
+          local n = tonumber(n_str)
+          if comma == "," and m_str ~= "" then
+            local m = tonumber(m_str)
+            if n > m then
+              fail("numbers out of order in {} quantifier")
+            end
+          end
+          i = i + rest - 1
+          if i <= len and char_at(i) == "?" then
+            i = i + 1
+          end
+          last_was_atom = true
+          last_was_quantifier = true
+        else
+          i = i + 1
+          last_was_atom = true
+          last_was_quantifier = false
+        end
+      else
+        if last_was_quantifier then
+          if c == "?" then
+            i = i + 1
+            last_was_quantifier = true
+            last_was_atom = true
+          else
+            fail("nothing to repeat")
+          end
+        elseif not last_was_atom then
+          fail("nothing to repeat")
+        else
+          i = i + 1
+          if i <= len and char_at(i) == "?" then
+            i = i + 1
+          end
+          last_was_atom = true
+          last_was_quantifier = true
+        end
+      end
+
+    else
+      i = i + 1
+      last_was_atom = true
+      last_was_quantifier = false
+    end
+  end
+
+  if depth ~= 0 then
+    fail("unclosed group")
+  end
+end
+
+local counter = 0
+local alphabet = {}
+for i = 65, 90 do
+  alphabet[#alphabet + 1] = string.char(i)
+end
+
+local function html()
+  return FORMAT:match("html")
+end
+
+local function id_for(el, prefix)
+  if el.identifier and el.identifier ~= "" then
+    return el.identifier
+  end
+  counter = counter + 1
+  return prefix .. "-" .. counter
+end
+
+local function alpha_key(index)
+  local key = ""
+  while index > 0 do
+    local remainder = (index - 1) % #alphabet
+    key = alphabet[remainder + 1] .. key
+    index = math.floor((index - 1) / #alphabet)
+  end
+  return key
+end
+
+local function normalize_bool(value)
+  if value == nil or value == "" then
+    return value
+  end
+  return string.lower(tostring(value))
+end
+
+local function is_bool(value)
+  return value == nil or value == "" or value == "true" or value == "false"
+end
+
+local function warn(id, msg)
+  local label = id and id ~= "" and ("exercise: #" .. id .. " ") or "exercise: "
+  io.stderr:write("quarto-exercises warning: " .. label .. msg .. "\n")
+end
+
+local function html_escape(value)
+  if value == nil then
+    return ""
+  end
+  return tostring(value)
+    :gsub("&", "&amp;")
+    :gsub('"', "&quot;")
+    :gsub("<", "&lt;")
+    :gsub(">", "&gt;")
+end
+
+local function attrs(values)
+  local parts = {}
+  for key, value in pairs(values) do
+    if value ~= nil then
+      parts[#parts + 1] = key .. '="' .. html_escape(value) .. '"'
+    end
+  end
+  table.sort(parts)
+  return #parts > 0 and (" " .. table.concat(parts, " ")) or ""
+end
+
+local function raw_block(tag, values)
+  return pandoc.RawBlock("html", "<" .. tag .. attrs(values) .. ">")
+end
+
+local function raw_inline(tag, values)
+  return "<" .. tag .. attrs(values) .. ">"
+end
+
+local function as_value(value)
+  if value == nil or type(value) == "boolean" or type(value) == "string" then
+    return value
+  end
+  if type(value) ~= "table" then
+    return value
+  end
+  local value_type = pandoc.utils.type and pandoc.utils.type(value) or nil
+  if value_type == "Inlines" or value_type == "Blocks" then
+    return pandoc.utils.stringify(value)
+  end
+  if value_type == "List" then
+    local list = {}
+    for _, item in ipairs(value) do
+      list[#list + 1] = as_value(item)
+    end
+    return list
+  end
+  if value_type == "Map" then
+    local map = {}
+    for key, item in pairs(value) do
+      map[key] = as_value(item)
+    end
+    return map
+  end
+  if value.t == "MetaBool" or value.t == "MetaString" then
+    return value.v
+  end
+  if value.t == "MetaInlines" or value.t == "MetaBlocks" then
+    return pandoc.utils.stringify(value)
+  end
+  if value.t == "MetaList" then
+    local list = {}
+    for _, item in ipairs(value) do
+      list[#list + 1] = as_value(item)
+    end
+    return list
+  end
+  if value.t == "MetaMap" then
+    local map = {}
+    for key, item in pairs(value) do
+      map[key] = as_value(item)
+    end
+    return map
+  end
+  if value[1] ~= nil then
+    return pandoc.utils.stringify(value)
+  end
+  local map = {}
+  local has_key = false
+  for key, item in pairs(value) do
+    if type(key) ~= "number" then
+      has_key = true
+      map[key] = as_value(item)
+    end
+  end
+  if has_key then
+    return map
+  end
+  return value
+end
+
+local function check_attrs(actual, valid, id)
+  for key in pairs(actual) do
+    if not valid[key] and not key:match("^data%-") and key ~= "style" and key ~= "class" and key ~= "id" then
+      warn(id, "unsupported attribute '" .. key .. "'")
+    end
+  end
+end
+
+local function check_bool(actual, name, id)
+  local value = normalize_bool(actual[name])
+  if not is_bool(value) then
+    warn(id, "invalid boolean value for '" .. name .. "': '" .. value .. "'")
+  end
+end
+
+local function check_bools(actual, id)
+  for name in pairs(bool_attrs) do
+    check_bool(actual, name, id)
+  end
+end
+
+local function bool_option(actual, name)
+  local value = normalize_bool(actual[name])
+  if value ~= nil then
+    return value == "true"
+  end
+  return options[name] == true or normalize_bool(options[name]) == "true"
+end
+
+local function string_option(actual, name)
+  return actual[name] or options[name]
+end
+
+local function attr_or_empty(actual, name)
+  return actual[name] or ""
+end
+
+local function validate_explanation(value, id)
+  if value ~= "correct" and value ~= "after-check" and value ~= "never" then
+    warn(id, "unsupported explanation policy '" .. tostring(value) .. "'")
+    return defaults.explanation
+  end
+  return value
+end
+
+local function compute_digests(values, trim, collapse_space, ignore_case, salt)
+  local digests = {}
+  for _, value in ipairs(values) do
+    local normalized = value
+    if trim then normalized = normalized:match("^%s*(.-)%s*$") end
+    if collapse_space then normalized = normalized:gsub("%s+", " ") end
+    if ignore_case then normalized = string.lower(normalized) end
+    digests[#digests + 1] = digest(salt, normalized)
+  end
+  return digests
+end
+
+local function split_values(value, delimiter)
+  local out = {}
+  local text = value or ""
+  local item = {}
+  local i = 1
+
+  while i <= #text do
+    local char = string.sub(text, i, i)
+    local next_char = string.sub(text, i + 1, i + 1)
+
+    if char == "\\" and (next_char == delimiter or next_char == "\\") then
+      item[#item + 1] = next_char
+      i = i + 2
+    elseif char == delimiter then
+      local value_part = table.concat(item)
+      if value_part ~= "" then
+        out[#out + 1] = value_part
+      end
+      item = {}
+      i = i + 1
+    else
+      item[#item + 1] = char
+      i = i + 1
+    end
+  end
+
+  local value_part = table.concat(item)
+  if value_part ~= "" then
+    out[#out + 1] = value_part
+  end
+
+  return out
+end
+
+local function escape_delimited_value(value)
+  return tostring(value or "")
+    :gsub("\\", "\\\\")
+    :gsub("|", "\\|")
+end
+
+local function join_values(values, delimiter)
+  local escaped = {}
+  for _, value in ipairs(values) do
+    escaped[#escaped + 1] = escape_delimited_value(value)
+  end
+  return table.concat(escaped, delimiter)
+end
+
+local function has_inline_interaction(blocks)
+  local found = false
+  for _, block in ipairs(blocks) do
+    if block.t == "CodeBlock" and block.classes:includes("code-cloze") then
+      found = true
+    else
+      pandoc.walk_block(block, {
+        Span = function(span)
+          if span.classes:includes("blank") or span.classes:includes("choose") or
+             span.classes:includes("quarto-exercise-blank-container") or
+             span.classes:includes("quarto-exercise-choose-container") then
+            found = true
+          end
+        end,
+        Div = function(div)
+          if div.classes:includes("quarto-exercise-code-cloze-container") then
+            found = true
+          end
+          local cls = div.attributes and div.attributes["class"] or ""
+          if type(cls) == "string" and (cls:find("quarto-exercise-code-cloze-container", 1, true) or
+             cls:find("quarto-exercise-blank-container", 1, true) or
+             cls:find("quarto-exercise-choose-container", 1, true)) then
+            found = true
+          end
+        end,
+        RawInline = function(raw)
+          if raw.format == "html" and (raw.text:find("quarto-exercise-blank-container", 1, true) or
+             raw.text:find("quarto-exercise-choose-container", 1, true) or
+             raw.text:find("quarto-exercise-code-cloze-container", 1, true)) then
+            found = true
+          end
+        end,
+        RawBlock = function(raw)
+          if raw.format == "html" and (raw.text:find("quarto-exercise-blank-container", 1, true) or
+             raw.text:find("quarto-exercise-choose-container", 1, true) or
+             raw.text:find("quarto-exercise-code-cloze-container", 1, true)) then
+            found = true
+          end
+        end
+      })
+    end
+  end
+  return found
+end
+
+local function split_answer(block, id)
+  local feedback
+  local content = pandoc.List()
+  local count = 0
+
+  for _, child in ipairs(block.content) do
+    if child.t == "Div" and child.classes:includes("feedback") then
+      count = count + 1
+      feedback = feedback or child
+    else
+      content:insert(child)
+    end
+  end
+
+  if count > 1 then
+    warn(id, "answer block has multiple feedback blocks")
+  end
+  if #content == 0 then
+    warn(id, "answer block has no content")
+  end
+
+  if not feedback and block.attributes.feedback then
+    feedback = pandoc.Div({ pandoc.Para({ block.attributes.feedback }) }, { class = "feedback" })
+  end
+
+  return content, feedback
+end
+
+local function parse_exercise(el, id, has_inline)
+  local parsed = {
+    stem = pandoc.List(),
+    answers = {},
+    explanation = nil,
+    hint = nil,
+    correct_count = 0
+  }
+  local keys_seen = {}
+
+  for _, block in ipairs(el.content) do
+    if block.t == "Div" and block.classes:includes("answer") then
+      check_bool(block.attributes, "correct", id)
+      local correct_value = normalize_bool(block.attributes.correct)
+      local correct = is_bool(correct_value) and correct_value == "true"
+      local key = block.attributes.key
+
+      if correct then
+        parsed.correct_count = parsed.correct_count + 1
+      end
+      if key and key ~= "" then
+        if keys_seen[key] then
+          warn(id, "duplicate answer key '" .. key .. "'")
+        end
+        keys_seen[key] = true
+      end
+
+      local content, feedback = split_answer(block, id)
+      parsed.answers[#parsed.answers + 1] = {
+        correct = correct,
+        key = key,
+        content = content,
+        feedback = feedback
+      }
+    elseif block.t == "Div" and block.classes:includes("explanation") then
+      if parsed.explanation then
+        warn(id, "multiple explanation blocks inside one question")
+      end
+      parsed.explanation = block
+    elseif block.t == "Div" and block.classes:includes("hint") then
+      if parsed.hint then
+        warn(id, "multiple hint blocks inside one question")
+      end
+      parsed.hint = block
+    else
+      parsed.stem:insert(block)
+    end
+  end
+
+  for index, answer in ipairs(parsed.answers) do
+    if not answer.key or answer.key == "" then
+      answer.key = string.lower(alpha_key(index))
+    end
+  end
+
+  if #parsed.answers == 0 and not has_inline and not has_inline_interaction(parsed.stem) and el.attributes["data-has-code-cloze"] ~= "true" then
+    warn(id, "has no .answer blocks or inline blanks/choices")
+  elseif #parsed.answers > 0 and parsed.correct_count == 0 then
+    warn(id, "has no correct answers")
+  end
+
+  return parsed
+end
+
+local function render_html_exercise(data, id, exercise_options)
+  local output = pandoc.List()
+  local input_type = data.correct_count > 1 and "checkbox" or "radio"
+  local answer_salt = opaque("salt")
+  local correct_digests = {}
+  for _, answer in ipairs(data.answers) do
+    answer.opaque_key = opaque("opt")
+    if answer.correct then
+      correct_digests[#correct_digests + 1] = digest(answer_salt, answer.opaque_key)
+    end
+  end
+
+  local div_attrs = {
+    class = "quarto-exercise" .. (exercise_options["question-boxes"] and " quarto-exercise-boxed" or ""),
+    id = id,
+    ["data-id"] = id,
+    ["data-type"] = input_type,
+    ["data-instant"] = exercise_options.instant,
+    ["data-reveal"] = exercise_options.reveal,
+    ["data-lock"] = exercise_options.lock,
+    ["data-reset"] = exercise_options.reset,
+    ["data-shuffle"] = exercise_options.shuffle,
+    ["data-reshuffle-on-reset"] = exercise_options["reshuffle-on-reset"],
+    ["data-explanation-policy"] = exercise_options.explanation,
+    ["data-feedback-correct"] = exercise_options["feedback-correct"],
+    ["data-feedback-incorrect"] = exercise_options["feedback-incorrect"],
+    ["data-check-mode"] = exercise_options["check-mode"],
+    ["data-score"] = exercise_options.score,
+    ["data-points"] = exercise_options.points
+  }
+  if #data.answers > 0 then
+    div_attrs["data-qx-salt"] = answer_salt
+    div_attrs["data-qx-correct"] = table.concat(correct_digests, " ")
+  end
+  for _, class in ipairs(exercise_options.classes or {}) do
+    if class ~= "exercise" then
+      div_attrs.class = div_attrs.class .. " " .. class
+    end
+  end
+  for key, value in pairs(exercise_options.attributes or {}) do
+    if (key:match("^data%-") or key == "style") and div_attrs[key] == nil then
+      div_attrs[key] = value
+    end
+  end
+
+  output:insert(raw_block("div", div_attrs))
+
+  for _, block in ipairs(data.stem) do
+    output:insert(block)
+  end
+
+  if #data.answers > 0 then
+    output:insert(pandoc.RawBlock("html", '<fieldset class="quarto-exercise-fieldset"><legend class="visually-hidden">Answer choices</legend><div class="quarto-exercise-choices quarto-exercise-choices-grid quarto-exercise-options-cols-' .. exercise_options["option-columns"] .. '" style="--ex-option-columns: ' .. exercise_options["option-columns"] .. ';">'))
+    for _, answer in ipairs(data.answers) do
+      local answer_key = answer.opaque_key
+      local input_id = id .. "-" .. answer_key
+      output:insert(pandoc.RawBlock("html",
+        '<div class="quarto-exercise-answer" data-key="' .. html_escape(answer_key) .. '">' ..
+        '<div class="quarto-exercise-control">' ..
+        '<input id="' .. html_escape(input_id) .. '" type="' .. input_type .. '" name="' .. html_escape(id) .. '" value="' .. html_escape(answer_key) .. '" class="quarto-exercise-input" />' ..
+        '<label for="' .. html_escape(input_id) .. '" class="quarto-exercise-answer-label"></label>' ..
+        '</div><div class="quarto-exercise-answer-content">'
+      ))
+      for _, block in ipairs(answer.content) do
+        output:insert(block)
+      end
+      output:insert(pandoc.RawBlock("html", '</div><span class="quarto-exercise-answer-state quarto-exercise-sr-only"></span>'))
+      if answer.feedback then
+        output:insert(pandoc.RawBlock("html", '<div class="quarto-exercise-feedback" aria-live="polite" hidden>'))
+        for _, block in ipairs(answer.feedback.content) do
+          output:insert(block)
+        end
+        output:insert(pandoc.RawBlock("html", "</div>"))
+      end
+      output:insert(pandoc.RawBlock("html", "</div>"))
+    end
+    output:insert(pandoc.RawBlock("html", "</div></fieldset>"))
+  end
+
+  local button_class = " quarto-exercise-btn quarto-exercise-btn-primary"
+  local reset_button_class = " quarto-exercise-btn quarto-exercise-btn-secondary"
+  output:insert(pandoc.RawBlock("html", '<div class="quarto-exercise-actions">'))
+  if not exercise_options.instant and not exercise_options.suppress_controls then
+    output:insert(pandoc.RawBlock("html", '<button type="button" class="quarto-exercise-check-btn' .. button_class .. '">Check</button>'))
+  end
+  if exercise_options.reset and not exercise_options.suppress_controls then
+    output:insert(pandoc.RawBlock("html", '<button type="button" class="quarto-exercise-reset-btn' .. reset_button_class .. '">Reset</button>'))
+  end
+  if data.hint then
+    output:insert(pandoc.RawBlock("html", '<button type="button" class="quarto-exercise-hint-btn' .. reset_button_class .. '">Hint</button>'))
+  end
+  output:insert(pandoc.RawBlock("html", '<span class="quarto-exercise-status" aria-live="polite"></span></div>'))
+
+  if data.hint then
+    output:insert(pandoc.RawBlock("html", '<div class="quarto-exercise-hint" hidden aria-live="polite">'))
+    for _, block in ipairs(data.hint.content) do
+      output:insert(block)
+    end
+    output:insert(pandoc.RawBlock("html", "</div>"))
+  end
+
+  if data.explanation then
+    output:insert(pandoc.RawBlock("html", '<div class="quarto-exercise-explanation" hidden aria-live="polite">'))
+    for _, block in ipairs(data.explanation.content) do
+      output:insert(block)
+    end
+    output:insert(pandoc.RawBlock("html", "</div>"))
+  end
+
+  output:insert(pandoc.RawBlock("html", "</div>"))
+  return output
+end
+
+local function render_static_exercise(data)
+  local output = pandoc.List()
+
+  for _, block in ipairs(data.stem) do
+    output:insert(block)
+  end
+
+  if #data.answers > 0 then
+    local items = {}
+    for index, answer in ipairs(data.answers) do
+      local item = pandoc.List()
+      local prefix = alpha_key(index) .. ". "
+      local first = answer.content[1]
+
+      if first and (first.t == "Para" or first.t == "Plain") then
+        local inlines = pandoc.List({ pandoc.Str(prefix) })
+        for _, inline in ipairs(first.content) do
+          inlines:insert(inline)
+        end
+        item:insert(pandoc.Para(inlines))
+        for i = 2, #answer.content do
+          item:insert(answer.content[i])
+        end
+      else
+        item:insert(pandoc.Para({ pandoc.Str(prefix) }))
+        for _, block in ipairs(answer.content) do
+          item:insert(block)
+        end
+      end
+      items[#items + 1] = item
+    end
+    output:insert(pandoc.BulletList(items))
+  end
+
+  return output
+end
+
+local function parse_attributes(attr_str)
+  local attrs = {}
+  for k, v in string.gmatch(attr_str, '([%w%-]+)%s*=%s*"([^"]*)"') do
+    attrs[k] = v
+  end
+  for k, v in string.gmatch(attr_str, "([%w%-]+)%s*=%s*'([^']*)'") do
+    attrs[k] = v
+  end
+  for k, v in string.gmatch(attr_str, "([%w%-]+)%s*=%s*(%S+)") do
+    if not attrs[k] then
+      attrs[k] = v
+    end
+  end
+  return attrs
+end
+
+json_encode = function(val)
+  if type(val) == "string" then
+    return '"' .. val:gsub('\\', '\\\\'):gsub('"', '\\"'):gsub('\n', '\\n'):gsub('\r', '\\r') .. '"'
+  elseif type(val) == "boolean" then
+    return tostring(val)
+  elseif type(val) == "table" then
+    local parts = {}
+    if val[1] ~= nil then
+      for _, item in ipairs(val) do
+        parts[#parts + 1] = json_encode(item)
+      end
+      return "[" .. table.concat(parts, ",") .. "]"
+    else
+      for k, v in pairs(val) do
+        parts[#parts + 1] = json_encode(k) .. ":" .. json_encode(v)
+      end
+      return "{" .. table.concat(parts, ",") .. "}"
+    end
+  else
+    return tostring(val)
+  end
+end
+
+local function make_token(text, idx)
+  while true do
+    local token = string.format("QEXCLOZEP%06d", idx)
+    if not string.find(text, token, 1, true) then
+      return token
+    end
+    idx = idx + 1
+  end
+end
+local function should_suppress_controls(parent_id, el_attributes)
+  local check_page_active = options["check-page"] == true
+  local in_batch = (el_attributes["data-in-batch"] == "true")
+  return (parent_id ~= nil) or check_page_active or in_batch
+end
+
+local function add_standalone_controller_attrs(container_attrs, el_attributes)
+  container_attrs["data-points"] = string_option(el_attributes, "points")
+  if options["check-page"] == true then
+    container_attrs["data-check-mode"] = "page"
+  end
+  if bool_option(el_attributes, "score") then
+    container_attrs["data-score"] = "true"
+  end
+end
+
+local function process_code_cloze(el, parent_id)
+  el.attributes["data-cloze-processed"] = nil
+  local text = el.text
+  local metadata = {}
+  local count = 0
+  local id = id_for(el, "cloze")
+
+  local pos = 1
+  while true do
+    local start_pos = string.find(text, "{{", pos, true)
+    if not start_pos then break end
+
+    local end_pos = string.find(text, "}}", start_pos, true)
+    if not end_pos then
+      warn(id, "malformed cloze syntax: missing closing '}}'")
+      break
+    end
+
+    local content = string.sub(text, start_pos + 2, end_pos - 1)
+    local control_type = string.match(content, "^%s*(%a+)")
+    if control_type ~= "blank" and control_type ~= "choose" then
+      warn(id, "malformed cloze syntax: invalid control type '" .. tostring(control_type) .. "'")
+    else
+      local attrs_str = string.match(content, "^%s*%a+%s*(.-)%s*$")
+      local attrs = parse_attributes(attrs_str)
+      if control_type == "blank" then
+        if not attrs.answer and not attrs.answers then
+          warn(id, "blank with no answer")
+        end
+        if attrs.match == "regex" and attrs.answer then
+          validate_regex(attrs.answer, id)
+        end
+      elseif control_type == "choose" then
+        if not attrs.answer then
+          warn(id, "choose with no answer")
+        end
+        if not attrs.options then
+          warn(id, "choose with no options")
+        end
+      end
+    end
+    pos = end_pos + 2
+  end
+
+  local html_text = text
+  local static_text = text
+
+  while true do
+    local start_pos = string.find(html_text, "{{", 1, true)
+    if not start_pos then break end
+    local end_pos = string.find(html_text, "}}", start_pos, true)
+    if not end_pos then break end
+
+    local content = string.sub(html_text, start_pos + 2, end_pos - 1)
+    local control_type, attrs_str = string.match(content, "^%s*(%a+)%s*(.-)%s*$")
+
+    if control_type == "blank" or control_type == "choose" then
+      count = count + 1
+      local token = make_token(html_text, count)
+      local attrs = parse_attributes(attrs_str)
+
+      metadata[token] = {
+        type = control_type,
+        attrs = attrs
+      }
+
+      html_text = string.sub(html_text, 1, start_pos - 1) .. token .. string.sub(html_text, end_pos + 2)
+    else
+      html_text = string.sub(html_text, 1, start_pos - 1) .. "INVALID_CLOZE" .. string.sub(html_text, end_pos + 2)
+    end
+  end
+
+  while true do
+    local start_pos = string.find(static_text, "{{", 1, true)
+    if not start_pos then break end
+    local end_pos = string.find(static_text, "}}", start_pos, true)
+    if not end_pos then break end
+
+    static_text = string.sub(static_text, 1, start_pos - 1) .. "________" .. string.sub(static_text, end_pos + 2)
+  end
+
+  if not html() then
+    return pandoc.CodeBlock(static_text, el.attr)
+  end
+
+  el.text = html_text
+
+  -- Replace the .code-cloze class with the actual language so Pandoc
+  -- syntax-highlights the block. The lang= attribute is NOT how Pandoc
+  -- selects a highlighter — the first matching class is.
+  local lang = el.attributes["lang"] or ""
+  el.classes = pandoc.List()
+  if lang ~= "" then
+    el.classes:insert(lang)
+  end
+  el.classes:insert("quarto-exercise-code-cloze-code")
+  el.attributes["lang"] = nil
+  local classes = { "quarto-exercise-code-cloze-container" }
+  if parent_id == nil then
+    classes[#classes + 1] = "quarto-exercise-code-cloze-standalone"
+  end
+
+  local container_attrs = {
+    class = table.concat(classes, " ")
+  }
+  local display_metadata = {}
+  for token, info in pairs(metadata) do
+    local attrs = {}
+    for key, value in pairs(info.attrs) do
+      if key ~= "answer" and key ~= "answers" and key ~= "match" and
+         key ~= "ignore-case" and key ~= "trim" and key ~= "collapse-space" then
+        attrs[key] = value
+      end
+    end
+    local qx = nil
+    do
+      local salt = opaque("salt")
+      local expected = info.attrs.answers or info.attrs.answer or ""
+      local values = info.type == "blank" and split_values(expected, "|") or { expected }
+      local ignore_case = normalize_bool(info.attrs["ignore-case"]) == "true"
+      local trim = normalize_bool(info.attrs.trim) ~= "false"
+      local collapse_space = normalize_bool(info.attrs["collapse-space"]) == "true"
+      local regex = nil
+      local digests = {}
+      if info.type == "blank" and info.attrs.match == "regex" then
+        validate_regex(expected, id)
+        regex = encode_pattern(salt, expected)
+      else
+        digests = compute_digests(values, trim, collapse_space, ignore_case, salt)
+      end
+      qx = { salt = salt, digests = digests, regex = regex, ignoreCase = ignore_case, trim = trim, collapseSpace = collapse_space }
+    end
+    display_metadata[token] = { type = info.type, attrs = attrs, qx = qx }
+  end
+  container_attrs["data-cloze-metadata"] = json_encode(display_metadata)
+
+  if parent_id then
+    container_attrs["data-parent-id"] = parent_id
+    container_attrs["data-id"] = id
+  else
+    container_attrs["id"] = id
+    container_attrs["data-id"] = id
+    add_standalone_controller_attrs(container_attrs, el.attributes)
+  end
+
+  local container = pandoc.Div({ el }, container_attrs)
+  if parent_id == nil then
+    local suppress_controls = should_suppress_controls(nil, el.attributes)
+    local actions_html = '<div class="quarto-exercise-actions">'
+    if not suppress_controls then
+      actions_html = actions_html ..
+        '<button type="button" class="quarto-exercise-check-btn quarto-exercise-btn quarto-exercise-btn-primary">Check</button>' ..
+        '<button type="button" class="quarto-exercise-reset-btn quarto-exercise-btn quarto-exercise-btn-secondary">Reset</button>'
+    end
+    actions_html = actions_html ..
+      '<span class="quarto-exercise-status" aria-live="polite"></span>' ..
+      '</div>'
+    local actions = pandoc.RawBlock("html", actions_html)
+    local wrapper = pandoc.Div({ container, actions }, { class = "quarto-exercise-code-cloze-wrapper" })
+    return wrapper
+  else
+    return container
+  end
+end
+
+local function render_blank(el, id, parent_id)
+  el.attributes["data-processed"] = nil
+  check_attrs(el.attributes, blank_attrs, id)
+  check_bools(el.attributes, id)
+
+  local match = el.attributes.match or "exact"
+  if match ~= "exact" and match ~= "one-of" and match ~= "regex" then
+    warn(id, "unsupported blank matching mode '" .. match .. "'")
+  end
+  if el.attributes.answer and el.attributes.answers then
+    warn(id, "both answer and answers on the same blank")
+  end
+  if not el.attributes.answer and not el.attributes.answers then
+    warn(id, "blank with no answer")
+  end
+  if match == "regex" and not el.attributes.answer then
+    warn(id, 'match="regex" with no answer')
+  end
+
+  local answer = el.attributes.answers or el.attributes.answer or ""
+  if match == "regex" and el.attributes.answer then
+    validate_regex(el.attributes.answer, id)
+  end
+  if not html() then
+    return pandoc.Str("________")
+  end
+
+  local container_attrs = {
+    id = id,
+    class = "quarto-exercise-blank-container",
+    ["data-feedback-correct"] = string_option(el.attributes, "feedback-correct"),
+    ["data-feedback-incorrect"] = attr_or_empty(el.attributes, "feedback-incorrect")
+  }
+  if parent_id == nil then
+    add_standalone_controller_attrs(container_attrs, el.attributes)
+  end
+
+  local ignore_case_val = (normalize_bool(el.attributes["ignore-case"]) or tostring(options["ignore-case"])) == "true"
+  local trim_val = (el.attributes.trim or "true") ~= "false"
+  local collapse_space_val = (normalize_bool(el.attributes["collapse-space"]) or tostring(options["collapse-space"])) == "true"
+
+  do
+    local salt = opaque("salt")
+    if match == "regex" then
+      container_attrs["data-qx-regex"] = encode_pattern(salt, answer)
+    else
+      local ans_list = split_values(answer, "|")
+      local digests = compute_digests(ans_list, trim_val, collapse_space_val, ignore_case_val, salt)
+      container_attrs["data-qx-digests"] = table.concat(digests, " ")
+    end
+    container_attrs["data-qx-salt"] = salt
+    container_attrs["data-qx-ignore-case"] = tostring(ignore_case_val)
+    container_attrs["data-qx-trim"] = tostring(trim_val)
+    container_attrs["data-qx-collapse-space"] = tostring(collapse_space_val)
+  end
+
+  local button_html = should_suppress_controls(parent_id, el.attributes) and "" or '<button type="button" class="quarto-exercise-blank-check-btn">Check</button>'
+
+  return pandoc.RawInline("html",
+    raw_inline("span", container_attrs) ..
+    '<input type="text" class="quarto-exercise-blank-input" value="" aria-label="Fill in the blank" />' ..
+    '<span class="quarto-exercise-blank-correct-text" hidden></span>' ..
+    button_html ..
+    '<span class="quarto-exercise-blank-feedback" aria-live="polite" hidden></span></span>'
+  )
+end
+
+local function render_choose(el, id, parent_id)
+  el.attributes["data-processed"] = nil
+  check_attrs(el.attributes, choose_attrs, id)
+  check_bools(el.attributes, id)
+
+  local answer = el.attributes.answer or ""
+  if answer == "" then
+    warn(id, "choose block with no answer")
+  end
+
+  local values = el.attributes.options and split_values(el.attributes.options, "|") or split_values(pandoc.utils.stringify(el), "|")
+  if #values == 0 then
+    warn(id, "choose block with no parseable options")
+  end
+
+  local ignore_case = normalize_bool(el.attributes["ignore-case"]) == "true"
+  local found = answer == ""
+  for _, value in ipairs(values) do
+    if ignore_case and string.lower(value) == string.lower(answer) or value == answer then
+      found = true
+      break
+    end
+  end
+  if not found then
+    warn(id, "choose block whose answer '" .. answer .. "' is not in the options list")
+  end
+
+  if not html() then
+    return pandoc.Str("________")
+  end
+
+  local container_attrs = {
+    id = id,
+    class = "quarto-exercise-choose-container",
+    ["data-options"] = join_values(values, "|"),
+    ["data-shuffle"] = normalize_bool(el.attributes.shuffle) or tostring(options.shuffle),
+    ["data-feedback-correct"] = string_option(el.attributes, "feedback-correct"),
+    ["data-feedback-incorrect"] = string_option(el.attributes, "feedback-incorrect")
+  }
+  if parent_id == nil then
+    add_standalone_controller_attrs(container_attrs, el.attributes)
+  end
+
+  local ignore_case_val = (normalize_bool(el.attributes["ignore-case"]) or "false") == "true"
+
+  do
+    local salt = opaque("salt")
+    local digests = compute_digests({ answer }, true, false, ignore_case_val, salt)
+    container_attrs["data-qx-salt"] = salt
+    container_attrs["data-qx-digests"] = table.concat(digests, " ")
+    container_attrs["data-qx-ignore-case"] = tostring(ignore_case_val)
+  end
+
+  local button_html = should_suppress_controls(parent_id, el.attributes) and "" or '<button type="button" class="quarto-exercise-choose-check-btn">Check</button>'
+
+  return pandoc.RawInline("html",
+    raw_inline("span", container_attrs) ..
+    '<select class="quarto-exercise-choose-select"><option value="">Choose...</option></select>' ..
+    '<span class="quarto-exercise-choose-correct-text" hidden></span>' ..
+    button_html ..
+    '<span class="quarto-exercise-choose-feedback" aria-live="polite" hidden></span></span>'
+  )
+end
+
+function Meta(meta)
+  if PANDOC_STATE and PANDOC_STATE.input_files and PANDOC_STATE.input_files[1] then
+    -- Use only the basename (no directory, no extension) so that local filesystem
+    -- paths never appear in the rendered HTML output.
+    local full = PANDOC_STATE.input_files[1]:gsub("\\", "/")
+    local basename = full:match("([^/]+)$") or full
+    doc_id = basename:gsub("%.[^%.]+$", "")
+  elseif meta.title then
+    doc_id = pandoc.utils.stringify(meta.title)
+  end
+
+  local config = as_value(meta["quarto-exercises"])
+  if type(config) == "table" then
+    for key, value in pairs(config) do
+      options[key] = value
+    end
+    if config["option-columns"] ~= nil then
+      warn("document", "'option-columns' is only supported on .exercise and .check-batch containers")
+      options["option-columns"] = nil
+    end
+  end
+
+  local check_page_val = meta["quarto-exercises.check-page"]
+  if check_page_val == nil and type(config) == "table" then
+    check_page_val = config["check-page"]
+  end
+  if check_page_val ~= nil then
+    local norm = normalize_bool(as_value(check_page_val))
+    options["check-page"] = norm == "true" or check_page_val == true
+  else
+    options["check-page"] = false
+  end
+
+  if quarto and quarto.doc and quarto.doc.add_html_dependency and html() then
+    quarto.doc.add_html_dependency({
+      name = "quarto-exercises",
+      version = "0.1.0",
+      stylesheets = { "quarto-exercises.css" },
+      scripts = { "quarto-exercises.js" }
+    })
+  end
+
+  return meta
+end
+
+function Div(el)
+  if not el.classes:includes("exercise") then
+    return nil
+  end
+
+  local id = id_for(el, "ex")
+  check_attrs(el.attributes, exercise_attrs, id)
+  check_bools(el.attributes, id)
+
+  local has_inline = has_inline_interaction(el.content)
+  local has_code_cloze = false
+  el = el:walk({
+    CodeBlock = function(code)
+      if code.classes:includes("code-cloze") then
+        has_code_cloze = true
+        code.attributes["data-cloze-processed"] = "true"
+        return process_code_cloze(code, id)
+      end
+    end,
+    Span = function(span)
+      if span.classes:includes("blank") then
+        span.attributes["data-processed"] = "true"
+        return render_blank(span, id_for(span, "blank"), id)
+      elseif span.classes:includes("choose") then
+        span.attributes["data-processed"] = "true"
+        return render_choose(span, id_for(span, "choose"), id)
+      end
+    end
+  })
+  if has_code_cloze then
+    el.attributes["data-has-code-cloze"] = "true"
+  end
+
+  local data = parse_exercise(el, id, has_inline)
+  local explanation = validate_explanation(string_option(el.attributes, "explanation"), id)
+  if data.explanation and explanation == "never" then
+    warn(id, "contains an .explanation block, but explanation is set to 'never'")
+  end
+  if not html() then
+    return render_static_exercise(data)
+  end
+
+  local check_page_active = options["check-page"] == true
+  local is_in_batch = el.attributes["data-in-batch"] == "true"
+  local runtime_check_mode = "exercise"
+  if check_page_active then
+    runtime_check_mode = "page"
+  elseif is_in_batch then
+    runtime_check_mode = "batch"
+  end
+  local suppress_controls = check_page_active or is_in_batch
+
+  local cols_str = el.attributes["option-columns"]
+  local cols_num = tonumber(cols_str)
+  local option_cols = 1
+  if cols_num and cols_num >= 1 then
+    option_cols = math.floor(cols_num)
+  elseif cols_str ~= nil and cols_str ~= "" then
+    warn(id, "unsupported option-columns '" .. cols_str .. "', falling back to 1")
+  end
+
+  return render_html_exercise(data, id, {
+    instant = bool_option(el.attributes, "instant"),
+    reveal = bool_option(el.attributes, "reveal"),
+    lock = bool_option(el.attributes, "lock"),
+    reset = bool_option(el.attributes, "reset"),
+    shuffle = bool_option(el.attributes, "shuffle"),
+    ["reshuffle-on-reset"] = bool_option(el.attributes, "reshuffle-on-reset"),
+    explanation = explanation,
+    ["feedback-correct"] = string_option(el.attributes, "feedback-correct"),
+    ["feedback-incorrect"] = string_option(el.attributes, "feedback-incorrect"),
+    ["question-boxes"] = bool_option(el.attributes, "question-boxes"),
+    ["option-columns"] = option_cols,
+    ["check-mode"] = runtime_check_mode,
+    score = bool_option(el.attributes, "score"),
+    points = tonumber(el.attributes.points or options.points) or defaults.points,
+    suppress_controls = suppress_controls,
+    classes = el.classes,
+    attributes = el.attributes
+  })
+end
+
+function CodeBlock(el)
+  if not el.classes:includes("code-cloze") then
+    return nil
+  end
+  if el.attributes["data-cloze-processed"] == "true" then
+    el.attributes["data-cloze-processed"] = nil
+    return el
+  end
+  return process_code_cloze(el, nil)
+end
+
+function Span(el)
+  if el.attributes["data-processed"] == "true" then
+    return nil
+  end
+  if el.classes:includes("blank") then
+    return render_blank(el, id_for(el, "blank"), nil)
+  end
+  if el.classes:includes("choose") then
+    return render_choose(el, id_for(el, "choose"), nil)
+  end
+  return nil
+end
+
+local function mark_batch_exercises(el)
+  if el.classes:includes("check-batch") then
+    local cols_str = el.attributes["option-columns"]
+    if cols_str ~= nil then
+      local cols_num = tonumber(cols_str)
+      if cols_num and cols_num >= 1 then
+        local cols = math.floor(cols_num)
+        el.classes:insert("quarto-exercise-batch-grid")
+        local grid_style = "--ex-batch-columns: " .. cols .. ";"
+        if el.attributes.style and el.attributes.style ~= "" then
+          local separator = el.attributes.style:match(";%s*$") and " " or "; "
+          el.attributes.style = el.attributes.style .. separator .. grid_style
+        else
+          el.attributes.style = grid_style
+        end
+      else
+        warn(id_for(el, "batch"), "unsupported option-columns '" .. tostring(cols_str) .. "', using one column")
+      end
+      el.attributes["option-columns"] = nil
+    end
+    local qb_option = el.attributes["question-boxes"]
+    local question_boxes_active = false
+    if qb_option ~= nil then
+      question_boxes_active = qb_option == "true"
+    else
+      question_boxes_active = options["question-boxes"] == true
+    end
+    if question_boxes_active then
+      el.classes:insert("quarto-exercise-boxed")
+    end
+
+    el = el:walk({
+      Div = function(sub_div)
+        if sub_div.classes:includes("exercise") then
+          sub_div.attributes["data-in-batch"] = "true"
+          if question_boxes_active then
+            sub_div.attributes["question-boxes"] = "false"
+          end
+          return sub_div
+        end
+      end,
+      Span = function(span)
+        if span.classes:includes("blank") or span.classes:includes("choose") then
+          span.attributes["data-in-batch"] = "true"
+          return span
+        end
+      end,
+      CodeBlock = function(code)
+        if code.classes:includes("code-cloze") then
+          code.attributes["data-in-batch"] = "true"
+          return code
+        end
+      end
+    })
+    return el
+  end
+end
+
+return {
+  { Meta = Meta },
+  { Div = mark_batch_exercises },
+  { Div = Div },
+  { Span = Span, CodeBlock = CodeBlock }
+}
