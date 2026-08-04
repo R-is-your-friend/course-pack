@@ -293,8 +293,8 @@ your Console:
 getwd()
 ```
 
-<!-- Allison: When would we want to use this? I worry this might be too confusing. -->
 ## Go to WD
+<!-- Allison: When would we want to use this? I worry this might be too confusing. -->
 
 Another thing you might want to do is navigate to your working directory in the Files tab in RStudio. 
 
@@ -304,6 +304,9 @@ Another thing you might want to do is navigate to your working directory in the 
 ![](images/04-go-to-wkdr.png){width=70%}
 
 :::
+
+<!-- Allison: Students haven't learned about Quarto documents yet (this reading
+comes before that one). So, I think this should be moved elsewhere. -->
 
 Both Quarto documents and RStudio projects help us manage the working directory automatically!
 
