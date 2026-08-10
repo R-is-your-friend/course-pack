@@ -3,6 +3,8 @@ filters:
  - flourish
 ---
 
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
 # Writing Simple Functions in R {.unnumbered}
 
 ::: callout
@@ -664,11 +666,33 @@ find_tax_rate <- function(income) {
 }
 ```
 
+```{webr}
+#| label: income-tax-function-webr
+#| include: false
+find_tax_rate <- function(income) {
+  if (income < 11925) {
+    0.10
+  } else if (income <= 48475) {
+    0.12
+  } else if (income <= 103350) {
+    0.22
+  } else if (income <= 197300) {
+    0.24
+  } else if (income <= 250525) {
+    0.32
+  } else if (income < 626350){
+    0.35
+  } else {
+    0.37
+  }
+}
+```
+
 Now, we try out our function for a few incomes:
 
-```{r}
+```{webr}
 #| label: income-tax-function-call
-
+#| autorun: true
 find_tax_rate(611203)
 find_tax_rate(795000)
 find_tax_rate(45000)

@@ -3,6 +3,8 @@ filters:
  - flourish
 ---
 
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
 # Control Flow {.unnumbered}
 
 ::: callout
@@ -267,13 +269,8 @@ would a professor pay in taxes?
 Let's check! Setting `income` to `95000`, our conditional statements tell us
 that the professor will pay `0.22` or 22% in taxes.
 
-<!-- [WEBR?] -->
-<!-- The code below could just be included in a code chunk so the students can run -->
-<!-- it to prove to themselves that the output will be 0.22. -->
-
-```{r}
+```{webr}
 #| label: income-conditionals
-
 income <- 95000
 
 if (income < 11925) {
@@ -648,9 +645,12 @@ while (x < 10){
 ::: {.callout-tip collapse="true"}
 # Check Your Answer
 
-```{r}
+```{webr}
 #| label: value-of-x
-
+x <- 0
+while (x < 10){
+  x <- x + 1
+}
 x
 ```
 
