@@ -1,7 +1,4 @@
----
-filters:
- - flourish
----
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
 
 # R is Friend {.unnumbered}
 
@@ -267,16 +264,48 @@ all the same data type.
 ::: {.callout-check-in}
 
 For each of the examples below, identify what data type do you believe the
-vector will have.  Try to answer this first *without* running the code.
+vector will have. Try to answer this first *without* running the code.
 
 1. `c(67, 13, 1989, TRUE)`
 2. `c("hello", "goodbye", TRUE)`
 3. `c("TRUE", FALSE, TRUE, "FALSE")`
 
+```{webr}
+#| exercise: vector-types
+c(
+  "______",
+  "______",
+  "______"
+)
+```
 
-<!-- [WEBR?] -->
-<!-- Add a code chunk where they can do this and check their answer. -->
-<!-- Give a hint to use the typeof() function to discover the datatype. -->
+```{webr}
+#| exercise: vector-types
+#| check: true
+answer <- tolower(.result)
+ok <- identical(answer, c("double", "character", "character")) ||
+  identical(answer, c("numeric", "character", "character"))
+
+list(
+  correct = ok,
+  message = if (ok) {
+    "Correct!"
+  } else if (any(answer == "string")) {
+    "Close, but not quite! Read the Data Types section again to see what strings are called in R."
+  } else {
+    "Try again."
+  }
+)
+```
+
+::: {.hint exercise="vector-types"}
+Use `typeof()`:
+
+```r
+typeof(c(67, 13, 1989, TRUE))
+```
+:::
+
 :::
 
 ### Multiple Vectors
@@ -688,9 +717,18 @@ be kept!
 Given this vector, write code to perform the following operations. *Can you find
 __multiple__ methods?*
 
-<!-- [WEBR?] -->
-<!-- There should be a code chunk where this vector is defined and the student can -->
-<!-- try out methods for extracting specific components. -->
+```{webr}
+#| setup: true
+#| exercise:
+#|   - fruits-first-three
+#|   - fruits-odd
+fruits <- c("apple",
+            "orange", 
+            "lemon", 
+            "lime", 
+            "mango", 
+            "peach")
+```
 
 ```{r}
 #| label: vector-check-in
@@ -700,13 +738,44 @@ fruits <- c("apple",
             "lime", 
             "mango", 
             "peach")
+fruits
 ```
 
 10. Grab the first three elements of the vector named `fruits`.
 
-11. Grab the first, third, and fifth element of the vector named `fruits`.
-:::
+```{webr}
+#| exercise: fruits-first-three
+______
+```
 
+```{webr}
+#| exercise: fruits-first-three
+#| check: true
+ok <- identical(.result, fruits[1:3])
+list(
+  correct = ok,
+  message = if (ok) "Correct!" else "Try again."
+)
+```
+
+11. Grab the first, third, and fifth element of the vector named `fruits`.
+
+```{webr}
+#| exercise: fruits-odd
+______
+```
+
+```{webr}
+#| exercise: fruits-odd
+#| check: true
+ok <- identical(.result, fruits[c(1, 3, 5)])
+list(
+  correct = ok,
+  message = if (ok) "Correct!" else "Try again."
+)
+```
+
+:::
 
 ### Matrices
 
@@ -797,18 +866,35 @@ name_matrix[, 2:3]
 Given this matrix, write code to perform the following operations. *Can you find
 __multiple__ methods?*
 
-<!-- [WEBR?] -->
-<!-- There should be a code chunk where this matrix is defined and the student
-can try out methods for extracting specific components. -->
+```{webr}
+#| setup: true
+#| exercise:
+#|   - tree-row-two-col-two
+#|   - tree-first-two-rows
+#|   - tree-second-column
+tree_matrix <- matrix(
+  c(
+    "Malus domestica",
+    "Citrus sinensis",
+    "Citrus limon",
+    "Citrus aurantifolia",
+    "Mangifera indica",
+    "Prunus persica"
+  ),
+  ncol = 2
+)
+```
 
 ```{r}
-trees <- c("Malus domestica", 
-           "Citrus sinensis", 
-           "Citrus limon", 
-           "Citrus aurantifolia", 
-           "Mangifera indica", 
-           "Prunus persica")
-
+#| label: matrix-check-in
+trees <- c(
+  "Malus domestica",
+  "Citrus sinensis",
+  "Citrus limon",
+  "Citrus aurantifolia",
+  "Mangifera indica",
+  "Prunus persica"
+)
 tree_matrix <- matrix(trees, ncol = 2)
 tree_matrix
 ```
@@ -816,9 +902,55 @@ tree_matrix
 12. Grab the tree in the second row, second column of the matrix named 
 `tree_matrix`.
 
+```{webr}
+#| exercise: tree-row-two-col-two
+______
+```
+
+```{webr}
+#| exercise: tree-row-two-col-two
+#| check: true
+ok <- identical(.result, tree_matrix[2, 2])
+list(
+  correct = ok,
+  message = if (ok) "Correct!" else "Try again."
+)
+```
+
 13. Grab the trees in the first two rows of the matrix named `tree_matrix`. 
 
+```{webr}
+#| exercise: tree-first-two-rows
+______
+```
+
+```{webr}
+#| exercise: tree-first-two-rows
+#| check: true
+ok <- identical(.result, tree_matrix[1:2, ])
+list(
+  correct = ok,
+  message = if (ok) "Correct!" else "Try again."
+)
+```
+
 14. Grab the trees in the second column of the matrix named `tree_matrix`. 
+
+```{webr}
+#| exercise: tree-second-column
+______
+```
+
+```{webr}
+#| exercise: tree-second-column
+#| check: true
+ok <- identical(.result, tree_matrix[, 2])
+list(
+  correct = ok,
+  message = if (ok) "Correct!" else "Try again."
+)
+```
+
 :::
 
 
@@ -901,23 +1033,80 @@ This hopefully motivates why it is nice to give the elements of your list names!
 Given this list, write code to perform the following operations. *Can you find
 __multiple__ methods?*
 
-<!-- [WEBR?] -->
-<!-- There should be a code chunk where this list is defined and the student
-can try out methods for extracting specific components. -->
+```{webr}
+#| setup: true
+#| exercise:
+#|   - list-fruit
+#|   - list-third-tree
+fruit_tree_harvest <- list(
+  fruit = c("apple", "orange", "lemon", "lime", "mango", "peach"),
+  tree = c(
+    "Malus domestica",
+    "Citrus sinensis",
+    "Citrus limon",
+    "Citrus aurantifolia",
+    "Mangifera indica",
+    "Prunus persica"
+  ),
+  harvest_window = c(3, 5, 12, 12, 5, 3)
+)
+```
 
 ```{r}
+#| label: list-check-in
 harvest_window <- c(3, 5, 12, 12, 5, 3)
-
-fruit_tree_harvest <- list(fruit = fruits, 
-                           tree = trees, 
-                           harvest_window = harvest_window)
+fruit_tree_harvest <- list(
+  fruit = fruits,
+  tree = trees,
+  harvest_window = harvest_window
+)
 fruit_tree_harvest
 ```
 
 15. Grab the first component (`fruit`) of the list named  `fruit_tree_harvest`.
 
+```{webr}
+#| exercise: list-fruit
+______
+```
+
+```{webr}
+#| exercise: list-fruit
+#| check: true
+ok <- identical(.result, fruit_tree_harvest$fruit)
+close <- is.list(.result) &&
+  identical(unlist(.result, use.names = FALSE), fruit_tree_harvest$fruit)
+
+list(
+  correct = ok,
+  message = if (ok) {
+    "Correct!"
+  } else if (close) {
+    "Close! Using `[]` on a list always gets a list back--here, we want a character vector. How can we get one?"
+  } else {
+    "Try again."
+  }
+)
+```
+
 16. Grab the third tree from the `tree` component of the list named 
 `fruit_tree_harvest`.
+
+```{webr}
+#| exercise: list-third-tree
+______
+```
+
+```{webr}
+#| exercise: list-third-tree
+#| check: true
+ok <- identical(.result, fruit_tree_harvest$tree[3])
+list(
+  correct = ok,
+  message = if (ok) "Correct!" else "Try again."
+)
+```
+
 :::
 
 ### Dataframes {#sec-2-dataframe-index}
@@ -1007,21 +1196,84 @@ This outputs a vector with contents of the second column.
 Given this dataframe, write code to perform the following operations. *Can you find
 __multiple__ methods?*
 
-<!-- [WEBR?] -->
-<!-- There should be a code chunk where this dataframe is defined and the student
-can try out methods for extracting specific components. -->
+```{r}
+#| setup: true
+#| exercise:
+#|   - df-trees-column
+#|   - df-trees-harvest-columns
+#|   - df-second-row
+fruit_trees <- data.frame(
+  fruits = c("apple", "orange", "lemon", "lime", "mango", "peach"),
+  trees = c(
+    "Malus domestica",
+    "Citrus sinensis",
+    "Citrus limon",
+    "Citrus aurantifolia",
+    "Mangifera indica",
+    "Prunus persica"
+  ),
+  harvest_window = c(3, 5, 12, 12, 5, 3)
+)
+```
 
 ```{r}
+#| label: data-frame-check-in
 fruit_trees <- data.frame(fruits, trees, harvest_window)
 fruit_trees
 ```
 
 17. Grab the second column (`trees`) of the `fruit_trees` dataframe.
 
+```{webr}
+#| exercise: df-trees-column
+______
+```
+
+```{webr}
+#| exercise: df-trees-column
+#| check: true
+ok <- identical(.result, fruit_trees$trees)
+list(
+  correct = ok,
+  message = if (ok) "Correct!" else "Try again."
+)
+```
+
 18. Grab the second and third columns (`trees`, `harvest_window`) of the
 `fruit_trees` dataframe.
 
+```{webr}
+#| exercise: df-trees-harvest-columns
+______
+```
+
+```{webr}
+#| exercise: df-trees-harvest-columns
+#| check: true
+ok <- identical(.result, fruit_trees[c("trees", "harvest_window")])
+list(
+  correct = ok,
+  message = if (ok) "Correct!" else "Try again."
+)
+```
+
 19. Grab the second row of all three columns of the `fruit_trees` dataframe.
+
+```{webr}
+#| exercise: df-second-row
+______
+```
+
+```{webr}
+#| exercise: df-second-row
+#| check: true
+ok <- identical(.result, fruit_trees[2, ])
+list(
+  correct = ok,
+  message = if (ok) "Correct!" else "Try again."
+)
+```
+
 :::
 
 ## Mathematical Operations
@@ -1098,7 +1350,7 @@ nums_matrix[1:2, 3] <- nums_matrix[1:2, 3] - 30
 nums_matrix
 ```
 
-
+<!-- TODO: (Visruth) surely there is a Quarto filter for quizzes? Could generate a minimal one. -->
 ::: {.callout-check-in}
 20. What will be the output of the following operation?  Try to answer the question
 first *without* running the code.
@@ -1277,23 +1529,28 @@ follows:
 21. When you add a vector of logical values (i.e., `TRUE`, `FALSE`), you get 
 the number of ___ values in the vector.
 
-22. Fill in the code to find the number of elements of `nums_vector` that 
-are not equal to 13. 
+22. Write code to find the number of elements of `nums_vector` that 
+are not equal to 13.
 
-<!-- [WEBR?] -->
-
-```{r}
-#| eval: false
-#| flourish:
-#| - target: 
-#|     - "sum"
-#|     - mask: true
-#|     - style: "text-decoration: underline;"
-#| - target: 
-#|     - "!="
-#|     - mask: true
-#|     - style: "text-decoration: underline;"
-
-sum(nums_vector != 13)
+```{webr}
+#| setup: true
+#| exercise: count-not-13
+nums_vector <- c(47, 13, 49, 46, 47, 4, 7, 0, 44, 24, 13, 1)
 ```
+
+```{webr}
+#| exercise: count-not-13
+______
+```
+
+```{webr}
+#| exercise: count-not-13
+#| check: true
+ok <- identical(.result, sum(nums_vector != 13))
+list(
+  correct = ok,
+  message = if (ok) "Correct!" else "Try again."
+)
+```
+
 :::
