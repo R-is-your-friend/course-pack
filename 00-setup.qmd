@@ -1,6 +1,6 @@
 # Computer is Friend {.unnumbered}
 
-The theme of this lesson is understanding the difference between hardware and 
+The theme of this chapter is understanding the difference between hardware and 
 software, and where things are stored on your computer. In part two of the 
 coursework, you will learn good practices for managing and storing files for 
 this course. 
@@ -67,7 +67,7 @@ This most likely will start with ARM, Intel, AMD, or Apple M*
 
 ### Operating Systems {#operating-systems}
 
-Operating systems (OS), such as Windows and MacOS, are sophisticated programs that
+Operating systems (OS), such as Windows and macOS, are sophisticated programs that
 allow CPUs to keep track of multiple programs and tasks and execute them at the
 same time. This 2-minute video describes different operating systems. 
 
@@ -79,7 +79,7 @@ same time. This 2-minute video describes different operating systems.
 
 Broadly, you should know (1) what operating system your computer uses
 (Windows / Mac / Linux), and (2) what version of the system your computer uses
-(e.g. Windows 11, Mac OSX Tahoe, Debian 12, RedHat 7).
+(e.g. Windows 11, macOS Tahoe, Debian 12, RedHat 7).
 
 ::: {.callout-practice-exercise}
 Locate your operating system and version information.
@@ -156,7 +156,7 @@ to tell the computer where to look. Meaning, you need to give the computer a
 **file path**. There are two types of file paths:
 
 - **absolute (or full) file paths**: Start at the root of the file system
-location (e.g., `C:\` or `/home` or `/Users`) and describes how to navigate to
+location (e.g., `C:\` or `/home` or `/Users`) and describe how to navigate to
 the file from the root directory of the computer. 
 
 - **relative file paths**: Start at the program's current location (e.g., 
@@ -212,7 +212,7 @@ So, we advocate for replacing spaces with a hyphen or an underscore.
 
 Different operating systems (and file system formats) have different rules for how file names are handled within the file system.
 
-|   | Windows {{< fa brands windows >}} | Mac OSX {{< fa brands apple >}} | Linux {{< fa brands linux >}} |
+|   | Windows {{< fa brands windows >}} | macOS {{< fa brands apple >}} | Linux {{< fa brands linux >}} |
 |--------------|-------------------|--------------|--------------------------|
 | Disallowed Characters | `<`, `>`, `"`, `/`, `\`, `|`, `?`, `*` | `:`, some programs will restrict use of `/` . Avoid names that start with `.` unless the file should be hidden. | NULL character, `/` . Can't name files `.` or `..` . Avoid `\`, `"`, `'`, `*`, `;`, `?`, `[`, `]`, `(`, `)`, `~`, `!`, `$`, `<`, `>`, `#`, `@`, `&`, `|`, spaces, tabs, and newlines. Avoid names that start with `.` unless the file should be hidden. |
 | Case Sensitive | No. `A.jpg` is the same as `a.JPG` | [It's complicated](https://discussions.apple.com/thread/251191099?sortBy=rank). Act as if it's case sensitive to be safe. | Yes. `A.jpg` is different from `a.jpg` and `A.JPG` |
@@ -261,7 +261,7 @@ does and why I'm asking you to install or sign up for them.
 |--------------|--------------|---------------------------------------------|
 | R            | ![](https://www.r-project.org/Rlogo.png){width="80" height="63" fig-alt="R logo which is a blue letter R with a gray oval in the background."}                                                                           | A statistical programming language built around working with data                                                                                                                                             |
 | RStudio IDE | ![](images/00-rstudio-ball.png){width="80" fig-alt="The RStudio logo which is a blue ball with a white R logo in the center."}                                                       | An integrated desktop environment (IDE) created to make it easy to work with R, Python, and other data-science programming tools.                                                                                   |
-| Quarto      | ![](https://quarto.org/quarto.png){width="80" height="20" fig-alt="Quarto logo which is the word quarto in blue with a logo of a blue circle cut into quarters on the left hand side."}                                                                                 | A document creation system that allows you to include code, results, and pictures generated from data within a document so that they automatically update when the document is recompiled. |
+| Quarto      | ![](https://quarto.org/quarto.png){width="80" height="20" fig-alt="Quarto logo which is the word quarto in blue with a logo of a blue circle cut into quarters on the left-hand side."}                                                                                 | A document creation system that allows you to include code, results, and pictures generated from data within a document so that they automatically update when the document is recompiled. |
 
 : Logos for and descriptions of what each of the programs you will use in STAT 1810.
 
@@ -290,9 +290,9 @@ computer's operating system.
 
 -   Click on the Download link.
 
--   When you open the execution file (`.exe`) you will be prompted with a
+-   When you open the executable (`.exe`) you will be prompted with a
 variety of questions about installing R. Feel free to use the default features /
-settings that come with R (continue to click "Ok" until the download starts).
+settings that come with R (continue to click "OK" until the download starts).
 
 ::: callout-warning
 # Multiple Versions of R
@@ -317,7 +317,7 @@ To do this you need to:
 ![](images/00-uninstall-old-r-version.png){fig-alt="A screenshot of selecting the (...) option to uninstall the older version of R."}
 :::
 
-#### If you are *macOS* user:
+#### If you are a *macOS* user:
 
 -   Click on “Download R for (Mac) OS X”
 
@@ -331,15 +331,15 @@ Ok until the download starts).
 ::: {.callout-tip collapse=TRUE}
 # Troubleshooting for Macs
 
-First, identify which version of OSx you are running. [How-to](https://support.apple.com/en-us/HT201260)
+First, identify which version of OS you are running. [How-to](https://support.apple.com/en-us/HT201260)
 
 Next, find out which version of `R` your computer can run. [Link](https://cran.r-project.org/bin/macosx/)
 
 If this version is 3.6 or later, download the latest version that your computer
 can handle.
 
-If this version is 3.4 or earlier, you're going to run in to some trouble. I
-recommend updating your version of OSx, if you are willing. If you can't, then
+If this version is 3.4 or earlier, you're going to run into some trouble. I
+recommend updating your version of OS, if you are willing. If you can't, then
 you can use [Posit Cloud](https://posit.cloud/) to run `R` and RStudio on a free
 server. However, I recommend strongly against this option; your files will not
 be saved indefinitely, you will have limited hours to complete your work, your

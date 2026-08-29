@@ -19,7 +19,7 @@ Example sections contain code and other information. Don't skip them!
 
 :::{.callout-note}
 
-Note sections contain clarification points (anywhere I would normally say "note that ....).  Make sure to read them to avoid any common pitfalls or misconceptions.
+Note sections contain clarification points (anywhere we would normally say "note that ....).  Make sure to read them to avoid any common pitfalls or misconceptions.
 :::
 
 :::{.callout-required-reading .icon}
@@ -48,7 +48,7 @@ Each chapter will have a longer practice exercise to complete and turn in.  Thes
 
 :::{.callout-learn-more .icon}
 
-Consider these to be optional readings/viewings. The world of python programming has so many interesting tidbits, we can't possibly teach them all - but we want to share them with you nonetheless!
+Consider these to be optional readings/viewings. The world of programming has so many interesting tidbits, we can't possibly teach them all - but we want to share them with you nonetheless!
 
 We will usually make these "click to expand" so that they don't distract from your reading.
 :::
